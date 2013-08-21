@@ -1,6 +1,9 @@
 Licenses
 ========
 
+All licences are addopted from Dibi 2.2-dev:
+===================================
+
 Good news! You may use Dibi under the terms of either the New BSD License
 or the GNU General Public License (GPL) version 2 or 3.
 

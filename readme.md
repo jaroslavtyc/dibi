@@ -1,4 +1,4 @@
-[Dibi](http://dibiphp.com) - smart database layer for PHP
+Pribi (forked from [Dibi](http://pribiphp.com) - smart database layer for PHP)
 =========================================================
 
 Database access functions in PHP are not standardised. This library
@@ -6,9 +6,9 @@ hides the differences between them, a above all, it gives you a very handy inter
 
 The best way how to install Dibi is to use a [Composer](http://getcomposer.org/download):
 
-    php composer.phar require dibi/dibi
+    php composer.phar require pribi/pribi
 
-Or you can download a latest package from http://dibiphp.com. In this
+Or you can download a latest package from http://pribiphp.com. In this
 package is also `Dibi.minified`, shrinked single-file version of whole Dibi,
 useful when you don't want to modify library, but just use it.
 
@@ -19,39 +19,39 @@ Examples
 --------
 
 Refer to the `examples` directory for examples. Dibi documentation is
-available on the [homepage](http://dibiphp.com).
+available on the [homepage](http://pribiphp.com).
 
 Connect to database:
 
 ```php
 // connect to database (static way)
-dibi::connect(array(
+pribi::connect(array(
     'driver'   => 'mysql',
     'host'     => 'localhost',
     'username' => 'root',
     'password' => '***',
 ));
 
-// or object way; in all other examples use $connection-> instead of dibi::
+// or object way; in all other examples use $connection-> instead of pribi::
 $connection = new DibiConnection($options);
 ```
 
 SELECT, INSERT, UPDATE
 
 ```php
-dibi::query('SELECT * FROM users WHERE id = ?', $id);
+pribi::query('SELECT * FROM users WHERE id = ?', $id);
 
 $arr = array(
     'name' => 'John',
     'is_admin'  => TRUE,
 );
-dibi::query('INSERT INTO users', $arr);
+pribi::query('INSERT INTO users', $arr);
 // INSERT INTO users (`name`, `is_admin`) VALUES ('John', 1)
 
-dibi::query('UPDATE users SET', $arr, 'WHERE `id`=?', $x);
+pribi::query('UPDATE users SET', $arr, 'WHERE `id`=?', $x);
 // UPDATE users SET `name`='John', `is_admin`=1 WHERE `id` = 123
 
-dibi::query('UPDATE users SET', array(
+pribi::query('UPDATE users SET', array(
 	'title' => array('SHA1(?)', 'tajneheslo'),
 ));
 // UPDATE users SET 'title' = SHA1('tajneheslo')
@@ -60,7 +60,7 @@ dibi::query('UPDATE users SET', array(
 Getting results
 
 ```php
-$result = dibi::query('SELECT * FROM users');
+$result = pribi::query('SELECT * FROM users');
 
 $value = $result->fetchSingle(); // single value
 $all = $result->fetchAll(); // all rows
@@ -76,7 +76,7 @@ foreach ($result as $n => $row) {
 Modifiers for arrays:
 
 ```php
-dibi::query('SELECT * FROM users WHERE %and', array(
+pribi::query('SELECT * FROM users WHERE %and', array(
 	array('number > ?', 10),
 	array('number < ?', 100),
 ));
@@ -99,7 +99,7 @@ dibi::query('SELECT * FROM users WHERE %and', array(
 Modifiers for LIKE
 
 ```php
-dibi::query("SELECT * FROM table WHERE name LIKE %like~", $query);
+pribi::query("SELECT * FROM table WHERE name LIKE %like~", $query);
 ```
 
 <table>
@@ -111,7 +111,7 @@ dibi::query("SELECT * FROM table WHERE name LIKE %like~", $query);
 DateTime:
 
 ```php
-dibi::query('UPDATE users SET', array(
+pribi::query('UPDATE users SET', array(
     'time' => new DateTime,
 ));
 // UPDATE users SET ('2008-01-01 01:08:10')
@@ -120,13 +120,13 @@ dibi::query('UPDATE users SET', array(
 Testing:
 
 ```php
-echo dibi::$sql; // last SQL query
-echo dibi::$elapsedTime;
-echo dibi::$numOfQueries;
-echo dibi::$totalTime;
+echo pribi::$sql; // last SQL query
+echo pribi::$elapsedTime;
+echo pribi::$numOfQueries;
+echo pribi::$totalTime;
 ```
 
 
 -----
 
-[![Build Status](https://secure.travis-ci.org/dg/dibi.png?branch=master)](http://travis-ci.org/dg/dibi)
+[![Build Status](https://secure.travis-ci.org/dg/pribi.png?branch=master)](http://travis-ci.org/dg/pribi)

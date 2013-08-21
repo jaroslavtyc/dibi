@@ -1,19 +1,24 @@
 {
-	"name": "dibi/dibi",
-	"description": "Dibi is Database Abstraction Library for PHP 5.",
-	"keywords": ["database", "dbal", "mysql", "postgresql", "sqlite", "mssql", "oracle", "access", "pdo", "odbc"],
-	"homepage": "http://dibiphp.com/",
+	"name": "jaroslavtyc/pribi",
+	"description": "Pribi is Database Abstraction Library for PHP 5.3+",
+	"keywords": ["database", "mysql", "pdo"],
+	"homepage": "https://github.com/jaroslavtyc/pribi",
 	"license": ["BSD-3", "GPLv2", "GPLv3"],
 	"authors": [
 		{
 			"name": "David Grudl",
-			"homepage": "http://davidgrudl.com"
+			"homepage": "http://davidgrudl.com",
+			"role": "Original author"
+		},
+		{
+			"name": "Jaroslav Týc",
+			"role": "Developer"
 		}
 	],
 	"require-dev": {
 		"nette/tester": "@dev"
 	},
 	"autoload": {
-		"classmap": ["dibi/"]
+		"classmap": ["pribi/"]
 	}
 }
