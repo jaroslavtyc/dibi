@@ -1,21 +1,6 @@
 <?php
-
+namespace Pribi\Drivers;
 /**
- * This file is part of the "pribi" - smart database abstraction layer.
- *
- * Copyright (c) 2005 David Grudl (http://davidgrudl.com)
- *
- * For the full copyright and license information, please view
- * the file license.txt that was distributed with this source code.
- */
-
-
-require_once dirname(__FILE__) . '/DibiMySqlReflector.php';
-
-
-/**
- * The pribi driver for PDO.
- *
  * Driver options:
  *   - dsn => driver specific DSN
  *   - username (or user)
@@ -23,43 +8,20 @@ require_once dirname(__FILE__) . '/DibiMySqlReflector.php';
  *   - options (array) => driver specific options {@see PDO::__construct}
  *   - resource (PDO) => existing connection
  *   - lazy, profiler, result, substitutes, ... => see DibiConnection options
- *
- * @author     David Grudl
- * @package    pribi\drivers
  */
-class DibiPdoDriver extends DibiObject implements IDibiDriver, IDibiResultDriver
-{
-	/** @var PDO  Connection resource */
+class PdoDriver extends \Pribi\Core\Object implements Driver, IDibiResultDriver {
 	private $connection;
-
-	/** @var PDOStatement  Resultset resource */
 	private $resultSet;
-
-	/** @var int|FALSE  Affected rows */
 	private $affectedRows = FALSE;
-
-	/** @var string */
 	private $driverName;
 
-
-	/**
-	 * @throws DibiNotSupportedException
-	 */
-	public function __construct()
-	{
+	public function __construct() {
 		if (!extension_loaded('pdo')) {
-			throw new DibiNotSupportedException("PHP extension 'pdo' is not loaded.");
+			throw new Exceptions\LackOfExtension('PHP extension [pdo] is not loaded');
 		}
 	}
 
-
-	/**
-	 * Connects to a database.
-	 * @return void
-	 * @throws DibiException
-	 */
-	public function connect(array & $config)
-	{
+	public function connect(array $config) {
 		$foo = & $config['dsn'];
 		$foo = & $config['options'];
 		DibiConnection::alias($config, 'resource', 'pdo');
