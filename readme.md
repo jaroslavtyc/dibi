@@ -1,4 +1,4 @@
-Pribi (forked from [Dibi](http://pribiphp.com) - smart database layer for PHP)
+Pribi (forked from [Dibi](http://dibiphp.com) - smart database layer for PHP)
 =========================================================
 
 Original Dibi is great. Not the unified interface for any database vendor, but for the fluent interface.
@@ -12,5 +12,5 @@ All hail the "Fluent, MySQL, prepared statements". And wish me good luck with de
 
 Pribi requires [PHP 5.3.0](http://php.net/releases/5_3_0.php)
 or later because of [namespaces](http://php.net/manual/en/language.namespaces.php)
-,[__callStatic()](http://www.php.net/manual/en/language.oop5.overloading.php#object.callstatic)
-and [__DIR__](http://php.net/manual/en/language.constants.predefined.php).
+ ,[__callStatic()](http://www.php.net/manual/en/language.oop5.overloading.php#object.callstatic)
+ and [__DIR__](http://php.net/manual/en/language.constants.predefined.php).
