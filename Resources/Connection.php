@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Resources;
 
-class DibiConnection extends \Pribi\Core\Object{
+class Connection extends \Pribi\Core\Object{
 	public $onEvent;
 	private $config;
 	private $driver;
