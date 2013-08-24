@@ -20,9 +20,4 @@ abstract class Driver {
     abstract public function runQuery(Query $query);
     abstract public function getAffectedRows();
     abstract public function getInsertedId();
-    abstract public function begin($savepointName = FALSE);
-    abstract public function savepoint($savepointName = self::DEFAULT_SAVEPOINT);
-    abstract public function rollback($savepointName = FALSE);
-    abstract public function releaseSavepoint($savepointName = self::DEFAULT_SAVEPOINT);
-    abstract public function commit($savepointName = FALSE);
 }
