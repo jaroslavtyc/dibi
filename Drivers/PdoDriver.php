@@ -9,7 +9,7 @@ namespace Pribi\Drivers;
  *   - resource (PDO) => existing connection
  *   - lazy, profiler, result, substitutes, ... => see DibiConnection options
  */
-class PdoDriver extends \Pribi\Core\Object implements Driver, IDibiResultDriver {
+class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultDriver {
 	private $connection;
 	private $resultSet;
 	private $affectedRows = FALSE;

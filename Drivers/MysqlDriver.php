@@ -16,7 +16,7 @@ namespace Pribi\Drivers;
  *   - resource (resource) => existing connection resource
  *   - lazy, profiler, result, substitutes, ... => see DibiConnection options
  */
-class MysqlDriver extends \Pribi\Core\Object implements Driver, IDibiResultDriver {
+class MysqlDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultDriver {
 	const ERROR_ACCESS_DENIED = 1045;
 	const ERROR_DUPLICATE_ENTRY = 1062;
 	const ERROR_DATA_TRUNCATED = 1265;

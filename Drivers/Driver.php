@@ -1,18 +1,28 @@
 <?php
 namespace Pribi\Drivers;
+use Pribi\Resources\Connection, \Pribi\Commands\Query;
 
-interface Driver {
-	function connect(array $config);
-	function disconnect();
-	function query($sql);
-	function getAffectedRows();
-	function getInsertId($sequence);
-	function begin($savepoint = NULL);
-	function commit($savepoint = NULL);
-	function rollback($savepoint = NULL);
-	function getResource();
-	function getReflector();
-	function escape($value, $type);
-	function escapeLike($value, $pos);
-	function applyLimit(& $sql, $limit, $offset);
+abstract class Driver {
+    const DEFAULT_SAVEPOINT = 'default';
+    private $connection;
+
+    public function __construct(Connection $connection) {
+        $this->connection = $connection;
+    }
+
+    /**
+     * @return Connection
+     */
+    protected function getConnection() {
+        return $this->connection;
+    }
+
+    abstract public function runQuery(Query $query);
+    abstract public function getAffectedRows();
+    abstract public function getInsertedId();
+    abstract public function begin($savepointName = FALSE);
+    abstract public function savepoint($savepointName = self::DEFAULT_SAVEPOINT);
+    abstract public function rollback($savepointName = FALSE);
+    abstract public function releaseSavepoint($savepointName = self::DEFAULT_SAVEPOINT);
+    abstract public function commit($savepointName = FALSE);
 }
