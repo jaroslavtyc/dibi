@@ -1,42 +1,30 @@
 <?php
 namespace Pribi\Commands;
 
-class Query extends \Pribi\Core\Object
-{
+class Query extends \Pribi\Core\Object {
 
-	const SELECT_SQL = 'SELECT';
-	const INSERT_SQL = 'INSERT';
-	const UPDATE_SQL = 'UPDATE';
-	const DELETE_SQL = 'DELETE';
-	const INTO_SQL = 'INTO';
-	const FROM_SQL = 'FROM';
-	const INNER_JOIN_SQL = 'INNER JOIN';
-	const LEFT_JOIN_SQL = 'LEFT JOIN';
-	const RIGHT_JOIN_SQL = 'RIGHT JOIN';
-	const ON_SQL = 'ON';
-	const AS_SQL = 'AS';
-	const WHERE_SQL = 'WHERE';
-	const AND_SQL = 'AND';
-	const VALUES_SQL = 'VALUES';
-	const BEGIN_SQL = 'BEGIN';
-	const SAVEPOINT_SQL = 'SAVEPOINT';
-	const ROLLBACK_SQL = 'ROLLBACK';
-	const RELEASE_SAVEPOINT_SQL = 'RELEASE_SAVEPOINT';
-	const COMMIT_SQL = 'COMMIT';
 
-	private $commands = array();
+	private $commands = array(
+		self::SELECT_SQL => array(),
+		self::INSERT_SQL => array(),
+		self::UPDATE_SQL => array(),
+		self::DELETE_SQL => array(),
+		self::INTO_SQL => array(),
+		self::FROM_SQL => array(),
+		self::INNER_JOIN_SQL => array(),
+		self::LEFT_JOIN_SQL => array(),
+		self::RIGHT_JOIN_SQL => array(),
+		self::WHERE_SQL => array(),
+	);
 
-	public function addCommand(Command $command)
-	{
-		if (!isset($this->commands[$command->getType()])) {
-			$this->commands[$command->getType()] = array();
+	public function addCommand(Command $command, $type) {
+		if (!isset($this->commands[$type])) {
+			$this->commands[$type] = array();
 		}
 
-		$this->commands[$command->getType()][] = $command;
+		$this->commands[$type][] = $command;
 	}
 
-	public function getPreparedQuery()
-	{
-
+	public function getPreparedQuery() {
 	}
 }
