@@ -1,6 +1,12 @@
 <?php
 namespace Pribi\Commands;
+
+/**
+ * @method as($alias) @return Command
+ */
 abstract class CommandWithIdentificator extends \Pribi\Core\Object implements Command {
+	use Alias;
+
 	private $alias;
 
 	public function __construct($identificator, FollowingCommands $followingCommands) {
@@ -8,12 +14,10 @@ abstract class CommandWithIdentificator extends \Pribi\Core\Object implements Co
 		$this->followingCommands = $followingCommands;
 	}
 
-	public function setAlias($alias) {
-		$this->alias = $alias;
-	}
+	protected function alias($name) {
+		$this->setAlias($name);
 
-	protected function getIdentificator() {
-		return $this->identificator;
+		return $this;
 	}
 
 	/**
@@ -23,7 +27,23 @@ abstract class CommandWithIdentificator extends \Pribi\Core\Object implements Co
 		return $this->followingCommands;
 	}
 
-	protected function getAlias() {
+	public function setAlias($alias) {
+		$this->alias = $alias;
+	}
+
+	public function getIdentificator() {
+		return $this->identificator;
+	}
+
+	public function getAlias() {
 		return $this->alias;
+	}
+
+	public function getFinalName() {
+		if (!\is_null($this->getAlias())) {
+			return $this->getAlias();
+		} else {
+			return $this->getIdentificator();
+		}
 	}
 }

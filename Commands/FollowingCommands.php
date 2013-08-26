@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands;
 /**
- * @method as($alias)
+ * @method as($alias) @return Command
  */
 class FollowingCommands extends \Pribi\Core\Object {
 	use Alias;
@@ -18,27 +18,27 @@ class FollowingCommands extends \Pribi\Core\Object {
 	}
 
 	public function from($identificator) {
-		return new From($identificator, $this->getCommands());
+		return $this->createCommandWithIdentificator('from', $identificator);
 	}
 
 	public function innerJoin($identificator) {
-		return new InnerJoin($identificator, $this->getCommands());
+		return $this->createCommandWithIdentificator('innerJoin', $identificator);
 	}
 
 	public function leftJoin($identificator) {
-		return new LeftJoin($identificator, $this->getCommands());
+		return $this->createCommandWithIdentificator('leftJoin', $identificator);
 	}
 
 	public function rightJoin($identificator) {
-		return new RightJoin($identificator, $this->getCommands());
+		return $this->createCommandWithIdentificator('rightJoin', $identificator);
 	}
 
 	public function on($identificator) {
-		return new On($identificator, $this->getCommands());
+		return $this->createCommandWithIdentificator('on', $identificator);
 	}
 
 	public function where($identificator) {
-		return new Where($identificator, $this->getCommands());
+		return $this->createCommandWithIdentificator('where', $identificator);
 	}
 
 	public function limit($limit) {
@@ -49,8 +49,13 @@ class FollowingCommands extends \Pribi\Core\Object {
 		return new Limit($offset, $limit);
 	}
 
-	public function alias($name) {
+	/**
+	 * @return CommandWithIdentificator
+	 */
+	protected function alias($name) {
 		$this->getLastCommandWithIdentificator()->setAlias($name);
+
+		return $this->getLastCommandWithIdentificator();
 	}
 
 	/**
@@ -59,6 +64,14 @@ class FollowingCommands extends \Pribi\Core\Object {
 	private function createCommandWithIdentificator($name, $identificator) {
 		if ($name === 'select') {
 			$command = new Select($identificator, $this);
+		} elseif ($name === 'from') {
+			$command = new From($identificator, $this);
+		} elseif ($name === 'innerJoin') {
+			$command = new InnerJoin($identificator, $this);
+		} elseif ($name === 'leftJoin') {
+			$command = new LeftJoin($identificator, $this);
+		} elseif ($name === 'rightJoin') {
+			$command = new RightJoin($identificator, $this);
 		} else {
 			throw new UnknownCommand($name);
 		}

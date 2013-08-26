@@ -1,6 +1,6 @@
 <?php
 namespace Pribi\Commands;
 
-class InnerJoin extends Join {
+class LeftJoin extends Join {
 
 }

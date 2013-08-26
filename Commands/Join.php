@@ -1,9 +1,9 @@
 <?php
 namespace Pribi\Commands;
 
-class From extends CommandWithIdentificator {
-	public function from($identificator) {
-		return $this->getFollowingCommands()->from($identificator);
+abstract class Join extends CommandWithIdentificator {
+	public function on($identificator) {
+		return $this->getFollowingCommands()->on($identificator);
 	}
 
 	public function innerJoin($identificator) {
