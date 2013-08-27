@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands;
 
-class From extends CommandWithIdentificator {
+class From extends CommandBringingIdentificator {
 	public function from($identificator) {
 		return $this->getFollowingCommands()->from($identificator);
 	}

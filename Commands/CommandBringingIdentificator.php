@@ -4,13 +4,14 @@ namespace Pribi\Commands;
 /**
  * @method as($alias) @return Command
  */
-abstract class CommandWithIdentificator extends \Pribi\Core\Object implements Command {
+abstract class CommandBringingIdentificator extends \Pribi\Core\Object implements Command {
 	use Alias;
 
+	private $subject;
 	private $alias;
 
-	public function __construct($identificator, FollowingCommands $followingCommands) {
-		$this->identificator = $identificator;
+	public function __construct($subject, FollowingCommands $followingCommands) {
+		$this->subject = $subject;
 		$this->followingCommands = $followingCommands;
 	}
 
@@ -32,18 +33,10 @@ abstract class CommandWithIdentificator extends \Pribi\Core\Object implements Co
 	}
 
 	public function getIdentificator() {
-		return $this->identificator;
-	}
-
-	public function getAlias() {
-		return $this->alias;
-	}
-
-	public function getFinalName() {
 		if (!\is_null($this->getAlias())) {
 			return $this->getAlias();
 		} else {
-			return $this->getIdentificator();
+			return $this->getSubject();
 		}
 	}
 }

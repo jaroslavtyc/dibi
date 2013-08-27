@@ -1,44 +1,67 @@
 <?php
 namespace Pribi\Commands;
+
 /**
- * @method as($alias) @return Command
+ * @method as ($alias) @return Command
  */
 class FollowingCommands extends \Pribi\Core\Object {
 	use Alias;
 
 	private $commands;
 	private $lastCommandWithIdentificator;
+	private $lastCommand;
 
 	protected function __construct(Commands $commands) {
 		$this->commands = $commands;
 	}
 
 	public function select($identificator) {
-		return $this->createCommandWithIdentificator('select', $identificator);
+		$select = new Select($identificator, $this);
+		$this->setLastCommandWithIdentificator($select);
+
+		return $select;
 	}
 
 	public function from($identificator) {
-		return $this->createCommandWithIdentificator('from', $identificator);
+		$from = new From($identificator, $this);
+		$this->setLastCommandWithIdentificator($from);
+
+		return $from;
 	}
 
 	public function innerJoin($identificator) {
-		return $this->createCommandWithIdentificator('innerJoin', $identificator);
+		$innerJoin = new InnerJoin($identificator, $this);
+		$this->setLastCommandWithIdentificator($innerJoin);
+
+		return $innerJoin;
 	}
 
 	public function leftJoin($identificator) {
-		return $this->createCommandWithIdentificator('leftJoin', $identificator);
+		$leftJoin = new LeftJoin($identificator, $this);
+		$this->setLastCommandWithIdentificator($leftJoin);
+
+		return $leftJoin;
 	}
 
 	public function rightJoin($identificator) {
-		return $this->createCommandWithIdentificator('rightJoin', $identificator);
+		$rightJoin = new RightJoin($identificator, $this);
+		$this->setLastCommandWithIdentificator($rightJoin);
+
+		return $rightJoin;
 	}
 
 	public function on($identificator) {
-		return $this->createCommandWithIdentificator('on', $identificator);
+		$on = new On($identificator, $this);
+		$this->setLastCommandWithIdentificator($on);
+
+		return $on;
 	}
 
 	public function where($identificator) {
-		return $this->createCommandWithIdentificator('where', $identificator);
+		$where = new Where($identificator, $this);
+		$this->setLastCommandWithIdentificator($where);
+
+		return $where;
 	}
 
 	public function limit($limit) {
@@ -50,46 +73,39 @@ class FollowingCommands extends \Pribi\Core\Object {
 	}
 
 	/**
-	 * @return CommandWithIdentificator
+	 * @return CommandBringingIdentificator
 	 */
 	protected function alias($name) {
-		$this->getLastCommandWithIdentificator()->setAlias($name);
+		if ($this->getLastCommandWithIdentificator() === $this->getLastCommand()) {
+			$this->getLastCommandWithIdentificator()->setAlias($name);
+		} else {
+			throw new Exceptions\AliasHasToDirectlyFollowIdentificator(sprintf('Followed [%s]', \get_class($this->getLastCommand())));
+		}
 
 		return $this->getLastCommandWithIdentificator();
 	}
 
-	/**
-	 * @return CommandWithIdentificator
-	 */
-	private function createCommandWithIdentificator($name, $identificator) {
-		if ($name === 'select') {
-			$command = new Select($identificator, $this);
-		} elseif ($name === 'from') {
-			$command = new From($identificator, $this);
-		} elseif ($name === 'innerJoin') {
-			$command = new InnerJoin($identificator, $this);
-		} elseif ($name === 'leftJoin') {
-			$command = new LeftJoin($identificator, $this);
-		} elseif ($name === 'rightJoin') {
-			$command = new RightJoin($identificator, $this);
-		} else {
-			throw new UnknownCommand($name);
-		}
-
-		$this->setLastCommandWithIdentificator($command);
-
-		return $command;
-	}
-
-	private function setLastCommandWithIdentificator(CommandWithIdentificator $command) {
+	private function setLastCommandWithIdentificator(CommandBringingIdentificator $command) {
 		$this->lastCommandWithIdentificator = $command;
+		$this->setLastCommand($command);
+	}
+
+	private function setLastCommand(Command $command) {
+		$this->lastCommand = $command;
 	}
 
 	/**
-	 * @return CommandWithIdentificator
+	 * @return CommandBringingIdentificator
 	 */
 	private function getLastCommandWithIdentificator() {
 		return $this->lastCommandWithIdentificator;
+	}
+
+	/**
+	 * @return Command
+	 */
+	private function getLastCommand() {
+		return $this->lastCommand;
 	}
 
 	/**

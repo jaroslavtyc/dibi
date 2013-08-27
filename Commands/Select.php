@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands;
 
-class Select extends CommandWithIdentificator {
+class Select extends CommandBringingIdentificator {
 	public function select($identificator) {
 		return $this->getFollowingCommands()->select($identificator);
 	}
