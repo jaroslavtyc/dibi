@@ -1,6 +1,6 @@
 <?php
 namespace Pribi\Commands\Exceptions;
 
-class ExpectedAlias extends \BadMethodCallException implements \Pribi\Core\Exceptions\Exception {
+class ExpectedAlias extends UnexpectedCommand implements \Pribi\Core\Exceptions\Exception {
 
 }
