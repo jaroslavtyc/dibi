@@ -2,6 +2,20 @@
 namespace Pribi\Commands;
 
 class On extends CommandUsingIdentificator {
+	use AndOring;
+
+	protected function conjunction($identificator) {
+		return $this->getFollowingCommands()->conjunction($identificator);
+	}
+
+	protected function disjunction($identificator) {
+		return $this->getFollowingCommands()->disjunction($identificator);
+	}
+
+	public function equalTo($identificator) {
+		return $this->getFollowingCommands()->equalTo($identificator);
+	}
+
 	public function from($identificator) {
 		return $this->getFollowingCommands()->from($identificator);
 	}
