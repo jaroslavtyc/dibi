@@ -1,5 +1,6 @@
 <?php
 namespace Pribi\Resources;
+
 use \Pribi\Drivers\LegacyDriver;
 
 class Connection extends \Pribi\Core\Object {

@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Resources;
 
-class LegacyConnection extends \Pribi\Core\Object{
+class LegacyConnection extends \Pribi\Core\Object {
 	public $onEvent;
 	private $config;
 	private $driver;
@@ -11,26 +11,24 @@ class LegacyConnection extends \Pribi\Core\Object{
 
 	/**
 	 * Connection options: (see driver-specific options too)
-	 *	- lazy (bool) => if TRUE, connection will be established only when required
-	 *	- result (array) => result set options
-	 *		 - formatDateTime => date-time format (if empty, DateTime objects will be returned)
-	 *	- profiler (array or bool)
-	 *		 - run (bool) => enable profiler?
-	 *		 - file => file to log
-	 *	- substitutes (array) => map of driver specific substitutes (under development)
+	 *   - lazy (bool) => if TRUE, connection will be established only when required
+	 *   - result (array) => result set options
+	 *       - formatDateTime => date-time format (if empty, DateTime objects will be returned)
+	 *   - profiler (array or bool)
+	 *       - run (bool) => enable profiler?
+	 *       - file => file to log
+	 *   - substitutes (array) => map of driver specific substitutes (under development)
 	 */
 	public function __construct($config, $name = NULL) {
 		// DSN string
 		if (\is_string($config)) {
 			\parse_str($config, $config);
-
 		} elseif ($config instanceof Traversable) {
 			$tmp = array();
 			foreach ($config as $key => $val) {
 				$tmp[$key] = $val instanceof \Traversable ? \iterator_to_array($val) : $val;
 			}
 			$config = $tmp;
-
 		} elseif (!\is_array($config)) {
 			throw new InvalidArgumentException('Configuration must be array, string or object.');
 		}
@@ -104,8 +102,8 @@ class LegacyConnection extends \Pribi\Core\Object{
 			$this->driver->connect($this->config);
 			$this->connected = TRUE;
 			$event && $this->onEvent($event->done());
-
-		} catch (DibiException $e) {
+		}
+		catch (DibiException $e) {
 			$event && $this->onEvent($event->done($e));
 			throw $e;
 		}
@@ -123,10 +121,8 @@ class LegacyConnection extends \Pribi\Core\Object{
 	public function getConfig($key = NULL, $default = NULL) {
 		if ($key === NULL) {
 			return $this->config;
-
 		} elseif (isset($this->config[$key])) {
 			return $this->config[$key];
-
 		} else {
 			return $default;
 		}
@@ -149,19 +145,22 @@ class LegacyConnection extends \Pribi\Core\Object{
 	 */
 	final public function getDriver() {
 		$this->connected || $this->connect();
+
 		return $this->driver;
 	}
 
 	/**
-	 * @return DibiResult|int	result set object (if any)
+	 * @return DibiResult|int   result set object (if any)
 	 */
 	final public function query($args) {
 		$args = \func_get_args();
+
 		return $this->nativeQuery($this->translateArgs($args));
 	}
 
 	final public function translate($args) {
 		$args = \func_get_args();
+
 		return $this->translateArgs($args);
 	}
 
@@ -169,25 +168,29 @@ class LegacyConnection extends \Pribi\Core\Object{
 		$args = \func_get_args();
 		try {
 			pribi::dump($this->translateArgs($args));
-			return TRUE;
 
-		} catch (DibiException $e) {
+			return TRUE;
+		}
+		catch (DibiException $e) {
 			if ($e->getSql()) {
 				pribi::dump($e->getSql());
 			} else {
 				echo \get_class($e) . ': ' . $e->getMessage() . (PHP_SAPI === 'cli' ? "\n" : '<br>');
 			}
+
 			return FALSE;
 		}
 	}
 
 	final public function dataSource($args) {
 		$args = \func_get_args();
+
 		return new DibiDataSource($this->translateArgs($args), $this);
 	}
 
 	private function translateArgs($args) {
 		$this->connected || $this->connect();
+
 		return $this->translator->translate($args);
 	}
 
@@ -198,8 +201,8 @@ class LegacyConnection extends \Pribi\Core\Object{
 		$event = $this->onEvent ? new DibiEvent($this, DibiEvent::QUERY, $sql) : NULL;
 		try {
 			$res = $this->driver->query($sql);
-
-		} catch (DibiException $e) {
+		}
+		catch (DibiException $e) {
 			$event && $this->onEvent($event->done($e));
 			throw $e;
 		}
@@ -211,6 +214,7 @@ class LegacyConnection extends \Pribi\Core\Object{
 		}
 
 		$event && $this->onEvent($event->done($res));
+
 		return $res;
 	}
 
@@ -220,6 +224,7 @@ class LegacyConnection extends \Pribi\Core\Object{
 		if (!\is_int($rows) || $rows < 0) {
 			throw new DibiException('Cannot retrieve number of affected rows.');
 		}
+
 		return $rows;
 	}
 
@@ -233,6 +238,7 @@ class LegacyConnection extends \Pribi\Core\Object{
 		if ($id < 1) {
 			throw new DibiException('Cannot retrieve last generated ID.');
 		}
+
 		return (int) $id;
 	}
 
@@ -246,8 +252,8 @@ class LegacyConnection extends \Pribi\Core\Object{
 		try {
 			$this->driver->begin($savepoint);
 			$event && $this->onEvent($event->done());
-
-		} catch (DibiException $e) {
+		}
+		catch (DibiException $e) {
 			$event && $this->onEvent($event->done($e));
 			throw $e;
 		}
@@ -259,8 +265,8 @@ class LegacyConnection extends \Pribi\Core\Object{
 		try {
 			$this->driver->commit($savepoint);
 			$event && $this->onEvent($event->done());
-
-		} catch (DibiException $e) {
+		}
+		catch (DibiException $e) {
 			$event && $this->onEvent($event->done($e));
 			throw $e;
 		}
@@ -272,8 +278,8 @@ class LegacyConnection extends \Pribi\Core\Object{
 		try {
 			$this->driver->rollback($savepoint);
 			$event && $this->onEvent($event->done());
-
-		} catch (DibiException $e) {
+		}
+		catch (DibiException $e) {
 			$event && $this->onEvent($event->done($e));
 			throw $e;
 		}
@@ -284,8 +290,8 @@ class LegacyConnection extends \Pribi\Core\Object{
 	 */
 	public function createResultSet(IDibiResultDriver $resultDriver) {
 		$res = new DibiResult($resultDriver);
-		return $res->setFormat(pribi::DATE, $this->config['result']['formatDate'])
-			 ->setFormat(pribi::DATETIME, $this->config['result']['formatDateTime']);
+
+		return $res->setFormat(pribi::DATE, $this->config['result']['formatDate'])->setFormat(pribi::DATETIME, $this->config['result']['formatDateTime']);
 	}
 
 	/**
@@ -300,9 +306,9 @@ class LegacyConnection extends \Pribi\Core\Object{
 	 */
 	public function select($args) {
 		$args = \func_get_args();
+
 		return $this->command()->__call('select', $args);
 	}
-
 
 	/**
 	 * @return DibiFluent
@@ -311,6 +317,7 @@ class LegacyConnection extends \Pribi\Core\Object{
 		if (!(\is_array($args) || $args instanceof Traversable)) {
 			throw new InvalidArgumentException('Arguments must be array or Traversable.');
 		}
+
 		return $this->command()->update('%n', $table)->set($args);
 	}
 
@@ -323,8 +330,8 @@ class LegacyConnection extends \Pribi\Core\Object{
 		} elseif (!\is_array($args)) {
 			throw new InvalidArgumentException('Arguments must be array or Traversable.');
 		}
-		return $this->command()->insert()
-			 ->into('%n', $table, '(%n)', array_keys($args))->values('%l', $args);
+
+		return $this->command()->insert()->into('%n', $table, '(%n)', array_keys($args))->values('%l', $args);
 	}
 
 	/**
@@ -357,6 +364,7 @@ class LegacyConnection extends \Pribi\Core\Object{
 	 */
 	public function fetch($args) {
 		$args = \func_get_args();
+
 		return $this->query($args)->fetch();
 	}
 
@@ -367,6 +375,7 @@ class LegacyConnection extends \Pribi\Core\Object{
 	 */
 	public function fetchAll($args) {
 		$args = \func_get_args();
+
 		return $this->query($args)->fetchAll();
 	}
 
@@ -377,6 +386,7 @@ class LegacyConnection extends \Pribi\Core\Object{
 	 */
 	public function fetchSingle($args) {
 		$args = \func_get_args();
+
 		return $this->query($args)->fetchSingle();
 	}
 
@@ -387,6 +397,7 @@ class LegacyConnection extends \Pribi\Core\Object{
 	 */
 	public function fetchPairs($args) {
 		$args = \func_get_args();
+
 		return $this->query($args)->fetchPairs();
 	}
 

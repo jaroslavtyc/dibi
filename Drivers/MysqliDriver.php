@@ -1,5 +1,6 @@
 <?php
 namespace Pribi\Drivers;
+
 /**
  * Driver options:
  *   - host => the MySQL server host name
@@ -39,14 +40,7 @@ class MysqliDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResu
 			$this->connection = $config['resource'];
 		} else {
 			// default values
-			$config += array(
-				'charset' => 'utf8',
-				'timezone' => date('P'),
-				'username' => ini_get('mysqli.default_user'),
-				'password' => ini_get('mysqli.default_pw'),
-				'socket' => ini_get('mysqli.default_socket'),
-				'port' => NULL,
-			);
+			$config += array('charset' => 'utf8', 'timezone' => date('P'), 'username' => ini_get('mysqli.default_user'), 'password' => ini_get('mysqli.default_pw'), 'socket' => ini_get('mysqli.default_socket'), 'port' => NULL,);
 			if (!isset($config['host'])) {
 				$host = ini_get('mysqli.default_host');
 				if ($host) {
@@ -81,7 +75,7 @@ class MysqliDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResu
 
 		if (isset($config['charset'])) {
 			$ok = FALSE;
-			if (version_compare(PHP_VERSION , '5.1.5', '>=')) {
+			if (version_compare(PHP_VERSION, '5.1.5', '>=')) {
 				// affects the character set used by mysql_real_escape_string() (was added in MySQL 5.0.7 and PHP 5.0.5, fixed in PHP 5.1.5)
 				$ok = @mysqli_set_charset($this->connection, $config['charset']); // intentionally @
 			}
@@ -101,16 +95,13 @@ class MysqliDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResu
 		$this->buffered = empty($config['unbuffered']);
 	}
 
-
 	/**
 	 * Disconnects from a database.
 	 * @return void
 	 */
-	public function disconnect()
-	{
+	public function disconnect() {
 		mysqli_close($this->connection);
 	}
-
 
 	/**
 	 * Executes the SQL query.
@@ -118,25 +109,21 @@ class MysqliDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResu
 	 * @return IDibiResultDriver|NULL
 	 * @throws DibiDriverException
 	 */
-	public function query($sql)
-	{
+	public function query($sql) {
 		$res = @mysqli_query($this->connection, $sql, $this->buffered ? MYSQLI_STORE_RESULT : MYSQLI_USE_RESULT); // intentionally @
 
 		if (mysqli_errno($this->connection)) {
 			throw new DibiDriverException(mysqli_error($this->connection), mysqli_errno($this->connection), $sql);
-
 		} elseif (is_object($res)) {
 			return $this->createResultDriver($res);
 		}
 	}
 
-
 	/**
 	 * Retrieves information about the most recently executed query.
 	 * @return array
 	 */
-	public function getInfo()
-	{
+	public function getInfo() {
 		$res = array();
 		preg_match_all('#(.+?): +(\d+) *#', mysqli_info($this->connection), $matches, PREG_SET_ORDER);
 		if (preg_last_error()) {
@@ -146,29 +133,25 @@ class MysqliDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResu
 		foreach ($matches as $m) {
 			$res[$m[1]] = (int) $m[2];
 		}
+
 		return $res;
 	}
-
 
 	/**
 	 * Gets the number of affected rows by the last INSERT, UPDATE or DELETE query.
 	 * @return int|FALSE  number of rows or FALSE on error
 	 */
-	public function getAffectedRows()
-	{
+	public function getAffectedRows() {
 		return mysqli_affected_rows($this->connection) === -1 ? FALSE : mysqli_affected_rows($this->connection);
 	}
-
 
 	/**
 	 * Retrieves the ID generated for an AUTO_INCREMENT column by the previous INSERT query.
 	 * @return int|FALSE  int on success or FALSE on failure
 	 */
-	public function getInsertId($sequence)
-	{
+	public function getInsertId($sequence) {
 		return mysqli_insert_id($this->connection);
 	}
-
 
 	/**
 	 * Begins a transaction (if supported).
@@ -176,11 +159,9 @@ class MysqliDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResu
 	 * @return void
 	 * @throws DibiDriverException
 	 */
-	public function begin($savepoint = NULL)
-	{
+	public function begin($savepoint = NULL) {
 		$this->query($savepoint ? "SAVEPOINT $savepoint" : 'START TRANSACTION');
 	}
-
 
 	/**
 	 * Commits statements in a transaction.
@@ -188,11 +169,9 @@ class MysqliDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResu
 	 * @return void
 	 * @throws DibiDriverException
 	 */
-	public function commit($savepoint = NULL)
-	{
+	public function commit($savepoint = NULL) {
 		$this->query($savepoint ? "RELEASE SAVEPOINT $savepoint" : 'COMMIT');
 	}
-
 
 	/**
 	 * Rollback changes in a transaction.
@@ -200,47 +179,39 @@ class MysqliDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResu
 	 * @return void
 	 * @throws DibiDriverException
 	 */
-	public function rollback($savepoint = NULL)
-	{
+	public function rollback($savepoint = NULL) {
 		$this->query($savepoint ? "ROLLBACK TO SAVEPOINT $savepoint" : 'ROLLBACK');
 	}
-
 
 	/**
 	 * Returns the connection resource.
 	 * @return mysqli
 	 */
-	public function getResource()
-	{
+	public function getResource() {
 		return @$this->connection->thread_id ? $this->connection : NULL;
 	}
-
 
 	/**
 	 * Returns the connection reflector.
 	 * @return IDibiReflector
 	 */
-	public function getReflector()
-	{
+	public function getReflector() {
 		return new DibiMySqlReflector($this);
 	}
-
 
 	/**
 	 * Result set driver factory.
 	 * @param  mysqli_result
 	 * @return IDibiResultDriver
 	 */
-	public function createResultDriver(mysqli_result $resource)
-	{
+	public function createResultDriver(mysqli_result $resource) {
 		$res = clone $this;
 		$res->resultSet = $resource;
+
 		return $res;
 	}
 
-
 	/********************* SQL ****************d*g**/
-
 
 	/**
 	 * Encodes data for use in a SQL statement.
@@ -249,8 +220,7 @@ class MysqliDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResu
 	 * @return string    encoded value
 	 * @throws InvalidArgumentException
 	 */
-	public function escape($value, $type)
-	{
+	public function escape($value, $type) {
 		switch ($type) {
 			case pribi::TEXT:
 				return "'" . mysqli_real_escape_string($this->connection, $value) . "'";
@@ -275,19 +245,17 @@ class MysqliDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResu
 		}
 	}
 
-
 	/**
 	 * Encodes string for use in a LIKE statement.
 	 * @param  string
 	 * @param  int
 	 * @return string
 	 */
-	public function escapeLike($value, $pos)
-	{
+	public function escapeLike($value, $pos) {
 		$value = addcslashes(str_replace('\\', '\\\\', $value), "\x00\n\r\\'%_");
+
 		return ($pos <= 0 ? "'%" : "'") . $value . ($pos >= 0 ? "%'" : "'");
 	}
-
 
 	/**
 	 * Decodes data from result set.
@@ -296,65 +264,54 @@ class MysqliDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResu
 	 * @return string    decoded value
 	 * @throws InvalidArgumentException
 	 */
-	public function unescape($value, $type)
-	{
+	public function unescape($value, $type) {
 		if ($type === pribi::BINARY) {
 			return $value;
 		}
 		throw new InvalidArgumentException('Unsupported type.');
 	}
 
-
 	/**
 	 * Injects LIMIT/OFFSET to the SQL query.
 	 * @return void
 	 */
-	public function applyLimit(& $sql, $limit, $offset)
-	{
+	public function applyLimit(& $sql, $limit, $offset) {
 		if ($limit >= 0 || $offset > 0) {
 			// see http://dev.mysql.com/doc/refman/5.0/en/select.html
-			$sql .= ' LIMIT ' . ($limit < 0 ? '18446744073709551615' : (int) $limit)
-				. ($offset > 0 ? ' OFFSET ' . (int) $offset : '');
+			$sql .= ' LIMIT ' . ($limit < 0 ? '18446744073709551615' : (int) $limit) . ($offset > 0 ? ' OFFSET ' . (int) $offset : '');
 		}
 	}
 
-
 	/********************* result set ****************d*g**/
-
 
 	/**
 	 * Automatically frees the resources allocated for this result set.
 	 * @return void
 	 */
-	public function __destruct()
-	{
+	public function __destruct() {
 		$this->autoFree && $this->getResultResource() && @$this->free();
 	}
-
 
 	/**
 	 * Returns the number of rows in a result set.
 	 * @return int
 	 */
-	public function getRowCount()
-	{
+	public function getRowCount() {
 		if (!$this->buffered) {
 			throw new DibiNotSupportedException('Row count is not available for unbuffered queries.');
 		}
+
 		return mysqli_num_rows($this->resultSet);
 	}
-
 
 	/**
 	 * Fetches the row at current position and moves the internal cursor to the next position.
 	 * @param  bool     TRUE for associative array, FALSE for numeric
 	 * @return array    array on success, nonarray if no next record
 	 */
-	public function fetch($assoc)
-	{
+	public function fetch($assoc) {
 		return mysqli_fetch_array($this->resultSet, $assoc ? MYSQLI_ASSOC : MYSQLI_NUM);
 	}
-
 
 	/**
 	 * Moves cursor position without fetching row.
@@ -362,32 +319,28 @@ class MysqliDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResu
 	 * @return boolean  TRUE on success, FALSE if unable to seek to specified record
 	 * @throws DibiException
 	 */
-	public function seek($row)
-	{
+	public function seek($row) {
 		if (!$this->buffered) {
 			throw new DibiNotSupportedException('Cannot seek an unbuffered result set.');
 		}
+
 		return mysqli_data_seek($this->resultSet, $row);
 	}
-
 
 	/**
 	 * Frees the resources allocated for this result set.
 	 * @return void
 	 */
-	public function free()
-	{
+	public function free() {
 		mysqli_free_result($this->resultSet);
 		$this->resultSet = NULL;
 	}
-
 
 	/**
 	 * Returns metadata for all columns in a result set.
 	 * @return array
 	 */
-	public function getResultColumns()
-	{
+	public function getResultColumns() {
 		static $types;
 		if (empty($types)) {
 			$consts = get_defined_constants(TRUE);
@@ -403,26 +356,19 @@ class MysqliDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResu
 		$columns = array();
 		for ($i = 0; $i < $count; $i++) {
 			$row = (array) mysqli_fetch_field_direct($this->resultSet, $i);
-			$columns[] = array(
-				'name' => $row['name'],
-				'table' => $row['orgtable'],
-				'fullname' => $row['table'] ? $row['table'] . '.' . $row['name'] : $row['name'],
-				'nativetype' => $types[$row['type']],
-				'vendor' => $row,
-			);
+			$columns[] = array('name' => $row['name'], 'table' => $row['orgtable'], 'fullname' => $row['table'] ? $row['table'] . '.' . $row['name'] : $row['name'], 'nativetype' => $types[$row['type']], 'vendor' => $row,);
 		}
+
 		return $columns;
 	}
-
 
 	/**
 	 * Returns the result set resource.
 	 * @return mysqli_result
 	 */
-	public function getResultResource()
-	{
+	public function getResultResource() {
 		$this->autoFree = FALSE;
+
 		return @$this->resultSet->type === NULL ? NULL : $this->resultSet;
 	}
-
 }

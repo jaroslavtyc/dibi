@@ -2,31 +2,25 @@
 
 /**
  * This file is part of the "pribi" - smart database abstraction layer.
- *
  * Copyright (c) 2005 David Grudl (http://davidgrudl.com)
- *
  * For the full copyright and license information, please view
  * the file license.txt that was distributed with this source code.
  */
-
 
 /**
  * Provides an interface between a dataset and data-aware components.
  * @package    pribi
  */
-interface IDataSource extends Countable, IteratorAggregate
-{
+interface IDataSource extends Countable, IteratorAggregate {
 	//function IteratorAggregate::getIterator();
 	//function Countable::count();
 }
-
 
 /**
  * pribi driver interface.
  * @package    pribi
  */
-interface IDibiDriver
-{
+interface IDibiDriver {
 
 	/**
 	 * Connects to a database.
@@ -121,16 +115,13 @@ interface IDibiDriver
 	 * @return void
 	 */
 	function applyLimit(& $sql, $limit, $offset);
-
 }
-
 
 /**
  * pribi result set driver interface.
  * @package    pribi
  */
-interface IDibiResultDriver
-{
+interface IDibiResultDriver {
 
 	/**
 	 * Returns the number of rows in a result set.
@@ -181,18 +172,14 @@ interface IDibiResultDriver
 	 * @throws InvalidArgumentException
 	 */
 	function unescape($value, $type);
-
 }
-
 
 /**
  * pribi driver reflection.
- *
  * @author     David Grudl
  * @package    pribi
  */
-interface IDibiReflector
-{
+interface IDibiReflector {
 
 	/**
 	 * Returns list of tables.
@@ -220,5 +207,4 @@ interface IDibiReflector
 	 * @return array
 	 */
 	function getForeignKeys($table);
-
 }

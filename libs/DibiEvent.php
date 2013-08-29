@@ -2,33 +2,20 @@
 
 /**
  * This file is part of the "pribi" - smart database abstraction layer.
- *
  * Copyright (c) 2005 David Grudl (http://davidgrudl.com)
- *
  * For the full copyright and license information, please view
  * the file license.txt that was distributed with this source code.
  */
 
-
 /**
  * Profiler & logger event.
- *
  * @author     David Grudl
  * @package    pribi
  */
-class DibiEvent
-{
+class DibiEvent {
 	/** event type */
-	const CONNECT = 1,
-		SELECT = 4,
-		INSERT = 8,
-		DELETE = 16,
-		UPDATE = 32,
-		QUERY = 60, // SELECT | INSERT | DELETE | UPDATE
-		BEGIN = 64,
-		COMMIT = 128,
-		ROLLBACK = 256,
-		TRANSACTION = 448, // BEGIN | COMMIT | ROLLBACK
+	const CONNECT = 1, SELECT = 4, INSERT = 8, DELETE = 16, UPDATE = 32, QUERY = 60, // SELECT | INSERT | DELETE | UPDATE
+		BEGIN = 64, COMMIT = 128, ROLLBACK = 256, TRANSACTION = 448, // BEGIN | COMMIT | ROLLBACK
 		ALL = 1023;
 
 	/** @var DibiConnection */
@@ -52,19 +39,14 @@ class DibiEvent
 	/** @var array */
 	public $source;
 
-
-	public function __construct(DibiConnection $connection, $type, $sql = NULL)
-	{
+	public function __construct(DibiConnection $connection, $type, $sql = NULL) {
 		$this->connection = $connection;
 		$this->type = $type;
 		$this->sql = trim($sql);
 		$this->time = -microtime(TRUE);
 
 		if ($type === self::QUERY && preg_match('#\(?\s*(SELECT|UPDATE|INSERT|DELETE)#iA', $this->sql, $matches)) {
-			static $types = array(
-				'SELECT' => self::SELECT, 'UPDATE' => self::UPDATE,
-				'INSERT' => self::INSERT, 'DELETE' => self::DELETE,
-			);
+			static $types = array('SELECT' => self::SELECT, 'UPDATE' => self::UPDATE, 'INSERT' => self::INSERT, 'DELETE' => self::DELETE,);
 			$this->type = $types[strtoupper($matches[1])];
 		}
 
@@ -82,20 +64,19 @@ class DibiEvent
 		pribi::$sql = $sql;
 	}
 
-
-	public function done($result = NULL)
-	{
+	public function done($result = NULL) {
 		$this->result = $result;
 		try {
 			$this->count = $result instanceof DibiResult ? count($result) : NULL;
-		} catch (DibiException $e) {
+		}
+		catch (DibiException $e) {
 			$this->count = NULL;
 		}
 
 		$this->time += microtime(TRUE);
 		pribi::$elapsedTime = $this->time;
 		pribi::$totalTime += $this->time;
+
 		return $this;
 	}
-
 }

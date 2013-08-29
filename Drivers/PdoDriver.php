@@ -1,5 +1,6 @@
 <?php
 namespace Pribi\Drivers;
+
 /**
  * Driver options:
  *   - dsn => driver specific DSN
@@ -28,11 +29,10 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 
 		if ($config['resource'] instanceof PDO) {
 			$this->connection = $config['resource'];
-
 		} else try {
 			$this->connection = new PDO($config['dsn'], $config['username'], $config['password'], $config['options']);
-
-		} catch (PDOException $e) {
+		}
+		catch (PDOException $e) {
 			throw new DibiDriverException($e->getMessage(), $e->getCode());
 		}
 
@@ -43,16 +43,13 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 		$this->driverName = $this->connection->getAttribute(PDO::ATTR_DRIVER_NAME);
 	}
 
-
 	/**
 	 * Disconnects from a database.
 	 * @return void
 	 */
-	public function disconnect()
-	{
+	public function disconnect() {
 		$this->connection = NULL;
 	}
-
 
 	/**
 	 * Executes the SQL query.
@@ -60,11 +57,10 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 	 * @return IDibiResultDriver|NULL
 	 * @throws DibiDriverException
 	 */
-	public function query($sql)
-	{
+	public function query($sql) {
 		// must detect if SQL returns result set or num of affected rows
 		$cmd = strtoupper(substr(ltrim($sql), 0, 6));
-		static $list = array('UPDATE'=>1, 'DELETE'=>1, 'INSERT'=>1, 'REPLAC'=>1);
+		static $list = array('UPDATE' => 1, 'DELETE' => 1, 'INSERT' => 1, 'REPLAC' => 1);
 		$this->affectedRows = FALSE;
 
 		if (isset($list[$cmd])) {
@@ -74,7 +70,6 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 				$err = $this->connection->errorInfo();
 				throw new DibiDriverException("SQLSTATE[$err[0]]: $err[2]", $err[1], $sql);
 			}
-
 		} else {
 			$res = $this->connection->query($sql);
 
@@ -87,26 +82,21 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 		}
 	}
 
-
 	/**
 	 * Gets the number of affected rows by the last INSERT, UPDATE or DELETE query.
 	 * @return int|FALSE  number of rows or FALSE on error
 	 */
-	public function getAffectedRows()
-	{
+	public function getAffectedRows() {
 		return $this->affectedRows;
 	}
-
 
 	/**
 	 * Retrieves the ID generated for an AUTO_INCREMENT column by the previous INSERT query.
 	 * @return int|FALSE  int on success or FALSE on failure
 	 */
-	public function getInsertId($sequence)
-	{
+	public function getInsertId($sequence) {
 		return $this->connection->lastInsertId();
 	}
-
 
 	/**
 	 * Begins a transaction (if supported).
@@ -114,14 +104,12 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 	 * @return void
 	 * @throws DibiDriverException
 	 */
-	public function begin($savepoint = NULL)
-	{
+	public function begin($savepoint = NULL) {
 		if (!$this->connection->beginTransaction()) {
 			$err = $this->connection->errorInfo();
 			throw new DibiDriverException("SQLSTATE[$err[0]]: $err[2]", $err[1]);
 		}
 	}
-
 
 	/**
 	 * Commits statements in a transaction.
@@ -129,14 +117,12 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 	 * @return void
 	 * @throws DibiDriverException
 	 */
-	public function commit($savepoint = NULL)
-	{
+	public function commit($savepoint = NULL) {
 		if (!$this->connection->commit()) {
 			$err = $this->connection->errorInfo();
 			throw new DibiDriverException("SQLSTATE[$err[0]]: $err[2]", $err[1]);
 		}
 	}
-
 
 	/**
 	 * Rollback changes in a transaction.
@@ -144,31 +130,26 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 	 * @return void
 	 * @throws DibiDriverException
 	 */
-	public function rollback($savepoint = NULL)
-	{
+	public function rollback($savepoint = NULL) {
 		if (!$this->connection->rollBack()) {
 			$err = $this->connection->errorInfo();
 			throw new DibiDriverException("SQLSTATE[$err[0]]: $err[2]", $err[1]);
 		}
 	}
 
-
 	/**
 	 * Returns the connection resource.
 	 * @return PDO
 	 */
-	public function getResource()
-	{
+	public function getResource() {
 		return $this->connection;
 	}
-
 
 	/**
 	 * Returns the connection reflector.
 	 * @return IDibiReflector
 	 */
-	public function getReflector()
-	{
+	public function getReflector() {
 		switch ($this->driverName) {
 			case 'mysql':
 				return new DibiMySqlReflector($this);
@@ -182,22 +163,19 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 		}
 	}
 
-
 	/**
 	 * Result set driver factory.
 	 * @param  PDOStatement
 	 * @return IDibiResultDriver
 	 */
-	public function createResultDriver(PDOStatement $resource)
-	{
+	public function createResultDriver(PDOStatement $resource) {
 		$res = clone $this;
 		$res->resultSet = $resource;
+
 		return $res;
 	}
 
-
 	/********************* SQL ****************d*g**/
-
 
 	/**
 	 * Encodes data for use in a SQL statement.
@@ -206,8 +184,7 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 	 * @return string    encoded value
 	 * @throws InvalidArgumentException
 	 */
-	public function escape($value, $type)
-	{
+	public function escape($value, $type) {
 		switch ($type) {
 			case pribi::TEXT:
 				return $this->connection->quote($value, PDO::PARAM_STR);
@@ -253,18 +230,15 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 		}
 	}
 
-
 	/**
 	 * Encodes string for use in a LIKE statement.
 	 * @param  string
 	 * @param  int
 	 * @return string
 	 */
-	public function escapeLike($value, $pos)
-	{
+	public function escapeLike($value, $pos) {
 		throw new DibiNotImplementedException;
 	}
-
 
 	/**
 	 * Decodes data from result set.
@@ -273,29 +247,25 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 	 * @return string    decoded value
 	 * @throws InvalidArgumentException
 	 */
-	public function unescape($value, $type)
-	{
+	public function unescape($value, $type) {
 		if ($type === pribi::BINARY) {
 			return $value;
 		}
 		throw new InvalidArgumentException('Unsupported type.');
 	}
 
-
 	/**
 	 * Injects LIMIT/OFFSET to the SQL query.
 	 * @return void
 	 */
-	public function applyLimit(& $sql, $limit, $offset)
-	{
+	public function applyLimit(& $sql, $limit, $offset) {
 		if ($limit < 0 && $offset < 1) {
 			return;
 		}
 
 		switch ($this->driverName) {
 			case 'mysql':
-				$sql .= ' LIMIT ' . ($limit < 0 ? '18446744073709551615' : (int) $limit)
-					. ($offset > 0 ? ' OFFSET ' . (int) $offset : '');
+				$sql .= ' LIMIT ' . ($limit < 0 ? '18446744073709551615' : (int) $limit) . ($offset > 0 ? ' OFFSET ' . (int) $offset : '');
 				break;
 
 			case 'pgsql':
@@ -314,9 +284,7 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 
 			case 'oci':
 				if ($offset > 0) {
-					$sql = 'SELECT * FROM (SELECT t.*, ROWNUM AS "__rnum" FROM (' . $sql . ') t '
-						. ($limit >= 0 ? 'WHERE ROWNUM <= ' . ((int) $offset + (int) $limit) : '')
-						. ') WHERE "__rnum" > '. (int) $offset;
+					$sql = 'SELECT * FROM (SELECT t.*, ROWNUM AS "__rnum" FROM (' . $sql . ') t ' . ($limit >= 0 ? 'WHERE ROWNUM <= ' . ((int) $offset + (int) $limit) : '') . ') WHERE "__rnum" > ' . (int) $offset;
 				} elseif ($limit >= 0) {
 					$sql = 'SELECT * FROM (' . $sql . ') WHERE ROWNUM <= ' . (int) $limit;
 				}
@@ -329,66 +297,55 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 					$sql = 'SELECT TOP ' . (int) $limit . ' * FROM (' . $sql . ') t';
 					break;
 				}
-				// intentionally break omitted
+			// intentionally break omitted
 
 			default:
 				throw new DibiNotSupportedException('PDO or driver does not support applying limit or offset.');
 		}
 	}
 
-
 	/********************* result set ****************d*g**/
-
 
 	/**
 	 * Returns the number of rows in a result set.
 	 * @return int
 	 */
-	public function getRowCount()
-	{
+	public function getRowCount() {
 		return $this->resultSet->rowCount();
 	}
-
 
 	/**
 	 * Fetches the row at current position and moves the internal cursor to the next position.
 	 * @param  bool     TRUE for associative array, FALSE for numeric
 	 * @return array    array on success, nonarray if no next record
 	 */
-	public function fetch($assoc)
-	{
+	public function fetch($assoc) {
 		return $this->resultSet->fetch($assoc ? PDO::FETCH_ASSOC : PDO::FETCH_NUM);
 	}
-
 
 	/**
 	 * Moves cursor position without fetching row.
 	 * @param  int      the 0-based cursor pos to seek to
 	 * @return boolean  TRUE on success, FALSE if unable to seek to specified record
 	 */
-	public function seek($row)
-	{
+	public function seek($row) {
 		throw new DibiNotSupportedException('Cannot seek an unbuffered result set.');
 	}
-
 
 	/**
 	 * Frees the resources allocated for this result set.
 	 * @return void
 	 */
-	public function free()
-	{
+	public function free() {
 		$this->resultSet = NULL;
 	}
-
 
 	/**
 	 * Returns metadata for all columns in a result set.
 	 * @return array
 	 * @throws DibiException
 	 */
-	public function getResultColumns()
-	{
+	public function getResultColumns() {
 		$count = $this->resultSet->columnCount();
 		$columns = array();
 		for ($i = 0; $i < $count; $i++) {
@@ -398,30 +355,19 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 			}
 			// PHP < 5.2.3 compatibility
 			// @see: http://php.net/manual/en/pdostatement.getcolumnmeta.php#pdostatement.getcolumnmeta.changelog
-			$row = $row + array(
-				'table' => NULL,
-				'native_type' => 'VAR_STRING',
-			);
+			$row = $row + array('table' => NULL, 'native_type' => 'VAR_STRING',);
 
-			$columns[] = array(
-				'name' => $row['name'],
-				'table' => $row['table'],
-				'nativetype' => $row['native_type'],
-				'fullname' => $row['table'] ? $row['table'] . '.' . $row['name'] : $row['name'],
-				'vendor' => $row,
-			);
+			$columns[] = array('name' => $row['name'], 'table' => $row['table'], 'nativetype' => $row['native_type'], 'fullname' => $row['table'] ? $row['table'] . '.' . $row['name'] : $row['name'], 'vendor' => $row,);
 		}
+
 		return $columns;
 	}
-
 
 	/**
 	 * Returns the result set resource.
 	 * @return PDOStatement
 	 */
-	public function getResultResource()
-	{
+	public function getResultResource() {
 		return $this->resultSet;
 	}
-
 }
