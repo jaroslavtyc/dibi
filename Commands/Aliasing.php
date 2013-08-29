@@ -1,10 +1,9 @@
 <?php
 namespace Pribi\Commands {
-
 	/**
-	 * @method as($alias) @return Command
+	 * @method as ($alias) @return Command
 	 */
-	trait Alias {
+	trait Aliasing {
 		public function __call($name, array $arguments) {
 			$loweredName = \strtolower($name);
 			if ($loweredName === 'as') {

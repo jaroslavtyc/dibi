@@ -2,10 +2,10 @@
 namespace Pribi\Commands;
 
 /**
- * @method as($alias) @return Command
+ * @method as ($alias) @return Command
  */
 abstract class CommandBringingIdentificator extends \Pribi\Core\Object implements Command {
-	use Alias;
+	use Aliasing;
 
 	private $subject;
 	private $alias;
