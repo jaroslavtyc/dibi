@@ -4,7 +4,7 @@ namespace Pribi\Commands {
 	 * @method as ($alias) @return Command
 	 */
 	trait Aliasing {
-		public function __call($name, array $arguments) {
+		public function __call($name, $arguments) {
 			$loweredName = \strtolower($name);
 			if ($loweredName === 'as') {
 				if (\array_key_exists(0, $arguments)) {
