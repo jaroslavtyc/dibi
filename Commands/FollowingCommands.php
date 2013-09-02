@@ -6,6 +6,27 @@ class FollowingCommands extends \Pribi\Core\Object {
 	private $lastCommandBringingIdentificator;
 	private $lastCommand;
 
+	public function startTransaction() {
+		$startTransaction = new StartTransaction($this);
+		$this->setLastCommand($startTransaction);
+
+		return $startTransaction;
+	}
+
+	public function withConsistentSnapshot() {
+		$withConsistentSnapshot = new WithConsistentSnapshot($this);
+		$this->setLastCommand($withConsistentSnapshot);
+
+		return $withConsistentSnapshot;
+	}
+
+	public function commit() {
+		$commit = new Commit($this);
+		$this->setLastCommand($commit);
+
+		return $commit;
+	}
+
 	public function select($identificator) {
 		$select = new Select($identificator, $this);
 		$this->setLastCommandBringingIdentificator($select);
