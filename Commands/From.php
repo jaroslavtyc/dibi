@@ -1,11 +1,9 @@
 <?php
 namespace Pribi\Commands;
-
+/**
+ * @method \Pribi\Commands\From as($alias)
+ */
 class From extends CommandBringingIdentificator {
-	public function from($identificator) {
-		return $this->getFollowingCommands()->from($identificator);
-	}
-
 	public function innerJoin($identificator) {
 		return $this->getFollowingCommands()->innerJoin($identificator);
 	}
