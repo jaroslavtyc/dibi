@@ -1,8 +1,8 @@
 <?php
 namespace Pribi\Commands\Transactions;
+use \Pribi\Core\Object;
 
-abstract class Command extends \Pribi\Core\Object implements \Pribi\Commands\Command {
-
+abstract class Command extends Object implements \Pribi\Commands\Command {
 	private $followingCommands;
 
 	public function __construct(FollowingCommands $followingCommands) {
