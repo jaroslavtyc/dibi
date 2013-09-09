@@ -2,4 +2,5 @@
 namespace Pribi\Commands;
 
 interface Command {
+
 }
