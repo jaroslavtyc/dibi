@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\Transactions\Rollbacks;
-use Pribi\Commands\Transactions\Command;
+use Pribi\Commands\FollowingCommand;
 
-class NoRelease extends Command {
+class NoRelease extends FollowingCommand {
 
 }

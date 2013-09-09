@@ -1,8 +1,8 @@
 <?php
 namespace Pribi\Commands\Transactions\Rollbacks;
-use Pribi\Commands\Transactions\Command;
+use Pribi\Commands\FollowingCommand;
 
-class Rollback extends Command {
+class Rollback extends FollowingCommand {
 	public function andChain() {
 		$andChain = new AndChain($this);
 

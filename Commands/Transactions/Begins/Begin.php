@@ -1,9 +1,9 @@
 <?php
 namespace Pribi\Commands\Transactions\Begins;
-use Pribi\Commands\Transactions\Command;
+use Pribi\Commands\FollowingCommand;
 use Pribi\Commands\Transactions\Commits\Commit;
 
-class Begin extends Command {
+class Begin extends FollowingCommand {
 	public function commit() {
 		$commit = new Commit($this);
 

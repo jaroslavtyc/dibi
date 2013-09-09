@@ -1,8 +1,8 @@
 <?php
 namespace Pribi\Commands\Transactions\Commits;
-use Pribi\Commands\Transactions\Command;
+use Pribi\Commands\FollowingCommand;
 
-class AndChain extends Command {
+class AndChain extends FollowingCommand {
 	public function release() {
 		$release = new Release($this);
 

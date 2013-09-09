@@ -1,8 +1,8 @@
 <?php
 namespace Pribi\Commands\Transactions\Rollbacks;
-use Pribi\Commands\Transactions\Command;
+use Pribi\Commands\FollowingCommand;
 
-class AndNoChain extends Command {
+class AndNoChain extends FollowingCommand {
 	public function release() {
 		$release = new Release($this);
 
