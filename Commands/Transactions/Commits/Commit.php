@@ -1,25 +1,36 @@
 <?php
 namespace Pribi\Commands\Transactions\Commits;
 use Pribi\Commands\Transactions\Command;
+use Pribi\Commands\Transactions\Rollbacks\Rollback;
 
 class Commit extends Command {
 	public function andChain() {
-		return $this->getFollowingCommands()->andChain();
+		$andChain = new AndChain($this);
+
+		return $andChain;
 	}
 
 	public function andNoChain() {
-		return $this->getFollowingCommands()->andNoChain();
+		$noChain = new AndNoChain($this);
+
+		return $noChain;
 	}
 
 	public function release() {
-		return $this->getFollowingCommands()->release();
+		$release = new Release($this);
+
+		return $release;
 	}
 
 	public function noRelease() {
-		return $this->getFollowingCommands()->noRelease();
+		$noRelease = new NoRelease($this);
+
+		return $noRelease;
 	}
 
 	public function rollback() {
-		return $this->getFollowingCommands()->rollback();
+		$rollback = new Rollback($this);
+
+		return $rollback;
 	}
 }

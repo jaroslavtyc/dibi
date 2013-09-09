@@ -1,8 +1,9 @@
 <?php
-namespace Pribi\Commands\Transactions\Rollbacks;
+namespace Pribi\Commands\Transactions\CommitWorks;
 use Pribi\Commands\Transactions\Command;
+use Pribi\Commands\Transactions\Rollbacks\RollbackWork;
 
-class Rollback extends Command {
+class CommitWork extends Command {
 	public function andChain() {
 		$andChain = new AndChain($this);
 
@@ -25,5 +26,11 @@ class Rollback extends Command {
 		$noRelease = new NoRelease($this);
 
 		return $noRelease;
+	}
+
+	public function rollbackWork() {
+		$rollback = new RollbackWork($this);
+
+		return $rollback;
 	}
 }

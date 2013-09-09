@@ -1,6 +1,8 @@
 <?php
 namespace Pribi\Commands\Transactions\StartTransactions;
 use Pribi\Commands\Transactions\Command;
+use Pribi\Commands\Transactions\Commits\Commit;
+use Pribi\Commands\Transactions\CommitWorks\CommitWork;
 
 /**
  * With START TRANSACTION, autocommit remains disabled until you end the transaction with COMMIT or ROLLBACK.
@@ -14,10 +16,20 @@ class StartTransaction extends Command {
 	 * @see http://dev.mysql.com/doc/refman/5.0/en/innodb-consistent-read.html
 	 */
 	public function withConsistentSnapshot() {
-		return $this->getFollowingCommands()->withConsistentSnapshot();
+		$withConsistentSnapshot = new WithConsistentSnapshot($this);
+
+		return $withConsistentSnapshot;
 	}
 
 	public function commit() {
-		return $this->getFollowingCommands()->commit();
+		$commit = new Commit($this);
+
+		return $commit;
+	}
+
+	public function commitWork() {
+		$commit = new CommitWork($this);
+
+		return $commit;
 	}
 }

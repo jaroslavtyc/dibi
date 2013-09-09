@@ -1,0 +1,7 @@
+<?php
+namespace Pribi\Commands\Transactions\RollbackWorks;
+use Pribi\Commands\Transactions\Command;
+
+class Release extends Command {
+
+}
