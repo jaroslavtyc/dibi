@@ -13,7 +13,7 @@ Forbidden changes, because of final methods or whole classes, confound chance to
 All hail the "Fluent, MySQL, prepared statements". And wish me good luck with development.
 
 Pribi requires [PHP 5.4.0](http://php.net/releases/5_4_0.php)
-or later because of [namespaces](http://php.net/manual/en/language.namespaces.php)
- ,[__callStatic()](http://www.php.net/manual/en/language.oop5.overloading.php#object.callstatic)
- ,[__DIR__](http://php.net/manual/en/language.constants.predefined.php)
- and [traits](http://php.net/traits).
+or later because of [namespaces 5.3](http://php.net/manual/en/language.namespaces.php)
+ ,[__callStatic() 5.3](http://www.php.net/manual/en/language.oop5.overloading.php#object.callstatic)
+ ,[__DIR__ 5.3](http://php.net/manual/en/language.constants.predefined.php)
+ and [traits 5.4](http://php.net/traits).
