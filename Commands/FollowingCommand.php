@@ -15,7 +15,7 @@ abstract class FollowingCommand extends Object implements Command {
 	}
 
 	/**
-	 * @return \Pribi\Commands\Command
+	 * @return Command
 	 */
 	public function getPreviousCommand() {
 		return $this->previousCommand;
