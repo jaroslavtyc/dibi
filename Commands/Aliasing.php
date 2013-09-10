@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands {
 	/**
-	 * @method as ($alias) @return Command
+	 * @method Command as($alias)
 	 */
 	trait Aliasing {
 		public function __call($name, $arguments) {
@@ -13,7 +13,7 @@ namespace Pribi\Commands {
 					throw new Exceptions\MissingAliasName;
 				}
 			} else {
-				throw new Exceptions\ExpectedAlias(\sprintf('Called [%s->%s]()', get_class($this), $loweredName));
+				throw new Exceptions\ExpectedAlias(\sprintf('But called [%s->%s]()', get_class($this), $loweredName));
 			}
 
 			return $nextToFluid;
