@@ -168,7 +168,7 @@ class FollowingCommands extends \Pribi\Core\Object {
 	}
 
 	/**
-	 * @return CommandBringingIdentificator
+	 * @return IdentificatorBringer
 	 */
 	protected function alias($name) {
 		if ($this->getLastCommandBringingIdentificator() === $this->getLastCommand()) {
@@ -180,7 +180,7 @@ class FollowingCommands extends \Pribi\Core\Object {
 		return $this->getLastCommandBringingIdentificator();
 	}
 
-	private function setLastCommandBringingIdentificator(CommandBringingIdentificator $command) {
+	private function setLastCommandBringingIdentificator(IdentificatorBringer $command) {
 		$this->lastCommandBringingIdentificator = $command;
 		$this->setLastCommand($command);
 	}
@@ -190,7 +190,7 @@ class FollowingCommands extends \Pribi\Core\Object {
 	}
 
 	/**
-	 * @return CommandBringingIdentificator
+	 * @return IdentificatorBringer
 	 */
 	private function getLastCommandBringingIdentificator() {
 		return $this->lastCommandBringingIdentificator;
