@@ -11,7 +11,7 @@ abstract class FollowingCommand extends Object implements Command {
 	}
 
 	public function hasPreviousCommand() {
-		return \is_null($this->previousCommand);
+		return !\is_null($this->previousCommand);
 	}
 
 	/**
