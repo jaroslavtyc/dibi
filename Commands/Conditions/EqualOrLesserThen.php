@@ -1,8 +1,8 @@
 <?php
-namespace Pribi\Commands;
+namespace Pribi\Commands\Conditions;
 
-class Conjunction extends CommandUsingIdentificator {
-	use AndOrNegating;
+class EqualOrLesserThen extends UsingIdentificator {
+	use AndOring;
 
 	protected function conjunction($identificator) {
 		return $this->getFollowingCommands()->conjunction($identificator);
@@ -10,18 +10,6 @@ class Conjunction extends CommandUsingIdentificator {
 
 	protected function disjunction($identificator) {
 		return $this->getFollowingCommands()->disjunction($identificator);
-	}
-
-	protected function negation() {
-		return $this->getFollowingCommands()->negation();
-	}
-
-	public function equalTo($identificator) {
-		return $this->getFollowingCommands()->equalTo($identificator);
-	}
-
-	public function equalOrGreaterThen($identificator) {
-		return $this->getFollowingCommands()->equalOrGreaterThen($identificator);
 	}
 
 	public function from($identificator) {

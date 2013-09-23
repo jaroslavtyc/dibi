@@ -1,7 +1,7 @@
 <?php
-namespace Pribi\Commands;
+namespace Pribi\Commands\Conditions;
 
-class EqualOrGreaterThen extends CommandUsingIdentificator {
+class DifferentTo extends UsingIdentificator {
 	use AndOring;
 
 	protected function conjunction($identificator) {

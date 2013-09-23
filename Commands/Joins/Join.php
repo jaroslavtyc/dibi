@@ -1,6 +1,8 @@
 <?php
 namespace Pribi\Commands\Joins;
 use Pribi\Commands\IdentificatorBringer;
+use Pribi\Commands\Joins\Inner\InnerJoin;
+use Pribi\Commands\Joins\Left\LeftJoin;
 
 /**
  * @method AliasedInnerJoin as($alias)

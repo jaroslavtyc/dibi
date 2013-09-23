@@ -26,14 +26,14 @@ class SelectAlias extends IdentificatorAlias {
 	}
 
 	public function limit($amount) {
-		$limit = new Limit(0, $amount);
+		$limit = new Limit(0, $amount, $this);
 
 		return $limit;
 	}
 
-	public function offsetLimit($offset, $amount) {
-		$amount = new Limit($offset, $amount);
+	public function offsetLimit($offset, $limit) {
+		$limit = new Limit($offset, $limit, $this);
 
-		return $amount;
+		return $limit;
 	}
 }

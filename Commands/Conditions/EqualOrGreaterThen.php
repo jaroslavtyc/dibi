@@ -1,7 +1,7 @@
 <?php
-namespace Pribi\Commands;
+namespace Pribi\Commands\Conditions;
 
-class InArray extends CommandUsingIdentificators {
+class EqualOrGreaterThen extends UsingIdentificator {
 	use AndOring;
 
 	protected function conjunction($identificator) {
@@ -10,10 +10,6 @@ class InArray extends CommandUsingIdentificators {
 
 	protected function disjunction($identificator) {
 		return $this->getFollowingCommands()->disjunction($identificator);
-	}
-
-	protected function negation() {
-		return $this->getFollowingCommands()->negation();
 	}
 
 	public function from($identificator) {

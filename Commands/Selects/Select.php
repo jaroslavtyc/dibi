@@ -29,13 +29,13 @@ class Select extends IdentificatorBringer {
 	}
 
 	public function limit($amount) {
-		$limit = new Limit(0, $amount);
+		$limit = new Limit(0, $amount, $this);
 
 		return $limit;
 	}
 
 	public function offsetLimit($offset, $amount) {
-		$amount = new Limit($offset, $amount);
+		$amount = new Limit($offset, $amount, $this);
 
 		return $amount;
 	}

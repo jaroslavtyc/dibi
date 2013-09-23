@@ -10,7 +10,8 @@ trait Negating {
 		if ($loweredName === 'not') {
 			$nextToFluid = $this->negation($arguments[0]);
 		} else {
-			throw new Exceptions\UnexpectedCommand(\sprintf('Called [%s->%s](), expected [%s->%s]()', get_class($this), $loweredName, get_class($this), 'not'));
+			throw new Exceptions\UnexpectedCommand(\sprintf('Called [%s->%s](), expected [%s->%s]()', \get_class($this),
+				$loweredName, \get_class($this), 'not'));
 		}
 
 		return $nextToFluid;

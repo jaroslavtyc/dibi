@@ -1,7 +1,7 @@
 <?php
-namespace Pribi\Commands;
+namespace Pribi\Commands\Conditions;
 
-class GreaterThen extends CommandUsingIdentificator {
+class GreaterThen extends UsingIdentificator {
 	use AndOring;
 
 	protected function conjunction($identificator) {

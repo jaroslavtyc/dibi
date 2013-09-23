@@ -1,16 +1,14 @@
 <?php
-namespace Pribi\Commands;
+namespace Pribi\Commands\Conditions;
 
 /**
  * @method and($identificator) @return Command
  * @method or($identificator) @return Command
  */
-trait AndOrNegating {
-	public function __call($name, array $arguments) {
+trait AndOring {
+	public function __call($name, $arguments) {
 		$loweredName = \strtolower($name);
-		if ($loweredName === 'not') {
-			$nextToFluid = $this->negation($arguments[0]);
-		} elseif (\array_key_exists(0, $arguments)) {
+		if (\array_key_exists(0, $arguments)) {
 			if ($loweredName === 'and') {
 				$nextToFluid = $this->conjunction($arguments[0]);
 			} elseif ($loweredName === 'or') {
@@ -19,7 +17,7 @@ trait AndOrNegating {
 				throw new Exceptions\UnexpectedCommand(\sprintf('Called [%s->%s](), expected [%s->%s]() or [%s->%s]()', get_class($this), $loweredName, get_class($this), 'and', get_class($this), 'or'));
 			}
 		} else {
-			throw new Exceptions\UnknownCommand($name);
+			throw new Exceptions\MissingIdentificator;
 		}
 
 		return $nextToFluid;
@@ -36,9 +34,4 @@ trait AndOrNegating {
 	 * @return Command
 	 */
 	abstract protected function disjunction($identificator);
-
-	/**
-	 * @return Command
-	 */
-	abstract protected function negation();
 }

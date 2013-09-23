@@ -154,14 +154,14 @@ class FollowingCommands extends \Pribi\Core\Object {
 	}
 
 	public function limit($amount) {
-		$limit = new Limit(0, $amount);
+		$limit = new Limit(0, $amount, $this);
 		$this->setLastCommand($limit);
 
 		return $limit;
 	}
 
 	public function offsetAndLimit($offset, $amount) {
-		$amount = new Limit($offset, $amount);
+		$amount = new Limit($offset, $amount, $this);
 		$this->setLastCommand($amount);
 
 		return $amount;

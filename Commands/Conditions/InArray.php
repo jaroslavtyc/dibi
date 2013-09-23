@@ -1,7 +1,8 @@
 <?php
 namespace Pribi\Commands;
+use Pribi\Commands\UsingIdentificator;
 
-class On extends CommandUsingIdentificator {
+class InArray extends UsingIdentificator {
 	use AndOring;
 
 	protected function conjunction($identificator) {
@@ -12,8 +13,8 @@ class On extends CommandUsingIdentificator {
 		return $this->getFollowingCommands()->disjunction($identificator);
 	}
 
-	public function equalTo($identificator) {
-		return $this->getFollowingCommands()->equalTo($identificator);
+	protected function negation() {
+		return $this->getFollowingCommands()->negation();
 	}
 
 	public function from($identificator) {
