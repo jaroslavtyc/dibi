@@ -7,7 +7,7 @@ use Pribi\Commands\Transactions\BeginWorks\BeginWork;
 use Pribi\Commands\Transactions\StartTransactions\StartTransaction;
 use Pribi\Core\Object;
 
-class First extends Object implements Command {
+class Fluent extends Object implements Command {
 	public function insert() {
 		return new Insert();
 	}
