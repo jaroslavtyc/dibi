@@ -1,6 +1,7 @@
 <?php
 namespace Pribi\Commands\Selects;
 use Pribi\Commands\IdentificatorAlias;
+use Pribi\Commands\FromSources\From;
 
 class SelectAlias extends IdentificatorAlias {
 	public function __construct($alias, Select $prependSelect) {
@@ -8,32 +9,22 @@ class SelectAlias extends IdentificatorAlias {
 	}
 
 	public function select($identificator) {
-		$select = new Select($identificator, $this);
-
-		return $select;
+		return new Select($identificator, $this);
 	}
 
 	public function from($identificator) {
-		$from = new From($identificator, $this);
-
-		return $from;
+		return new From($identificator, $this);
 	}
 
 	public function where($identificator) {
-		$where = new Where($identificator, $this);
-
-		return $where;
+		return new Where($identificator, $this);
 	}
 
 	public function limit($amount) {
-		$limit = new Limit(0, $amount, $this);
-
-		return $limit;
+		return new Limit(0, $amount, $this);
 	}
 
 	public function offsetLimit($offset, $limit) {
-		$limit = new Limit($offset, $limit, $this);
-
-		return $limit;
+		return new Limit($offset, $limit, $this);
 	}
 }
