@@ -9,7 +9,7 @@ use Pribi\Commands\Where;
 use Pribi\Commands\Limit;
 
 /**
- * @method FromAlias as($alias)
+ * @method \Pribi\Commands\FromSources\FromAlias as($alias)
  */
 class From extends IdentificatorBringer {
 	protected function alias($alias) {
