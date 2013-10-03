@@ -4,39 +4,39 @@ namespace Pribi\Commands\Conditions;
 class DifferentTo extends UsingIdentificator {
 	use AndOring;
 
-	protected function conjunction($identificator) {
-		return $this->getFollowingCommands()->conjunction($identificator);
+	protected function conjunction($subject) {
+		return new Conjunction($subject, $this);
 	}
 
-	protected function disjunction($identificator) {
-		return $this->getFollowingCommands()->disjunction($identificator);
+	protected function disjunction($subject) {
+		return new Disjunction($subject, $this);
 	}
 
-	public function from($identificator) {
-		return $this->getFollowingCommands()->from($identificator);
+	public function from($subject) {
+		return new From($subject, $this);
 	}
 
-	public function innerJoin($identificator) {
-		return $this->getFollowingCommands()->innerJoin($identificator);
+	public function innerJoin($subject) {
+		return new InnerJoin($subject, $this);
 	}
 
-	public function leftJoin($identificator) {
-		return $this->getFollowingCommands()->leftJoin($identificator);
+	public function leftJoin($subject) {
+		return new LeftJoin($subject, $this);
 	}
 
-	public function rightJoin($identificator) {
-		return $this->getFollowingCommands()->rightJoin($identificator);
+	public function rightJoin($subject) {
+		return new RightJoin($subject, $this);
 	}
 
-	public function where($identificator) {
-		return $this->getFollowingCommands()->where($identificator);
+	public function where($subject) {
+		return new Where($subject, $this);
 	}
 
 	public function limit($limit) {
-		return $this->getFollowingCommands()->limit($limit);
+		return new Limit(0, $limit, $this);
 	}
 
 	public function offsetAndLimit($offset, $limit) {
-		return $this->getFollowingCommands()->offsetAndLimit($offset, $limit);
+		return new Limit($offset, $limit, $this);
 	}
 }
