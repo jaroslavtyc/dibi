@@ -1,11 +1,12 @@
 <?php
 namespace Pribi\Commands\Joins;
 use Pribi\Commands\IdentificatorBringer;
-use Pribi\Commands\Joins\Inner\InnerJoin;
-use Pribi\Commands\Joins\Left\LeftJoin;
+use Pribi\Commands\Joins\InnerJoin;
+use Pribi\Commands\Joins\LeftJoin;
+use Pribi\Commands\Joins\RightJoin;
 
 /**
- * @method AliasedInnerJoin as($alias)
+ * @method \Pribi\Commands\Joins\AliasedInnerJoin as($alias)
  */
 abstract class Join extends IdentificatorBringer {
 	public function on($identificator) {

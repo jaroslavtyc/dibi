@@ -2,9 +2,9 @@
 namespace Pribi\Commands\FromSources;
 
 use Pribi\Commands\IdentificatorAlias;
-use Pribi\Commands\InnerJoin;
-use Pribi\Commands\LeftJoin;
-use Pribi\Commands\RightJoin;
+use Pribi\Commands\Joins\InnerJoin;
+use Pribi\Commands\Joins\LeftJoin;
+use Pribi\Commands\Joins\RightJoin;
 use Pribi\Commands\Where;
 use Pribi\Commands\Limit;
 

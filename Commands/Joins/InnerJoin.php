@@ -1,9 +1,8 @@
 <?php
-namespace Pribi\Commands\Joins\Inner;
-use Pribi\Commands\Joins\Join;
+namespace Pribi\Commands\Joins;
 
 /**
- * @method InnerJoinAlias as($alias)
+ * @method \Pribi\Commands\Joins\InnerJoinAlias as($alias)
  */
 class InnerJoin extends Join {
 	protected function alias($alias) {

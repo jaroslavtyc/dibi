@@ -1,9 +1,8 @@
 <?php
-namespace Pribi\Commands\Joins\Left;
-use Pribi\Commands\Joins\Join;
+namespace Pribi\Commands\Joins;
 
 /**
- * @method LeftJoinAlias as($alias)
+ * @method \Pribi\Commands\Joins\LeftJoinAlias as($alias)
  */
 class LeftJoin extends Join {
 	protected function alias($alias) {

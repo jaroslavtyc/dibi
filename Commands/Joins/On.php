@@ -1,6 +1,9 @@
 <?php
 namespace Pribi\Commands\Joins;
 
+use Pribi\Commands\Conditions\EqualOrLesserThen;
+use Pribi\Commands\Conditions\GreaterThen;
+use Pribi\Commands\Conditions\LesserThen;
 use Pribi\Commands\Conjunction;
 use Pribi\Commands\Disjunction;
 use Pribi\Commands\EqualTo;
@@ -39,6 +42,24 @@ class On extends UsingIdentificator {
 
 	public function equalOrGreaterThen($identificator) {
 		$equalOrGreaterThen = new EqualOrGreaterThen($identificator, $this);
+
+		return $equalOrGreaterThen;
+	}
+
+	public function greaterThen($identificator) {
+		$equalTo = new GreaterThen($identificator, $this);
+
+		return $equalTo;
+	}
+
+	public function equalOrLesserThen($identificator) {
+		$equalOrGreaterThen = new EqualOrLesserThen($identificator, $this);
+
+		return $equalOrGreaterThen;
+	}
+
+	public function lesserThen($identificator) {
+		$equalOrGreaterThen = new LesserThen($identificator, $this);
 
 		return $equalOrGreaterThen;
 	}
