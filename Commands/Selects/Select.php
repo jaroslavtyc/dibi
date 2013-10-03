@@ -3,7 +3,7 @@ namespace Pribi\Commands\Selects;
 use Pribi\Commands\IdentificatorBringer;
 
 /**
- * @method SelectAlias as($alias)
+ * @method \Pribi\Commands\Selects\SelectAlias as($alias)
  */
 class Select extends IdentificatorBringer {
 	protected function alias($alias) {
