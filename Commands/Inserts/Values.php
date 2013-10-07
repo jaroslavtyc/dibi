@@ -6,7 +6,7 @@ use Pribi\Commands\FollowingCommand;
 class Values extends FollowingCommand {
 	private $values;
 
-	public function __construct($values, Into $into) {
+	public function __construct($values, Insert $into) {
 		$this->values = $values;
 		parent::__construct($into);
 	}

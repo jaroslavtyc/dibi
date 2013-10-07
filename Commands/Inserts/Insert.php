@@ -1,10 +1,8 @@
 <?php
 namespace Pribi\Commands\Inserts;
 
-use Pribi\Commands\WithoutIdentificator;
-
-class Insert extends WithoutIdentificator {
-	public function into($identificator) {
-		return new Into($identificator, $this);
+abstract class Insert extends WithoutIdentificator {
+	public function values($identificator) {
+		return new Values($identificator, $this);
 	}
 }
