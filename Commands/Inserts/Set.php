@@ -3,7 +3,7 @@ namespace Pribi\Commands\Inserts;
 
 use Pribi\Commands\FollowingCommand;
 
-class Values extends FollowingCommand {
+class Set extends FollowingCommand {
 	private $values;
 
 	public function __construct($values, FollowingCommand $previousCommand) {
