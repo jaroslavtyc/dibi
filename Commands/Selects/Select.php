@@ -1,11 +1,12 @@
 <?php
 namespace Pribi\Commands\Selects;
 use Pribi\Commands\IdentificatorBringer;
+use Pribi\Commands\Executable;
 
 /**
  * @method \Pribi\Commands\Selects\SelectAlias as($alias)
  */
-class Select extends IdentificatorBringer {
+class Select extends IdentificatorBringer implements Executable {
 	protected function alias($alias) {
 		return new SelectAlias($alias, $this);
 	}

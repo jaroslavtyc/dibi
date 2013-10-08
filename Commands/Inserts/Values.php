@@ -1,9 +1,10 @@
 <?php
 namespace Pribi\Commands\Inserts;
 
+use Pribi\Commands\Executable;
 use Pribi\Commands\FollowingCommand;
 
-class Values extends FollowingCommand {
+class Values extends FollowingCommand implements Executable {
 	private $values;
 
 	public function __construct($values, FollowingCommand $previousCommand) {
