@@ -1,12 +1,11 @@
 <?php
 namespace Pribi\Commands;
 
-abstract class FollowingCommand extends FollowedCommand {
+abstract class FollowingCommand extends Object implements Command {
 	private $previousCommand;
 
-	public function __construct(FollowedCommand $previousCommand = NULL) {
+	public function __construct(Command $previousCommand = NULL) {
 		$this->previousCommand = $previousCommand;
-		$this->previousCommand->setFollowingCommand($this);
 	}
 
 	protected  function hasPreviousCommand() {
@@ -14,7 +13,7 @@ abstract class FollowingCommand extends FollowedCommand {
 	}
 
 	/**
-	 * @return FollowedCommand
+	 * @return Command
 	 */
 	protected function getPreviousCommand() {
 		return $this->previousCommand;
