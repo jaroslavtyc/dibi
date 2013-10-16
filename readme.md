@@ -25,7 +25,7 @@ Tips and Tricks
 ---------------
 **Identifier quote**
 	- Pribi is for MySQL. Thats the trick. That means, the quotation is done by \` (tick).
-	Not SQL-99 standard by " (double quote), not MS SQL standard by [] (brackets) or anything else. Only \`ticks\`.
+	Not SQL-99 standard by " (double quote), not MS SQL standard by \[\] (brackets) or anything else. Only \`ticks\`.
 **Aliasing**
 	- Use fluent interface. Everytime its possible. And that should be everytime. For alias, use select('columnName')->as('prettyAlias');
 	If you want try to use shorthand as 'columnName prettyAlias', that means two stings split by white space, you will have to wrap both identifiers.
