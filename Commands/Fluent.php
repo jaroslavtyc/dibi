@@ -7,9 +7,12 @@ use Pribi\Commands\Selects\Select;
 use Pribi\Commands\Transactions\Begins\Begin;
 use Pribi\Commands\Transactions\BeginWorks\BeginWork;
 use Pribi\Commands\Transactions\StartTransactions\StartTransaction;
-use Pribi\Core\Object;
 
-class Fluent extends Object implements Command {
+class Fluent extends Command {
+	protected function toSql() {
+		return '';
+	}
+
 	public function insertInto() {
 		return new InsertInto();
 	}
