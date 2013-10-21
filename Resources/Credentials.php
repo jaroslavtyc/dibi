@@ -15,15 +15,11 @@ class Credentials extends Object {
 	}
 
 	private function encrypt($decrypted) {
-		$iv = $this->getIv();
+		$iv = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC), MCRYPT_RAND);
 		$ivBase64 = substr(base64_encode($iv), 0, 22);
 		$encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $this->key, $decrypted, MCRYPT_MODE_CBC, $iv));
 
 		return $ivBase64 . $encrypted;
-	}
-
-	private function getIv() {
-		return mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC), MCRYPT_RAND);
 	}
 
 	public function getUser() {
