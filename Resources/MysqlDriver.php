@@ -2,6 +2,7 @@
 namespace Pribi\Resources;
 
 use Pribi\Resources\Exceptions\AlreadyConnected;
+use Pribi\Resources\Exceptions\NotConnected;
 
 class MysqlDriver implements Driver {
 	private $dsn;
@@ -35,5 +36,17 @@ class MysqlDriver implements Driver {
 		}
 
 		return $alive;
+	}
+
+	public function disconnect() {
+		if ($this->isConnected()) {
+			$this->connection = NULL;
+		} else {
+			throw new NotConnected;
+		}
+	}
+
+	public function executeQuery($queryString) {
+		return $this->connection->exec($queryString);
 	}
 }
