@@ -21,7 +21,7 @@ class DibiRow implements ArrayAccess, IteratorAggregate, Countable {
 	}
 
 	public function toArray() {
-		return (array) $this;
+		return (array)$this;
 	}
 
 	/**
@@ -33,7 +33,7 @@ class DibiRow implements ArrayAccess, IteratorAggregate, Countable {
 	public function asDateTime($key, $format = NULL) {
 		$time = $this[$key];
 		if (!$time instanceof DibiDateTime) {
-			if ((int) $time === 0) { // '', NULL, FALSE, '0000-00-00', ...
+			if ((int)$time === 0) { // '', NULL, FALSE, '0000-00-00', ...
 				return NULL;
 			}
 			$time = new DibiDateTime(is_numeric($time) ? date('Y-m-d H:i:s', $time) : $time);
@@ -51,8 +51,8 @@ class DibiRow implements ArrayAccess, IteratorAggregate, Countable {
 		trigger_error(__METHOD__ . '() is deprecated.', E_USER_WARNING);
 		$time = $this[$key];
 
-		return (int) $time === 0 // '', NULL, FALSE, '0000-00-00', ...
-			? NULL : (is_numeric($time) ? (int) $time : strtotime($time));
+		return (int)$time === 0 // '', NULL, FALSE, '0000-00-00', ...
+			? NULL : (is_numeric($time) ? (int)$time : strtotime($time));
 	}
 
 	/**
@@ -79,7 +79,7 @@ class DibiRow implements ArrayAccess, IteratorAggregate, Countable {
 	/********************* interfaces ArrayAccess, Countable & IteratorAggregate ****************d*g**/
 
 	final public function count() {
-		return count((array) $this);
+		return count((array)$this);
 	}
 
 	final public function getIterator() {

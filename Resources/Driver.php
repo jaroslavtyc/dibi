@@ -9,8 +9,8 @@ interface Driver {
 	public function disconnect();
 
 	/**
-	 * @param string $queryString
-	 * @return int affected rows
+	 * @param $queryString
+	 * @return \Pribi\Resources\Prepared
 	 */
-	public function executeQuery($queryString);
+	public function prepare($queryString);
 }

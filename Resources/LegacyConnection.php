@@ -60,7 +60,7 @@ class LegacyConnection extends \Pribi\Core\Object {
 
 		$profilerCfg = & $config['profiler'];
 		if (\is_scalar($profilerCfg)) {
-			$profilerCfg = array('run' => (bool) $profilerCfg);
+			$profilerCfg = array('run' => (bool)$profilerCfg);
 		}
 		if (!empty($profilerCfg['run'])) {
 			$filter = isset($profilerCfg['filter']) ? $profilerCfg['filter'] : DibiEvent::QUERY;
@@ -102,8 +102,7 @@ class LegacyConnection extends \Pribi\Core\Object {
 			$this->driver->connect($this->config);
 			$this->connected = TRUE;
 			$event && $this->onEvent($event->done());
-		}
-		catch (DibiException $e) {
+		} catch (DibiException $e) {
 			$event && $this->onEvent($event->done($e));
 			throw $e;
 		}
@@ -170,8 +169,7 @@ class LegacyConnection extends \Pribi\Core\Object {
 			pribi::dump($this->translateArgs($args));
 
 			return TRUE;
-		}
-		catch (DibiException $e) {
+		} catch (DibiException $e) {
 			if ($e->getSql()) {
 				pribi::dump($e->getSql());
 			} else {
@@ -201,8 +199,7 @@ class LegacyConnection extends \Pribi\Core\Object {
 		$event = $this->onEvent ? new DibiEvent($this, DibiEvent::QUERY, $sql) : NULL;
 		try {
 			$res = $this->driver->query($sql);
-		}
-		catch (DibiException $e) {
+		} catch (DibiException $e) {
 			$event && $this->onEvent($event->done($e));
 			throw $e;
 		}
@@ -239,7 +236,7 @@ class LegacyConnection extends \Pribi\Core\Object {
 			throw new DibiException('Cannot retrieve last generated ID.');
 		}
 
-		return (int) $id;
+		return (int)$id;
 	}
 
 	public function insertId($sequence = NULL) {
@@ -252,8 +249,7 @@ class LegacyConnection extends \Pribi\Core\Object {
 		try {
 			$this->driver->begin($savepoint);
 			$event && $this->onEvent($event->done());
-		}
-		catch (DibiException $e) {
+		} catch (DibiException $e) {
 			$event && $this->onEvent($event->done($e));
 			throw $e;
 		}
@@ -265,8 +261,7 @@ class LegacyConnection extends \Pribi\Core\Object {
 		try {
 			$this->driver->commit($savepoint);
 			$event && $this->onEvent($event->done());
-		}
-		catch (DibiException $e) {
+		} catch (DibiException $e) {
 			$event && $this->onEvent($event->done($e));
 			throw $e;
 		}
@@ -278,8 +273,7 @@ class LegacyConnection extends \Pribi\Core\Object {
 		try {
 			$this->driver->rollback($savepoint);
 			$event && $this->onEvent($event->done());
-		}
-		catch (DibiException $e) {
+		} catch (DibiException $e) {
 			$event && $this->onEvent($event->done($e));
 			throw $e;
 		}

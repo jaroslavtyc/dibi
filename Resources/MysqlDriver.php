@@ -46,7 +46,7 @@ class MysqlDriver implements Driver {
 		}
 	}
 
-	public function executeQuery($queryString) {
-		return $this->connection->exec($queryString);
+	public function prepare($queryString) {
+		return new Prepared($this->connection->prepare($queryString));
 	}
 }

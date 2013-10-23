@@ -18,6 +18,6 @@ class Connection extends Object {
 	}
 
 	public function executeQuery($query) {
-		return $this->driver->executeQuery($query);
+		return $this->driver->execute($query);
 	}
 }

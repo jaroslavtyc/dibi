@@ -98,7 +98,7 @@ class DibiResult extends DibiObject implements IDataSource {
 	 * @throws DibiException
 	 */
 	final public function seek($row) {
-		return ($row !== 0 || $this->fetched) ? (bool) $this->getResultDriver()->seek($row) : TRUE;
+		return ($row !== 0 || $this->fetched) ? (bool)$this->getResultDriver()->seek($row) : TRUE;
 	}
 
 	/**
@@ -214,8 +214,8 @@ class DibiResult extends DibiObject implements IDataSource {
 	 * @return array of DibiRow
 	 */
 	final public function fetchAll($offset = NULL, $limit = NULL) {
-		$limit = $limit === NULL ? -1 : (int) $limit;
-		$this->seek((int) $offset);
+		$limit = $limit === NULL ? -1 : (int)$limit;
+		$this->seek((int)$offset);
 		$row = $this->fetch();
 		if (!$row) {
 			return array(); // empty result set
@@ -446,8 +446,7 @@ class DibiResult extends DibiObject implements IDataSource {
 			foreach ($this->getResultDriver()->getResultColumns() as $col) {
 				$this->types[$col['name']] = $cache->{$col['nativetype']};
 			}
-		}
-		catch (DibiNotSupportedException $e) {
+		} catch (DibiNotSupportedException $e) {
 		}
 	}
 
@@ -466,16 +465,16 @@ class DibiResult extends DibiObject implements IDataSource {
 			} elseif ($type === pribi::INTEGER) {
 				$row[$key] = is_float($tmp = $value * 1) ? $value : $tmp;
 			} elseif ($type === pribi::FLOAT) {
-				$row[$key] = (string) ($tmp = (float) $value) === rtrim(rtrim($value, '0'), '.') ? $tmp : $value;
+				$row[$key] = (string)($tmp = (float)$value) === rtrim(rtrim($value, '0'), '.') ? $tmp : $value;
 			} elseif ($type === pribi::BOOL) {
-				$row[$key] = ((bool) $value) && $value !== 'f' && $value !== 'F';
+				$row[$key] = ((bool)$value) && $value !== 'f' && $value !== 'F';
 			} elseif ($type === pribi::DATE || $type === pribi::DATETIME) {
-				if ((int) $value === 0 && substr((string) $value, 0, 3) !== '00:') { // '', NULL, FALSE, '0000-00-00', ...
+				if ((int)$value === 0 && substr((string)$value, 0, 3) !== '00:') { // '', NULL, FALSE, '0000-00-00', ...
 
 				} elseif (empty($this->formats[$type])) { // return DateTime object (default)
 					$row[$key] = new DibiDateTime(is_numeric($value) ? date('Y-m-d H:i:s', $value) : $value);
 				} elseif ($this->formats[$type] === 'U') { // return timestamp
-					$row[$key] = is_numeric($value) ? (int) $value : strtotime($value);
+					$row[$key] = is_numeric($value) ? (int)$value : strtotime($value);
 				} elseif (is_numeric($value)) { // formatted date
 					$row[$key] = date($this->formats[$type], $value);
 				} else {
