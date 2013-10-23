@@ -1,17 +1,17 @@
 <?php
 namespace Pribi\Resources;
 
-class SocketedMysqlDataSourceName implements DataSourceName {
-	private $unixSocket;
+abstract class MysqlDataSourceName implements DataSourceName {
+	private $uri;
 	private $databaseName;
 
-	public function __construct($unixSocket, $databaseName = FALSE) {
-		$this->unixSocket = $unixSocket;
+	protected function __construct($uri, $databaseName = FALSE) {
+		$this->uri = $uri;
 		$this->databaseName = $databaseName;
 	}
 
 	public function getName() {
-		$name = 'mysql:unix_socket=' . $this->unixSocket;
+		$name = 'mysql:' . $this->uri;
 		if ((string)$this->databaseName !== '') {
 			$name .= ';dbname=' . $this->databaseName;
 		}

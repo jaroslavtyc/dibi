@@ -11,13 +11,13 @@ class MysqlDriver implements Driver {
 	 */
 	private $connection;
 
-	public function __construct(DataSourceName $dsn) {
+	public function __construct(MysqlDataSourceName $dsn) {
 		$this->dsn = $dsn;
 	}
 
 	public function connect(Credentials $credentials) {
 		if (!$this->isConnected()) {
-			$this->connection = new \PDO($this->dsn, $credentials->getUser(), $credentials->getPassword());
+			$this->connection = new \PDO($this->dsn->getName(), $credentials->getUser(), $credentials->getPassword());
 		} else {
 			throw new AlreadyConnected;
 		}

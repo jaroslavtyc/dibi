@@ -1,26 +1,12 @@
 <?php
 namespace Pribi\Resources;
 
-class HostedMysqlDataSourceName implements DataSourceName {
-	private $host;
-	private $port;
-	private $databaseName;
-
+class HostedMysqlDataSourceName extends MysqlDataSourceName {
 	public function __construct($host, $port, $databaseName = FALSE) {
-		$this->host = $host;
-		$this->port = $port;
-		$this->databaseName = $databaseName;
-	}
-
-	public function getName() {
-		$name = 'mysql:host=' . $this->host;
-		if ((string)$this->port !== '') {
-			$name .= ';port=' . $this->port;
+		$uri = $host;
+		if ((string)$port !== '') {
+			$uri .= ';port=' . $port;
 		}
-		if ((string)$this->databaseName !== '') {
-			$name .= ';dbname=' . $this->databaseName;
-		}
-
-		return $name;
+		parent::__construct($uri, $databaseName);
 	}
 }
