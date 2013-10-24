@@ -5,19 +5,25 @@ use Pribi\Resources\Exceptions\AlreadyConnected;
 use Pribi\Resources\Exceptions\NotConnected;
 
 class MysqlDriver implements Driver {
-	private $dsn;
+	private $dataSourceName;
+	private $credentials;
 	/**
-	 * @var \PDO
+	 * @var \mysqli
 	 */
 	private $connection;
 
-	public function __construct(MysqlDataSourceName $dsn) {
-		$this->dsn = $dsn;
-	}
-
-	public function connect(Credentials $credentials) {
+	public function connect(DataSourceName $dsn, Credentials $credentials) {
 		if (!$this->isConnected()) {
-			$this->connection = new \PDO($this->dsn->getName(), $credentials->getUser(), $credentials->getPassword());
+			$this->connection = new \mysqli(
+				$dsn->getHost(),
+				$credentials->getUser(),
+				$credentials->getPassword(),
+				$dsn->getDatabaseName(),
+				$dsn->getPort(),
+				$dsn->getSocket()
+			);
+			$this->dataSourceName = $dsn;
+			$this->credentials = $credentials;
 		} else {
 			throw new AlreadyConnected;
 		}
@@ -28,24 +34,22 @@ class MysqlDriver implements Driver {
 	}
 
 	private function isConnectionAlive() {
-		try {
-			$this->connection->exec('SELECT 1');
-			$alive = TRUE;
-		} catch (\PDOException $exception) {
-			$alive = FALSE;
-		}
-
-		return $alive;
+		return mysqli_ping($this->connection);
 	}
 
 	public function disconnect() {
 		if ($this->isConnected()) {
+			mysqli_close($this->connection);
 			$this->connection = NULL;
 		} else {
 			throw new NotConnected;
 		}
 	}
 
+	/**
+	 * @param $queryString
+	 * @return Prepared
+	 */
 	public function prepare($queryString) {
 		return new Prepared($this->connection->prepare($queryString));
 	}

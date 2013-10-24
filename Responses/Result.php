@@ -3,19 +3,16 @@ namespace Pribi\Responses;
 
 class Result implements \Iterator {
 	private $statement;
+	private $result;
 	private $current;
 	private $key = 0;
 
-	public function __construct(\PDOStatement $statement) {
+	public function __construct(\mysqli_stmt $statement) {
 		$this->statement = $statement;
 	}
 
 	public function getAffectedRows() {
-		return $this->statement->rowCount();
-	}
-
-	public function fetchArray() {
-		return new $this->statement->fetchAll(\PDO::FETCH_ASSOC);
+		return $this->statement->affected_rows;
 	}
 
 	public function current() {
@@ -23,13 +20,13 @@ class Result implements \Iterator {
 	}
 
 	public function next() {
-		$fetched = $this->statement->fetch(\PDO::FETCH_ASSOC);
-		if ($fetched !== FALSE) {
+		$fetched = $this->result->fetch_assoc();
+		if (!is_null($fetched)) {
 			$this->current = new Row($fetched);
 			$this->key++;
 		} else {
-			$this->key = FALSE;
-			$this->current = FALSE;
+			$this->key = NULL;
+			$this->current = NULL;
 		}
 
 		return $this->current;
@@ -40,10 +37,13 @@ class Result implements \Iterator {
 	}
 
 	public function valid() {
-		return $this->key !== FALSE;
+		return !is_null($this->key);
 	}
 
 	public function rewind() {
-		throw new ResultCanNotBeRewind();
+		$this->key = -1;
+		$this->statement->data_seek(0);
+		$this->result = $this->statement->get_result();
+		$this->next();
 	}
 }
