@@ -15,6 +15,9 @@ class Result implements \Iterator {
 		return $this->statement->affected_rows;
 	}
 
+	/**
+	 * @return Row|NULL
+	 */
 	public function current() {
 		return $this->current;
 	}
