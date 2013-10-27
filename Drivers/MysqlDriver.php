@@ -48,6 +48,12 @@ class MysqlDriver implements Driver {
 		}
 	}
 
+	public function __destruct() {
+		if (isset($this->connection)) {
+			$this->connection->close();
+		}
+	}
+
 	public function isConnected() {
 		return isset($this->connection) && $this->isConnectionAlive();
 	}
