@@ -21,9 +21,8 @@ class Prepared extends Object {
 			$types .= $this->getMysqliType($value->getType());
 			$arguments[] = $value->getValue();
 		}
-		$reflection = new \ReflectionClass('mysqli_stmt');
-		$method = $reflection->getMethod('bind_param');
-		$method->invokeArgs($this->statement, $arguments);
+		$this->bindParameters($types, $arguments);
+
 	}
 
 	private function getMysqliType($pdoType) {
@@ -35,6 +34,13 @@ class Prepared extends Object {
 			default :
 				return 's';
 		}
+	}
+
+	private function bindParameters($types, array $arguments) {
+		array_unshift($arguments, $types);
+		$reflection = new \ReflectionClass('mysqli_stmt');
+		$method = $reflection->getMethod('bind_param');
+		$method->invokeArgs($this->statement, $arguments);
 	}
 
 	public function execute() {
