@@ -6,6 +6,7 @@ use Pribi\Resources\Credentials;
 use Pribi\Resources\DataSourceName;
 use Pribi\Resources\Exceptions\AlreadyConnected;
 use Pribi\Resources\Exceptions\NotConnected;
+use Pribi\Resources\Prepared;
 
 class MysqlDriver implements Driver {
 	private $dataSourceName;
