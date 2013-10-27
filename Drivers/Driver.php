@@ -1,6 +1,9 @@
 <?php
 namespace Pribi\Drivers;
 
+use Pribi\Resources\Credentials;
+use Pribi\Resources\DataSourceName;
+
 interface Driver {
 	public function connect(DataSourceName $dsn, Credentials $credentials);
 

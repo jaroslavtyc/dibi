@@ -1,6 +1,8 @@
 <?php
 namespace Pribi\Drivers;
 
+use Pribi\Resources\Credentials;
+use Pribi\Resources\DataSourceName;
 use Pribi\Resources\Exceptions\AlreadyConnected;
 use Pribi\Resources\Exceptions\NotConnected;
 
