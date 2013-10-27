@@ -1,6 +1,7 @@
 <?php
 namespace Pribi\Drivers;
 
+use Pribi\Drivers\Exceptions\CanNotConnect;
 use Pribi\Resources\Credentials;
 use Pribi\Resources\DataSourceName;
 use Pribi\Resources\Exceptions\AlreadyConnected;
@@ -9,6 +10,7 @@ use Pribi\Resources\Exceptions\NotConnected;
 class MysqlDriver implements Driver {
 	private $dataSourceName;
 	private $credentials;
+	private $legacyErrorLevelReporting;
 	/**
 	 * @var \mysqli
 	 */
@@ -16,18 +18,33 @@ class MysqlDriver implements Driver {
 
 	public function connect(DataSourceName $dsn, Credentials $credentials) {
 		if (!$this->isConnected()) {
-			$this->connection = new \mysqli(
-				$dsn->getHost(),
-				$credentials->getUser(),
-				$credentials->getPassword(),
-				$dsn->getDatabaseName(),
-				$dsn->getPort(),
-				$dsn->getSocket()
-			);
+			$this->avoidWarningsReporting();
+			$this->connection = new \mysqli($dsn->getHost(), $credentials->getUser(), $credentials->getPassword(), $dsn->getDatabaseName(), $dsn->getPort(), $dsn->getSocket());
+			$this->restoreWarningsReporting();
+			$this->checkConnectError();
 			$this->dataSourceName = $dsn;
 			$this->credentials = $credentials;
 		} else {
 			throw new AlreadyConnected;
+		}
+	}
+
+	private function avoidWarningsReporting() {
+		if (error_reporting() & E_WARNING) {
+			$this->legacyErrorLevelReporting = error_reporting();
+			error_reporting($this->legacyErrorLevelReporting ^ E_WARNING);
+		}
+	}
+
+	private function checkConnectError() {
+		if ($this->connection->connect_errno) {
+			throw new CanNotConnect($this->connection->connect_error);
+		}
+	}
+
+	private function restoreWarningsReporting() {
+		if (isset($this->legacyErrorLevelReporting)) {
+			error_reporting($this->legacyErrorLevelReporting);
 		}
 	}
 
