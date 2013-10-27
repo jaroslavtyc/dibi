@@ -5,7 +5,7 @@ class Result implements \Iterator {
 	private $statement;
 	private $result;
 	private $current;
-	private $key = 0;
+	private $key;
 
 	public function __construct(\mysqli_stmt $statement) {
 		$this->statement = $statement;
