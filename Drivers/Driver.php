@@ -1,26 +1,16 @@
 <?php
 namespace Pribi\Drivers;
 
-use Pribi\Resources\Connection, \Pribi\Commands\Query;
+interface Driver {
+	public function connect(DataSourceName $dsn, Credentials $credentials);
 
-abstract class Driver {
-	const DEFAULT_SAVEPOINT = 'default';
-	private $connection;
+	public function isConnected();
 
-	public function __construct(Connection $connection) {
-		$this->connection = $connection;
-	}
+	public function disconnect();
 
 	/**
-	 * @return Connection
+	 * @param $queryString
+	 * @return \Pribi\Resources\Prepared
 	 */
-	protected function getConnection() {
-		return $this->connection;
-	}
-
-	abstract public function runQuery(Query $query);
-
-	abstract public function getAffectedRows();
-
-	abstract public function getInsertedId();
+	public function prepare($queryString);
 }

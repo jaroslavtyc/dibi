@@ -10,7 +10,7 @@ namespace Pribi\Drivers;
  *   - resource (PDO) => existing connection
  *   - lazy, profiler, result, substitutes, ... => see DibiConnection options
  */
-class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultDriver {
+class LegacyPdoDriver implements LegacyDriver, IDibiResultDriver {
 	private $connection;
 	private $resultSet;
 	private $affectedRows = FALSE;
@@ -31,8 +31,7 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 			$this->connection = $config['resource'];
 		} else try {
 			$this->connection = new PDO($config['dsn'], $config['username'], $config['password'], $config['options']);
-		}
-		catch (PDOException $e) {
+		} catch (PDOException $e) {
 			throw new DibiDriverException($e->getMessage(), $e->getCode());
 		}
 
@@ -265,28 +264,28 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 
 		switch ($this->driverName) {
 			case 'mysql':
-				$sql .= ' LIMIT ' . ($limit < 0 ? '18446744073709551615' : (int) $limit) . ($offset > 0 ? ' OFFSET ' . (int) $offset : '');
+				$sql .= ' LIMIT ' . ($limit < 0 ? '18446744073709551615' : (int)$limit) . ($offset > 0 ? ' OFFSET ' . (int)$offset : '');
 				break;
 
 			case 'pgsql':
 				if ($limit >= 0) {
-					$sql .= ' LIMIT ' . (int) $limit;
+					$sql .= ' LIMIT ' . (int)$limit;
 				}
 				if ($offset > 0) {
-					$sql .= ' OFFSET ' . (int) $offset;
+					$sql .= ' OFFSET ' . (int)$offset;
 				}
 				break;
 
 			case 'sqlite':
 			case 'sqlite2':
-				$sql .= ' LIMIT ' . $limit . ($offset > 0 ? ' OFFSET ' . (int) $offset : '');
+				$sql .= ' LIMIT ' . $limit . ($offset > 0 ? ' OFFSET ' . (int)$offset : '');
 				break;
 
 			case 'oci':
 				if ($offset > 0) {
-					$sql = 'SELECT * FROM (SELECT t.*, ROWNUM AS "__rnum" FROM (' . $sql . ') t ' . ($limit >= 0 ? 'WHERE ROWNUM <= ' . ((int) $offset + (int) $limit) : '') . ') WHERE "__rnum" > ' . (int) $offset;
+					$sql = 'SELECT * FROM (SELECT t.*, ROWNUM AS "__rnum" FROM (' . $sql . ') t ' . ($limit >= 0 ? 'WHERE ROWNUM <= ' . ((int)$offset + (int)$limit) : '') . ') WHERE "__rnum" > ' . (int)$offset;
 				} elseif ($limit >= 0) {
-					$sql = 'SELECT * FROM (' . $sql . ') WHERE ROWNUM <= ' . (int) $limit;
+					$sql = 'SELECT * FROM (' . $sql . ') WHERE ROWNUM <= ' . (int)$limit;
 				}
 				break;
 
@@ -294,7 +293,7 @@ class PdoDriver extends \Pribi\Core\Object implements LegacyDriver, IDibiResultD
 			case 'mssql':
 			case 'sqlsrv':
 				if ($offset < 1) {
-					$sql = 'SELECT TOP ' . (int) $limit . ' * FROM (' . $sql . ') t';
+					$sql = 'SELECT TOP ' . (int)$limit . ' * FROM (' . $sql . ') t';
 					break;
 				}
 			// intentionally break omitted
