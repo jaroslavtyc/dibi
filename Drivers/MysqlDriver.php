@@ -22,7 +22,7 @@ class MysqlDriver implements Driver {
 			$this->avoidWarningsReporting();
 			$this->connection = new \mysqli($dsn->getHost(), $credentials->getUser(), $credentials->getPassword(), $dsn->getDatabaseName(), $dsn->getPort(), $dsn->getSocket());
 			$this->restoreWarningsReporting();
-			$this->checkConnectError();
+			$this->checkConnectError($this->connection);
 			$this->dataSourceName = $dsn;
 			$this->credentials = $credentials;
 		} else {
@@ -37,9 +37,9 @@ class MysqlDriver implements Driver {
 		}
 	}
 
-	private function checkConnectError() {
-		if ($this->connection->connect_errno) {
-			throw new CanNotConnect($this->connection->connect_error);
+	private function checkConnectError(\mysqli $connection) {
+		if ($connection->connect_errno) {
+			throw new CanNotConnect($connection->connect_error);
 		}
 	}
 
