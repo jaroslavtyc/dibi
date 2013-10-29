@@ -10,9 +10,9 @@ class ValueToBind extends Object {
 
 	const DEFAULT_DATA_TYPE = \PDO::PARAM_STR;
 
-	public function __construct($name, $value, $dataType) {
-		$this->name = $this->formatName($name);
+	public function __construct($value, $name, $dataType) {
 		$this->value = $value;
+		$this->name = $this->formatName($name);
 		$this->dataType = $this->validateDataType($dataType);
 	}
 
