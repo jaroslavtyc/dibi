@@ -19,10 +19,9 @@ class Prepared extends Object {
 		$arguments = array();
 		foreach ($values as $value) {
 			$types .= $this->getMysqliType($value->getDataType());
-			$arguments[] = $value->getValue();
+			$arguments[$value->getName()] = $value->getValue();
 		}
 		$this->bindParameters($types, $arguments);
-
 	}
 
 	private function getMysqliType($pdoType) {
