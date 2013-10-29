@@ -3,6 +3,9 @@ namespace Pribi\Responses;
 
 class Result implements \Iterator {
 	private $statement;
+	/**
+	 * @var \mysqli_result
+	 */
 	private $result;
 	private $current;
 	private $key;
@@ -47,6 +50,13 @@ class Result implements \Iterator {
 		$this->key = -1;
 		$this->statement->data_seek(0);
 		$this->result = $this->statement->get_result();
+		$this->checkResultError($this->statement);
 		$this->next();
+	}
+
+	private function checkResultError(\mysqli_stmt $statement) {
+		if ($statement->errno) {
+			throw new Exceptions\Result($statement->error);
+		}
 	}
 }
