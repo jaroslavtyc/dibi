@@ -37,10 +37,20 @@ class Prepared extends Object {
 	}
 
 	private function bindParameters($types, array $arguments) {
-		array_unshift($arguments, $types);
+		$parameters = $this->prepareParameters($types, $arguments);
 		$reflection = new \ReflectionClass('mysqli_stmt');
 		$method = $reflection->getMethod('bind_param');
-		$method->invokeArgs($this->statement, $arguments);
+		$method->invokeArgs($this->statement, $parameters);
+	}
+
+	private function prepareParameters($types, array $arguments) {
+		$referenced = array();
+		foreach ($arguments as $key => $argument) {
+			$referenced[$key] = &$argument;
+		}
+		array_unshift($referenced, $types);
+
+		return $referenced;
 	}
 
 	public function execute() {
