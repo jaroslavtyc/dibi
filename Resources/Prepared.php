@@ -18,7 +18,7 @@ class Prepared extends Object {
 		$types = '';
 		$arguments = array();
 		foreach ($values as $value) {
-			$types .= $this->getMysqliType($value->getType());
+			$types .= $this->getMysqliType($value->getDataType());
 			$arguments[] = $value->getValue();
 		}
 		$this->bindParameters($types, $arguments);
