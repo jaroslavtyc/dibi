@@ -19,9 +19,9 @@ class MysqlDriver implements Driver {
 
 	public function connect(DataSourceName $dsn, Credentials $credentials) {
 		if (!$this->isConnected()) {
-			$this->avoidWarningsReporting();
+			$this->suppressWarningReport();
 			$this->connection = new \mysqli($dsn->getHost(), $credentials->getUser(), $credentials->getPassword(), $dsn->getDatabaseName(), $dsn->getPort(), $dsn->getSocket());
-			$this->restoreWarningsReporting();
+			$this->restoreWarningReport();
 			$this->checkConnectError($this->connection);
 			$this->dataSourceName = $dsn;
 			$this->credentials = $credentials;
@@ -30,7 +30,7 @@ class MysqlDriver implements Driver {
 		}
 	}
 
-	private function avoidWarningsReporting() {
+	private function suppressWarningReport() {
 		if (error_reporting() & E_WARNING) {
 			$this->legacyErrorLevelReporting = error_reporting();
 			error_reporting($this->legacyErrorLevelReporting ^ E_WARNING);
@@ -43,7 +43,7 @@ class MysqlDriver implements Driver {
 		}
 	}
 
-	private function restoreWarningsReporting() {
+	private function restoreWarningReport() {
 		if (isset($this->legacyErrorLevelReporting)) {
 			error_reporting($this->legacyErrorLevelReporting);
 		}
@@ -77,6 +77,11 @@ class MysqlDriver implements Driver {
 	 * @return Prepared
 	 */
 	public function prepare($queryString) {
-		return new Prepared($this->connection->prepare($queryString));
+		$statement = $this->connection->prepare($queryString);
+		if ($statement) {
+			return new Prepared($statement);
+		} else {
+			throw new Exceptions\PreparationFailed($this->connection->error);
+		}
 	}
 }
