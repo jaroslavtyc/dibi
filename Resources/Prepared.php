@@ -9,6 +9,8 @@ class Prepared extends Object {
 	 * @var \mysqli_stmt
 	 */
 	private $statement;
+	private $legacyErrorLevelReporting;
+	private $lastError;
 
 	public function __construct(\mysqli_stmt $statement) {
 		$this->statement = $statement;
@@ -39,7 +41,9 @@ class Prepared extends Object {
 		$parameters = $this->prepareParameters($types, $arguments);
 		$reflection = new \ReflectionClass('mysqli_stmt');
 		$method = $reflection->getMethod('bind_param');
+		$this->prepareToCheckBindingFailure();
 		$method->invokeArgs($this->statement, $parameters);
+		$this->checkBindingFailure();
 	}
 
 	private function prepareParameters($types, array $arguments) {
@@ -50,6 +54,32 @@ class Prepared extends Object {
 		array_unshift($referenced, $types);
 
 		return $referenced;
+	}
+
+	private function prepareToCheckBindingFailure() {
+		$this->lastError = error_get_last();
+		$this->suppressWarningReport();
+	}
+
+	private function suppressWarningReport() {
+		if (error_reporting() & E_WARNING) {
+			$this->legacyErrorLevelReporting = error_reporting();
+			error_reporting($this->legacyErrorLevelReporting ^ E_WARNING);
+		}
+	}
+
+	private function checkBindingFailure() {
+		$this->restoreWarningReport();
+		$error = error_get_last();
+		if (!is_null($error) && (is_null($this->lastError) || $error !== $this->lastError)) {
+			throw new Exceptions\BindingParametersFailed($error['message']);
+		}
+	}
+
+	private function restoreWarningReport() {
+		if (isset($this->legacyErrorLevelReporting)) {
+			error_reporting($this->legacyErrorLevelReporting);
+		}
 	}
 
 	public function execute() {
