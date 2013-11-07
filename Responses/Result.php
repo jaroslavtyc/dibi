@@ -14,6 +14,12 @@ class Result implements \Iterator {
 		$this->statement = $statement;
 	}
 
+	public function __destruct() {
+		if (isset($this->result)) {
+			$this->result->free();
+		}
+	}
+
 	public function getAffectedRows() {
 		return $this->statement->affected_rows;
 	}
@@ -47,16 +53,19 @@ class Result implements \Iterator {
 	}
 
 	public function rewind() {
-		$this->key = -1;
-		$this->statement->data_seek(0);
-		$this->result = $this->statement->get_result();
-		$this->checkResultError($this->statement);
-		$this->next();
+		if (is_null($this->result)) {
+			$this->key = -1;
+			$this->result = $this->statement->get_result();
+			if (!$this->result) {
+				$this->reportResultError($this->statement);
+			}
+			$this->next();
+		} else {
+			throw new Exceptions\Result('Repeated rewind is not supported');
+		}
 	}
 
-	private function checkResultError(\mysqli_stmt $statement) {
-		if ($statement->errno) {
-			throw new Exceptions\Result($statement->error);
-		}
+	private function reportResultError(\mysqli_stmt $statement) {
+		throw new Exceptions\Result($statement->error, $statement->errno);
 	}
 }
