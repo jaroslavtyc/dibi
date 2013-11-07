@@ -1,9 +1,10 @@
 <?php
 namespace Pribi\Commands\Transactions\BeginWorks;
-use Pribi\Commands\FollowingCommand;
+
+use Pribi\Commands\Command;
 use Pribi\Commands\Transactions\CommitWorks\CommitWork;
 
-class BeginWork extends FollowingCommand {
+class BeginWork extends Command {
 	public function commitWork() {
 		$commitWork = new CommitWork($this);
 

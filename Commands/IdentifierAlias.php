@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands;
 
-abstract class IdentificatorAlias extends FollowingCommand {
+abstract class IdentifierAlias extends Command {
 	private $alias;
 
 	public function __construct($alias, Command $previousCommand) {

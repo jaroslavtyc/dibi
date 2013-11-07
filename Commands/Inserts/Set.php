@@ -1,12 +1,12 @@
 <?php
 namespace Pribi\Commands\Inserts;
 
-use Pribi\Commands\FollowingCommand;
+use Pribi\Commands\Command;
 
-class Set extends FollowingCommand {
+class Set extends Command {
 	private $values;
 
-	public function __construct($values, FollowingCommand $previousCommand) {
+	public function __construct($values, Command $previousCommand) {
 		$this->values = $values;
 		parent::__construct($previousCommand);
 	}

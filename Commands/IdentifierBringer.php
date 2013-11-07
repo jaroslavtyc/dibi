@@ -1,9 +1,10 @@
 <?php
 namespace Pribi\Commands;
+
 /**
- * @method IdentificatorAlias as($alias)
+ * @method IdentifierAlias as ($alias)
  */
-abstract class IdentificatorBringer extends FollowingCommand {
+abstract class IdentifierBringer extends Command {
 	use Aliasing;
 
 	private $subject;

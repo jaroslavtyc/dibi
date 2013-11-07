@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\FromSources;
 
-use Pribi\Commands\IdentificatorBringer;
+use Pribi\Commands\IdentifierBringer;
 use Pribi\Commands\InnerJoin;
 use Pribi\Commands\LeftJoin;
 use Pribi\Commands\RightJoin;
@@ -9,9 +9,9 @@ use Pribi\Commands\Where;
 use Pribi\Commands\Limit;
 
 /**
- * @method \Pribi\Commands\FromSources\FromAlias as($alias)
+ * @method \Pribi\Commands\FromSources\FromAlias as ($alias)
  */
-class From extends IdentificatorBringer {
+class From extends IdentifierBringer {
 	protected function alias($alias) {
 		return new FromAlias($alias, $this);
 	}

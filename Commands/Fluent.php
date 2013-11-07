@@ -9,6 +9,10 @@ use Pribi\Commands\Transactions\BeginWorks\BeginWork;
 use Pribi\Commands\Transactions\StartTransactions\StartTransaction;
 
 class Fluent extends Command {
+	public function __construct() {
+
+	}
+
 	protected function toSql() {
 		return '';
 	}

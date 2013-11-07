@@ -21,7 +21,7 @@ class DibiFileLogger extends DibiObject {
 
 	public function __construct($file, $filter = NULL) {
 		$this->file = $file;
-		$this->filter = $filter ? (int) $filter : DibiEvent::QUERY;
+		$this->filter = $filter ? (int)$filter : DibiEvent::QUERY;
 	}
 
 	/**

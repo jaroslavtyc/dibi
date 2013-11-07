@@ -235,8 +235,7 @@ FROM %SQL', $this->sql, '
 %ex', $this->conds ? array('WHERE %and', $this->conds) : NULL, '
 %ex', $this->sorting ? array('ORDER BY %by', $this->sorting) : NULL, '
 %ofs %lmt', $this->offset, $this->limit);
-		}
-		catch (Exception $e) {
+		} catch (Exception $e) {
 			trigger_error($e->getMessage(), E_USER_ERROR);
 		}
 	}
@@ -249,7 +248,7 @@ FROM %SQL', $this->sql, '
 	 */
 	public function count() {
 		if ($this->count === NULL) {
-			$this->count = $this->conds || $this->offset || $this->limit ? (int) $this->connection->nativeQuery('SELECT COUNT(*) FROM (' . $this->__toString() . ') t')->fetchSingle() : $this->getTotalCount();
+			$this->count = $this->conds || $this->offset || $this->limit ? (int)$this->connection->nativeQuery('SELECT COUNT(*) FROM (' . $this->__toString() . ') t')->fetchSingle() : $this->getTotalCount();
 		}
 
 		return $this->count;
@@ -261,7 +260,7 @@ FROM %SQL', $this->sql, '
 	 */
 	public function getTotalCount() {
 		if ($this->totalCount === NULL) {
-			$this->totalCount = (int) $this->connection->nativeQuery('SELECT COUNT(*) FROM ' . $this->sql)->fetchSingle();
+			$this->totalCount = (int)$this->connection->nativeQuery('SELECT COUNT(*) FROM ' . $this->sql)->fetchSingle();
 		}
 
 		return $this->totalCount;

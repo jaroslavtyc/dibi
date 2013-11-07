@@ -1,6 +1,6 @@
 <?php
 namespace Pribi\Commands;
 
-class WithoutIdentificator extends FollowingCommand {
+abstract class WithoutIdentificator extends Command {
 
 }

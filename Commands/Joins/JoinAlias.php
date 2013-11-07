@@ -1,8 +1,9 @@
 <?php
 namespace Pribi\Commands\Joins;
-use Pribi\Commands\IdentificatorAlias;
 
-abstract class JoinAlias extends IdentificatorAlias {
+use Pribi\Commands\IdentifierAlias;
+
+abstract class JoinAlias extends IdentifierAlias {
 
 	public function on($identificator) {
 		return new On($identificator, $this);

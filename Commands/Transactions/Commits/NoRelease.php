@@ -1,9 +1,10 @@
 <?php
 namespace Pribi\Commands\Transactions\Commits;
-use Pribi\Commands\FollowingCommand;
+
+use Pribi\Commands\Command;
 use Pribi\Commands\Transactions\Rollbacks\Rollback;
 
-class NoRelease extends FollowingCommand {
+class NoRelease extends Command {
 	public function rollback() {
 		$rollback = new Rollback($this);
 

@@ -49,7 +49,7 @@ class DibiDateTime extends DateTime {
 	}
 
 	public function getTimestamp() {
-		return (int) $this->format('U');
+		return (int)$this->format('U');
 	}
 
 	public function setTimestamp($timestamp) {

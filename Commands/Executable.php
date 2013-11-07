@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands;
 
-interface Executable extends Command {
+interface Executable {
 	public function execute();
 
 	public function test();

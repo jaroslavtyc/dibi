@@ -1,5 +1,6 @@
 <?php
 namespace Pribi\Commands;
+
 use Pribi\Commands\UsingIdentificator;
 
 class InArray extends UsingIdentificator {

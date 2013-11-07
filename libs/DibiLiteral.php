@@ -16,7 +16,7 @@ class DibiLiteral extends DibiObject {
 	private $value;
 
 	public function __construct($value) {
-		$this->value = (string) $value;
+		$this->value = (string)$value;
 	}
 
 	/**

@@ -1,14 +1,15 @@
 <?php
 namespace Pribi\Commands\Joins;
-use Pribi\Commands\IdentificatorBringer;
+
+use Pribi\Commands\IdentifierBringer;
 use Pribi\Commands\Joins\InnerJoin;
 use Pribi\Commands\Joins\LeftJoin;
 use Pribi\Commands\Joins\RightJoin;
 
 /**
- * @method \Pribi\Commands\Joins\AliasedInnerJoin as($alias)
+ * @method \Pribi\Commands\Joins\AliasedInnerJoin as ($alias)
  */
-abstract class Join extends IdentificatorBringer {
+abstract class Join extends IdentifierBringer {
 	public function on($identificator) {
 		return new On($identificator, $this);
 	}

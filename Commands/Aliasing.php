@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands {
 	/**
-	 * @method Command as($alias)
+	 * @method Command as ($alias)
 	 */
 	trait Aliasing {
 		public function __call($name, $arguments) {

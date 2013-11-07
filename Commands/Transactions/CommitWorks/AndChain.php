@@ -1,9 +1,10 @@
 <?php
 namespace Pribi\Commands\Transactions\CommitWorks;
-use Pribi\Commands\FollowingCommand;
+
+use Pribi\Commands\Command;
 use Pribi\Commands\Transactions\RollbackWorks\RollbackWork;
 
-class AndChain extends FollowingCommand {
+class AndChain extends Command {
 	public function release() {
 		$release = new Release($this);
 

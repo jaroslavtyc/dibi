@@ -39,7 +39,7 @@ class DibiFirePhpLogger extends DibiObject {
 	}
 
 	public function __construct($filter = NULL) {
-		$this->filter = $filter ? (int) $filter : DibiEvent::QUERY;
+		$this->filter = $filter ? (int)$filter : DibiEvent::QUERY;
 	}
 
 	/**
@@ -53,7 +53,7 @@ class DibiFirePhpLogger extends DibiObject {
 
 		$this->totalTime += $event->time;
 		$this->numOfQueries++;
-		self::$fireTable[] = array(sprintf('%0.3f', $event->time * 1000), strlen($event->sql) > self::$maxLength ? substr($event->sql, 0, self::$maxLength) . '...' : $event->sql, $event->result instanceof Exception ? 'ERROR' : (string) $event->count, $event->connection->getConfig('driver') . '/' . $event->connection->getConfig('name'));
+		self::$fireTable[] = array(sprintf('%0.3f', $event->time * 1000), strlen($event->sql) > self::$maxLength ? substr($event->sql, 0, self::$maxLength) . '...' : $event->sql, $event->result instanceof Exception ? 'ERROR' : (string)$event->count, $event->connection->getConfig('driver') . '/' . $event->connection->getConfig('name'));
 
 		header('X-Wf-Protocol-pribi: http://meta.wildfirehq.org/Protocol/JsonStream/0.2');
 		header('X-Wf-pribi-Plugin-1: http://meta.firephp.org/Wildfire/Plugin/FirePHP/Library-FirePHPCore/0.2.0');

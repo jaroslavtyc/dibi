@@ -1,12 +1,12 @@
 <?php
 namespace Pribi\Commands\Inserts;
 
-use Pribi\Commands\FollowingCommand;
+use Pribi\Commands\Command;
 
-class OnDuplicateKeyUpdate extends FollowingCommand {
+class OnDuplicateKeyUpdate extends Command {
 	private $expression;
 
-	public function __construct($expression, FollowingCommand $previousCommand) {
+	public function __construct($expression, Command $previousCommand) {
 		$this->expression = $expression;
 		parent::__construct($previousCommand);
 	}

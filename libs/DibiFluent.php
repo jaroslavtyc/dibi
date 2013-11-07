@@ -327,7 +327,7 @@ class DibiFluent extends DibiObject implements IDataSource {
 	 * @return int
 	 */
 	public function count() {
-		return (int) $this->query(array('SELECT COUNT(*) FROM (%ex', $this->_export(), ') AS [data]'))->fetchSingle();
+		return (int)$this->query(array('SELECT COUNT(*) FROM (%ex', $this->_export(), ') AS [data]'))->fetchSingle();
 	}
 
 	/**
@@ -358,8 +358,7 @@ class DibiFluent extends DibiObject implements IDataSource {
 	final public function __toString() {
 		try {
 			return $this->connection->translate($this->_export());
-		}
-		catch (Exception $e) {
+		} catch (Exception $e) {
 			trigger_error($e->getMessage(), E_USER_ERROR);
 		}
 	}

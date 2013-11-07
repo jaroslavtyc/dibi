@@ -1,10 +1,11 @@
 <?php
 namespace Pribi\Commands\Transactions\StartTransactions;
-use Pribi\Commands\FollowingCommand;
+
+use Pribi\Commands\Command;
 use Pribi\Commands\Transactions\Commits\Commit;
 use Pribi\Commands\Transactions\CommitWorks\CommitWork;
 
-class WithConsistentSnapshot extends FollowingCommand {
+class WithConsistentSnapshot extends Command {
 	/**
 	 * The WITH CONSISTENT SNAPSHOT option starts a consistent read for storage engines that are capable of it.
 	 * This applies only to InnoDB. The effect is the same as issuing a START TRANSACTION followed by a SELECT from any InnoDB table.

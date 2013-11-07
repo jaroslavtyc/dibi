@@ -54,7 +54,7 @@ class DibiEvent {
 		$dibiDir = dirname($rc->getFileName()) . DIRECTORY_SEPARATOR;
 		foreach (debug_backtrace(FALSE) as $row) {
 			if (isset($row['file']) && is_file($row['file']) && strpos($row['file'], $dibiDir) !== 0) {
-				$this->source = array($row['file'], (int) $row['line']);
+				$this->source = array($row['file'], (int)$row['line']);
 				break;
 			}
 		}
@@ -68,8 +68,7 @@ class DibiEvent {
 		$this->result = $result;
 		try {
 			$this->count = $result instanceof DibiResult ? count($result) : NULL;
-		}
-		catch (DibiException $e) {
+		} catch (DibiException $e) {
 			$this->count = NULL;
 		}
 

@@ -1,5 +1,6 @@
 <?php
 namespace Pribi\Commands\Conditions;
+
 use Pribi\Commands\WithoutIdentificator;
 
 abstract class Negation extends WithoutIdentificator {

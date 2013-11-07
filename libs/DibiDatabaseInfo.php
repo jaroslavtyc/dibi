@@ -431,28 +431,28 @@ class DibiColumnInfo extends DibiObject {
 	 * @return int
 	 */
 	public function getSize() {
-		return isset($this->info['size']) ? (int) $this->info['size'] : NULL;
+		return isset($this->info['size']) ? (int)$this->info['size'] : NULL;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isUnsigned() {
-		return isset($this->info['unsigned']) ? (bool) $this->info['unsigned'] : NULL;
+		return isset($this->info['unsigned']) ? (bool)$this->info['unsigned'] : NULL;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isNullable() {
-		return isset($this->info['nullable']) ? (bool) $this->info['nullable'] : NULL;
+		return isset($this->info['nullable']) ? (bool)$this->info['nullable'] : NULL;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isAutoIncrement() {
-		return isset($this->info['autoincrement']) ? (bool) $this->info['autoincrement'] : NULL;
+		return isset($this->info['autoincrement']) ? (bool)$this->info['autoincrement'] : NULL;
 	}
 
 	/**

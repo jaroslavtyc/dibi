@@ -23,7 +23,7 @@ class DibiException extends Exception {
 	 * @param  string SQL command
 	 */
 	public function __construct($message = NULL, $code = 0, $sql = NULL) {
-		parent::__construct($message, (int) $code);
+		parent::__construct($message, (int)$code);
 		$this->sql = $sql;
 	}
 
