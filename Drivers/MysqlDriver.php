@@ -64,7 +64,7 @@ class MysqlDriver implements Driver {
 	}
 
 	public function disconnect() {
-		if ($this->isConnected()) {
+		if (isset($this->connection)) {
 			mysqli_close($this->connection);
 			$this->connection = NULL;
 		} else {
