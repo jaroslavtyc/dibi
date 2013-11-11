@@ -17,7 +17,7 @@ class ValuesToBind extends Object implements \Iterator {
 
 	private function resolveValueName($name) {
 		if ($name === FALSE) {
-			$name = (string) count($this->values);
+			$name = count($this->values);
 		} elseif (!is_null($name)) {
 			$name = (string) $name;
 		} else {
