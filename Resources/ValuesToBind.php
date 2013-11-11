@@ -18,27 +18,32 @@ class ValuesToBind extends Object implements \Iterator {
 	private function resolveValueName($name) {
 		if ($name === FALSE) {
 			$name = (string) count($this->values);
-		} elseif (is_null($name)) {
-			throw new Exceptions\NameOfValueToBindCanNotBeNull;
+		} elseif (!is_null($name)) {
+			$name = (string) $name;
+		} else {
+			throw new Exceptions\CannotBeSet('Name of value can not be null');
 		}
 
 		return $name;
 	}
 
 	/**
-	 * @return ValueToBind
+	 * @return ValueToBind|FALSE
 	 */
 	public function current() {
 		return current($this->values);
 	}
 
 	/**
-	 * @return ValueToBind
+	 * @return ValueToBind|FALSE
 	 */
 	public function next() {
 		return next($this->values);
 	}
 
+	/**
+	 * @return string|int|NULL
+	 */
 	public function key() {
 		return key($this->values);
 	}
@@ -47,6 +52,9 @@ class ValuesToBind extends Object implements \Iterator {
 		return !is_null($this->key());
 	}
 
+	/**
+	 * @return ValueToBind|FALSE
+	 */
 	public function rewind() {
 		return reset($this->values);
 	}
