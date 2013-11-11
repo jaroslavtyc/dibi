@@ -18,6 +18,8 @@ class ValuesToBind extends Object implements \Iterator {
 	private function resolveValueName($name) {
 		if ($name === FALSE) {
 			$name = (string) count($this->values);
+		} elseif (is_null($name)) {
+			throw new Exceptions\NameOfValueToBindCanNotBeNull;
 		}
 
 		return $name;
