@@ -11,7 +11,7 @@ class ValuesToBind extends Object implements \Iterator {
 		if (!isset($this->values[$valueToBind->getName()])) {
 			$this->values[$valueToBind->getName()] = $valueToBind;
 		} else {
-			throw new AlreadySet(sprintf('Value to bind of name [%s]', $valueToBind->getName()));
+			throw new Exceptions\AlreadySet(sprintf('Value to bind of name [%s]', $valueToBind->getName()));
 		}
 	}
 
