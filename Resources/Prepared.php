@@ -18,8 +18,11 @@ class Prepared extends Object {
 	public function bindValues(ValuesToBind $values) {
 		$types = '';
 		$arguments = array();
+		/**
+		 * @var ValueToBind[] $values
+		 */
 		foreach ($values as $value) {
-			$types .= $this->getMysqliType($value->getDataType());
+			$types .= $this->getMysqliType($value->getPdoDataType());
 			$arguments[$value->getName()] = $value->getValue();
 		}
 		$this->bindParameters($types, $arguments);
