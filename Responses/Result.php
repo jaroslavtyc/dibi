@@ -24,6 +24,10 @@ class Result implements \Iterator {
 		return $this->statement->affected_rows;
 	}
 
+	public function getLastInsertId() {
+		return $this->statement->insert_id;
+	}
+
 	/**
 	 * @return Row|NULL
 	 */
