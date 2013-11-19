@@ -33,14 +33,6 @@ class Fluent extends Command {
 		return new Delete($subject);
 	}
 
-	public function begin() {
-		return new Begin();
-	}
-
-	public function beginWork() {
-		return new BeginWork();
-	}
-
 	public function startTransaction() {
 		return new StartTransaction();
 	}
