@@ -9,12 +9,12 @@ abstract class IdentifierBringer extends Command {
 
 	private $subject;
 
-	public function __construct($subject, Command $previousCommand = NULL) {
+	public function __construct(Identifier $subject, Command $previousCommand = NULL) {
 		$this->subject = $subject;
 		parent::__construct($previousCommand);
 	}
 
-	public function getIdentificator() {
+	public function getIdentifier() {
 		return $this->subject;
 	}
 }

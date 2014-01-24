@@ -4,8 +4,6 @@ namespace Pribi\Commands;
 use Pribi\Commands\Inserts\InsertInto;
 use Pribi\Commands\Inserts\InsertIgnoreInto;
 use Pribi\Commands\Selects\Select;
-use Pribi\Commands\Transactions\Begins\Begin;
-use Pribi\Commands\Transactions\BeginWorks\BeginWork;
 use Pribi\Commands\Transactions\StartTransactions\StartTransaction;
 
 class Fluent extends Command {
@@ -17,12 +15,12 @@ class Fluent extends Command {
 		return '';
 	}
 
-	public function insertInto() {
-		return new InsertInto();
+	public function insertInto($columns) {
+		return new InsertInto($this, $columns);
 	}
 
 	public function insertIgnoreInto() {
-		return new InsertIgnoreInto();
+		return new InsertIgnoreInto($this);
 	}
 
 	public function select($subject) {

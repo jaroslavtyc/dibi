@@ -1,9 +1,9 @@
 <?php
 namespace Pribi\Commands;
 
-use Pribi\Commands\UsingIdentificator;
+use Pribi\Commands\WithIdentifier;
 
-class InArray extends UsingIdentificator {
+class InArray extends WithIdentifier {
 	use AndOring;
 
 	protected function conjunction($identificator) {

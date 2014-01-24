@@ -1,13 +1,19 @@
 <?php
 namespace Pribi\Commands;
 
-use Pribi\Core\Object;
+class Identifier extends QueryPart {
+	private $subject;
+	private $quoted;
 
-class IdentifierQuoter extends Object {
-	public function quote($subject) {
+	public function __construct($subject) {
+		$this->subject = $subject;
+		$this->quoted = $this->quote($subject);
+	}
+
+	private function quote($subject) {
 		$subject = trim($subject);
 		if ($this->isNotManuallyQuoted($subject) && $this->isProbablyNotSpecial($subject) && $this->isValidIdentifier($subject)) {
-			$subject = $this->process($subject);
+			$subject = $this->quoteIt($subject);
 		}
 
 		return $subject;
@@ -18,14 +24,14 @@ class IdentifierQuoter extends Object {
 	}
 
 	private function isValidIdentifier($qualifier) {
-		return preg_match('~^[.\x{0001}-\x{FFFF}]+$~u', $qualifier);
+		return (bool)preg_match('~^[.\x{0001}-\x{FFFF}]+$~u', $qualifier);
 	}
 
 	private function isProbablyNotSpecial($subject) {
-		return preg_match('~^[.\s0-9a-zA-Z$_\x{0080}-\x{FFFF}]+$~u', $subject);
+		return (bool)preg_match('~^[.\s0-9a-zA-Z$_\x{0080}-\x{FFFF}]+$~u', $subject);
 	}
 
-	private function process($identifier) {
+	private function quoteIt($identifier) {
 		$qualifiers = $this->explodeToQualifiers($identifier);
 		$quoted = array();
 		foreach ($qualifiers as $qualifier) {
@@ -47,15 +53,7 @@ class IdentifierQuoter extends Object {
 		return implode('.', $qualifiers);
 	}
 
-	private function hasToBeQuoted($qualifier) {
-		return preg_match('~^[\x{0001}-\x{007F}]+$~u', $qualifier) || preg_match('~^\d+$~', $qualifier);
-	}
-
-	private function isValidQualifier($qualifier) {
-		return preg_match('~^[\x{0001}-\x{FFFF}]+$~u', $qualifier);
-	}
-
-	private function canBeNonquoted($qualifier) {
-		return preg_match('~^[0-9a-zA-Z$_\x{0080}-\x{FFFF}]+$~u', $qualifier);
+	protected function toSql() {
+		return $this->quoted;
 	}
 }

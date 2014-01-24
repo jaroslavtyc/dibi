@@ -1,9 +1,9 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-use Pribi\Commands\WithoutIdentificator;
+use Pribi\Commands\WithoutIdentifier;
 
-abstract class Negation extends WithoutIdentificator {
+abstract class Negation extends WithoutIdentifier {
 	use Negating;
 
 	public function in($firstSubject) {

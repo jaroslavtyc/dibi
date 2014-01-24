@@ -1,9 +1,9 @@
 <?php
 namespace Pribi\Commands\Inserts;
 
-use Pribi\Commands\UsingIdentificator;
+use Pribi\Commands\WithIdentifier;
 
-class Partition extends UsingIdentificator {
+class Partition extends WithIdentifier {
 	public function values($identificator) {
 		return new Values($identificator, $this);
 	}

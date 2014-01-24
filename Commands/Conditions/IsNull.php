@@ -1,8 +1,8 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-use Pribi\Commands\WithoutIdentificator;
+use Pribi\Commands\WithoutIdentifier;
 
-class IsNull extends WithoutIdentificator {
+class IsNull extends WithoutIdentifier {
 
 }

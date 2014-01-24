@@ -1,36 +1,48 @@
 <?php
 namespace Pribi\Commands\Inserts;
 
+use Pribi\Commands\Command;
 use Pribi\Commands\Exceptions\WrongFormat;
-use Pribi\Commands\WithoutIdentificator;
+use Pribi\Commands\IdentifierBringer;
+use Pribi\Commands\WithIdentifier;
 use Pribi\Commands\Selects\Select;
 
-abstract class Insert extends WithoutIdentificator {
-	public function __construct(Command $previousCommand, $columns) {
-		$this->previousCommand = $previousCommand;
+abstract class Insert extends WithIdentifier {
+	private $columns;
+
+	public function __construct(Command $previousCommand, Identifier $table, $columns) {
+		parent::__construct($table, $previousCommand);
 		$this->columns = $this->extractColumns($columns);
 	}
 
 	private function extractColumns($columns) {
-		$extracted = array();
 		if (is_array($columns)) {
 			$extracted = $columns;
 		} elseif (is_object($columns)) {
-			if (is_a($columns, '\Traversable')) {
-				foreach ($columns as $column) {
-					$extracted[] = $column;
-				}
-			} elseif (method_exists($columns, '__toString')) {
-				$extracted = $this->splitFromString((string)$columns);
-			} else {
-				throw new WrongFormat(sprintf('Cannot find out how to extract columns from given class [%s].', get_class($columns)));
-			}
+			$extracted = $this->extractColumnsFromObject($columns);
 		} elseif (is_scalar($columns)) {
 			$extracted = $this->splitFromString((string)$columns);
+		} else {
+			throw new WrongFormat(sprintf('Do not know how to extract columns from [%s]', var_export($columns, TRUE)));
 		}
 
-		if (empty($extracted)) {
+		if (count($extracted) === 0) {
 			throw new WrongFormat(sprintf('Cannot extract any column name from given [%s]', var_export($columns, TRUE)));
+		}
+
+		return $extracted;
+	}
+
+	private function extractColumnsFromObject($columns) {
+		if (is_a($columns, '\Traversable')) {
+			$extracted = array();
+			foreach ($columns as $column) {
+				$extracted[] = $column;
+			}
+		} elseif (method_exists($columns, '__toString')) {
+			$extracted = $this->splitFromString((string)$columns);
+		} else {
+			throw new WrongFormat(sprintf('Cannot find out how to extract columns from given class [%s].', get_class($columns)));
 		}
 
 		return $extracted;
@@ -54,5 +66,29 @@ abstract class Insert extends WithoutIdentificator {
 
 	public function select($subject) {
 		return new Select($subject);
+	}
+
+	/**
+	 * @return string[] array
+	 */
+	protected function getColumns() {
+		return $this->columns;
+	}
+
+	protected function getSqlWithoutInsertCommand() {
+		$query = ' INTO ' . $this->getTable();
+		if (count($this->getColumns()) > 0) {
+			$columns = array();
+			foreach ($this->getColumns() as $column) {
+				$columns[] = $this->identifierQuoter()->quote($column);
+			}
+			$query .= '(' . implode($columns) . ')';
+		}
+
+		return $query;
+	}
+
+	protected function getTable() {
+		return $this->getIdentifier();
 	}
 }

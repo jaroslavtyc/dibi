@@ -10,10 +10,10 @@ use Pribi\Commands\EqualTo;
 use Pribi\Commands\FromSources\From;
 use Pribi\Commands\Negation;
 use Pribi\Commands\RightJoin;
-use Pribi\Commands\UsingIdentificator;
+use Pribi\Commands\WithIdentifier;
 use \Pribi\Commands\AndOrNegating;
 
-class On extends UsingIdentificator {
+class On extends WithIdentifier {
 	use AndOrNegating;
 
 	protected function conjunction($identificator) {
