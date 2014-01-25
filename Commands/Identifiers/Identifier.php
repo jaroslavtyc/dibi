@@ -1,5 +1,7 @@
 <?php
-namespace Pribi\Commands;
+namespace Pribi\Commands\Identifiers;
+
+use Pribi\Commands\QueryPart;
 
 class Identifier extends QueryPart {
 	private $subject;
@@ -23,12 +25,13 @@ class Identifier extends QueryPart {
 		return strpos($subject, '`') === FALSE;
 	}
 
-	private function isValidIdentifier($qualifier) {
-		return (bool)preg_match('~^[.\x{0001}-\x{FFFF}]+$~u', $qualifier);
-	}
 
 	private function isProbablyNotSpecial($subject) {
-		return (bool)preg_match('~^[.\s0-9a-zA-Z$_\x{0080}-\x{FFFF}]+$~u', $subject);
+		return (bool)preg_match('~^[.\s0-9a-zA-Z$_\x{0080}-\x{FFFF}]+(\.\*)?$~u', $subject);
+	}
+
+	private function isValidIdentifier($qualifier) {
+		return (bool)preg_match('~^[.\x{0001}-\x{FFFF}]+$~u', $qualifier);
 	}
 
 	private function quoteIt($identifier) {
@@ -46,14 +49,18 @@ class Identifier extends QueryPart {
 	}
 
 	private function quoteQualifier($qualifier) {
-		return '`' . $qualifier . '`';
+		if ($qualifier === '*') {
+			return $qualifier;
+		} else {
+			return '`' . $qualifier . '`';
+		}
 	}
 
 	private function implodeToIdentifier(array $qualifiers) {
 		return implode('.', $qualifiers);
 	}
 
-	protected function toSql() {
+	public function toSql() {
 		return $this->quoted;
 	}
 }
