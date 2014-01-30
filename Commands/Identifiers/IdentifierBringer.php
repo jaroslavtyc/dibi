@@ -1,7 +1,7 @@
 <?php
-namespace Pribi\Commands;
+namespace Pribi\Commands\Identifiers;
 
-use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Commands\Command;
 
 /**
  * @method IdentifierAlias as ($alias)

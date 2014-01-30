@@ -1,18 +1,22 @@
 <?php
 namespace Pribi\Commands\Selects;
 
-use Pribi\Commands\Executabling;
-use Pribi\Commands\IdentifierBringer;
 use Pribi\Commands\Executable;
+use Pribi\Commands\Executabling;
+use Pribi\Commands\Identifiers\IdentifierBringer;
 
 /**
  * @method \Pribi\Commands\Selects\SelectAlias as ($alias)
  */
-class Select extends IdentifierBringer implements Executable {
+class Select extends IdentifierBringer implements Executable, SelectIdentity {
 	use Executabling;
 
 	protected function toSql() {
-		return $this->getIdentifier()->toSql();
+		if (is_a($this->getPreviousCommand(), SelectIdentity::CLASS_IDENTITY)) {
+			return ',' . $this->getIdentifier()->toSql();
+		} else {
+			return 'SELECT ' . $this->getIdentifier()->toSql();
+		}
 	}
 
 	protected function alias($alias) {

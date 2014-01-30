@@ -6,7 +6,7 @@ use Pribi\Commands\Executabling;
 use Pribi\Commands\IdentifierAlias;
 use Pribi\Commands\FromSources\From;
 
-class SelectAlias extends IdentifierAlias implements Executable {
+class SelectAlias extends IdentifierAlias implements Executable, SelectIdentity {
 	use Executabling;
 
 	public function __construct($alias, Select $prependSelect) {
