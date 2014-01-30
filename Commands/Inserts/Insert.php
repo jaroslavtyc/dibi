@@ -3,14 +3,14 @@ namespace Pribi\Commands\Inserts;
 
 use Pribi\Commands\Command;
 use Pribi\Commands\Exceptions\WrongFormat;
-use Pribi\Commands\IdentifierBringer;
+use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\WithIdentifier;
 use Pribi\Commands\Selects\Select;
 
 abstract class Insert extends WithIdentifier {
 	private $columns;
 
-	public function __construct(Command $previousCommand, Identifier $table, $columns) {
+	public function __construct(Identifier $table, $columns, Command $previousCommand) {
 		parent::__construct($table, $previousCommand);
 		$this->columns = $this->extractColumns($columns);
 	}
@@ -65,7 +65,7 @@ abstract class Insert extends WithIdentifier {
 	}
 
 	public function select($subject) {
-		return new Select($subject);
+		return new Select($subject, $this);
 	}
 
 	/**

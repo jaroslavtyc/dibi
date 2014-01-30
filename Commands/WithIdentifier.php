@@ -1,6 +1,8 @@
 <?php
 namespace Pribi\Commands;
 
+use Pribi\Commands\Identifiers\Identifier;
+
 abstract class WithIdentifier extends Command {
 	private $identifier;
 

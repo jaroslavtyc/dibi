@@ -11,6 +11,10 @@ use Pribi\Commands\Executable;
 class Select extends IdentifierBringer implements Executable {
 	use Executabling;
 
+	protected function toSql() {
+		return $this->getIdentifier()->toSql();
+	}
+
 	protected function alias($alias) {
 		return new SelectAlias($alias, $this);
 	}

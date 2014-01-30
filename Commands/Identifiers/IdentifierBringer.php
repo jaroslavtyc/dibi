@@ -1,6 +1,8 @@
 <?php
 namespace Pribi\Commands;
 
+use Pribi\Commands\Identifiers\Identifier;
+
 /**
  * @method IdentifierAlias as ($alias)
  */
@@ -9,7 +11,7 @@ abstract class IdentifierBringer extends Command {
 
 	private $subject;
 
-	public function __construct(Identifier $subject, Command $previousCommand = NULL) {
+	public function __construct(Identifier $subject, Command $previousCommand) {
 		$this->subject = $subject;
 		parent::__construct($previousCommand);
 	}

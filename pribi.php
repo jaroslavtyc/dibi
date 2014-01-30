@@ -1,10 +1,10 @@
 <?php
 class pribi {
 	/**
-	 * @return \Pribi\Commands\Fluent
+	 * @return \Pribi\Commands\QueryOpener
 	 */
-	public static function fluent() {
-		return new \Pribi\Commands\Fluent();
+	public static function openQuery() {
+		return new \Pribi\Commands\QueryOpener();
 	}
 
 	/**

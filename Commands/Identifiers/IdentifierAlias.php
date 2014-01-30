@@ -1,6 +1,8 @@
 <?php
 namespace Pribi\Commands;
 
+use Pribi\Commands\Identifiers\Identifier;
+
 abstract class IdentifierAlias extends Command {
 	private $alias;
 
@@ -9,6 +11,9 @@ abstract class IdentifierAlias extends Command {
 		parent::__construct($previousCommand);
 	}
 
+	/**
+	 * @return Identifier
+	 */
 	public function getIdentifier() {
 		return $this->alias;
 	}

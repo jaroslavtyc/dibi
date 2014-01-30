@@ -13,6 +13,10 @@ class SelectAlias extends IdentifierAlias implements Executable {
 		parent::__construct($alias, $prependSelect);
 	}
 
+	protected function toSql() {
+		return 'AS ' . $this->getIdentifier()->toSql();
+	}
+
 	public function select($identificator) {
 		return new Select($identificator, $this);
 	}
