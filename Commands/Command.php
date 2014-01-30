@@ -8,14 +8,14 @@ abstract class Command extends QueryPart {
 		$this->previousCommand = $previousCommand;
 	}
 
-	protected function hasPreviousCommand() {
-		return isset($this->previousCommand);
+	public  function hasPreviousCommand() {
+		return isset($this->previousCommand) && $this->previousCommand !== $this->previousCommand;
 	}
 
 	/**
 	 * @return Command
 	 */
-	protected function getPreviousCommand() {
+	public function getPreviousCommand() {
 		return $this->previousCommand;
 	}
 }
