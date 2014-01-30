@@ -13,7 +13,7 @@ namespace Pribi\Commands\Identifiers {
 					throw new Exceptions\MissingAliasName;
 				}
 			} else {
-				throw new Exceptions\ExpectedAlias(\sprintf('But called [%s->%s]()', get_class($this), $loweredName));
+				throw new Exceptions\ExpectedAlias(\sprintf('Expected as(), but called [%s->%s]()', get_class($this), $loweredName));
 			}
 
 			return $nextToFluid;
