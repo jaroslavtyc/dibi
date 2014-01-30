@@ -2,7 +2,7 @@
 namespace Pribi\Resources;
 
 use Pribi\Commands\Command;
-use Pribi\Commands\Query;
+use Pribi\Commands\QueryBuilder;
 use Pribi\Core\Object;
 
 class Builder extends Object {
@@ -23,7 +23,7 @@ class Builder extends Object {
 	}
 
 	public function buildQuery(Command $command) {
-		return new Query($command, $this->resolveExecutor(), $this->resolveTester(), $this->resolveExplainer());
+		return new QueryBuilder($command, $this->resolveExecutor(), $this->resolveTester(), $this->resolveExplainer());
 	}
 
 	private function resolveExecutor() {
