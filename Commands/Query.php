@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands;
 
-class QueryBuilder extends Command implements Executable {
+class Query extends Command implements Executable {
 	private $lastCommand;
 	private $executor;
 	private $tester;
@@ -19,7 +19,7 @@ class QueryBuilder extends Command implements Executable {
 		$query = $command->toSql();
 		while ($command->hasPreviousCommand()) {
 			$command = $command->getPreviousCommand();
-			$query = $command->toSql() . ' ' . $query;
+			$query = $command->toSql() . $query;
 		}
 
 		return $query;
