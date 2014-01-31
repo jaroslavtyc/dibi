@@ -4,12 +4,13 @@ namespace Pribi\Commands\Selects;
 use Pribi\Commands\Executions\Executable;
 use Pribi\Commands\Executions\Executabling;
 use Pribi\Commands\FromSources\From;
+use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Identifiers\IdentifierAlias;
 
 class SelectAlias extends IdentifierAlias implements Executable, SelectIdentity {
 	use Executabling;
 
-	public function __construct($alias, Select $prependSelect) {
+	public function __construct(Identifier $alias, Select $prependSelect) {
 		parent::__construct($alias, $prependSelect);
 	}
 

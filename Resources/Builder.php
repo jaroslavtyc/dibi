@@ -2,6 +2,7 @@
 namespace Pribi\Resources;
 
 use Pribi\Commands\Command;
+use Pribi\Commands\Executions\Executor;
 use Pribi\Commands\Query;
 use Pribi\Core\Object;
 

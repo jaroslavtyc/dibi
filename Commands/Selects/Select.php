@@ -3,6 +3,7 @@ namespace Pribi\Commands\Selects;
 
 use Pribi\Commands\Executions\Executable;
 use Pribi\Commands\Executions\Executabling;
+use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Identifiers\IdentifierBringer;
 
 /**
@@ -19,7 +20,7 @@ class Select extends IdentifierBringer implements Executable, SelectIdentity {
 		}
 	}
 
-	protected function alias($alias) {
+	protected function alias(Identifier $alias) {
 		return new SelectAlias($alias, $this);
 	}
 
