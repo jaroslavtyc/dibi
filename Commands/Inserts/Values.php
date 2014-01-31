@@ -1,8 +1,8 @@
 <?php
 namespace Pribi\Commands\Inserts;
 
-use Pribi\Commands\Executable;
-use Pribi\Commands\Executabling;
+use Pribi\Commands\Executions\Executable;
+use Pribi\Commands\Executions\Executabling;
 use Pribi\Commands\Command;
 
 class Values extends Command implements Executable {

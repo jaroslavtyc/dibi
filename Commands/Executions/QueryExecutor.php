@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands;
+namespace Pribi\Commands\Executions;
 
 use Pribi\Core\Object;
 

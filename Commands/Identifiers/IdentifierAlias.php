@@ -1,7 +1,5 @@
 <?php
-namespace Pribi\Commands;
-
-use Pribi\Commands\Identifiers\Identifier;
+namespace Pribi\Commands\Identifiers;
 
 abstract class IdentifierAlias extends Command {
 	private $alias;
