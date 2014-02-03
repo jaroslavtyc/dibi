@@ -13,21 +13,26 @@ class Identifier extends QueryPart {
 	}
 
 	private function quote($subject) {
-		$subject = trim($subject);
-		if ($this->isNotManuallyQuoted($subject) && $this->isProbablyNotSpecial($subject) && $this->isValidIdentifier($subject)) {
-			$subject = $this->quoteIt($subject);
+		if ($this->isString($subject)) {
+			$subject = trim($subject);
+			if ($this->isNotManuallyQuoted($subject) && $this->isProbablyNotSpecial($subject) && $this->isValidIdentifier($subject)) {
+				$subject = $this->quoteIt($subject);
+			}
 		}
 
 		return $subject;
+	}
+
+	private function isString($subject) {
+		return is_string($subject) || (is_object($subject) && method_exists($subject, '__toString'));
 	}
 
 	private function isNotManuallyQuoted($subject) {
 		return strpos($subject, '`') === FALSE;
 	}
 
-
 	private function isProbablyNotSpecial($subject) {
-		return (bool)preg_match('~^[.\s0-9a-zA-Z$_\x{0080}-\x{FFFF}]+(\.\*)?$~u', $subject);
+		return preg_match('~^[.\s\dA-Za-z$_\x{0080}-\x{FFFF}]+(\.\*)?$~u', $subject);
 	}
 
 	private function isValidIdentifier($qualifier) {

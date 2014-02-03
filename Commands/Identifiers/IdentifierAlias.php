@@ -14,7 +14,7 @@ abstract class IdentifierAlias extends Command {
 	/**
 	 * @return Identifier
 	 */
-	public function getIdentifier() {
+	protected function getIdentifier() {
 		return $this->alias;
 	}
 }

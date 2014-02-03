@@ -3,6 +3,11 @@ namespace Pribi\Resources;
 
 use Pribi\Commands\Command;
 use Pribi\Commands\Executions\Executor;
+use Pribi\Commands\Executions\Explainer;
+use Pribi\Commands\Executions\OutputExecutor;
+use Pribi\Commands\Executions\OutputExplainer;
+use Pribi\Commands\Executions\OutputTester;
+use Pribi\Commands\Executions\Tester;
 use Pribi\Commands\Query;
 use Pribi\Core\Object;
 
@@ -29,7 +34,7 @@ class Builder extends Object {
 
 	private function resolveExecutor() {
 		if (!isset($this->executor)) {
-			$this->setExecutor(new Executor);
+			$this->setExecutor(new OutputExecutor());
 		}
 
 		return $this->executor;
@@ -37,7 +42,7 @@ class Builder extends Object {
 
 	private function resolveTester() {
 		if (!isset($this->tester)) {
-			$this->setTester(new Tester);
+			$this->setTester(new OutputTester());
 		}
 
 		return $this->tester;
@@ -45,7 +50,7 @@ class Builder extends Object {
 
 	private function resolveExplainer() {
 		if (!isset($this->explainer)) {
-			$this->setExplainer(new Explainer);
+			$this->setExplainer(new OutputExplainer());
 		}
 
 		return $this->explainer;
