@@ -1,10 +1,10 @@
 <?php
 namespace Pribi\Commands;
 
-use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Inserts\InsertIgnoreInto;
-use Pribi\Commands\Inserts\InsertInto;
-use Pribi\Commands\Selects\Select;
+use Pribi\Commands\Identifiers\Identifier,
+	Pribi\Commands\Inserts\InsertIgnoreInto,
+	Pribi\Commands\Inserts\InsertInto,
+	Pribi\Commands\Selects\Select;
 
 class QueryOpener extends Command {
 	public function __construct() {

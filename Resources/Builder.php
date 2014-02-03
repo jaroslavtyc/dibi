@@ -1,15 +1,15 @@
 <?php
 namespace Pribi\Resources;
 
-use Pribi\Commands\Command;
-use Pribi\Commands\Executions\Executor;
-use Pribi\Commands\Executions\Explainer;
-use Pribi\Commands\Executions\OutputExecutor;
-use Pribi\Commands\Executions\OutputExplainer;
-use Pribi\Commands\Executions\OutputTester;
-use Pribi\Commands\Executions\Tester;
-use Pribi\Commands\Query;
-use Pribi\Core\Object;
+use Pribi\Commands\Command,
+	Pribi\Commands\Executions\Executor,
+	Pribi\Commands\Executions\Explainer,
+	Pribi\Commands\Executions\OutputExecutor,
+	Pribi\Commands\Executions\OutputExplainer,
+	Pribi\Commands\Executions\OutputTester,
+	Pribi\Commands\Executions\Tester,
+	Pribi\Commands\Query,
+	Pribi\Core\Object;
 
 class Builder extends Object {
 	private $executor;

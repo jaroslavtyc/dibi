@@ -1,8 +1,8 @@
 <?php
 namespace Pribi\Commands\Transactions\CommitWorks;
 
-use Pribi\Commands\Command;
-use Pribi\Commands\Transactions\Rollbacks\RollbackWork;
+use Pribi\Commands\Command,
+	Pribi\Commands\Transactions\Rollbacks\RollbackWork;
 
 class CommitWork extends Command {
 	public function andChain() {

@@ -1,11 +1,11 @@
 <?php
 namespace Pribi\Commands\Inserts;
 
-use Pribi\Commands\Command;
-use Pribi\Commands\Exceptions\WrongFormat;
-use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\WithIdentifier;
-use Pribi\Commands\Selects\Select;
+use Pribi\Commands\Command,
+	Pribi\Commands\Exceptions\WrongFormat,
+	Pribi\Commands\Identifiers\Identifier,
+	Pribi\Commands\WithIdentifier,
+	Pribi\Commands\Selects\Select;
 
 abstract class Insert extends WithIdentifier {
 	private $columns;

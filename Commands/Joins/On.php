@@ -1,17 +1,17 @@
 <?php
 namespace Pribi\Commands\Joins;
 
-use Pribi\Commands\Conditions\EqualOrLesserThen;
-use Pribi\Commands\Conditions\GreaterThen;
-use Pribi\Commands\Conditions\LesserThen;
-use Pribi\Commands\Conjunction;
-use Pribi\Commands\Disjunction;
-use Pribi\Commands\EqualTo;
-use Pribi\Commands\FromSources\From;
-use Pribi\Commands\Negation;
-use Pribi\Commands\RightJoin;
-use Pribi\Commands\WithIdentifier;
-use \Pribi\Commands\AndOrNegating;
+use Pribi\Commands\Conditions\EqualOrLesserThen,
+	Pribi\Commands\Conditions\GreaterThen,
+	Pribi\Commands\Conditions\LesserThen,
+	Pribi\Commands\Conjunction,
+	Pribi\Commands\Disjunction,
+	Pribi\Commands\EqualTo,
+	Pribi\Commands\FromSources\From,
+	Pribi\Commands\Negation,
+	Pribi\Commands\RightJoin,
+	Pribi\Commands\WithIdentifier,
+	\Pribi\Commands\AndOrNegating;
 
 class On extends WithIdentifier {
 	use AndOrNegating;

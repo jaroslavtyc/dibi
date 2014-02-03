@@ -1,10 +1,10 @@
 <?php
 namespace Pribi\Commands;
 
-use Pribi\Commands\Executions\Executable;
-use Pribi\Commands\Executions\Executor;
-use Pribi\Commands\Executions\Explainer;
-use Pribi\Commands\Executions\Tester;
+use Pribi\Commands\Executions\Executable,
+	Pribi\Commands\Executions\Executor,
+	Pribi\Commands\Executions\Explainer,
+	Pribi\Commands\Executions\Tester;
 
 class Query extends Command implements Executable {
 	private $lastCommand;

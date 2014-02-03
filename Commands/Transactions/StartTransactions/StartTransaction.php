@@ -1,9 +1,9 @@
 <?php
 namespace Pribi\Commands\Transactions\StartTransactions;
 
-use Pribi\Commands\Command;
-use Pribi\Commands\Transactions\Commits\Commit;
-use Pribi\Commands\Transactions\CommitWorks\CommitWork;
+use Pribi\Commands\Command,
+	Pribi\Commands\Transactions\Commits\Commit,
+	Pribi\Commands\Transactions\CommitWorks\CommitWork;
 
 /**
  * With START TRANSACTION, autocommit remains disabled until you end the transaction with COMMIT or ROLLBACK.

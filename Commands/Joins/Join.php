@@ -1,10 +1,10 @@
 <?php
 namespace Pribi\Commands\Joins;
 
-use Pribi\Commands\IdentifierBringer;
-use Pribi\Commands\Joins\InnerJoin;
-use Pribi\Commands\Joins\LeftJoin;
-use Pribi\Commands\Joins\RightJoin;
+use Pribi\Commands\IdentifierBringer,
+	Pribi\Commands\Joins\InnerJoin,
+	Pribi\Commands\Joins\LeftJoin,
+	Pribi\Commands\Joins\RightJoin;
 
 /**
  * @method \Pribi\Commands\Joins\AliasedInnerJoin as ($alias)

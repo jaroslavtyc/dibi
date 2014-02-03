@@ -1,8 +1,8 @@
 <?php
 namespace Pribi\Resources;
 
-use Pribi\Core\Object;
-use Pribi\Responses\Result;
+use Pribi\Core\Object,
+	Pribi\Responses\Result;
 
 class Prepared extends Object {
 	/**

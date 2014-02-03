@@ -1,9 +1,9 @@
 <?php
 namespace Pribi\Commands\Transactions\StartTransactions;
 
-use Pribi\Commands\Command;
-use Pribi\Commands\Transactions\Commits\Commit;
-use Pribi\Commands\Transactions\CommitWorks\CommitWork;
+use Pribi\Commands\Command,
+	Pribi\Commands\Transactions\Commits\Commit,
+	Pribi\Commands\Transactions\CommitWorks\CommitWork;
 
 class WithConsistentSnapshot extends Command {
 	/**

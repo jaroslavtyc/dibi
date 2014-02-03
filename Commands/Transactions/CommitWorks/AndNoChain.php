@@ -1,8 +1,8 @@
 <?php
 namespace Pribi\Commands\Transactions\CommitWorks;
 
-use Pribi\Commands\Command;
-use Pribi\Commands\Transactions\RollbackWorks\RollbackWork;
+use Pribi\Commands\Command,
+	Pribi\Commands\Transactions\RollbackWorks\RollbackWork;
 
 class AndNoChain extends Command {
 	public function release() {

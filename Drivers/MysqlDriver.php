@@ -1,12 +1,12 @@
 <?php
 namespace Pribi\Drivers;
 
-use Pribi\Drivers\Exceptions\CanNotConnect;
-use Pribi\Resources\Credentials;
-use Pribi\Resources\DataSourceName;
-use Pribi\Resources\Exceptions\AlreadyConnected;
-use Pribi\Resources\Exceptions\NotConnected;
-use Pribi\Resources\Prepared;
+use Pribi\Drivers\Exceptions\CanNotConnect,
+	Pribi\Resources\Credentials,
+	Pribi\Resources\DataSourceName,
+	Pribi\Resources\Exceptions\AlreadyConnected,
+	Pribi\Resources\Exceptions\NotConnected,
+	Pribi\Resources\Prepared;
 
 class MysqlDriver implements Driver {
 	private $dataSourceName;

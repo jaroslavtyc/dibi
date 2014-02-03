@@ -1,12 +1,12 @@
 <?php
 namespace Pribi\Commands\FromSources;
 
-use Pribi\Commands\IdentifierBringer;
-use Pribi\Commands\InnerJoin;
-use Pribi\Commands\LeftJoin;
-use Pribi\Commands\RightJoin;
-use Pribi\Commands\Where;
-use Pribi\Commands\Limit;
+use Pribi\Commands\IdentifierBringer,
+	Pribi\Commands\InnerJoin,
+	Pribi\Commands\LeftJoin,
+	Pribi\Commands\RightJoin,
+	Pribi\Commands\Where,
+	Pribi\Commands\Limit;
 
 /**
  * @method \Pribi\Commands\FromSources\FromAlias as ($alias)

@@ -1,11 +1,11 @@
 <?php
 namespace Pribi\Commands\Selects;
 
-use Pribi\Commands\Executions\Executable;
-use Pribi\Commands\Executions\Executabling;
-use Pribi\Commands\FromSources\From;
-use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Identifiers\IdentifierAlias;
+use Pribi\Commands\Executions\Executable,
+	Pribi\Commands\Executions\Executabling,
+	Pribi\Commands\FromSources\From,
+	Pribi\Commands\Identifiers\Identifier,
+	Pribi\Commands\Identifiers\IdentifierAlias;
 
 class SelectAlias extends IdentifierAlias implements Executable, SelectIdentity {
 	use Executabling;

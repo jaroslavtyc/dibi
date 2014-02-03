@@ -1,10 +1,10 @@
 <?php
 namespace Pribi\Commands\Selects;
 
-use Pribi\Commands\Executions\Executable;
-use Pribi\Commands\Executions\Executabling;
-use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Identifiers\IdentifierBringer;
+use Pribi\Commands\Executions\Executable,
+	Pribi\Commands\Executions\Executabling,
+	Pribi\Commands\Identifiers\Identifier,
+	Pribi\Commands\Identifiers\IdentifierBringer;
 
 /**
  * @method SelectAlias as ($alias)

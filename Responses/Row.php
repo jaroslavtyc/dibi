@@ -1,8 +1,8 @@
 <?php
 namespace Pribi\Responses;
 
-use Pribi\Core\Object;
-use Pribi\Responses\Exceptions\RequestedResultColumnMissing;
+use Pribi\Core\Object,
+	Pribi\Responses\Exceptions\RequestedResultColumnMissing;
 
 class Row extends Object implements \ArrayAccess {
 	private $values;
