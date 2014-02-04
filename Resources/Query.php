@@ -25,7 +25,10 @@ class Query extends Command implements Executable {
 		$query = $command->toSql();
 		while ($command->hasPreviousCommand()) {
 			$command = $command->getPreviousCommand();
-			$query = $command->toSql() . $query;
+			$previousQueryPart = $command->toSql();
+			if ($previousQueryPart !== '') {
+				$query = $previousQueryPart . ' ' . $query;
+			}
 		}
 
 		return $query;
