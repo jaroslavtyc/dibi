@@ -2,8 +2,8 @@
 namespace Pribi\Executions;
 
 use Pribi\Resources\Builder,
-	\Pribi\Commands\Query,
-	\Pribi\Commands\Command;
+	Pribi\Commands\Query,
+	Pribi\Commands\Command;
 
 trait Executabling {
 	private $builder;
@@ -24,10 +24,14 @@ trait Executabling {
 	 * @return Query
 	 */
 	protected function builtQuery() {
+		return $this->buildQueryByBuilder($this->resolveBuilder());
+	}
+
+	private function buildQueryByBuilder(Builder $builder) {
 		/**
 		 * @var Command $this
 		 */
-		return $this->resolveBuilder()->buildQuery($this);
+		return $builder->buildQuery($this);
 	}
 
 	/**
