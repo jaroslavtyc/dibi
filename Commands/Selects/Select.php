@@ -13,7 +13,7 @@ class Select extends IdentifierBringer implements Executable, SelectIdentity {
 	use Executabling;
 
 	protected function toSql() {
-		if (is_a($this->getPreviousCommand(), SelectIdentity::CLASS_IDENTITY)) {
+		if (is_a($this->getPreviousCommand(), self::CLASS_IDENTITY)) {
 			return ',' . $this->getIdentifier()->toSql();
 		} else {
 			return 'SELECT ' . $this->getIdentifier()->toSql();
