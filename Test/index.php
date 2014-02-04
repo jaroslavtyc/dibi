@@ -6,4 +6,5 @@ spl_autoload_register(function ($className) {
 $subject = new \Pribi\Commands\Identifiers\Identifier('?');
 $i = new \Pribi\Commands\Selects\Select($subject, new \Pribi\Commands\QueryOpener());
 $alias = $i->as('bla');
-echo $alias->test();
+$from = $alias->from(new \Pribi\Commands\Identifiers\Identifier('hubabuba'));
+echo $from->test();
