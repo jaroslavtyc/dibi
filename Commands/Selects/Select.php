@@ -1,8 +1,8 @@
 <?php
 namespace Pribi\Commands\Selects;
 
-use Pribi\Commands\Executions\Executable,
-	Pribi\Commands\Executions\Executabling,
+use Pribi\Executions\Executable,
+	Pribi\Executions\Executabling,
 	Pribi\Commands\Identifiers\Identifier,
 	Pribi\Commands\Identifiers\IdentifierBringer;
 
