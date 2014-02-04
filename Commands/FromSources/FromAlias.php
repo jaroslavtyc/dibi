@@ -7,8 +7,19 @@ use Pribi\Commands\IdentifierAlias,
 	Pribi\Commands\Joins\RightJoin,
 	Pribi\Commands\Where,
 	Pribi\Commands\Limit;
+use Pribi\Executions\Executabling;
 
-class FromAlias extends IdentifierAlias {
+class FromAlias extends IdentifierAlias implements FromIdentity {
+	use Executabling;
+
+	public function __construct(Identifier $alias, From $prependFrom) {
+		parent::__construct($alias, $prependFrom);
+	}
+
+	protected function toSql() {
+		return 'AS ' . $this->getIdentifier()->toSql();
+	}
+
 	public function innerJoin($identificator) {
 		return new InnerJoin($identificator, $this);
 	}

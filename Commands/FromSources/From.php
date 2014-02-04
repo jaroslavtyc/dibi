@@ -1,18 +1,30 @@
 <?php
 namespace Pribi\Commands\FromSources;
 
-use Pribi\Commands\IdentifierBringer,
+use Pribi\Commands\Identifiers\Identifier,
+	Pribi\Commands\Identifiers\IdentifierBringer,
 	Pribi\Commands\InnerJoin,
 	Pribi\Commands\LeftJoin,
 	Pribi\Commands\RightJoin,
 	Pribi\Commands\Where,
-	Pribi\Commands\Limit;
+	Pribi\Commands\Limit,
+	Pribi\Executions\Executabling;
 
 /**
  * @method \Pribi\Commands\FromSources\FromAlias as ($alias)
  */
-class From extends IdentifierBringer {
-	protected function alias($alias) {
+class From extends IdentifierBringer implements FromIdentity {
+	use Executabling;
+
+	protected function toSql() {
+		if (is_a($this->getPreviousCommand(), self::CLASS_IDENTITY)) {
+			return ',' . $this->getIdentifier()->toSql();
+		} else {
+			return 'FROM ' . $this->getIdentifier()->toSql();
+		}
+	}
+
+	protected function alias(Identifier $alias) {
 		return new FromAlias($alias, $this);
 	}
 
