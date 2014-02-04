@@ -9,7 +9,7 @@ abstract class Command extends QueryPart {
 	}
 
 	protected function hasPreviousCommand() {
-		return isset($this->previousCommand) && $this->previousCommand !== $this->previousCommand;
+		return isset($this->previousCommand) && $this !== $this->previousCommand;
 	}
 
 	/**
