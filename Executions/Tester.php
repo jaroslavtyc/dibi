@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Executions;
+namespace Pribi\Executions;
 
 interface Tester {
 	public function test($queryString);

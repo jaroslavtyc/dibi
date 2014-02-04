@@ -2,13 +2,12 @@
 namespace Pribi\Resources;
 
 use Pribi\Commands\Command,
-	Pribi\Commands\Executions\Executor,
-	Pribi\Commands\Executions\Explainer,
-	Pribi\Commands\Executions\OutputExecutor,
-	Pribi\Commands\Executions\OutputExplainer,
-	Pribi\Commands\Executions\OutputTester,
-	Pribi\Commands\Executions\Tester,
-	Pribi\Commands\Query,
+	Pribi\Executions\Executor,
+	Pribi\Executions\Explainer,
+	Pribi\Executions\OutputExecutor,
+	Pribi\Executions\OutputExplainer,
+	Pribi\Executions\OutputTester,
+	Pribi\Executions\Tester,
 	Pribi\Core\Object;
 
 class Builder extends Object {
