@@ -1,13 +1,14 @@
 <?php
 namespace Pribi\Commands\FromSources;
 
-use Pribi\Commands\IdentifierAlias,
+use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Commands\Identifiers\IdentifierAlias,
 	Pribi\Commands\Joins\InnerJoin,
 	Pribi\Commands\Joins\LeftJoin,
 	Pribi\Commands\Joins\RightJoin,
 	Pribi\Commands\Where,
-	Pribi\Commands\Limit;
-use Pribi\Executions\Executabling;
+	Pribi\Commands\Limit,
+	Pribi\Executions\Executabling;
 
 class FromAlias extends IdentifierAlias implements FromIdentity {
 	use Executabling;
