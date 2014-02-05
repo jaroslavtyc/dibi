@@ -21,8 +21,8 @@ class FromAlias extends IdentifierAlias implements FromIdentity {
 		return 'AS ' . $this->getIdentifier()->toSql();
 	}
 
-	public function innerJoin($identificator) {
-		return new InnerJoin($identificator, $this);
+	public function innerJoin($name) {
+		return new InnerJoin(new Identifier($name), $this);
 	}
 
 	public function leftJoin($identificator) {

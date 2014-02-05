@@ -22,8 +22,8 @@ class SelectAlias extends IdentifierAlias implements Executable, SelectIdentity 
 		return new Select($identificator, $this);
 	}
 
-	public function from($identificator) {
-		return new From($identificator, $this);
+	public function from($name) {
+		return new From(new Identifier($name), $this);
 	}
 
 	public function where($identificator) {
