@@ -11,7 +11,7 @@ abstract class WithIdentifier extends Command {
 		parent::__construct($previousCommand);
 	}
 
-	public function getIdentifier() {
+	protected function getIdentifier() {
 		return $this->identifier;
 	}
 }

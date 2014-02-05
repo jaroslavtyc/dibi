@@ -1,6 +1,7 @@
 <?php
 namespace Pribi\Commands\Joins;
 
+use Pribi\Commands\Conditions\AndOrNegating;
 use Pribi\Commands\Conditions\EqualOrLesserThen,
 	Pribi\Commands\Conditions\GreaterThen,
 	Pribi\Commands\Conditions\LesserThen,
@@ -10,11 +11,14 @@ use Pribi\Commands\Conditions\EqualOrLesserThen,
 	Pribi\Commands\FromSources\From,
 	Pribi\Commands\Negation,
 	Pribi\Commands\RightJoin,
-	Pribi\Commands\WithIdentifier,
-	\Pribi\Commands\AndOrNegating;
+	Pribi\Commands\WithIdentifier;
 
 class On extends WithIdentifier {
 	use AndOrNegating;
+
+	protected function toSql() {
+		return 'ON ' . $this->getIdentifier()->toSql();
+	}
 
 	protected function conjunction($identificator) {
 		$conjunction = new Conjunction($identificator, $this);

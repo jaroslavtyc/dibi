@@ -4,7 +4,7 @@ namespace Pribi\Commands\Identifiers {
 	 * @method Command as ($alias)
 	 */
 	trait Aliasing {
-		public function __call($methodName, $arguments) {
+		public function __call($methodName, array $arguments) {
 			if ($methodName === 'as') {
 				if (\array_key_exists(0, $arguments)) {
 					$nextToFluid = $this->alias(new Identifier($arguments[0]));

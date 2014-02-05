@@ -1,6 +1,14 @@
 <?php
 namespace Pribi\Commands\Joins;
 
-class LeftJoinAlias extends JoinAlias {
+use Pribi\Commands\Identifiers\Identifier;
 
+class LeftJoinAlias extends JoinAlias {
+	public function __construct(Identifier $alias, LeftJoin $prependLeftJoin) {
+		parent::__construct($alias, $prependLeftJoin);
+	}
+
+	protected function toSql() {
+		return 'AS ' . $this->getIdentifier()->toSql();
+	}
 }

@@ -16,7 +16,7 @@ abstract class IdentifierBringer extends Command {
 		parent::__construct($previousCommand);
 	}
 
-	public function getIdentifier() {
+	protected function getIdentifier() {
 		return $this->subject;
 	}
 }

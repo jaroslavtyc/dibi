@@ -14,11 +14,11 @@ abstract class Object {
 		throw new Exceptions\ReadingAccess(\sprintf('Checking property [%s->%s] if is set fails. Does not exists or has restricted access.', \get_class($this), $name));
 	}
 
-	public function __call($name, $parameters) {
+	public function __call($name, array $arguments) {
 		throw new Exceptions\ExecutingAccess(\sprintf('Executing method [%s->%s] fails. Does not exists or has restricted access.', \get_class($this), $name));
 	}
 
-	public static function __callStatic($name, $parameters) {
+	public static function __callStatic($name, array $arguments) {
 		throw new Exceptions\ExecutingAccess(\sprintf('Executing static method [%s->%s] fails. Does not exists or has restricted access.', \get_called_class(), $name));
 	}
 }
