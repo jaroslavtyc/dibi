@@ -4,7 +4,7 @@ namespace Pribi\Commands\Joins;
 use Pribi\Commands\Identifiers\Identifier;
 
 /**
- * @method \Pribi\Commands\Joins\InnerJoinAlias as ($alias)
+ * @method InnerJoinAlias as ($alias)
  */
 class InnerJoin extends Join implements InnerJoinIdentity {
 	protected function alias(Identifier $alias) {

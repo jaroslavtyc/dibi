@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\Joins;
 
-use Pribi\Commands\IdentifierAlias;
+use Pribi\Commands\Identifiers\IdentifierAlias;
 
 abstract class JoinAlias extends IdentifierAlias {
 
