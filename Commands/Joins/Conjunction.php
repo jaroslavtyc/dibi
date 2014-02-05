@@ -1,25 +1,31 @@
 <?php
 namespace Pribi\Commands\Joins;
 
+use Pribi\Commands\Conditions\Negation;
 use Pribi\Commands\DifferentTo;
+use Pribi\Commands\Identifiers\Identifier;
 
-class Conjunction extends \Pribi\Commands\Conjunction {
-	protected function conjunction($identificator) {
-		$conjunction = new Conjunction($identificator, $this);
+class Conjunction extends \Pribi\Commands\Conditions\Conjunction {
+	protected function conjunction(Identifier $subject = NULL) {
+		$conjunction = new Conjunction($subject, $this);
 
 		return $conjunction;
 	}
 
-	protected function disjunction($identificator) {
-		$disjunction = new Disjunction($identificator, $this);
+	protected function disjunction(Identifier $subject = NULL) {
+		$disjunction = new Disjunction($subject, $this);
 
 		return $disjunction;
 	}
 
-	protected function negation() {
-		$negation = new Negation($this);
+	protected function negation(Identifier $subject) {
+		$negation = new Negation($subject, $this);
 
 		return $negation;
+	}
+
+	protected function toSql() {
+		return 'AND ' . $this->getIdentifier()->toSql();
 	}
 
 	public function equalTo($identificator) {

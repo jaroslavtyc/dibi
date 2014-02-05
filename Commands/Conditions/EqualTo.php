@@ -1,42 +1,45 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-class EqualTo extends UsingIdentificator {
+use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Commands\WithIdentifier;
+
+class EqualTo extends WithIdentifier implements Comparison {
 	use AndOring;
 
-	protected function conjunction($identificator) {
-		return $this->getFollowingCommands()->conjunction($identificator);
+	protected function conjunction(Identifier $identifier) {
+		return new Conjunction($identifier, $this);
 	}
 
-	protected function disjunction($identificator) {
-		return $this->getFollowingCommands()->disjunction($identificator);
+	protected function disjunction(Identifier $identifier) {
+		return new Disjunction($identifier, $this);
 	}
 
-	public function from($identificator) {
-		return $this->getFollowingCommands()->from($identificator);
+	protected function toSql() {
+		return '= ' . $this->getIdentifier()->toSql();
 	}
 
-	public function innerJoin($identificator) {
-		return $this->getFollowingCommands()->innerJoin($identificator);
+	public function equalTo(Identifier $identifier) {
+		return new EqualTo($identifier, $this);
 	}
 
-	public function leftJoin($identificator) {
-		return $this->getFollowingCommands()->leftJoin($identificator);
+	public function equalOrGreaterThen(Identifier $identifier) {
+		return new EqualOrGreaterThen($identifier, $this);
 	}
 
-	public function rightJoin($identificator) {
-		return $this->getFollowingCommands()->rightJoin($identificator);
+	public function equalOrLesserThen(Identifier $identifier) {
+		return new EqualOrLesserThen($identifier, $this);
 	}
 
-	public function where($identificator) {
-		return $this->getFollowingCommands()->where($identificator);
+	public function greaterThen(Identifier $identifier) {
+		return new GreaterThen($identifier, $this);
 	}
 
-	public function limit($limit) {
-		return $this->getFollowingCommands()->limit($limit);
+	public function lesserThen(Identifier $identifier) {
+		return new LesserThen($identifier, $this);
 	}
 
-	public function offsetAndLimit($offset, $limit) {
-		return $this->getFollowingCommands()->offsetAndLimit($offset, $limit);
+	public function differentTo(Identifier $identifier) {
+		return new DifferentTo($identifier, $this);
 	}
 }

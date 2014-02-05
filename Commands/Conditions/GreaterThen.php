@@ -1,7 +1,9 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-class GreaterThen extends UsingIdentificator {
+use Pribi\Commands\WithIdentifier;
+
+class GreaterThen extends WithIdentifier {
 	use AndOring;
 
 	protected function conjunction($identificator) {
@@ -14,6 +16,10 @@ class GreaterThen extends UsingIdentificator {
 
 	protected function negation() {
 		return $this->getFollowingCommands()->negation();
+	}
+
+	protected function toSql() {
+		return '> ' . $this->getIdentifier()->toSql();
 	}
 
 	public function from($identificator) {

@@ -1,7 +1,9 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-class EqualOrLesserThen extends UsingIdentificator {
+use Pribi\Commands\WithIdentifier;
+
+class EqualOrLesserThen extends WithIdentifier {
 	use AndOring;
 
 	protected function conjunction($identificator) {
@@ -10,6 +12,10 @@ class EqualOrLesserThen extends UsingIdentificator {
 
 	protected function disjunction($identificator) {
 		return $this->getFollowingCommands()->disjunction($identificator);
+	}
+
+	protected function toSql() {
+		return $this->getIdentifier()->toSql();
 	}
 
 	public function from($identificator) {

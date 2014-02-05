@@ -5,13 +5,13 @@ use Pribi\Commands\Conditions\AndOrNegating;
 use Pribi\Commands\Conditions\EqualOrLesserThen,
 	Pribi\Commands\Conditions\GreaterThen,
 	Pribi\Commands\Conditions\LesserThen,
-	Pribi\Commands\Conjunction,
 	Pribi\Commands\Disjunction,
 	Pribi\Commands\EqualTo,
 	Pribi\Commands\FromSources\From,
 	Pribi\Commands\Negation,
 	Pribi\Commands\RightJoin,
 	Pribi\Commands\WithIdentifier;
+use Pribi\Commands\Identifiers\Identifier;
 
 class On extends WithIdentifier {
 	use AndOrNegating;
@@ -20,7 +20,7 @@ class On extends WithIdentifier {
 		return 'ON ' . $this->getIdentifier()->toSql();
 	}
 
-	protected function conjunction($identificator) {
+	protected function conjunction(Identifier $identificator = NULL) {
 		$conjunction = new Conjunction($identificator, $this);
 
 		return $conjunction;

@@ -1,10 +1,12 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-use Pribi\Commands\WithoutIdentifier;
+use Pribi\Commands\WithIdentifier;
 
-abstract class Negation extends WithoutIdentifier {
-	use Negating;
+class Negation extends WithIdentifier {
+	protected function toSql() {
+		return 'NOT ' . $this->getIdentifier()->toSql();
+	}
 
 	public function in($firstSubject) {
 		$in = new In($firstSubject);

@@ -1,44 +1,45 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
+use Pribi\Commands\Command;
+use Pribi\Commands\Identifiers\Identifier;
+
 /**
- * @method FollowingCommand and($identificator)
- * @method FollowingCommand or($identificator)
+ * @method Command not($identificator)
+ * @method Command and($identificator)
+ * @method Command or($identificator)
  */
 trait AndOrNegating {
 	public function __call($name, array $arguments) {
-		$loweredName = \strtolower($name);
-		if ($loweredName === 'not') {
-			$nextToFluid = $this->negation($arguments[0]);
-		} elseif (\array_key_exists(0, $arguments)) {
-			if ($loweredName === 'and') {
-				$nextToFluid = $this->conjunction($arguments[0]);
-			} elseif ($loweredName === 'or') {
-				$nextToFluid = $this->disjunction($arguments[0]);
-			} else {
-				throw new Exceptions\UnexpectedCommand(\sprintf('Called [%s->%s](), expected [%s->%s]() or [%s->%s]()', get_class($this), $loweredName, get_class($this), 'and', get_class($this), 'or'));
-			}
+		$upperCasedName = \strtoupper($name);
+		if ($upperCasedName === 'AND') {
+			return $this->conjunction(new Identifier($arguments[0]));
+		} elseif ($upperCasedName === 'OR') {
+			return $this->disjunction(new Identifier($arguments[0]));
+		}elseif ($upperCasedName === 'NOT') {
+			return $this->negation(new Identifier($arguments[0]));
 		} else {
-			throw new Exceptions\UnknownCommand($name);
+			throw new Exceptions\UnknownMethodCalled();
 		}
-
-		return $nextToFluid;
 	}
 
 	/**
-	 * @param $identificator
-	 * @return FollowingCommand
+	 * @param $identifier
+	 * @return Conjunction
 	 */
-	abstract protected function conjunction($identificator);
+	abstract protected function conjunction(Identifier $identifier);
 
 	/**
-	 * @param $identificator
-	 * @return FollowingCommand
+	 * @param $identifier
+	 * @return Disjunction
 	 */
-	abstract protected function disjunction($identificator);
+	abstract protected function disjunction(Identifier $identifier);
 
 	/**
-	 * @return FollowingCommand
+	 * After NOT has to follow a subject
+	 *
+	 * @param $identifier
+	 * @return Negation
 	 */
-	abstract protected function negation();
+	abstract protected function negation(Identifier $identifier);
 }

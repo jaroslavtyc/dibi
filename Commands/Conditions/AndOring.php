@@ -1,6 +1,8 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
+use Pribi\Commands\Identifiers\Identifier;
+
 /**
  * @method and($identificator) @return Command
  * @method or($identificator) @return Command
@@ -24,14 +26,14 @@ trait AndOring {
 	}
 
 	/**
-	 * @param $identificator
+	 * @param Identifier $identifier
 	 * @return Command
 	 */
-	abstract protected function conjunction($identificator);
+	abstract protected function conjunction(Identifier $identifier);
 
 	/**
-	 * @param $identificator
+	 * @param Identifier $identifier
 	 * @return Command
 	 */
-	abstract protected function disjunction($identificator);
+	abstract protected function disjunction(Identifier $identifier);
 }
