@@ -2,8 +2,8 @@
 namespace Pribi\Executions;
 
 use Pribi\Resources\Builder,
-	Pribi\Commands\Query,
 	Pribi\Commands\Command;
+use Pribi\Resources\Query;
 
 trait Executabling {
 	private $builder;

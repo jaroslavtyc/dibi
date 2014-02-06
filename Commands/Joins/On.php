@@ -11,9 +11,12 @@ use Pribi\Commands\Negation;
 use Pribi\Commands\RightJoin;
 use Pribi\Commands\WithIdentifier;
 use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Executions\Executable;
+use Pribi\Executions\Executabling;
 
-class On extends WithIdentifier {
+class On extends WithIdentifier implements Executable {
 	use AndOrNegating;
+	use Executabling;
 
 	protected function toSql() {
 		return 'ON ' . $this->getIdentifier()->toSql();

@@ -6,4 +6,3 @@ class OutputTester implements Tester {
 		echo $queryString;
 	}
 }
- 
