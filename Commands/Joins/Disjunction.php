@@ -4,6 +4,8 @@ namespace Pribi\Commands\Joins;
 use Pribi\Commands\Identifiers\Identifier;
 
 class Disjunction extends \Pribi\Commands\Conditions\Disjunction {
+	use AndOrNegating;
+
 	protected function conjunction(Identifier $identifier) {
 		$conjunction = new Conjunction($identifier, $this);
 
@@ -26,38 +28,38 @@ class Disjunction extends \Pribi\Commands\Conditions\Disjunction {
 		return 'OR ' . $this->getIdentifier()->toSql();
 	}
 
-	public function equalTo($identificator) {
-		$equalTo = new EqualTo($identificator, $this);
+	public function equalTo(Identifier $identifier) {
+		$equalTo = new EqualTo($identifier, $this);
 
 		return $equalTo;
 	}
 
-	public function equalOrGreaterThen($identificator) {
-		$equalOrGreaterThen = new EqualOrGreaterThen($identificator, $this);
+	public function equalOrGreaterThen(Identifier $identifier) {
+		$equalOrGreaterThen = new EqualOrGreaterThen($identifier, $this);
 
 		return $equalOrGreaterThen;
 	}
 
-	public function equalOrLesserThen($identificator) {
-		$equalOrLesserThen = new EqualOrLesserThen($identificator, $this);
+	public function equalOrLesserThen(Identifier $identifier) {
+		$equalOrLesserThen = new EqualOrLesserThen($identifier, $this);
 
 		return $equalOrLesserThen;
 	}
 
-	public function greaterThen($identificator) {
-		$greaterThen = new GreaterThen($identificator, $this);
+	public function greaterThen(Identifier $identifier) {
+		$greaterThen = new GreaterThen($identifier, $this);
 
 		return $greaterThen;
 	}
 
-	public function lesserThen($identificator) {
-		$lesserThen = new LesserThen($identificator, $this);
+	public function lesserThen(Identifier $identifier) {
+		$lesserThen = new LesserThen($identifier, $this);
 
 		return $lesserThen;
 	}
 
-	public function differentTo($identificator) {
-		$differentTo = new DifferentTo($identificator, $this);
+	public function differentTo(Identifier $identifier) {
+		$differentTo = new DifferentTo($identifier, $this);
 
 		return $differentTo;
 	}

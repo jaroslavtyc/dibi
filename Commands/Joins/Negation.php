@@ -4,7 +4,7 @@ namespace Pribi\Commands\Joins;
 use Pribi\Commands\DifferentTo;
 use Pribi\Commands\Identifiers\Identifier;
 
-class Conjunction extends \Pribi\Commands\Conditions\Conjunction {
+class Negation extends \Pribi\Commands\Conditions\Negation {
 	use AndOrNegating;
 
 	protected function conjunction(Identifier $identifier) {

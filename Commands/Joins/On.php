@@ -1,16 +1,15 @@
 <?php
 namespace Pribi\Commands\Joins;
 
-use Pribi\Commands\Conditions\AndOrNegating;
-use Pribi\Commands\Conditions\EqualOrLesserThen,
-	Pribi\Commands\Conditions\GreaterThen,
-	Pribi\Commands\Conditions\LesserThen,
-	Pribi\Commands\Disjunction,
-	Pribi\Commands\EqualTo,
-	Pribi\Commands\FromSources\From,
-	Pribi\Commands\Negation,
-	Pribi\Commands\RightJoin,
-	Pribi\Commands\WithIdentifier;
+use Pribi\Commands\Conditions\EqualOrLesserThen;
+use Pribi\Commands\Conditions\GreaterThen;
+use Pribi\Commands\Conditions\LesserThen;
+use Pribi\Commands\Disjunction;
+use Pribi\Commands\EqualTo;
+use Pribi\Commands\FromSources\From;
+use Pribi\Commands\Negation;
+use Pribi\Commands\RightJoin;
+use Pribi\Commands\WithIdentifier;
 use Pribi\Commands\Identifiers\Identifier;
 
 class On extends WithIdentifier {
@@ -20,80 +19,80 @@ class On extends WithIdentifier {
 		return 'ON ' . $this->getIdentifier()->toSql();
 	}
 
-	protected function conjunction(Identifier $identificator = NULL) {
-		$conjunction = new Conjunction($identificator, $this);
+	protected function conjunction(Identifier $identifier) {
+		$conjunction = new Conjunction($identifier, $this);
 
 		return $conjunction;
 	}
 
-	protected function disjunction($identificator) {
-		$disjunction = new Disjunction($identificator, $this);
+	protected function disjunction(Identifier $identifier) {
+		$disjunction = new Disjunction($identifier, $this);
 
 		return $disjunction;
 	}
 
-	protected function negation() {
-		$negation = new Negation($this);
+	protected function negation(Identifier $identifier) {
+		$negation = new Negation($identifier, $this);
 
 		return $negation;
 	}
 
-	public function equalTo($identificator) {
-		$equalTo = new EqualTo($identificator, $this);
+	public function equalTo($identifier) {
+		$equalTo = new EqualTo($identifier, $this);
 
 		return $equalTo;
 	}
 
-	public function equalOrGreaterThen($identificator) {
-		$equalOrGreaterThen = new EqualOrGreaterThen($identificator, $this);
+	public function equalOrGreaterThen($identifier) {
+		$equalOrGreaterThen = new EqualOrGreaterThen($identifier, $this);
 
 		return $equalOrGreaterThen;
 	}
 
-	public function greaterThen($identificator) {
-		$equalTo = new GreaterThen($identificator, $this);
+	public function greaterThen($identifier) {
+		$equalTo = new GreaterThen($identifier, $this);
 
 		return $equalTo;
 	}
 
-	public function equalOrLesserThen($identificator) {
-		$equalOrGreaterThen = new EqualOrLesserThen($identificator, $this);
+	public function equalOrLesserThen($identifier) {
+		$equalOrGreaterThen = new EqualOrLesserThen($identifier, $this);
 
 		return $equalOrGreaterThen;
 	}
 
-	public function lesserThen($identificator) {
-		$equalOrGreaterThen = new LesserThen($identificator, $this);
+	public function lesserThen($identifier) {
+		$equalOrGreaterThen = new LesserThen($identifier, $this);
 
 		return $equalOrGreaterThen;
 	}
 
-	public function from($identificator) {
-		$from = new From($identificator, $this);
+	public function from($identifier) {
+		$from = new From($identifier, $this);
 
 		return $from;
 	}
 
-	public function innerJoin($identificator) {
-		$innerJoin = new InnerJoin($identificator, $this);
+	public function innerJoin($identifier) {
+		$innerJoin = new InnerJoin($identifier, $this);
 
 		return $innerJoin;
 	}
 
-	public function leftJoin($identificator) {
-		$leftJoin = new LeftJoin($identificator, $this);
+	public function leftJoin($identifier) {
+		$leftJoin = new LeftJoin($identifier, $this);
 
 		return $leftJoin;
 	}
 
-	public function rightJoin($identificator) {
-		$rightJoin = new RightJoin($identificator, $this);
+	public function rightJoin($identifier) {
+		$rightJoin = new RightJoin($identifier, $this);
 
 		return $rightJoin;
 	}
 
-	public function where($identificator) {
-		$where = new Where($identificator, $this);
+	public function where($identifier) {
+		$where = new Where($identifier, $this);
 
 		return $where;
 	}
