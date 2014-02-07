@@ -12,7 +12,7 @@ namespace Pribi\Commands\Identifiers {
 					throw new Exceptions\MissingAliasName;
 				}
 			} else {
-				throw new Exceptions\UnknownMethodCalled(\sprintf('Expected as(), but called [%s->%s()]', get_class($this), $methodName));
+				throw new Exceptions\UnknownMethodCalled(\sprintf('Called non-existing method [%s->%s()]', get_class($this), $methodName));
 			}
 
 			return $nextToFluid;
