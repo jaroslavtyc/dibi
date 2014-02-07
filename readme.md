@@ -24,11 +24,22 @@ or later because of [namespaces 5.3](http://php.net/manual/en/language.namespace
 Tips and Tricks
 ---------------
 **Identifier quote**
-	- Pribi is for MySQL. Thats the trick. That means, the quotation is done by \` (tick).
-	Not SQL-99 standard by " (double quote), not MS SQL standard by \[\] (brackets) or anything else. Only \`ticks\`.
+
+- Pribi is for MySQL. That's the trick. That means, the quotation is done by \` (tick).
+	Not SQL-99 standard by " (double quote), not MS SQL standard by \[ \] (brackets) or anything else. Only \`ticks\`.
+
 **Aliasing**
-	- Use fluent interface. Everytime its possible. And that should be everytime. For alias, use select('columnName')->as('prettyAlias');
-	If you want try to use shorthand as 'columnName prettyAlias', that means two stings split by white space, you will have to wrap both identifiers.
-	Otherwise Pribi will wrap your string as single identifier: 'columnName prettyAlias' = `columnName prettyAlias`.
-	Yes, this is valid name. By the way, this is also valid `9[;,-/`. And this too `SELECT (*_*) AS REALY?!`.
-	So again, use fluent. Everytime.
+
+- Use fluent interface. Every time its possible. And that should be every time. For alias, use <code>select('columnName')->as('prettyAlias')</code>.
+	If you want try to use shorthand as <code>select('columnName prettyAlias')</code>, that means two strings split by white space, you will have to wrap both identifiers like this <code>select('\`columnName\` \`prettyAlias\`')</code>
+	Otherwise Pribi will wrap your string as single identifier: <code>'columnName prettyAlias'</code> = <code>\`columnName prettyAlias\`</code>, yes, this is valid name.
+	So again, use fluent. Every time. That's what Pribi has been designed for and what is native then.
+
+Attractions
+-----------
+* <code>SELECT 1</code> is complete and valid query, it will return, surprisingly, `1`.
+* <code>SELECT * FROM \`foo\` INNER JOIN \`bar\`</code> is valid too, but without `ON` (or `WHERE`) condition, specifying bindings between `foo` and `bar`, nothing will be as result. MySQL allows to run query like this (with empty result), but Pribi does not offer you executing immediately after `INNER JOIN` because of useless result.
+* <code>SELECT * FROM \`foo\` LEFT JOIN \`bar\`</code> on the other hand is not valid for MySQL and you will get error.
+* <code>SELECT * FROM \`foo\` INNER JOIN \`bar\ ON TRUE</code> seems almost same like previous situation, but notice the trailing `ON TRUE` condition. It says "join everything with everything" and will give you every combination of all columns of both tables, which will result into `number of columns of first table` multiply `number of columns of second table` of result rows.
+* <code>SELECT * FROM \`foo\` LEFT JOIN \`bar\ ON TRUE</code> seems again almost same like previous situation, which will give you again combinations of every row of every table, but notice the `LEFT` keyword, which covers situation when the second table is empty - then at least rows from the first table will be in result (extended by columns of the second table, but with NULL values everywhere, as any LEFT JOIN without condition match).
+* This is valid identifier <code>\`9[;,-/\`</code>, and this too <code>\`SELECT (*_*) AS REALY?!\`</code>, if you do not forgot \`ticks\`. Like this you can name your columns, tables, databases, aliases. But seriously, do not do it, if you do not like pain badly.
