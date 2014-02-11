@@ -5,7 +5,7 @@ use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\WithIdentifier;
 
 class Conjunction extends WithIdentifier implements Comparison {
-	use AndOrNegating;
+	use AndOring;
 
 	protected function conjunction(Identifier $identifier) {
 		return new Conjunction($identifier, $this);
@@ -18,7 +18,7 @@ class Conjunction extends WithIdentifier implements Comparison {
 	protected function negation(Identifier $identifier) {
 		return new Negation($identifier, $this);
 	}
-	
+
 	protected function toSql() {
 		return 'AND ' . $this->getIdentifier()->toSql();
 	}

@@ -15,7 +15,7 @@ use Pribi\Executions\Executable;
 use Pribi\Executions\Executabling;
 
 class On extends WithIdentifier implements Executable {
-	use AndOrNegating;
+	use AndOring;
 	use Executabling;
 
 	protected function toSql() {

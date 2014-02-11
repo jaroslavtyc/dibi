@@ -2,9 +2,12 @@
 namespace Pribi\Commands\Joins;
 
 use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Executions\Executable;
+use Pribi\Executions\Executabling;
 
-class Disjunction extends \Pribi\Commands\Conditions\Disjunction {
-	use AndOrNegating;
+class Disjunction extends \Pribi\Commands\Conditions\Disjunction implements Executable {
+	use AndOring;
+	use Executabling;
 
 	protected function conjunction(Identifier $identifier) {
 		$conjunction = new Conjunction($identifier, $this);
@@ -16,12 +19,6 @@ class Disjunction extends \Pribi\Commands\Conditions\Disjunction {
 		$disjunction = new Disjunction($identifier, $this);
 
 		return $disjunction;
-	}
-
-	protected function negation(Identifier $identifier) {
-		$negation = new Negation($identifier, $this);
-
-		return $negation;
 	}
 
 	protected function toSql() {

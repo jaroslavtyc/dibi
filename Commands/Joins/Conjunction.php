@@ -7,7 +7,7 @@ use Pribi\Executions\Executable;
 use Pribi\Executions\Executabling;
 
 class Conjunction extends \Pribi\Commands\Conditions\Conjunction implements Executable {
-	use AndOrNegating;
+	use AndOring;
 	use Executabling;
 
 	protected function conjunction(Identifier $identifier) {
@@ -20,12 +20,6 @@ class Conjunction extends \Pribi\Commands\Conditions\Conjunction implements Exec
 		$disjunction = new Disjunction($identifier, $this);
 
 		return $disjunction;
-	}
-
-	protected function negation(Identifier $identifier) {
-		$negation = new Negation($identifier, $this);
-
-		return $negation;
 	}
 
 	protected function toSql() {
