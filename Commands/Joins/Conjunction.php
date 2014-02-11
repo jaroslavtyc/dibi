@@ -3,9 +3,12 @@ namespace Pribi\Commands\Joins;
 
 use Pribi\Commands\DifferentTo;
 use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Executions\Executable;
+use Pribi\Executions\Executabling;
 
-class Conjunction extends \Pribi\Commands\Conditions\Conjunction {
+class Conjunction extends \Pribi\Commands\Conditions\Conjunction implements Executable {
 	use AndOrNegating;
+	use Executabling;
 
 	protected function conjunction(Identifier $identifier) {
 		$conjunction = new Conjunction($identifier, $this);
