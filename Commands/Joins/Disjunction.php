@@ -1,12 +1,14 @@
 <?php
 namespace Pribi\Commands\Joins;
 
+use Pribi\Commands\Conditions\Limiting;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Executions\Executable;
 use Pribi\Executions\Executabling;
 
 class Disjunction extends \Pribi\Commands\Conditions\Disjunction implements Executable {
 	use AndOring;
+	use Limiting;
 	use Executabling;
 
 	protected function conjunction(Identifier $identifier) {
@@ -21,42 +23,38 @@ class Disjunction extends \Pribi\Commands\Conditions\Disjunction implements Exec
 		return $disjunction;
 	}
 
-	protected function toSql() {
-		return 'OR ' . $this->getIdentifier()->toSql();
-	}
-
-	public function equalTo(Identifier $identifier) {
-		$equalTo = new EqualTo($identifier, $this);
+	public function equalTo($subject) {
+		$equalTo = new EqualTo(new Identifier($subject), $this);
 
 		return $equalTo;
 	}
 
-	public function equalOrGreaterThen(Identifier $identifier) {
-		$equalOrGreaterThen = new EqualOrGreaterThen($identifier, $this);
+	public function equalOrGreaterThen($subject) {
+		$equalOrGreaterThen = new EqualOrGreaterThen(new Identifier($subject), $this);
 
 		return $equalOrGreaterThen;
 	}
 
-	public function equalOrLesserThen(Identifier $identifier) {
-		$equalOrLesserThen = new EqualOrLesserThen($identifier, $this);
+	public function equalOrLesserThen($subject) {
+		$equalOrLesserThen = new EqualOrLesserThen(new Identifier($subject), $this);
 
 		return $equalOrLesserThen;
 	}
 
-	public function greaterThen(Identifier $identifier) {
-		$greaterThen = new GreaterThen($identifier, $this);
+	public function greaterThen($subject) {
+		$greaterThen = new GreaterThen(new Identifier($subject), $this);
 
 		return $greaterThen;
 	}
 
-	public function lesserThen(Identifier $identifier) {
-		$lesserThen = new LesserThen($identifier, $this);
+	public function lesserThen($subject) {
+		$lesserThen = new LesserThen(new Identifier($subject), $this);
 
 		return $lesserThen;
 	}
 
-	public function differentTo(Identifier $identifier) {
-		$differentTo = new DifferentTo($identifier, $this);
+	public function differentTo($subject) {
+		$differentTo = new DifferentTo(new Identifier($subject), $this);
 
 		return $differentTo;
 	}

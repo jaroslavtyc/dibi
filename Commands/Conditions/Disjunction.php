@@ -23,27 +23,27 @@ class Disjunction extends WithIdentifier implements Comparison {
 		return 'OR ' . $this->getIdentifier()->toSql();
 	}
 
-	public function equalTo(Identifier $identifier) {
-		return new EqualTo($identifier, $this);
+	public function equalTo($subject) {
+		return new EqualTo(new Identifier($subject), $this);
 	}
 
-	public function equalOrGreaterThen(Identifier $identifier) {
-		return new EqualOrGreaterThen($identifier, $this);
+	public function equalOrGreaterThen($subject) {
+		return new EqualOrGreaterThen(new Identifier($subject), $this);
 	}
 
-	public function equalOrLesserThen(Identifier $identifier) {
-		return new EqualOrLesserThen($identifier, $this);
+	public function equalOrLesserThen($subject) {
+		return new EqualOrLesserThen(new Identifier($subject), $this);
 	}
 
-	public function greaterThen(Identifier $identifier) {
-		return new GreaterThen($identifier, $this);
+	public function greaterThen($subject) {
+		return new GreaterThen(new Identifier($subject), $this);
 	}
 
-	public function lesserThen(Identifier $identifier) {
-		return new LesserThen($identifier, $this);
+	public function lesserThen($subject) {
+		return new LesserThen(new Identifier($subject), $this);
 	}
 
-	public function differentTo(Identifier $identifier) {
-		return new DifferentTo($identifier, $this);
+	public function differentTo($subject) {
+		return new DifferentTo(new Identifier($subject), $this);
 	}
 }

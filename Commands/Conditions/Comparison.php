@@ -1,18 +1,16 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-use Pribi\Commands\Identifiers\Identifier;
-
 interface Comparison {
-	public function equalTo(Identifier $identifier);
+	public function equalTo($subject);
 
-	public function equalOrGreaterThen(Identifier $identifier);
+	public function equalOrGreaterThen($subject);
 
-	public function equalOrLesserThen(Identifier $identifier);
+	public function equalOrLesserThen($subject);
 
-	public function greaterThen(Identifier $identifier);
+	public function greaterThen($subject);
 
-	public function lesserThen(Identifier $identifier);
+	public function lesserThen($subject);
 
-	public function differentTo(Identifier $identifier);
+	public function differentTo($subject);
 }
