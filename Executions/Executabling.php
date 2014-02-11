@@ -1,8 +1,8 @@
 <?php
 namespace Pribi\Executions;
 
-use Pribi\Resources\Builder,
-	Pribi\Commands\Command;
+use Pribi\Resources\Builder;
+use Pribi\Commands\Command;
 use Pribi\Resources\Query;
 
 trait Executabling {
