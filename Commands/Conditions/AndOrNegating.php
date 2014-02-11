@@ -19,7 +19,7 @@ trait AndOrNegating {
 		}elseif ($upperCasedName === 'NOT') {
 			return $this->negation(new Identifier($arguments[0]));
 		} else {
-			throw new Exceptions\UnknownMethodCalled();
+			throw new Exceptions\UnknownMethodCalled(\sprintf('Called non-existing method [%s->%s()]', get_class($this), $name));
 		}
 	}
 
