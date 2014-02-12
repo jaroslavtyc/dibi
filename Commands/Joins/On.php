@@ -4,9 +4,9 @@ namespace Pribi\Commands\Joins;
 use Pribi\Commands\Conditions\EqualOrLesserThen;
 use Pribi\Commands\Conditions\GreaterThen;
 use Pribi\Commands\Conditions\LesserThen;
+use Pribi\Commands\Conditions\Limiting;
 use Pribi\Commands\Disjunction;
 use Pribi\Commands\EqualTo;
-use Pribi\Commands\FromSources\From;
 use Pribi\Commands\Negation;
 use Pribi\Commands\RightJoin;
 use Pribi\Commands\WithIdentifier;
@@ -17,6 +17,7 @@ use Pribi\Executions\Executabling;
 class On extends WithIdentifier implements Executable {
 	use AndOring;
 	use Executabling;
+	use Limiting;
 
 	protected function toSql() {
 		return 'ON ' . $this->getIdentifier()->toSql();
@@ -32,12 +33,6 @@ class On extends WithIdentifier implements Executable {
 		$disjunction = new Disjunction($identifier, $this);
 
 		return $disjunction;
-	}
-
-	protected function negation(Identifier $identifier) {
-		$negation = new Negation($identifier, $this);
-
-		return $negation;
 	}
 
 	public function equalTo($identifier) {
@@ -70,12 +65,6 @@ class On extends WithIdentifier implements Executable {
 		return $equalOrGreaterThen;
 	}
 
-	public function from($identifier) {
-		$from = new From($identifier, $this);
-
-		return $from;
-	}
-
 	public function innerJoin($identifier) {
 		$innerJoin = new InnerJoin($identifier, $this);
 
@@ -98,17 +87,5 @@ class On extends WithIdentifier implements Executable {
 		$where = new Where($identifier, $this);
 
 		return $where;
-	}
-
-	public function limit($limit) {
-		$limit = new Limit(0, $limit, $this);
-
-		return $limit;
-	}
-
-	public function offsetAndLimit($offset, $limit) {
-		$limit = new Limit($offset, $limit, $this);
-
-		return $limit;
 	}
 }
