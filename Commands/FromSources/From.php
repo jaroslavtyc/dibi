@@ -1,19 +1,20 @@
 <?php
 namespace Pribi\Commands\FromSources;
 
-use Pribi\Commands\Identifiers\Identifier,
-	Pribi\Commands\Identifiers\IdentifierBringer,
-	Pribi\Commands\InnerJoin,
-	Pribi\Commands\LeftJoin,
-	Pribi\Commands\RightJoin,
-	Pribi\Commands\Where,
-	Pribi\Commands\Limit,
-	Pribi\Executions\Executabling;
+use Pribi\Commands\Conditions\Limiting;
+use Pribi\Commands\Conditions\Where;
+use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Commands\Identifiers\IdentifierBringer;
+use Pribi\Executions\Executabling;
+use Pribi\Commands\Joins\InnerJoin;
+use Pribi\Commands\Joins\LeftJoin;
+use Pribi\Commands\Joins\RightJoin;
 
 /**
  * @method \Pribi\Commands\FromSources\FromAlias as ($alias)
  */
 class From extends IdentifierBringer implements FromIdentity {
+	use Limiting;
 	use Executabling;
 
 	protected function toSql() {
@@ -28,27 +29,19 @@ class From extends IdentifierBringer implements FromIdentity {
 		return new FromAlias($alias, $this);
 	}
 
-	public function innerJoin($identificator) {
-		return new InnerJoin($identificator, $this);
+	public function innerJoin($subject) {
+		return new InnerJoin(new Identifier($subject), $this);
 	}
 
-	public function leftJoin($identificator) {
-		return new LeftJoin($identificator, $this);
+	public function leftJoin($subject) {
+		return new LeftJoin(new Identifier($subject), $this);
 	}
 
-	public function rightJoin($identificator) {
-		return new RightJoin($identificator, $this);
+	public function rightJoin($subject) {
+		return new RightJoin(new Identifier($subject), $this);
 	}
 
-	public function where($identificator) {
-		return new Where($identificator, $this);
-	}
-
-	public function limit($limit) {
-		return new Limit(0, $limit);
-	}
-
-	public function offsetLimit($offset, $limit) {
-		return new Limit($offset, $limit);
+	public function where($subject) {
+		return new Where(new Identifier($subject), $this);
 	}
 }
