@@ -27,6 +27,7 @@ Tips and Tricks
 
 - Pribi is for MySQL. That's the trick. That means, the quotation is done by \` (tick).
 	Not SQL-99 standard by " (double quote), not MS SQL standard by \[ \] (brackets) or anything else. Only \`ticks\`.
+- Empty `IN()` condition will cause syntax error in MySQL, pribi will replace it by IN(NULL).
 
 **Aliasing**
 
@@ -43,3 +44,5 @@ Attractions
 * <code>SELECT * FROM \`foo\` INNER JOIN \`bar\ ON TRUE</code> seems almost same like previous situation, but notice the trailing `ON TRUE` condition. It says "join everything with everything" and will give you every combination of all columns of both tables, which will result into `number of columns of first table` multiply `number of columns of second table` of result rows.
 * <code>SELECT * FROM \`foo\` LEFT JOIN \`bar\ ON TRUE</code> seems again almost same like previous situation, which will give you again combinations of every row of every table, but notice the `LEFT` keyword, which covers situation when the second table is empty - then at least rows from the first table will be in result (extended by columns of the second table, but with NULL values everywhere, as any LEFT JOIN without condition match).
 * This is valid identifier <code>\`9[;,-/\`</code>, and this too <code>\`SELECT (*_*) AS REALY?!\`</code>, if you do not forgot \`ticks\`. Like this you can name your columns, tables, databases, aliases. But seriously, do not do it, if you do not like pain badly.
+* `NULL` is not a standard value, it does not mean *nothing* but much more something like *does not know*. If you want to search for `NULL` value, you will have to use `IS NULL` or `IS NOT NULL` construction. Comparing any value with `NULL` results into `NULL`, because MySQL really does not know, what `NULL` means against compared value. For example, `15 = NULL` is `NULL`, `"" = NULL` (empty string) is `NULL`, `TRUE = NULL` is `NULL` and finally `NULL = NULL` is again `NULL`. Because, remember this, MySQL does not know what is meaning of `NULL`, so comparing *unknown value* with *unknown value* has *unknown result*. For any details, try [MySQL official pages](http://dev.mysql.com/doc/refman/5.0/en/working-with-null.html).
+* <code>WHERE IN ()</code> is not a valid condition and causes syntax error because of missing parameters of `IN` condition. Using `IN(NULL)` *matches nothing*, even if column value is `NULL` (which is very special, respective very unknown, as mentioned before).
