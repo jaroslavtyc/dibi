@@ -15,10 +15,6 @@ class Conjunction extends WithIdentifier implements Comparison {
 		return new Disjunction($identifier, $this);
 	}
 
-	protected function negation(Identifier $identifier) {
-		return new Negation($identifier, $this);
-	}
-
 	protected function toSql() {
 		return 'AND ' . $this->getIdentifier()->toSql();
 	}
