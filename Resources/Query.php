@@ -24,15 +24,10 @@ class Query extends Command implements Executable {
 		$command = $this->lastCommand;
 		$query = $command->toSql();
 		while ($command->hasPreviousCommand()) {
-			if (is_a($command->getPreviousCommand(), get_class($command))) {
-				$delimiter = ' ';
-			} else {
-				$delimiter = PHP_EOL;
-			}
 			$command = $command->getPreviousCommand();
 			$previousQueryPart = $command->toSql();
 			if ($previousQueryPart !== '') {
-				$query = $previousQueryPart . $delimiter . $query;
+				$query = $previousQueryPart . ' ' . $query;
 			}
 		}
 
