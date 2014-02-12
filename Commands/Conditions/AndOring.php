@@ -20,15 +20,17 @@ trait AndOring {
 		}
 	}
 
-	/**
-	 * @param $identifier
-	 * @return Conjunction
-	 */
-	abstract protected function conjunction(Identifier $identifier);
+	protected function conjunction(Identifier $identifier) {
+		/**
+		 * @var Command $this
+		 */
+		return new Conjunction($identifier, $this);
+	}
 
-	/**
-	 * @param $identifier
-	 * @return Disjunction
-	 */
-	abstract protected function disjunction(Identifier $identifier);
+	protected function disjunction(Identifier $identifier) {
+		/**
+		 * @var Command $this
+		 */
+		return new Disjunction($identifier, $this);
+	}
 }

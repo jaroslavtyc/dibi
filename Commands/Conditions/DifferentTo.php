@@ -7,14 +7,6 @@ use Pribi\Commands\WithIdentifier;
 class DifferentTo extends WithIdentifier {
 	use AndOring;
 
-	protected function conjunction(Identifier $identifier) {
-		return new Conjunction($identifier, $this);
-	}
-
-	protected function disjunction(Identifier $identifier) {
-		return new Disjunction($identifier, $this);
-	}
-
 	protected function toSql() {
 		return '!= ' . $this->getIdentifier()->toSql();
 	}

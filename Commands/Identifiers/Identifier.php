@@ -18,6 +18,8 @@ class Identifier extends QueryPart {
 			if ($this->isNotManuallyQuoted($subject) && $this->isProbablyNotSpecial($subject) && $this->isValidIdentifier($subject)) {
 				$subject = $this->quoteIt($subject);
 			}
+		} elseif (is_null($subject)) {
+			$subject = 'NULL';
 		}
 
 		return $subject;
