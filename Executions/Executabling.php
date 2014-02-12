@@ -20,14 +20,6 @@ trait Executabling {
 		return $this->builtQuery()->explain();
 	}
 
-	public function limit($limit) {
-		return new Limit(0, $limit, $this);
-	}
-
-	public function offsetAndLimit($offset, $limit) {
-		return new Limit($offset, $limit, $this);
-	}
-
 	/**
 	 * @return Query
 	 */
