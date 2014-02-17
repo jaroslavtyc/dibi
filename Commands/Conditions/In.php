@@ -3,13 +3,12 @@ namespace Pribi\Commands;
 
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Identifiers\Identifiers;
-use Pribi\Commands\Identifiers\NullIdentifier;
 
 class In extends Command {
 	use AndOring;
 
 	/**
-	 * @var Identifier[]
+	 * @var Identifier[] Identifiers
 	 */
 	private $identifiers;
 
@@ -20,20 +19,27 @@ class In extends Command {
 
 	private function validateIdentifiers($identifiers) {
 		if (count($identifiers) === 0) {
-			$identifiers = array(new NullIdentifier());
+			$identifiers = new Identifiers(NULL);
 		}
-
 		return $identifiers;
 	}
 
 	protected function toSql() {
-		$sql = 'IN (';
-		$delimiter = '';
-		foreach ($this->identifiers as $identifier) {
-			$sql .= $delimiter . $identifier->toSql();
-			$delimiter = ',';
-		}
+		return 'IN (' . $this->implodeIdentifiers() . ')';
+	}
 
-		return $sql . ')';
+	private function implodeIdentifiers() {
+		$iterator = $this->identifiers->getIterator();
+		$iterator->rewind();
+		$imploded = '';
+		if ($iterator->valid()) {
+			$imploded .= $iterator->current()->toSql();
+			$iterator->next();
+			while ($iterator->valid()) {
+				$imploded .= ',' . $iterator->current()->toSql();
+				$iterator->next();
+			}
+		}
+		return $imploded;
 	}
 }

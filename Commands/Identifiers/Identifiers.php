@@ -10,18 +10,18 @@ class Identifiers extends Object implements \IteratorAggregate {
 	}
 
 	private function buildIdentifiers($subjects) {
-		$this->identifiers = array();
+		$this->identifiers = new \ArrayIterator();
 		if (is_array($subjects) || (is_object($subjects) && is_a($subjects, 'Traversable'))) {
 			foreach ($subjects as $subject) {
-				$this->identifiers[] = new Identifier($subject);
+				$this->identifiers->append(new Identifier($subject));
 			}
 		} else {
-			$this->identifiers[] = new Identifier($subjects);
+			$this->identifiers->append(new Identifier($subjects));
 		}
 	}
 
 	/**
-	 * @return Identifier[] array
+	 * @return \ArrayIterator
 	 */
 	public function getIterator() {
 		return $this->identifiers;
