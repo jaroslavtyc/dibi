@@ -1,6 +1,11 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-class Like {
+use Pribi\Commands\WithIdentifier;
 
+class Like extends WithIdentifier {
+
+	protected function toSql() {
+		return 'LIKE ' . $this->getIdentifier()->toSql();
+	}
 }

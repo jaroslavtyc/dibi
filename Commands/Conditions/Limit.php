@@ -8,6 +8,11 @@ class Limit extends WithoutIdentifier {
 	private $offset;
 	private $limit;
 
+	/**
+	 * @param int $offset
+	 * @param int $limit
+	 * @param Command $previousCommand
+	 */
 	public function __construct($offset, $limit, Command $previousCommand) {
 		$this->offset = $offset;
 		$this->limit = $limit;
