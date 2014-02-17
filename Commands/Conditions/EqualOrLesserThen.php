@@ -7,6 +7,6 @@ class EqualOrLesserThen extends WithIdentifier {
 	use AndOring;
 
 	protected function toSql() {
-		return $this->getIdentifier()->toSql();
+		return '<= ' . $this->getIdentifier()->toSql();
 	}
 }
