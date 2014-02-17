@@ -1,12 +1,11 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-use Pribi\Commands\Command;
 use Pribi\Commands\Identifiers\Identifier;
 
 /**
- * @method Command and($identificator)
- * @method Command or($identificator)
+ * @method \Pribi\Commands\Command and($identificator)
+ * @method \Pribi\Commands\Command or($identificator)
  */
 trait AndOring {
 	public function __call($name, array $arguments) {
@@ -22,14 +21,14 @@ trait AndOring {
 
 	protected function conjunction(Identifier $identifier) {
 		/**
-		 * @var Command $this
+		 * @var \Pribi\Commands\Command $this
 		 */
 		return new Conjunction($identifier, $this);
 	}
 
 	protected function disjunction(Identifier $identifier) {
 		/**
-		 * @var Command $this
+		 * @var \Pribi\Commands\Command $this
 		 */
 		return new Disjunction($identifier, $this);
 	}
