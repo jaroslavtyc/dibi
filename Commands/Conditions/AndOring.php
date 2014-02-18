@@ -32,4 +32,18 @@ trait AndOring {
 		 */
 		return new Disjunction($identifier, $this);
 	}
+
+	public function andNot($subject) {
+		/**
+		 * @var \Pribi\Commands\Command $this
+		 */
+		return new AndNot(new Identifier($subject), $this);
+	}
+
+	public function orNot($subject) {
+		/**
+		 * @var \Pribi\Commands\Command $this
+		 */
+		return new OrNot(new Identifier($subject), $this);
+	}
 }
