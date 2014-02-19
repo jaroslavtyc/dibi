@@ -2,32 +2,33 @@
 namespace Pribi\Commands\Identifiers;
 
 use Pribi\Commands\QueryPart;
-use Traversable;
 
-class Identifiers extends QueryPart implements \IteratorAggregate, \Countable {
+class Subjects extends QueryPart implements \IteratorAggregate, \Countable {
+	private $subjects;
+
 	public function __construct($subjects) {
-		$this->identifiers = $this->buildIdentifiers($subjects);
+		$this->subjects = $this->buildSubjects($subjects);
 	}
 
-	private function buildIdentifiers($subjects) {
-		$this->identifiers = new \ArrayIterator();
+	private function buildSubjects($subjects) {
+		$this->subjects = new \ArrayIterator();
 		if (is_array($subjects) || (is_object($subjects) && is_a($subjects, 'Traversable'))) {
 			foreach ($subjects as $subject) {
-				$this->identifiers->append(new Identifier($subject));
+				$this->subjects->append(new Subject($subject));
 			}
 		} else {
-			$this->identifiers->append(new Identifier($subjects));
+			$this->subjects->append(new Subject($subjects));
 		}
 	}
 
 	protected function toSql() {
 		$sql = '';
 		$delimiter = '';
-		foreach ($this->identifiers as $identifier) {
+		foreach ($this->subjects as $subject) {
 			/**
-			 * @var Identifier $identifier
+			 * @var Subject $subject
 			 */
-			$sql .= $delimiter . $identifier->toSql();
+			$sql .= $delimiter . $subject->toSql();
 			$delimiter = ',';
 		}
 
@@ -38,7 +39,7 @@ class Identifiers extends QueryPart implements \IteratorAggregate, \Countable {
 	 * @return \ArrayIterator
 	 */
 	public function getIterator() {
-		return $this->identifiers;
+		return $this->subjects;
 	}
 
 	public function count() {

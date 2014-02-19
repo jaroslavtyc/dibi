@@ -1,24 +1,20 @@
 <?php
 namespace Pribi\Commands\Inserts;
 
-use Pribi\Commands\Executions\Executable,
-	Pribi\Commands\Executions\Executabling,
-	Pribi\Commands\Command;
+use Pribi\Commands\Command;
+use Pribi\Commands\Identifiers\Subjects;
 
 class Values extends Command implements Executable {
 	use Executabling;
 
 	private $values;
 
-	public function __construct($values, Command $previousCommand) {
+	public function __construct(Subjects $values, Command $previousCommand) {
 		parent::__construct($previousCommand);
-		$this->values = $this->toTraversable($values);
+		$this->values = $values;
 	}
 
-	private function toTraversable($values) {
-	}
-
-	public function onDuplicateKeyUpdate($expression) {
-		return new OnDuplicateKeyUpdate($expression, $this);
+	protected function toSql() {
+		return 'VALUES (' . $this->values->toSql() . ')';
 	}
 }

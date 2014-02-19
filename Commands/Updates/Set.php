@@ -10,8 +10,4 @@ class Set extends Command {
 		$this->values = $values;
 		parent::__construct($previousCommand);
 	}
-
-	public function onDuplicateKeyUpdate($expression) {
-		return new OnDuplicateKeyUpdate($expression, $this);
-	}
 }

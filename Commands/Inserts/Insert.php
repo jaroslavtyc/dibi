@@ -1,63 +1,41 @@
 <?php
 namespace Pribi\Commands\Inserts;
 
-use Pribi\Commands\Command,
-	Pribi\Commands\Exceptions\WrongFormat,
-	Pribi\Commands\Identifiers\Identifier,
-	Pribi\Commands\WithIdentifier,
-	Pribi\Commands\Selects\Select;
+use Pribi\Commands\Command;
+use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Commands\WithIdentifier;
+use Pribi\Commands\Selects\Select;
+use Pribi\Commands\Identifiers\Identifiers;
 
 abstract class Insert extends WithIdentifier {
 	private $columns;
 
-	public function __construct(Identifier $table, $columns, Command $previousCommand) {
-		parent::__construct($table, $previousCommand);
-		$this->columns = $this->extractColumns($columns);
+	public function __construct(Identifier $tableName, Command $previousCommand, Identifiers $columns = NULL) {
+		parent::__construct($tableName, $previousCommand);
+		$this->columns = $columns;
 	}
 
-	private function extractColumns($columns) {
-		if (is_array($columns)) {
-			$extracted = $columns;
-		} elseif (is_object($columns)) {
-			$extracted = $this->extractColumnsFromObject($columns);
-		} elseif (is_scalar($columns)) {
-			$extracted = $this->splitFromString((string)$columns);
-		} else {
-			throw new WrongFormat(sprintf('Do not know how to extract columns from [%s]', var_export($columns, TRUE)));
+	protected function toSql() {
+		$sql = 'INTO ' . $this->getIdentifier()->toSql();
+		if (count($this->columns) > 0) {
+			$sql .= '(' . $this->getImplodedColumns() . ')';
 		}
 
-		if (count($extracted) === 0) {
-			throw new WrongFormat(sprintf('Cannot extract any column name from given [%s]', var_export($columns, TRUE)));
+		return $sql;
+	}
+
+	private function getImplodedColumns() {
+		$imploded = '';
+		$delimiter = '';
+		foreach ($this->columns as $column) {
+			/**
+			 * @var Identifier $column
+			 */
+			$imploded .= $delimiter . $column->toSql();
+			$delimiter = ',';
 		}
 
-		return $extracted;
-	}
-
-	private function extractColumnsFromObject($columns) {
-		if (is_a($columns, '\Traversable')) {
-			$extracted = array();
-			foreach ($columns as $column) {
-				$extracted[] = $column;
-			}
-		} elseif (method_exists($columns, '__toString')) {
-			$extracted = $this->splitFromString((string)$columns);
-		} else {
-			throw new WrongFormat(sprintf('Cannot find out how to extract columns from given class [%s].', get_class($columns)));
-		}
-
-		return $extracted;
-	}
-
-	private function splitFromString($string) {
-		return array_map(function ($name) {
-				return trim($name);
-			},
-			explode(',', $string)
-		);
-	}
-
-	public function partition($identificator) {
-		return new Partition($identificator, $this);
+		return $imploded;
 	}
 
 	public function values($identificator) {
@@ -66,29 +44,5 @@ abstract class Insert extends WithIdentifier {
 
 	public function select($subject) {
 		return new Select($subject, $this);
-	}
-
-	/**
-	 * @return string[] array
-	 */
-	protected function getColumns() {
-		return $this->columns;
-	}
-
-	protected function getSqlWithoutInsertCommand() {
-		$query = ' INTO ' . $this->getTable();
-		if (count($this->getColumns()) > 0) {
-			$columns = array();
-			foreach ($this->getColumns() as $column) {
-				$columns[] = $this->identifierQuoter()->quote($column);
-			}
-			$query .= '(' . implode($columns) . ')';
-		}
-
-		return $query;
-	}
-
-	protected function getTable() {
-		return $this->getIdentifier();
 	}
 }
