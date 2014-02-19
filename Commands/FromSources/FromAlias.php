@@ -1,16 +1,17 @@
 <?php
 namespace Pribi\Commands\FromSources;
 
+use Pribi\Commands\Conditions\Whereing;
+use Pribi\Commands\Identifiers\IdentifierAlias;
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Identifiers\IdentifierAlias,
-	Pribi\Commands\Joins\InnerJoin,
-	Pribi\Commands\Joins\LeftJoin,
-	Pribi\Commands\Joins\RightJoin,
-	Pribi\Commands\Where,
-	Pribi\Commands\Limit,
-	Pribi\Executions\Executabling;
+use Pribi\Commands\Joins\Joining;
+use Pribi\Executions\Executabling;
+use Pribi\Commands\Conditions\Limiting;
 
 class FromAlias extends IdentifierAlias implements FromIdentity {
+	use Whereing;
+	use Joining;
+	use Limiting;
 	use Executabling;
 
 	public function __construct(Identifier $alias, From $prependFrom) {
@@ -19,29 +20,5 @@ class FromAlias extends IdentifierAlias implements FromIdentity {
 
 	protected function toSql() {
 		return 'AS ' . $this->getIdentifier()->toSql();
-	}
-
-	public function innerJoin($name) {
-		return new InnerJoin(new Identifier($name), $this);
-	}
-
-	public function leftJoin($identificator) {
-		return new LeftJoin($identificator, $this);
-	}
-
-	public function rightJoin($identificator) {
-		return new RightJoin($identificator, $this);
-	}
-
-	public function where($identificator) {
-		return new Where($identificator, $this);
-	}
-
-	public function limit($limit) {
-		return new Limit(0, $limit);
-	}
-
-	public function offsetLimit($offset, $limit) {
-		return new Limit($offset, $limit);
 	}
 }
