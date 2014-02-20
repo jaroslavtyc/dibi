@@ -3,6 +3,7 @@ namespace Pribi\Commands\FromSources;
 
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Identifiers\IdentifierBringer;
+use Pribi\Commands\Joins\Joinable;
 use Pribi\Commands\Joins\Joining;
 use Pribi\Commands\Conditions\Whereing;
 use Pribi\Commands\Conditions\Limiting;
@@ -11,7 +12,7 @@ use Pribi\Executions\Executabling;
 /**
  * @method FromAlias as ($alias)
  */
-class From extends IdentifierBringer implements FromIdentity {
+class From extends IdentifierBringer implements FromIdentity, Joinable {
 	use Joining;
 	use Whereing;
 	use Limiting;

@@ -4,11 +4,12 @@ namespace Pribi\Commands\FromSources;
 use Pribi\Commands\Conditions\Whereing;
 use Pribi\Commands\Identifiers\IdentifierAlias;
 use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Commands\Joins\Joinable;
 use Pribi\Commands\Joins\Joining;
 use Pribi\Executions\Executabling;
 use Pribi\Commands\Conditions\Limiting;
 
-class FromAlias extends IdentifierAlias implements FromIdentity {
+class FromAlias extends IdentifierAlias implements FromIdentity, Joinable {
 	use Whereing;
 	use Joining;
 	use Limiting;
