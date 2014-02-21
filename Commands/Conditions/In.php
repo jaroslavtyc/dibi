@@ -17,7 +17,7 @@ class In extends Command {
 		parent::__construct($previousCommand);
 	}
 
-	private function validateIdentifiers($identifiers) {
+	private function validateIdentifiers(Identifiers $identifiers) {
 		if (count($identifiers) === 0) {
 			$identifiers = new Identifiers(NULL);
 		}
@@ -25,21 +25,6 @@ class In extends Command {
 	}
 
 	protected function toSql() {
-		return 'IN (' . $this->implodeIdentifiers() . ')';
-	}
-
-	private function implodeIdentifiers() {
-		$iterator = $this->identifiers->getIterator();
-		$iterator->rewind();
-		$imploded = '';
-		if ($iterator->valid()) {
-			$imploded .= $iterator->current()->toSql();
-			$iterator->next();
-			while ($iterator->valid()) {
-				$imploded .= ',' . $iterator->current()->toSql();
-				$iterator->next();
-			}
-		}
-		return $imploded;
+		return 'IN (' . $this->identifiers->toSql() . ')';
 	}
 }

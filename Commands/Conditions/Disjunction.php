@@ -3,7 +3,7 @@ namespace Pribi\Commands\Conditions;
 
 use Pribi\Commands\WithIdentifier;
 
-class Disjunction extends WithIdentifier implements Comparison {
+class Disjunction extends WithIdentifier implements Comparable {
 	use AndOring;
 	use Comparing;
 

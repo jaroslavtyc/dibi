@@ -4,7 +4,7 @@ namespace Pribi\Commands\Conditions;
 use Pribi\Commands\WithIdentifier;
 use Pribi\Executions\Executabling;
 
-class Where extends WithIdentifier implements Comparison {
+class Where extends WithIdentifier implements Comparable {
 	use AndOring;
 	use Comparing;
 	use Limiting;

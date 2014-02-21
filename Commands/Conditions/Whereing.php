@@ -18,4 +18,3 @@ trait Whereing {
 		return new WhereNot(new Identifier($subject), $this);
 	}
 }
- 

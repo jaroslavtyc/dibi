@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-interface Comparison {
+interface Comparable {
 	public function equalTo($subject);
 
 	public function equalOrGreaterThen($subject);
