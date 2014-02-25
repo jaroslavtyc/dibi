@@ -17,7 +17,7 @@ class SelectNot extends Select implements SelectIdentity, Limitable, Executable 
 
 	protected function toSql() {
 		if (is_a($this->getPreviousCommand(), self::CLASS_IDENTITY)) {
-			return ',' . $this->getIdentifier()->toSql();
+			return ',NOT ' . $this->getIdentifier()->toSql();
 		} else {
 			return 'SELECT NOT ' . $this->getIdentifier()->toSql();
 		}
