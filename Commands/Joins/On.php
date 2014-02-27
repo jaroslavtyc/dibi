@@ -1,6 +1,7 @@
 <?php
 namespace Pribi\Commands\Joins;
 
+use Pribi\Commands\Conditions\AndOrUsable;
 use Pribi\Commands\Conditions\Comparable;
 use Pribi\Commands\Conditions\Limitable;
 use Pribi\Commands\Conditions\Limiting;
@@ -14,7 +15,7 @@ use Pribi\Commands\WithIdentifier;
 use Pribi\Executions\Executable;
 use Pribi\Executions\Executabling;
 
-class On extends WithIdentifier implements Comparable, Whereable, Limitable, Executable {
+class On extends WithIdentifier implements AndOrUsable, Comparable, Whereable, Limitable, Executable {
 	use AndOring;
 	use Comparing;
 	use Whereing;

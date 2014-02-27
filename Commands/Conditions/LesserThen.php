@@ -1,7 +1,6 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-use Pribi\Commands\AndOrUsable;
 use Pribi\Commands\WithIdentifier;
 
 class LesserThen extends WithIdentifier implements AndOrUsable {

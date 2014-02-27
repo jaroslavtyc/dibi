@@ -1,7 +1,6 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-use Pribi\Commands\AndOrUsable;
 use Pribi\Commands\Command;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Identifiers\Identifiers;
