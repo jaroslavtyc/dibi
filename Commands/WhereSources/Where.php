@@ -1,8 +1,11 @@
 <?php
-namespace Pribi\Commands\Conditions;
+namespace Pribi\Commands\WhereSources;
 
+use Pribi\Commands\Conditions\AndOring;
+use Pribi\Commands\Conditions\AndOrUsable;
+use Pribi\Commands\Conditions\Comparable;
+use Pribi\Commands\Conditions\Comparing;
 use Pribi\Commands\WithIdentifier;
-use Pribi\Executions\Executabling;
 
 class Where extends WithIdentifier implements AndOrUsable, Comparable {
 	use AndOring;

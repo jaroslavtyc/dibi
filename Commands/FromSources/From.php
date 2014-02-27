@@ -2,13 +2,13 @@
 namespace Pribi\Commands\FromSources;
 
 use Pribi\Commands\Conditions\Limitable;
-use Pribi\Commands\Conditions\Whereable;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Identifiers\IdentifierBringer;
 use Pribi\Commands\Joins\Joinable;
 use Pribi\Commands\Joins\Joining;
-use Pribi\Commands\Conditions\Whereing;
 use Pribi\Commands\Conditions\Limiting;
+use Pribi\Commands\WhereSources\Whereable;
+use Pribi\Commands\WhereSources\Whereing;
 
 /**
  * @method FromAlias as ($alias)

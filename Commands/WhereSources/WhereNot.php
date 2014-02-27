@@ -1,7 +1,5 @@
 <?php
-namespace Pribi\Commands\Conditions;
-
-use Pribi\Executions\Executabling;
+namespace Pribi\Commands\WhereSources;
 
 class WhereNot extends Where {
 	protected function toSql() {

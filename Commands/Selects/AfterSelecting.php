@@ -1,10 +1,10 @@
 <?php
 namespace Pribi\Commands\Selects;
 
-use Pribi\Commands\Conditions\Where;
-use Pribi\Commands\Conditions\WhereNot;
 use Pribi\Commands\FromSources\From;
 use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Commands\WhereSources\Where;
+use Pribi\Commands\WhereSources\WhereNot;
 
 trait AfterSelecting {
 	public function select($subject) {

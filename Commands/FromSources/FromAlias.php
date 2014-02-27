@@ -2,13 +2,13 @@
 namespace Pribi\Commands\FromSources;
 
 use Pribi\Commands\Conditions\Limitable;
-use Pribi\Commands\Conditions\Whereable;
-use Pribi\Commands\Conditions\Whereing;
 use Pribi\Commands\Identifiers\IdentifierAlias;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Joins\Joinable;
 use Pribi\Commands\Joins\Joining;
 use Pribi\Commands\Conditions\Limiting;
+use Pribi\Commands\WhereSources\Whereable;
+use Pribi\Commands\WhereSources\Whereing;
 
 class FromAlias extends IdentifierAlias implements FromIdentifiable, Whereable, Joinable, Limitable {
 	use Whereing;
