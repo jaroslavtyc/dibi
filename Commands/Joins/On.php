@@ -12,15 +12,12 @@ use Pribi\Commands\EqualTo;
 use Pribi\Commands\Negation;
 use Pribi\Commands\RightJoin;
 use Pribi\Commands\WithIdentifier;
-use Pribi\Executions\Executable;
-use Pribi\Executions\Executabling;
 
-class On extends WithIdentifier implements AndOrUsable, Comparable, Whereable, Limitable, Executable {
+class On extends WithIdentifier implements AndOrUsable, Comparable, Whereable, Limitable {
 	use AndOring;
 	use Comparing;
 	use Whereing;
 	use Limiting;
-	use Executabling;
 
 	protected function toSql() {
 		return 'ON ' . $this->getIdentifier()->toSql();

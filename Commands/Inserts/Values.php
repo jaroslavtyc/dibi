@@ -4,9 +4,7 @@ namespace Pribi\Commands\Inserts;
 use Pribi\Commands\Command;
 use Pribi\Commands\Identifiers\Subjects;
 
-class Values extends Command implements Executable {
-	use Executabling;
-
+class Values extends Command {
 	private $values;
 
 	public function __construct(Subjects $values, Command $previousCommand) {

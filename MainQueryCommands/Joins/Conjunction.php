@@ -1,14 +1,12 @@
 <?php
-namespace Pribi\Commands\Joins;
+namespace Pribi\MainQueryCommands\Joins;
 
-use Pribi\Commands\Conditions\Limitable;
-use Pribi\Commands\Conditions\Limiting;
 use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Executions\Executable;
+use Pribi\Executions\Executabling;
 
-class Disjunction extends \Pribi\Commands\Conditions\Disjunction implements Limitable {
-	use AndOring;
-	use Comparing;
-	use Limiting;
+class Conjunction extends \Pribi\Commands\Joins\Conjunction implements Executable {
+	use Executabling;
 
 	protected function conjunction(Identifier $identifier) {
 		$conjunction = new Conjunction($identifier, $this);
