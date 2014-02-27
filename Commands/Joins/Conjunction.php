@@ -2,10 +2,10 @@
 namespace Pribi\Commands\Joins;
 
 use Pribi\Commands\Conditions\Comparable;
-use Pribi\Commands\Conditions\Limiting;
 use Pribi\Commands\DifferentTo;
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Conditions\Limitable;
+use Pribi\Commands\Limits\Limitable;
+use Pribi\Commands\Limits\Limiting;
 use Pribi\Commands\WhereSources\Whereable;
 use Pribi\Commands\WhereSources\Whereing;
 

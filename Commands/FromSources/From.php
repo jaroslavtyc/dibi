@@ -1,12 +1,12 @@
 <?php
 namespace Pribi\Commands\FromSources;
 
-use Pribi\Commands\Conditions\Limitable;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Identifiers\IdentifierBringer;
 use Pribi\Commands\Joins\Joinable;
 use Pribi\Commands\Joins\Joining;
-use Pribi\Commands\Conditions\Limiting;
+use Pribi\Commands\Limits\Limitable;
+use Pribi\Commands\Limits\Limiting;
 use Pribi\Commands\WhereSources\Whereable;
 use Pribi\Commands\WhereSources\Whereing;
 

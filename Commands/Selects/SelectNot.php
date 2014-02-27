@@ -1,8 +1,8 @@
 <?php
 namespace Pribi\Commands\Selects;
 
-use Pribi\Commands\Conditions\Limitable;
-use Pribi\Commands\Conditions\Limiting;
+use Pribi\Commands\Limits\Limitable;
+use Pribi\Commands\Limits\Limiting;
 
 /**
  * @method SelectAlias as ($alias)

@@ -3,10 +3,10 @@ namespace Pribi\Commands\Joins;
 
 use Pribi\Commands\Conditions\AndOrUsable;
 use Pribi\Commands\Conditions\Comparable;
-use Pribi\Commands\Conditions\Limitable;
-use Pribi\Commands\Conditions\Limiting;
 use Pribi\Commands\Disjunction;
 use Pribi\Commands\EqualTo;
+use Pribi\Commands\Limits\Limitable;
+use Pribi\Commands\Limits\Limiting;
 use Pribi\Commands\Negation;
 use Pribi\Commands\RightJoin;
 use Pribi\Commands\WhereSources\Whereable;
