@@ -20,6 +20,6 @@ class Limit extends WithoutIdentifier {
 	}
 
 	protected function toSql() {
-		return 'LIMIT ' . $this->limit . ' OFFSET ' . $this->offset;
+		return 'LIMIT ' . $this->limit . ($this->offset > 0 ? (' OFFSET ' . $this->offset) : '');
 	}
 }

@@ -1,10 +1,12 @@
 <?php
-namespace Pribi\Commands;
+namespace Pribi\Commands\Conditions;
 
+use Pribi\Commands\AndOrUsable;
+use Pribi\Commands\Command;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Identifiers\Identifiers;
 
-class In extends Command {
+class In extends Command implements AndOrUsable {
 	use AndOring;
 
 	/**
@@ -13,11 +15,11 @@ class In extends Command {
 	private $identifiers;
 
 	public function __construct(Identifiers $identifiers, Command $previousCommand) {
-		$this->identifiers = $this->validateIdentifiers($identifiers);
+		$this->identifiers = $this->sanitizeIdentifiersAmount($identifiers);
 		parent::__construct($previousCommand);
 	}
 
-	private function validateIdentifiers(Identifiers $identifiers) {
+	private function sanitizeIdentifiersAmount(Identifiers $identifiers) {
 		if (count($identifiers) === 0) {
 			$identifiers = new Identifiers(NULL);
 		}

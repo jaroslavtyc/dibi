@@ -1,7 +1,6 @@
 <?php
 namespace Pribi\Commands\Joins;
 
-interface InnerJoinIdentity {
+interface InnerJoinIdentifiable {
 	const CLASS_IDENTITY = __CLASS__;
 }
- 

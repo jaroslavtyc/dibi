@@ -12,7 +12,7 @@ use Pribi\Executions\Executabling;
 /**
  * @method FromAlias as ($alias)
  */
-class From extends IdentifierBringer implements FromIdentity, Joinable {
+class From extends IdentifierBringer implements FromIdentifiable, Joinable {
 	use Joining;
 	use Whereing;
 	use Limiting;

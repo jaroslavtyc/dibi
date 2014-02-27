@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\Selects;
 
-interface AfterSelect {
+interface AfterSelectUsable {
 	public function select($subject);
 
 	public function selectNot($subject);

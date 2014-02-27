@@ -1,7 +1,6 @@
 <?php
 namespace Pribi\Commands\FromSources;
 
-interface FromIdentity {
+interface FromIdentifiable {
 	const CLASS_IDENTITY = __CLASS__;
 }
- 

@@ -1,9 +1,10 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
+use Pribi\Commands\AndOrUsable;
 use Pribi\Commands\WithoutIdentifier;
 
-class IsNull extends WithoutIdentifier {
+class IsNull extends WithoutIdentifier implements AndOrUsable {
 	use AndOring;
 
 	protected function toSql() {

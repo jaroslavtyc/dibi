@@ -11,7 +11,7 @@ use Pribi\Commands\Identifiers\IdentifierBringer;
 /**
  * @method SelectAlias as ($alias)
  */
-class Select extends IdentifierBringer implements SelectIdentity, AfterSelect, Limitable, Executable {
+class Select extends IdentifierBringer implements SelectIdentifiable, AfterSelectUsable, Limitable, Executable {
 	use AfterSelecting;
 	use Limiting;
 	use Executabling;

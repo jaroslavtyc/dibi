@@ -8,7 +8,7 @@ use Pribi\Executions\Executabling;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Identifiers\IdentifierAlias;
 
-class SelectAlias extends IdentifierAlias implements SelectIdentity, AfterSelect, Executable, Limitable {
+class SelectAlias extends IdentifierAlias implements SelectIdentifiable, AfterSelectUsable, Executable, Limitable {
 	use AfterSelecting;
 	use Executabling;
 	use Limiting;

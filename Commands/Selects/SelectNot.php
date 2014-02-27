@@ -10,7 +10,7 @@ use Pribi\Commands\Identifiers\Identifier;
 /**
  * @method SelectAlias as ($alias)
  */
-class SelectNot extends Select implements SelectIdentity, Limitable, Executable {
+class SelectNot extends Select implements SelectIdentifiable, Limitable, Executable {
 	use AfterSelecting;
 	use Limiting;
 	use Executabling;

@@ -6,7 +6,7 @@ use Pribi\Commands\Identifiers\Identifier;
 /**
  * @method InnerJoinAlias as ($alias)
  */
-class InnerJoin extends Join implements InnerJoinIdentity {
+class InnerJoin extends Join implements InnerJoinIdentifiable {
 	protected function alias(Identifier $alias) {
 		return new InnerJoinAlias($alias, $this);
 	}
