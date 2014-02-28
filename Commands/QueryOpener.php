@@ -1,10 +1,12 @@
 <?php
 namespace Pribi\Commands;
 
-use Pribi\Commands\Identifiers\Identifier,
-	Pribi\Commands\Inserts\InsertIgnoreInto,
-	Pribi\Commands\Inserts\InsertInto,
-	Pribi\Commands\Selects\Select;
+use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Commands\Inserts\InsertIgnoreInto;
+use Pribi\Commands\Inserts\InsertInto;
+use Pribi\Commands\Selects\Select;
+use Pribi\Commands\Identifiers\Identifiers;
+use Pribi\Commands\Transactions\StartTransactions\StartTransaction;
 
 class QueryOpener extends Command {
 	public function __construct() {
@@ -16,11 +18,11 @@ class QueryOpener extends Command {
 	}
 
 	public function insertInto($table, $columns) {
-		return new InsertInto($table, $columns, $this);
+		return new InsertInto(new Identifier($table), $this, new Identifiers($columns));
 	}
 
 	public function insertIgnoreInto($table, $columns) {
-		return new InsertIgnoreInto($table, $columns, $this);
+		return new InsertIgnoreInto($table, $this, $columns);
 	}
 
 	public function select($subject) {
