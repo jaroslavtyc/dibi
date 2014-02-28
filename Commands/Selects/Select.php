@@ -9,10 +9,7 @@ use Pribi\Commands\Limits\Limiting;
 /**
  * @method SelectAlias as ($alias)
  */
-class Select extends IdentifierBringer implements SelectIdentifiable, AfterSelectUsable, Limitable {
-	use AfterSelecting;
-	use Limiting;
-
+class Select extends BaseSelect {
 	protected function toSql() {
 		if (is_a($this->getPreviousCommand(), self::CLASS_IDENTITY)) {
 			return ',' . $this->getIdentifier()->toSql();
