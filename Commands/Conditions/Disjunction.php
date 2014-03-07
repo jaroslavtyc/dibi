@@ -1,12 +1,7 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-use Pribi\Commands\WithIdentifier;
-
-class Disjunction extends WithIdentifier implements AndOrUsable, Comparable {
-	use AndOring;
-	use Comparing;
-
+class Disjunction extends BaseOr {
 	protected function toSql() {
 		return 'OR ' . $this->getIdentifier()->toSql();
 	}
