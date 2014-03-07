@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Identifiers\Exceptions;
+namespace Pribi\Commands\Conditions\Exceptions;
 
 class MissingIdentificator extends \BadMethodCallException implements Exception {
 
