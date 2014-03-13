@@ -1,7 +1,9 @@
 <?php
-namespace Pribi\Commands\Conditions;
+namespace Pribi\Commands\Conditions\Base;
 
 use Pribi\Commands\Command;
+use Pribi\Commands\Conditions\Base\AndOring;
+use Pribi\Commands\Conditions\Base\AndOrUsable;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Identifiers\Identifiers;
 

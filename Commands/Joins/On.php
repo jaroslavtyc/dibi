@@ -1,8 +1,8 @@
 <?php
 namespace Pribi\Commands\Joins;
 
-use Pribi\Commands\Conditions\AndOrUsable;
-use Pribi\Commands\Conditions\Comparable;
+use Pribi\Commands\Conditions\Base\AndOrUsable;
+use Pribi\Commands\Conditions\Base\Comparable;
 use Pribi\Commands\Disjunction;
 use Pribi\Commands\EqualTo;
 use Pribi\Commands\Limits\Limitable;

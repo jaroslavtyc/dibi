@@ -1,6 +1,11 @@
 <?php
-namespace Pribi\Commands\Conditions;
+namespace Pribi\Commands\Conditions\Base;
 
+use Pribi\Commands\Conditions\AndNot;
+use Pribi\Commands\Conditions\Conjunction;
+use Pribi\Commands\Conditions\Disjunction;
+use Pribi\Commands\Conditions\Exceptions;
+use Pribi\Commands\Conditions\OrNot;
 use Pribi\Commands\Identifiers\Identifier;
 
 /**

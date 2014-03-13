@@ -1,6 +1,12 @@
 <?php
-namespace Pribi\Commands\Conditions;
+namespace Pribi\Commands\Conditions\Base;
 
+use Pribi\Commands\Conditions\DifferentTo;
+use Pribi\Commands\Conditions\EqualOrGreaterThen;
+use Pribi\Commands\Conditions\EqualOrLesserThen;
+use Pribi\Commands\Conditions\EqualTo;
+use Pribi\Commands\Conditions\GreaterThen;
+use Pribi\Commands\Conditions\LesserThen;
 use Pribi\Commands\Identifiers\Identifier;
 
 trait Comparing {

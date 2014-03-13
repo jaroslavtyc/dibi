@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Conditions;
+namespace Pribi\Commands\Conditions\Base;
 
 /**
  * @method \Pribi\Commands\Command and($identificator)

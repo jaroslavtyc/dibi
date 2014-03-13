@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\Joins;
 
-use Pribi\Commands\Conditions\Comparable;
+use Pribi\Commands\Conditions\Base\Comparable;
 use Pribi\Commands\DifferentTo;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Limits\Limitable;

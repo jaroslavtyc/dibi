@@ -8,7 +8,7 @@ use Pribi\Commands\Identifiers\Identifier;
  * @method Disjunction or($subject)
  */
 trait AndOring {
-	use \Pribi\Commands\Conditions\AndOring;
+	use \Pribi\Commands\Conditions\Base\AndOring;
 
 	protected function conjunction(Identifier $identifier) {
 		/**
