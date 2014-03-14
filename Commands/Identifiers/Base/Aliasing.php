@@ -1,5 +1,8 @@
 <?php
-namespace Pribi\Commands\Identifiers {
+namespace Pribi\Commands\Identifiers\Base {
+	use Pribi\Commands\Identifiers\Exceptions;
+	use Pribi\Commands\Identifiers\Identifier;
+
 	/**
 	 * @method \Pribi\Commands\Command as ($alias)
 	 */

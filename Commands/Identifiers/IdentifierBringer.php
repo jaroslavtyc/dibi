@@ -2,6 +2,7 @@
 namespace Pribi\Commands\Identifiers;
 
 use Pribi\Commands\Command;
+use Pribi\Commands\Identifiers\Base\Aliasing;
 
 /**
  * @method IdentifierAlias as ($alias)
