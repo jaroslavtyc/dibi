@@ -1,6 +1,7 @@
 <?php
 namespace Pribi\Commands\FromSources;
 
+use Pribi\Commands\FromSources\Base\FromIdentifiable;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Identifiers\IdentifierBringer;
 use Pribi\Commands\Joins\Joinable;
