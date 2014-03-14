@@ -1,7 +1,13 @@
 <?php
-namespace Pribi\MainQueryCommands\Conditions;
+namespace Pribi\MainQueryCommands\Conditions\Base;
 
 use Pribi\Commands\Identifiers\Identifier;
+use Pribi\MainQueryCommands\Conditions\DifferentTo;
+use Pribi\MainQueryCommands\Conditions\EqualOrGreaterThen;
+use Pribi\MainQueryCommands\Conditions\EqualOrLesserThen;
+use Pribi\MainQueryCommands\Conditions\EqualTo;
+use Pribi\MainQueryCommands\Conditions\GreaterThen;
+use Pribi\MainQueryCommands\Conditions\LesserThen;
 
 trait Comparing {
 	public function equalTo($subject) {

@@ -1,7 +1,12 @@
 <?php
-namespace Pribi\MainQueryCommands\Conditions;
+namespace Pribi\MainQueryCommands\Conditions\Base;
 
 use Pribi\Commands\Identifiers\Identifier;
+use Pribi\MainQueryCommands\Conditions\AndNot;
+use Pribi\MainQueryCommands\Conditions\Conjunction;
+use Pribi\MainQueryCommands\Conditions\Disjunction;
+use Pribi\MainQueryCommands\Conditions\Exceptions;
+use Pribi\MainQueryCommands\Conditions\OrNot;
 
 /**
  * @method \Pribi\Commands\Command and($identificator)
