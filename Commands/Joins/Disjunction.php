@@ -10,7 +10,7 @@ use Pribi\Commands\Limits\Base\Limiting;
 class Disjunction extends \Pribi\Commands\Conditions\Disjunction implements Limitable {
 	use AndOring;
 	use Comparing;
-	use \Pribi\Commands\Limits\Base\Limiting;
+	use Limiting;
 
 	protected function conjunction(Identifier $identifier) {
 		$conjunction = new Conjunction($identifier, $this);

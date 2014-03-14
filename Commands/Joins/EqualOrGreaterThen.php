@@ -9,5 +9,5 @@ use Pribi\Commands\Limits\Base\Limiting;
 class EqualOrGreaterThen extends \Pribi\Commands\Conditions\EqualOrGreaterThen implements Joinable, Limitable {
 	use AndOring;
 	use Joining;
-	use \Pribi\Commands\Limits\Base\Limiting;
+	use Limiting;
 }

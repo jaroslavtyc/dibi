@@ -14,8 +14,8 @@ use Pribi\Commands\WhereSources\Base\Whereing;
 class Conjunction extends \Pribi\Commands\Conditions\Conjunction implements Comparable, Whereable, Limitable {
 	use AndOring;
 	use Comparing;
-	use \Pribi\Commands\WhereSources\Base\Whereing;
-	use \Pribi\Commands\Limits\Base\Limiting;
+	use Whereing;
+	use Limiting;
 
 	protected function conjunction(Identifier $identifier) {
 		$conjunction = new Conjunction($identifier, $this);

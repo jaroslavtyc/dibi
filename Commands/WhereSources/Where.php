@@ -8,8 +8,8 @@ use Pribi\Commands\Conditions\Base\Comparing;
 use Pribi\Commands\WithIdentifier;
 
 class Where extends WithIdentifier implements AndOrUsable, Comparable {
-	use \Pribi\Commands\Conditions\Base\AndOring;
-	use \Pribi\Commands\Conditions\Base\Comparing;
+	use AndOring;
+	use Comparing;
 
 	protected function toSql() {
 		return 'WHERE ' . $this->getIdentifier()->toSql();

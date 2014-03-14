@@ -18,8 +18,8 @@ use Pribi\Commands\WithIdentifier;
 class On extends WithIdentifier implements AndOrUsable, Comparable, Whereable, Limitable {
 	use AndOring;
 	use Comparing;
-	use \Pribi\Commands\WhereSources\Base\Whereing;
-	use \Pribi\Commands\Limits\Base\Limiting;
+	use Whereing;
+	use Limiting;
 
 	protected function toSql() {
 		return 'ON ' . $this->getIdentifier()->toSql();

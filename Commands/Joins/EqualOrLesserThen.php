@@ -10,5 +10,5 @@ use Pribi\Commands\Limits\Base\Limiting;
 class EqualOrLesserThen extends \Pribi\Commands\Conditions\EqualOrLesserThen implements AndOrUsable, Joinable, Limitable {
 	use AndOring;
 	use Joining;
-	use \Pribi\Commands\Limits\Base\Limiting;
+	use Limiting;
 }
