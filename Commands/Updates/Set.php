@@ -1,13 +1,14 @@
 <?php
-namespace Pribi\Commands\Inserts;
+namespace Pribi\Commands\Updates;
 
-use Pribi\Commands\Command;
+use Pribi\Commands\WithIdentifier;
 
-class Set extends Command {
-	private $values;
-
-	public function __construct($values, Command $previousCommand) {
-		$this->values = $values;
-		parent::__construct($previousCommand);
+class Set extends WithIdentifier {
+	protected function toSql() {
+		if (is_a($this->getPreviousCommand(), __CLASS__)) {
+			return ',' . $this->getIdentifier()->toSql();
+		} else {
+			return 'SET ' . $this->getIdentifier()->toSql();
+		}
 	}
 }
