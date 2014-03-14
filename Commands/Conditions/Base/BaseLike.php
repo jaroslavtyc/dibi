@@ -3,6 +3,6 @@ namespace Pribi\Commands\Conditions\Base;
 
 use Pribi\Commands\WithIdentifier;
 
-abstract class BaseLike extends WithIdentifier implements AndOrUsable {
+abstract class Like extends WithIdentifier implements AndOrUsable {
 	use AndOring;
 }

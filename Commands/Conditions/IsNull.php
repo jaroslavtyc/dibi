@@ -1,9 +1,9 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-use Pribi\Commands\Conditions\Base\BaseNull;
+use Pribi\Commands\Conditions\Base\Null;
 
-class IsNull extends BaseNull {
+class IsNull extends Null {
 	protected function toSql() {
 		return 'IS NULL';
 	}

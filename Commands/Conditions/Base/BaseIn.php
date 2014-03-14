@@ -5,7 +5,7 @@ use Pribi\Commands\Command;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Identifiers\Identifiers;
 
-abstract class BaseIn extends Command implements AndOrUsable {
+abstract class In extends Command implements AndOrUsable {
 	use AndOring;
 
 	/**

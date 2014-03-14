@@ -1,9 +1,9 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-use Pribi\Commands\Conditions\Base\BaseOr;
+use Pribi\Commands\Conditions\Base\Disjunction;
 
-class Disjunction extends BaseOr {
+class Disjunction extends Disjunction {
 	protected function toSql() {
 		return 'OR ' . $this->getIdentifier()->toSql();
 	}

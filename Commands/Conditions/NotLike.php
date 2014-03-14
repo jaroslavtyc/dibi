@@ -1,9 +1,9 @@
 <?php
 namespace Pribi\Commands\Conditions;
 
-use Pribi\Commands\Conditions\Base\BaseLike;
+use Pribi\Commands\Conditions\Base\Like;
 
-class NotLike extends BaseLike {
+class NotLike extends Like {
 	protected function toSql() {
 		return 'NOT LIKE ' . $this->getIdentifier()->toSql();
 	}

@@ -10,7 +10,7 @@ use Pribi\Commands\Selects\SelectAlias;
 /**
  * @method SelectAlias as ($alias)
  */
-abstract class BaseSelect extends IdentifierBringer implements SelectIdentifiable, AfterSelectUsable, Limitable {
+abstract class Select extends IdentifierBringer implements SelectIdentifiable, AfterSelectUsable, Limitable {
 	use AfterSelecting;
 	use Limiting;
 }
