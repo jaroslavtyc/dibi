@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\WhereSources;
+namespace Pribi\MainQueryCommands\WhereSources;
 
 use Pribi\Commands\Identifiers\Identifier;
 
