@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Joins;
+namespace Pribi\Commands\Joins\Base;
 
 interface Joinable {
 	public function innerJoin($subject);

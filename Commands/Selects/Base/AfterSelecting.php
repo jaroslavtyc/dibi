@@ -1,8 +1,10 @@
 <?php
-namespace Pribi\Commands\Selects;
+namespace Pribi\Commands\Selects\Base;
 
 use Pribi\Commands\FromSources\From;
 use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Commands\Selects\Select;
+use Pribi\Commands\Selects\SelectNot;
 use Pribi\Commands\WhereSources\Where;
 use Pribi\Commands\WhereSources\WhereNot;
 

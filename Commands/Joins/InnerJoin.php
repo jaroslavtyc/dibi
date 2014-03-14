@@ -2,6 +2,7 @@
 namespace Pribi\Commands\Joins;
 
 use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Commands\Joins\Base\InnerJoinIdentifiable;
 use Pribi\Commands\WhereSources\Where;
 
 /**

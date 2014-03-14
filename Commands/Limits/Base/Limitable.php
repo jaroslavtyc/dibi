@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Limits;
+namespace Pribi\Commands\Limits\Base;
 
 interface Limitable {
 	public function limit($limit);

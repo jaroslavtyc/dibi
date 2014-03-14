@@ -1,7 +1,11 @@
 <?php
-namespace Pribi\Commands\Joins;
+namespace Pribi\Commands\Joins\Base;
 
 use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Commands\Joins\AndNot;
+use Pribi\Commands\Joins\Conjunction;
+use Pribi\Commands\Joins\Disjunction;
+use Pribi\Commands\Joins\OrNot;
 
 /**
  * @method Conjunction and($subject)

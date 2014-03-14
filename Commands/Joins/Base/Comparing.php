@@ -1,7 +1,13 @@
 <?php
-namespace Pribi\Commands\Joins;
+namespace Pribi\Commands\Joins\Base;
 
 use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Commands\Joins\DifferentTo;
+use Pribi\Commands\Joins\EqualOrGreaterThen;
+use Pribi\Commands\Joins\EqualOrLesserThen;
+use Pribi\Commands\Joins\EqualTo;
+use Pribi\Commands\Joins\GreaterThen;
+use Pribi\Commands\Joins\LesserThen;
 
 trait Comparing {
 	public function equalTo($subject) {
