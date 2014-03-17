@@ -1,37 +1,17 @@
 <?php
 namespace Pribi\Commands\Transactions\Commits;
 
-use Pribi\Commands\Command,
-	Pribi\Commands\Transactions\Rollbacks\Rollback;
+use Pribi\Commands\WithoutIdentifier;
+use Shoptet\Transactions\Ends\Base\Finishable;
+use Shoptet\Transactions\Ends\Base\Finishing;
+use Pribi\Executions\Executable;
+use Pribi\Executions\Executabling;
 
-class Commit extends Command {
-	public function andChain() {
-		$andChain = new AndChain($this);
+class Commit extends WithoutIdentifier implements Finishable, Executable {
+	use Finishing;
+	use Executabling;
 
-		return $andChain;
-	}
-
-	public function andNoChain() {
-		$noChain = new AndNoChain($this);
-
-		return $noChain;
-	}
-
-	public function release() {
-		$release = new Release($this);
-
-		return $release;
-	}
-
-	public function noRelease() {
-		$noRelease = new NoRelease($this);
-
-		return $noRelease;
-	}
-
-	public function rollback() {
-		$rollback = new Rollback($this);
-
-		return $rollback;
+	protected function toSql() {
+		return 'COMMIT';
 	}
 }
