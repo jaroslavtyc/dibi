@@ -1,10 +1,10 @@
 Licenses
 ========
 
-All licences are addopted from Dibi 2.2-dev:
+All licences are adopted from Dibi 2.2-dev:
 ===================================
 
-Good news! You may use Dibi under the terms of either the New BSD License
+Good news! You may use Dibi and this clone Pribi under the terms of either the New BSD License
 or the GNU General Public License (GPL) version 2 or 3.
 
 The BSD License is recommended for most projects. It is easy to understand and it
@@ -12,15 +12,16 @@ places almost no restrictions on what you can do with the framework. If the GPL
 fits better to your project, you can use the framework under this license.
 
 You don't have to notify anyone which license you are using. You can freely
-use Dibi in commercial projects as long as the copyright header
+use Dibi and this clone Pribi in commercial projects as long as the copyright header
 remains intact.
 
 
 New BSD License
 ---------------
 
-Copyright (c) 2004, 2013 David Grudl (http://davidgrudl.com)
+Copyright of Dibi (c) 2004, 2013 David Grudl (http://davidgrudl.com)
 All rights reserved.
+Copyright of Pribi (c), who cares.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
