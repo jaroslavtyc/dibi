@@ -2,7 +2,7 @@
 namespace Pribi\Commands\Joins;
 
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Identifiers\IdentifierBringer;
+use Pribi\Commands\IdentifierBringer;
 
 /**
  * @method InnerJoinAlias as ($alias)

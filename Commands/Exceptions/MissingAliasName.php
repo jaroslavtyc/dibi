@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Identifiers\Exceptions;
+namespace Pribi\Commands\Exceptions;
 
 class MissingAliasName extends \BadMethodCallException implements Exception {
 

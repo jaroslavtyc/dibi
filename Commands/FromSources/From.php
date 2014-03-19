@@ -3,7 +3,7 @@ namespace Pribi\Commands\FromSources;
 
 use Pribi\Commands\FromSources\Base\FromIdentifiable;
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Identifiers\IdentifierBringer;
+use Pribi\Commands\IdentifierBringer;
 use Pribi\Commands\Joins\Base\Joinable;
 use Pribi\Commands\Joins\Joining;
 use Pribi\Commands\Limits\Base\Limitable;

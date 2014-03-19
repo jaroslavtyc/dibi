@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\Selects\Base;
 
-use Pribi\Commands\Identifiers\IdentifierBringer;
+use Pribi\Commands\IdentifierBringer;
 use Pribi\Commands\Limits\Base\Limitable;
 use Pribi\Commands\Limits\Base\Limiting;
 use Pribi\Commands\Selects\Base\AfterSelecting;
