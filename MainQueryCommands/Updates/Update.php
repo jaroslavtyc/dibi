@@ -1,13 +1,11 @@
 <?php
-namespace Pribi\Commands\Updates;
+namespace Pribi\MainQueryCommands\Updates;
 
-use Pribi\Commands\Identifiers\Base\Aliasing;
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Identifiers\IdentifierBringer;
-use Pribi\Commands\Updates\Base\AfterUpdating;
+use Pribi\Commands\IdentifierBringer;
 
 class Update extends IdentifierBringer implements Base\AfterUpdateUsable, Base\UpdateIdentifiable {
-	use AfterUpdating;
+	use Base\AfterUpdating;
 
 	protected function toSql() {
 		if (is_a($this->getPreviousCommand(), self::CLASS_IDENTITY)) {

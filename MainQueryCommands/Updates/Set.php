@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Updates;
+namespace Pribi\MainQueryCommands\Updates;
 
 use Pribi\Commands\WithIdentifier;
 
