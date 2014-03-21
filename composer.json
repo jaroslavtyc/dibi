@@ -1,7 +1,7 @@
 {
     "name": "jaroslavtyc/pribi",
-    "description": "Pribi is Database Abstraction Library for PHP 5.3+",
-    "keywords": ["database", "mysql", "pdo"],
+    "description": "Pribi is Database Abstraction Library for PHP 5.4+",
+    "keywords": ["database", "mysql", "pdo", "php"],
     "homepage": "https://github.com/jaroslavtyc/pribi",
     "license": ["BSD-3", "GPLv2", "GPLv3"],
     "authors": [
@@ -15,9 +15,6 @@
             "role": "Developer"
         }
     ],
-    "require-dev": {
-        "nette/tester": "@dev"
-    },
     "autoload": {
         "classmap": ["pribi/"]
     }
