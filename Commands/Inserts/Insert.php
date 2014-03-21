@@ -38,8 +38,8 @@ abstract class Insert extends WithIdentifier {
 		return $imploded;
 	}
 
-	public function values($identificator) {
-		return new Values($identificator, $this);
+	public function values($subjects) {
+		return new Values(new Identifiers($subjects), $this);
 	}
 
 	public function select($subject) {

@@ -2,12 +2,12 @@
 namespace Pribi\Commands\Inserts;
 
 use Pribi\Commands\Command;
-use Pribi\Commands\Identifiers\Subjects;
+use Pribi\Commands\Identifiers\Identifiers;
 
 class Values extends Command {
 	private $values;
 
-	public function __construct(Subjects $values, Command $previousCommand) {
+	public function __construct(Identifiers $values, Command $previousCommand) {
 		parent::__construct($previousCommand);
 		$this->values = $values;
 	}
