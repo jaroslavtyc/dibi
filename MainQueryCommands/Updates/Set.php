@@ -11,4 +11,8 @@ class Set extends WithIdentifier {
 			return 'SET ' . $this->getIdentifier()->toSql();
 		}
 	}
+
+	public function equalTo($subject) {
+		return new EqualTo($subject, $this);
+	}
 }
