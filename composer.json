@@ -15,7 +15,16 @@
             "role": "Developer"
         }
     ],
-    "autoload": {
-        "classmap": ["pribi/"]
+    "config": {
+        "process-timeout": 3600,
+        "vendor-dir": "libraries",
+        "bin-dir:": "libraries/bin"
+    },
+    "require" : {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.0.*",
+        "mockery/mockery": "dev-master"
     }
 }
