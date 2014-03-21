@@ -2,7 +2,7 @@
 namespace Pribi\MainQueryCommands\Updates;
 
 use Pribi\Commands\Limits\Base\Limitable;
-use Pribi\Commands\Limits\Base\Limiting;
+use Pribi\MainQueryCommands\Limits\Base\Limiting;
 use Pribi\Commands\WithIdentifier;
 use Pribi\MainQueryCommands\WhereSources\Base\Whereable;
 use Pribi\MainQueryCommands\WhereSources\Base\Whereing;
