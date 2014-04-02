@@ -1,7 +1,7 @@
-Pribi (forked from [Dibi](http://dibiphp.com) - smart database layer for PHP)
+Pribi (forked from [Dibi](http://dibiphp.com/cs/) - smart database layer for PHP)
 =========================================================
 
-Original [Dibi](http://dibiphp.com) is great.
+Original [Dibi](http://dibiphp.com/cs/) is great.
 
 Not the unified interface for any database vendor, but the fluent interface.
 
