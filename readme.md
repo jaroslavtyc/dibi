@@ -18,7 +18,7 @@ All hail the "Fluent, MySQL, prepared statements". And wish me good luck with de
 Pribi requires [PHP 5.4.0](http://php.net/releases/5_4_0.php)
 or later because of [namespaces 5.3](http://php.net/manual/en/language.namespaces.php)
  ,[__callStatic() 5.3](http://www.php.net/manual/en/language.oop5.overloading.php#object.callstatic)
- ,[__DIR__ 5.3](http://php.net/manual/en/language.constants.predefined.php)
+ ,[\_\_DIR\_\_ 5.3](http://php.net/manual/en/language.constants.predefined.php)
  and [traits 5.4](http://php.net/traits).
 
 Tips and Tricks
@@ -52,3 +52,4 @@ Attractions
 * `IN` command becomes much faster than repeated `WHERE` for a large amount of values. For details try [Danil Zburivsky research](http://www.pythian.com/blog/debugging-in-vs-or-performance-in-mysql/) and then [Baron Schwartz simple answer](http://lists.mysql.com/mysql/216945) about sorted values in the `IN` list.
 * *Duplicate key on update* when creating a table? Yes, that is quite confusing message. Its correct meaning is *The name of a key (index) you want to use is already in use for an existing table*.
 * Queries too slow? [Use the index, Luke!](http://use-the-index-luke.com/). And use the `EXPLAIN` to find out if an index is used at all.
+* To use or not to use `PRIMARY KEY` for InnoDB table? As say [Jeremy Cole](http://blog.jcole.us/2013/01/07/the-physical-structure-of-innodb-index-pages/) *Every table __has__ a primary key*, even if you do not want to (if the `PRIMARY KEY` is not explicitly specified, the first non-NULL unique key is used, and failing that, a 48-bit hidden *Row ID* field is automatically added), so create it by yourself to take control over it.
