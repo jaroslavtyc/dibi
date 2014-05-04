@@ -1,7 +1,7 @@
 {
     "name": "jaroslavtyc/pribi",
-    "description": "Pribi is a MySQL Database Abstraction Library for PHP 5.4+",
-    "keywords": ["database", "mysql", "pdo", "php"],
+    "description": "Pribi is Database Fluent Interface for PHP 5.4+",
+    "keywords": ["database", "mysql", "pdo", "php", "fluent"],
     "homepage": "https://github.com/jaroslavtyc/pribi",
     "license": ["MIT"],
     "authors": [
