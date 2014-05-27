@@ -1,18 +1,19 @@
 {
     "name": "jaroslavtyc/pribi",
-    "description": "Pribi is Database Abstraction Library for PHP 5.4+",
+    "description": "Pribi is a MySQL Database Abstraction Library for PHP 5.4+",
     "keywords": ["database", "mysql", "pdo", "php"],
     "homepage": "https://github.com/jaroslavtyc/pribi",
-    "license": ["BSD-3", "GPLv2", "GPLv3"],
+    "license": ["MIT"],
     "authors": [
         {
-            "name": "David Grudl",
-            "homepage": "http://davidgrudl.com",
+            "name": "Jaroslav Týc",
+            "homepage": "http://jaroslavtyc.com",
             "role": "Original author"
         },
         {
-            "name": "Jaroslav Týc",
-            "role": "Developer"
+            "name": "David Grudl",
+            "homepage": "http://davidgrudl.com",
+            "role": "A man of inspiration"
         }
     ],
     "config": {
