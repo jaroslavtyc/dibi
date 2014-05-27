@@ -1,5 +1,5 @@
 <?php
-namespace Shoptet\Transactions\Options;
+namespace Pribi\Transactions\Options;
 
 use Pribi\Commands\WithoutIdentifier;
 use Pribi\Executions\Executable;

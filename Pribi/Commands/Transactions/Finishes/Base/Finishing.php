@@ -1,5 +1,5 @@
 <?php
-namespace Shoptet\Transactions\Ends\Base;
+namespace Pribi\Transactions\Ends\Base;
 
 use Pribi\Commands\Transactions\Finishes\AndChain;
 use Pribi\Commands\Transactions\Finishes\AndNoChain;

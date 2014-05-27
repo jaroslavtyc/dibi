@@ -2,8 +2,8 @@
 namespace Pribi\Commands\Transactions\Rollbacks;
 
 use Pribi\Executions\Executabling;
-use Shoptet\Transactions\Ends\Base\Finishable;
-use Shoptet\Transactions\Ends\Base\Finishing;
+use Pribi\Transactions\Ends\Base\Finishable;
+use Pribi\Transactions\Ends\Base\Finishing;
 use Pribi\Commands\WithoutIdentifier;
 use Pribi\Executions\Executable;
 

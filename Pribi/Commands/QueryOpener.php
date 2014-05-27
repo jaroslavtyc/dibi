@@ -34,6 +34,6 @@ class QueryOpener extends Command {
 	}
 
 	public function startTransaction() {
-		return new StartTransaction();
+		return new StartTransaction($this);
 	}
 }

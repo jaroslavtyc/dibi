@@ -1,5 +1,5 @@
 <?php
-namespace Shoptet\Transactions\Ends\Base;
+namespace Pribi\Transactions\Ends\Base;
 
 interface Finishable {
 	public function andChain();
