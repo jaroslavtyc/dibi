@@ -9,8 +9,8 @@ And short notations of standard operations.
 
 And for type-check of parameters, inserted similarly to printf() (just for integer the %i notation is used in difference).
 
-And should be greater, but price for universality does not allow it.
-Especially lack of prepared statements hurts these developers, who are recalculating CPU time to money.
+And should be greater, but the price for universality does not allow it.
+Especially lack of prepared statements hurts these developers, who recalculate CPU time to money.
 
 Forbidden changes, because of final methods or whole classes, confound chance to extend Dibi itself, so fork has been enforced.
 All hail the "Fluent, MySQL, prepared statements". And wish me good luck with development.
@@ -24,16 +24,16 @@ or later because of [namespaces 5.3](http://php.net/manual/en/language.namespace
 Tips and Tricks
 ---------------
 **Identifier quote**
-
 - Pribi is for MySQL. That's the trick. That means, the quotation is done by \` (tick).
-	Not SQL-99 standard by " (double quote), not MS SQL standard by \[ \] (brackets) or anything else. Only \`ticks\`.
-- Empty `IN()` condition will cause syntax error in MySQL, Pribi will replace it or you by IN(NULL).
+	Not SQL-99 standard by " (double quote), not MS SQL style by \[ \] (brackets) or anything else. Only \`ticks\`.
+
+**Protection against empty array of values to search by**
+- Empty `IN()` condition will cause syntax error in MySQL, Pribi will replace it for you by IN(NULL), which results always to FALSE.
 
 **Aliasing**
-
-- Use fluent interface. Every time its possible. And that should be every time. For alias, use <code>select('columnName')->as('prettyAlias')</code>.
+- For alias, use <code>select('table_with_some_domain_name.columnWithNameReferencingToTableDomain')->as('prettyAliasWithBothTableAndColumnMeaning')</code>.
 	If you want try to use shorthand as <code>select('columnName prettyAlias')</code>, that means two strings split by white space, you will have to wrap both identifiers like this <code>select('\`columnName\` \`prettyAlias\`')</code>
-	Otherwise Pribi will wrap your string as single identifier: <code>'columnName prettyAlias'</code> = <code>\`columnName prettyAlias\`</code>, yes, this is valid name.
+	Otherwise Pribi will wrap your string as single identifier: <code>'columnName prettyAlias'</code> = <code>\`columnName prettyAlias\`</code> (yes, name with space is valid).
 	So again, use fluent. Every time. That's what Pribi has been designed for and what is native then.
 
 Attractions
