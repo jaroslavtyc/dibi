@@ -1,4 +1,5 @@
 <?php
+namespace Pribi;
 
 class PribiTest extends PHPUnit_Framework_TestCase {
 	public function testOpenQueryPublicStaticFunctionExists() {
