@@ -18,8 +18,8 @@
     ],
     "config": {
         "process-timeout": 3600,
-        "vendor-dir": "libraries",
-        "bin-dir:": "libraries/bin"
+        "vendor-dir": "vendor",
+        "bin-dir:": "vendor/bin"
     },
     "require" : {
         "php": ">=5.4.0"
