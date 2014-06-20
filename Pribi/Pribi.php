@@ -1,5 +1,7 @@
 <?php
-class pribi {
+namespace Pribi;
+
+class Pribi {
 	/**
 	 * @return \Pribi\Commands\QueryOpener
 	 */
