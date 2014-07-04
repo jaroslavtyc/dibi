@@ -53,3 +53,10 @@ Attractions
 * *Duplicate key on update* when creating a table? Yes, that is quite confusing message. Its correct meaning is *The name of a key (index) you want to use is already in use for an existing table*.
 * Queries too slow? [Use the index, Luke!](http://use-the-index-luke.com/). And use the `EXPLAIN` to find out if an index is used at all.
 * To use or not to use `PRIMARY KEY` for InnoDB table? As say [Jeremy Cole](http://blog.jcole.us/2013/01/07/the-physical-structure-of-innodb-index-pages/) *Every table __has__ a primary key*, even if you do not want to (if the `PRIMARY KEY` is not explicitly specified, the first non-NULL unique key is used, and failing that, a 48-bit hidden *Row ID* field is automatically added), so create it by yourself to take control over it.
+* What operation comes first to play? SQL operations order are as follows. Check the [Ben Nadel blog](http://www.bennadel.com/blog/70-sql-query-order-of-operations.htm) for details.
+	1. FROM clause
+	2. WHERE clause
+	3. GROUP BY clause
+	4. HAVING clause
+	5. SELECT clause
+	6. ORDER BY clause
