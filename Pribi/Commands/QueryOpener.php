@@ -22,7 +22,7 @@ class QueryOpener extends Command {
 	}
 
 	public function insertIgnoreInto($table, $columns) {
-		return new InsertIgnoreInto($table, $this, $columns);
+		return new InsertIgnoreInto(new Identifier($table), $this, new Identifiers($columns));
 	}
 
 	public function select($subject) {
