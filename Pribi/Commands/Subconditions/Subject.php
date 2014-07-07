@@ -1,8 +1,6 @@
 <?php
 namespace Pribi\Commands\Subconditions;
 
-use Pribi\Commands\Conditions\Base\AndOring;
-
 /**
  * @method and($identificator) @return Conjunction
  * @method or($identificator) @return Disjunction
