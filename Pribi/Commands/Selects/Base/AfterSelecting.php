@@ -3,7 +3,6 @@ namespace Pribi\Commands\Selects\Base;
 
 use Pribi\Commands\FromSources\From;
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Selects\Select;
 use Pribi\Commands\Selects\SelectNot;
 use Pribi\Commands\WhereSources\Where;
 use Pribi\Commands\WhereSources\WhereNot;
@@ -13,7 +12,7 @@ trait AfterSelecting {
 		/**
 		 * @var \Pribi\Commands\Command $this
 		 */
-		$select = new Select(new Identifier($subject), $this);
+		$select = new \Pribi\Commands\Selects\Select(new Identifier($subject), $this);
 
 		return $select;
 	}
