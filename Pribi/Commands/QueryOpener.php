@@ -7,6 +7,7 @@ use Pribi\Commands\Inserts\InsertInto;
 use Pribi\Commands\Selects\Select;
 use Pribi\Commands\Identifiers\Identifiers;
 use Pribi\Commands\Transactions\StartTransactions\StartTransaction;
+use Pribi\Commands\Deletions\Delete;
 
 class QueryOpener extends Command {
 	public function __construct() {
@@ -29,8 +30,8 @@ class QueryOpener extends Command {
 		return new Select(new Identifier($subject), $this);
 	}
 
-	public function delete($subject = FALSE) {
-		return new Delete($subject);
+	public function delete() {
+		return new Delete($this);
 	}
 
 	public function startTransaction() {
