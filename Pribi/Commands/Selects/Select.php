@@ -2,7 +2,6 @@
 namespace Pribi\Commands\Selects;
 
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Limits\Base\Limiting;
 
 /**
  * @method SelectAlias as ($alias)
