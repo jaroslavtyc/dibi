@@ -1,7 +1,7 @@
 <?php
 namespace Pribi;
 
-use Pribi\Commands\QueryOpener;
+use Pribi\Commands\Openers\Query;
 use Pribi\Commands\Subconditions\Subcondition;
 
 class PribiTest extends \PHPUnit_Framework_TestCase {
@@ -14,7 +14,7 @@ class PribiTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testCanGiveQueryOpener() {
-		$this->assertEquals(new QueryOpener(), Pribi::openQuery());
+		$this->assertEquals(new Query(), Pribi::openQuery());
 	}
 
 	public function testEveryGivenQueryOpenerIsANewInstance() {

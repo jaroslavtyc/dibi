@@ -1,6 +1,7 @@
 <?php
-namespace Pribi\Commands;
+namespace Pribi\Commands\Openers;
 
+use Pribi\Commands\Command;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Inserts\InsertIgnoreInto;
 use Pribi\Commands\Inserts\InsertInto;
@@ -9,7 +10,7 @@ use Pribi\Commands\Identifiers\Identifiers;
 use Pribi\Commands\Transactions\StartTransactions\StartTransaction;
 use Pribi\Commands\Deletions\Delete;
 
-class QueryOpener extends Command {
+class Query extends Command {
 	public function __construct() {
 		parent::__construct($this);
 	}
