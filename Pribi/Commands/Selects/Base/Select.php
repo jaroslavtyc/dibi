@@ -4,7 +4,6 @@ namespace Pribi\Commands\Selects\Base;
 use Pribi\Commands\IdentifierBringer;
 use Pribi\Commands\Limits\Base\Limitable;
 use Pribi\Commands\Limits\Base\Limiting;
-use Pribi\Commands\Selects\Base\AfterSelecting;
 use Pribi\Commands\Selects\SelectAlias;
 
 /**
