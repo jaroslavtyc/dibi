@@ -1,6 +1,7 @@
 <?php
 namespace Pribi\Commands\Inserts;
 
+use Pribi\Builders\CommandsBuilder;
 use Pribi\Commands\Command;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\WithIdentifier;
@@ -10,8 +11,13 @@ use Pribi\Commands\Identifiers\Identifiers;
 abstract class Insert extends WithIdentifier {
 	private $columns;
 
-	public function __construct(Identifier $tableName, Command $previousCommand, Identifiers $columns = NULL) {
-		parent::__construct($tableName, $previousCommand);
+	public function __construct(
+		Identifier $tableIdentifier,
+		Command $previousCommand,
+		CommandsBuilder $commandsBuilder,
+		Identifiers $columns = NULL
+	) {
+		parent::__construct($tableIdentifier, $previousCommand, $commandsBuilder);
 		$this->columns = $columns;
 	}
 

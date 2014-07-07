@@ -15,7 +15,11 @@ class Select extends Base\Select {
 		}
 	}
 
+	/**
+	 * @param Identifier $alias
+	 * @return \Pribi\Commands\Command|SelectAlias
+	 */
 	protected function alias(Identifier $alias) {
-		return new SelectAlias($alias, $this);
+		return $this->getCommandBuilder()->createSelectAlias($alias, $this);
 	}
 }

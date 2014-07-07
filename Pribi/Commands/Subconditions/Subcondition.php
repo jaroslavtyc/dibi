@@ -1,7 +1,15 @@
 <?php
 namespace Pribi\Commands\Subconditions;
 
-class Subcondition {
+class Subcondition extends Command {
+	public function __construct(CommandsBuilder $commandsBuilder) {
+		parent::__construct($this, $commandsBuilder);
+	}
+
+	protected function toSql() {
+		return '';
+	}
+
 	public function subject($subject) {
 		return new Subject($subject);
 	}

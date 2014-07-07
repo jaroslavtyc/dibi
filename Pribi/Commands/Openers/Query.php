@@ -1,6 +1,7 @@
 <?php
 namespace Pribi\Commands\Openers;
 
+use Pribi\Builders\CommandsBuilder;
 use Pribi\Commands\Command;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Inserts\InsertIgnoreInto;
@@ -11,8 +12,8 @@ use Pribi\Commands\Transactions\StartTransactions\StartTransaction;
 use Pribi\Commands\Deletions\Delete;
 
 class Query extends Command {
-	public function __construct() {
-		parent::__construct($this);
+	public function __construct(CommandsBuilder $commandsBuilder) {
+		parent::__construct($this, $commandsBuilder);
 	}
 
 	protected function toSql() {
@@ -20,15 +21,15 @@ class Query extends Command {
 	}
 
 	public function insertInto($table, $columns) {
-		return new InsertInto(new Identifier($table), $this, new Identifiers($columns));
+		return $this->getCommandBuilder()->createInsertInto(new Identifier($table), $this, new Identifiers($columns));
 	}
 
 	public function insertIgnoreInto($table, $columns) {
-		return new InsertIgnoreInto(new Identifier($table), $this, new Identifiers($columns));
+		return $this->getCommandBuilder()->createInsertIgnoreInto(new Identifier($table), $this, new Identifiers($columns));
 	}
 
 	public function select($subject) {
-		return new Select(new Identifier($subject), $this);
+		return $this->getCommandBuilder()->createSelect(new Identifier($subject), $this);
 	}
 
 	public function delete() {
