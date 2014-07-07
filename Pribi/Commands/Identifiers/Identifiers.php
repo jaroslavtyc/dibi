@@ -5,6 +5,8 @@ use Pribi\Commands\QueryPart;
 use Traversable;
 
 class Identifiers extends QueryPart implements \IteratorAggregate, \Countable {
+	private $identifiers;
+
 	public function __construct($subjects) {
 		$this->identifiers = $this->buildIdentifiers($subjects);
 	}
