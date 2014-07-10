@@ -1,6 +1,9 @@
 <?php
 namespace Pribi\Commands\Subconditions;
 
+use Pribi\Builders\CommandsBuilder;
+use Pribi\Commands\Command;
+
 class Subcondition extends Command {
 	public function __construct(CommandsBuilder $commandsBuilder) {
 		parent::__construct($this, $commandsBuilder);
