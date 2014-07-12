@@ -14,7 +14,9 @@ class PribiTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testCanGiveQueryOpener() {
-		$this->assertEquals(new Query(), Pribi::openQuery());
+		$queryOpener = Pribi::openQuery();
+		$this->assertNotNull($queryOpener);
+		$this->assertEquals(Query::class, get_class($queryOpener));
 	}
 
 	public function testEveryGivenQueryOpenerIsANewInstance() {
@@ -30,7 +32,9 @@ class PribiTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testCanGiveSubcondition() {
-		$this->assertEquals(new Subcondition(), Pribi::subcondition());
+		$subcondition = Pribi::subcondition();
+		$this->assertNotNull($subcondition);
+		$this->assertEquals(Subcondition::class, get_class($subcondition));
 	}
 
 	public function testEveryGivenSubconditionIsANewInstance() {

@@ -1,27 +1,48 @@
 <?php
 namespace Commands;
 
+use Pribi\Builders\CommandsBuilder;
 use Pribi\Commands\Deletions\Delete;
+use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Inserts\InsertIgnoreInto;
 use Pribi\Commands\Inserts\InsertInto;
 use Pribi\Commands\Openers\Query;
 use Pribi\Commands\Selects\Select;
 use Pribi\Commands\Transactions\StartTransactions\StartTransaction;
+use Tests\Helpers\TestCase;
 
-class QueryTest extends \PHPUnit_Framework_TestCase {
+class QueryTest extends TestCase {
 	public function testQueryOpenerCanBeCreated() {
-		$instance = new Query();
+		$instance = new Query($this->getCommandsBuilderMock());
 		$this->assertNotNull($instance);
 		$this->assertEquals(Query::class, get_class($instance));
 	}
 
 	public function testQueryOpenerCanInsertInto() {
-		$queryOpener = new Query();
-		$queryOpener->insertInto('foo', 'bar');
+		$classReflection = new \ReflectionClass(Pribi::class);
+		$this->assertTrue($classReflection->hasMethod('insertInto'));
+		$methodReflection = $classReflection->getMethod('insertInto');
+		$this->assertTrue($methodReflection->isPublic());
 	}
 
 	public function testQueryOpenerCanReturnInsertInto() {
-		$queryOpener = new Query();
+		$commandBuilder = $this->getMock(CommandsBuilder::class, ['createIdentifier', 'createIdentifiers', 'createInsertInto']);
+		$commandBuilder->expects($this->once())
+			->method('createIdentifier')
+			->with('foo')
+			->willReturn($this->getMock(Identifier::class));
+		$commandBuilder->expects($this->once())
+			->method('createIdentifiers')
+			->with('bar')
+			->willReturn($this->getMock(Identifiers::class));
+		$commandBuilder->expects($this->once())
+			->method('createInsertInto')
+			->with('bar')
+			->willReturn($this->getMock(InsertInto::class));
+		/**
+		 * @var $commandBuilder CommandsBuilder
+		 */
+		$queryOpener = new Query($commandBuilder);
 		$insertInto = $queryOpener->insertInto('foo', 'bar');
 		$this->assertNotNull($insertInto);
 		$this->assertEquals(InsertInto::class, get_class($insertInto));

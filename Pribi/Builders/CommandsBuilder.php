@@ -13,6 +13,14 @@ use Pribi\Commands\Selects\SelectAlias;
 use Pribi\Core\Object;
 
 class CommandsBuilder extends Object {
+	public function createIdentifier($subject) {
+		return new Identifier($subject);
+	}
+
+	public function createIdentifiers($subjects) {
+		return new Identifiers($subjects);
+	}
+
 	public function createSelect(Identifier $identifier, Command $previousCommand) {
 		return new Select($identifier, $previousCommand, $this);
 	}

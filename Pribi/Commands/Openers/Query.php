@@ -21,7 +21,11 @@ class Query extends Command {
 	}
 
 	public function insertInto($table, $columns) {
-		return $this->getCommandBuilder()->createInsertInto(new Identifier($table), $this, new Identifiers($columns));
+		return $this->getCommandBuilder()->createInsertInto(
+			$this->getCommandBuilder()->createIdentifier($table),
+			$this,
+			$this->getCommandBuilder()->createIdentifiers($columns)
+		);
 	}
 
 	public function insertIgnoreInto($table, $columns) {
