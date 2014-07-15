@@ -33,5 +33,6 @@
         "psr-0": {
             "Pribi\\": "Pribi/"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }
