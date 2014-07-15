@@ -28,5 +28,10 @@
         "phpunit/phpunit": "4.0.*",
         "mockery/mockery": "dev-master",
         "hamcrest/hamcrest-php": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Pribi\\": "Pribi/"
+        }
     }
 }
