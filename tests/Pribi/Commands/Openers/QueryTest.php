@@ -2,6 +2,7 @@
 namespace Commands;
 
 use Pribi\Builders\CommandsBuilder;
+use Pribi\Commands\Command;
 use Pribi\Commands\Deletions\Delete;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Inserts\InsertIgnoreInto;
@@ -19,7 +20,7 @@ class QueryTest extends TestCase {
 	}
 
 	public function testQueryOpenerCanInsertInto() {
-		$classReflection = new \ReflectionClass(Pribi::class);
+		$classReflection = new \ReflectionClass(Query::class);
 		$this->assertTrue($classReflection->hasMethod('insertInto'));
 		$methodReflection = $classReflection->getMethod('insertInto');
 		$this->assertTrue($methodReflection->isPublic());
@@ -30,7 +31,7 @@ class QueryTest extends TestCase {
 		$commandBuilder->expects($this->once())
 			->method('createIdentifier')
 			->with('foo')
-			->willReturn($this->getMock(Identifier::class));
+			->willReturn($this->getMock(Identifier::class, [], ['foo']));
 		$commandBuilder->expects($this->once())
 			->method('createIdentifiers')
 			->with('bar')
@@ -38,12 +39,21 @@ class QueryTest extends TestCase {
 		$commandBuilder->expects($this->once())
 			->method('createInsertInto')
 			->with('bar')
-			->willReturn($this->getMock(InsertInto::class));
+			->willReturn(
+				$this->getMock(
+					InsertInto::class,
+					[],
+					[$this->getMock(Identifier::class, [], ['bar']), $this->getMockForAbstractClass(Command::class, [], '', false), $commandBuilder]
+				)
+			);
 		/**
 		 * @var $commandBuilder CommandsBuilder
 		 */
-		$queryOpener = new Query($commandBuilder);
-		$insertInto = $queryOpener->insertInto('foo', 'bar');
+		$query = $this->getMock(Query::class, ['insertInto'], [$commandBuilder])
+			->expects($this->once())
+			->method('insertInto')
+			->willReturn($this->once());
+		$insertInto = $query->insertInto('foo', 'bar');
 		$this->assertNotNull($insertInto);
 		$this->assertEquals(InsertInto::class, get_class($insertInto));
 	}
