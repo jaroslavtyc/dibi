@@ -1,43 +1,37 @@
 <?php
 namespace Pribi;
 
-use Pribi\Commands\Openers\Query;
-use Pribi\Commands\Subconditions\Subcondition;
+class PribiTest extends \Tests\Helpers\TestCase {
 
-class PribiTest extends \PHPUnit_Framework_TestCase {
-	public function testOpenQueryAsPublicStaticFunctionExists() {
-		$reflection = new \ReflectionClass(Pribi::class);
-		$this->assertTrue($reflection->hasMethod('openQuery'));
-		$methodReflection = $reflection->getMethod('openQuery');
-		$this->assertTrue($methodReflection->isPublic());
-		$this->assertTrue($methodReflection->isStatic());
+	public function testInstanceCanBeCreated() {
+		$instance = new Pribi($this->getCommandsBuilderDummy());
+		$this->assertNotNull($instance);
 	}
 
-	public function testCanGiveQueryOpener() {
-		$queryOpener = Pribi::openQuery();
-		$this->assertNotNull($queryOpener);
-		$this->assertEquals(Query::class, get_class($queryOpener));
+	public function testCanOpenQuery() {
+		$commandBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$pribi = $this->createPribi($commandBuilderMock);
+		$commandBuilderMock->expects($this->once())
+			->method('createQuery')
+			->with() // no parameters expected
+			->willReturn('foo');
+		$this->assertEquals('foo', $pribi->query());
 	}
 
-	public function testEveryGivenQueryOpenerIsANewInstance() {
-		$this->assertNotSame(Pribi::openQuery(), Pribi::openQuery());
-	}
-
-	public function testSubconditionAsPublicStaticFunctionExists() {
-		$reflection = new \ReflectionClass(Pribi::class);
-		$this->assertTrue($reflection->hasMethod('subcondition'));
-		$methodReflection = $reflection->getMethod('subcondition');
-		$this->assertTrue($methodReflection->isPublic());
-		$this->assertTrue($methodReflection->isStatic());
+	private function createPribi(\PHPUnit_Framework_MockObject_MockObject $commandsBuilder){
+		/**
+		 * @var \Pribi\Builders\CommandsBuilder $commandsBuilder
+		 */
+		return new Pribi($commandsBuilder);
 	}
 
 	public function testCanGiveSubcondition() {
-		$subcondition = Pribi::subcondition();
-		$this->assertNotNull($subcondition);
-		$this->assertEquals(Subcondition::class, get_class($subcondition));
-	}
-
-	public function testEveryGivenSubconditionIsANewInstance() {
-		$this->assertNotSame(Pribi::subcondition(), Pribi::subcondition());
+		$commandBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$pribi = $this->createPribi($commandBuilderMock);
+		$commandBuilderMock->expects($this->once())
+			->method('createSubcondition')
+			->with() // no parameters expected
+			->willReturn('foo');
+		$this->assertEquals('foo', $pribi->subcondition());
 	}
 }
