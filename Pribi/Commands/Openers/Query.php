@@ -37,7 +37,10 @@ class Query extends Command {
 	}
 
 	public function select($subject) {
-		return $this->getCommandBuilder()->createSelect(new Identifier($subject), $this);
+		return $this->getCommandBuilder()->createSelect(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
 	}
 
 	public function delete() {

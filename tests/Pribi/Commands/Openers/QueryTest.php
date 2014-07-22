@@ -1,6 +1,8 @@
 <?php
 namespace Pribi\Commands\Openers;
 
+use Pribi\Executions\QueryExecutor;
+
 class QueryTest extends \Tests\Helpers\TestCase {
 
 	public function testInstanceCanBeCreated() {
@@ -39,6 +41,13 @@ class QueryTest extends \Tests\Helpers\TestCase {
 		$query->insertInto($tableName, $columnNames);
 	}
 
+	private function createQuery(\PHPUnit_Framework_MockObject_MockObject $commandsBuilder) {
+		/**
+		 * @var \Pribi\Builders\CommandsBuilder $commandsBuilder
+		 */
+		return new Query($commandsBuilder);
+	}
+
 	public function testCanInsertIgnoreInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		$query = $this->createQuery($commandsBuilderMock);
@@ -70,10 +79,25 @@ class QueryTest extends \Tests\Helpers\TestCase {
 		$query->insertIgnoreInto($tableName, $columnNames);
 	}
 
-	private function createQuery(\PHPUnit_Framework_MockObject_MockObject $commandsBuilder) {
-		/**
-		 * @var \Pribi\Builders\CommandsBuilder $commandsBuilder
-		 */
-		return new Query($commandsBuilder);
+	public function testCanSelect() {
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$query = $this->createQuery($commandsBuilderMock);
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createSelect')
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Inserts\InsertInto::class)
+					->disableOriginalConstructor()
+					->getMock()
+			);
+		$subject = 'foo';
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createIdentifier')
+			->with($subject)
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Identifiers\Identifier::class)
+					->disableOriginalConstructor()
+					->getMock()
+			);
+		$query->select($subject);
 	}
 }
