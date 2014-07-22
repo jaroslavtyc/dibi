@@ -1,55 +1,52 @@
 <?php
 namespace Pribi\Builders;
 
-use Pribi\Commands\Command;
-use Pribi\Commands\Deletions\Delete;
-use Pribi\Commands\FromSources\From;
-use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Identifiers\Identifiers;
-use Pribi\Commands\Inserts\InsertIgnoreInto;
-use Pribi\Commands\Inserts\InsertInto;
-use Pribi\Commands\Selects\Select;
-use Pribi\Commands\Selects\SelectAlias;
-use Pribi\Core\Object;
-
-class CommandsBuilder extends Object {
+class CommandsBuilder extends \Pribi\Core\Object {
 	public function createIdentifier($subject) {
-		return new Identifier($subject);
+		return new \Pribi\Commands\Identifiers\Identifier($subject);
 	}
 
 	public function createIdentifiers($subjects) {
-		return new Identifiers($subjects);
+		return new \Pribi\Commands\Identifiers\Identifiers($subjects);
 	}
 
-	public function createSelect(Identifier $identifier, Command $previousCommand) {
-		return new Select($identifier, $previousCommand, $this);
+	public function createQuery(){
+		return new \Pribi\Commands\Openers\Query($this);
 	}
 
-	public function createSelectAlias(Identifier $alias, Select $prependSelect) {
-		return new SelectAlias($alias, $prependSelect, $this);
+	public function createSubcondition(){
+		return new \Pribi\Commands\Subconditions\Subcondition($this);
+	}
+
+	public function createSelect(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\Selects\Select($identifier, $previousCommand, $this);
+	}
+
+	public function createSelectAlias(\Pribi\Commands\Identifiers\Identifier $alias, \Pribi\Commands\Selects\Select $prependSelect) {
+		return new \Pribi\Commands\Selects\SelectAlias($alias, $prependSelect, $this);
 	}
 
 	public function createInsertInto(
-		Identifier $tableIdentifier,
-		Command $previousCommand,
-		Identifiers $columnsIdentifiers
+		\Pribi\Commands\Identifiers\Identifier $tableIdentifier,
+		\Pribi\Commands\Command $previousCommand,
+		\Pribi\Commands\Identifiers\Identifiers $columnsIdentifiers
 	) {
-		return new InsertInto($tableIdentifier, $previousCommand, $this, $columnsIdentifiers);
+		return new \Pribi\Commands\Inserts\InsertInto($tableIdentifier, $previousCommand, $this, $columnsIdentifiers);
 	}
 
 	public function createInsertIgnoreInto(
-		Identifier $tableIdentifier,
-		Command $previousCommand,
-		Identifiers $columnsIdentifiers
+		\Pribi\Commands\Identifiers\Identifier $tableIdentifier,
+		\Pribi\Commands\Command $previousCommand,
+		\Pribi\Commands\Identifiers\Identifiers $columnsIdentifiers
 	) {
-		return new InsertIgnoreInto($tableIdentifier, $previousCommand, $this, $columnsIdentifiers);
+		return new \Pribi\Commands\Inserts\InsertIgnoreInto($tableIdentifier, $previousCommand, $this, $columnsIdentifiers);
 	}
 
-	public function createDelete(Identifier $identifier, Command $previousCommand) {
-		return new Delete($identifier, $previousCommand, $this);
+	public function createDelete(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\Deletions\Delete($identifier, $previousCommand, $this);
 	}
 
-	public function createFrom(Identifier $fromSource, Command $previousCommand) {
-		return new From($fromSource, $previousCommand, $this);
+	public function createFrom(\Pribi\Commands\Identifiers\Identifier $fromSource, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\FromSources\From($fromSource, $previousCommand, $this);
 	}
 }

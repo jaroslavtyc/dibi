@@ -1,15 +1,19 @@
 <?php
 namespace Pribi;
 
-use Pribi\Builders\CommandsBuilder;
-
 class Pribi {
 
-	public static function openQuery() {
-		return new \Pribi\Commands\Openers\Query(new CommandsBuilder());
+	private $commandsBuilder;
+
+	public function __construct(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
+		$this->commandsBuilder = $commandsBuilder;
 	}
 
-	public static function subcondition() {
-		return new \Pribi\Commands\Subconditions\Subcondition(new CommandsBuilder());
+	public function query() {
+		return $this->commandsBuilder->createQuery();
+	}
+
+	public function subcondition() {
+		return $this->commandsBuilder->createSubcondition();
 	}
 }
