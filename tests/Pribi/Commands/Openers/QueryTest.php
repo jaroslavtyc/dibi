@@ -24,7 +24,7 @@ class QueryTest extends \Tests\Helpers\TestCase {
 			->method('createIdentifier')
 			->with($tableName)
 			->willReturn($this->getMockBuilder(\Pribi\Commands\Identifiers\Identifier::class)
-					->setConstructorArgs([$tableName])
+					->disableOriginalConstructor()
 					->getMock()
 			);
 		$columnNames = ['bar_column', 'baz_column'];
@@ -33,10 +33,41 @@ class QueryTest extends \Tests\Helpers\TestCase {
 			->method('createIdentifiers')
 			->with($columnNames)
 			->willReturn($this->getMockBuilder(\Pribi\Commands\Identifiers\Identifiers::class)
-					->setConstructorArgs($columnNames)
+					->disableOriginalConstructor()
 					->getMock()
 			);
 		$query->insertInto($tableName, $columnNames);
+	}
+
+	public function testCanInsertIgnoreInto() {
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$query = $this->createQuery($commandsBuilderMock);
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createInsertIgnoreInto')
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Inserts\InsertInto::class)
+					->disableOriginalConstructor()
+					->getMock()
+			);
+		$tableName = 'foo';
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createIdentifier')
+			->with($tableName)
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Identifiers\Identifier::class)
+					->disableOriginalConstructor()
+					->getMock()
+			);
+		$columnNames = ['bar_column', 'baz_column'];
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createIdentifiers')
+			->with($columnNames)
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Identifiers\Identifiers::class)
+					->disableOriginalConstructor()
+					->getMock()
+			);
+		$query->insertIgnoreInto($tableName, $columnNames);
 	}
 
 	private function createQuery(\PHPUnit_Framework_MockObject_MockObject $commandsBuilder) {

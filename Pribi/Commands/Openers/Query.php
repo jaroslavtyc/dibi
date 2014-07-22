@@ -29,7 +29,11 @@ class Query extends Command {
 	}
 
 	public function insertIgnoreInto($table, $columns) {
-		return $this->getCommandBuilder()->createInsertIgnoreInto(new Identifier($table), $this, new Identifiers($columns));
+		return $this->getCommandBuilder()->createInsertIgnoreInto(
+			$this->getCommandBuilder()->createIdentifier($table),
+			$this,
+			$this->getCommandBuilder()->createIdentifiers($columns)
+		);
 	}
 
 	public function select($subject) {
