@@ -15,7 +15,7 @@ class PribiTest extends \Tests\Helpers\TestCase {
 			->method('createQuery')
 			->with() // no parameters expected
 			->willReturn('foo');
-		$this->assertEquals('foo', $pribi->query());
+		$this->assertEquals('foo', $pribi->createQuery());
 	}
 
 	private function createPribi(\PHPUnit_Framework_MockObject_MockObject $commandsBuilder){
@@ -32,6 +32,6 @@ class PribiTest extends \Tests\Helpers\TestCase {
 			->method('createSubcondition')
 			->with() // no parameters expected
 			->willReturn('foo');
-		$this->assertEquals('foo', $pribi->subcondition());
+		$this->assertEquals('foo', $pribi->craeteSubcondition());
 	}
 }

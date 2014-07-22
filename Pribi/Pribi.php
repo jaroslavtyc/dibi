@@ -9,11 +9,11 @@ class Pribi {
 		$this->commandsBuilder = $commandsBuilder;
 	}
 
-	public function query() {
+	public function createQuery() {
 		return $this->commandsBuilder->createQuery();
 	}
 
-	public function subcondition() {
+	public function craeteSubcondition() {
 		return $this->commandsBuilder->createSubcondition();
 	}
 }
