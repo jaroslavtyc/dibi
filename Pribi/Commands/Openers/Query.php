@@ -43,8 +43,11 @@ class Query extends Command {
 		);
 	}
 
-	public function delete() {
-		return new Delete($this);
+	public function delete($subject) {
+		return $this->getCommandBuilder()->createDelete(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
 	}
 
 	public function startTransaction() {

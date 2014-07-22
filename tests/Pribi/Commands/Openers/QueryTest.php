@@ -100,4 +100,26 @@ class QueryTest extends \Tests\Helpers\TestCase {
 			);
 		$query->select($subject);
 	}
+
+	public function testCanDelete() {
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$query = $this->createQuery($commandsBuilderMock);
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createDelete')
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Inserts\InsertInto::class)
+					->disableOriginalConstructor()
+					->getMock()
+			);
+		$subject = 'foo';
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createIdentifier')
+			->with($subject)
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Identifiers\Identifier::class)
+					->disableOriginalConstructor()
+					->getMock()
+			);
+		$query->delete($subject);
+	}
 }
