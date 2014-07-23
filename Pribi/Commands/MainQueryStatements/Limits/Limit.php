@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\MainQueryCommands\Limits;
+namespace Pribi\Commands\MainQueryStatements\Limits;
 
 use Pribi\Executions\Executable;
 use Pribi\Executions\Executabling;

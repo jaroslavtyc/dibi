@@ -1,7 +1,7 @@
 <?php
-namespace Pribi\MainQueryCommands\Conditions;
+namespace Pribi\Commands\MainQueryStatements\Conditions;
 
-use Pribi\MainQueryCommands\Conditions\Base\AndOring;
+use Pribi\Commands\MainQueryStatements\Conditions\Base\AndOring;
 
 class EqualTo extends \Pribi\Commands\Conditions\EqualTo {
 	use AndOring;

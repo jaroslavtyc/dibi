@@ -1,19 +1,14 @@
 <?php
-namespace Pribi\MainQueryCommands\Selects;
-
-use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Executions\Executable;
-use Pribi\Executions\Executabling;
-use Pribi\MainQueryCommands\Selects\Base\AfterSelecting;
+namespace Pribi\Commands\MainQueryStatements\Selects;
 
 /**
  * @method SelectAlias as ($alias)
  */
-class Select extends \Pribi\Commands\Statements\Selects\Select implements Executable {
-	use AfterSelecting;
-	use Executabling;
+class Select extends \Pribi\Commands\Statements\Selects\Select implements \Pribi\Executions\Executable {
+	use Base\AfterSelecting;
+	use \Pribi\Executions\Executabling;
 
-	protected function alias(Identifier $alias) {
+	protected function alias(\Pribi\Commands\Identifiers\Identifier $alias) {
 		return new SelectAlias($alias, $this);
 	}
 }

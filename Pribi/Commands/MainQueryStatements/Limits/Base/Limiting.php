@@ -1,7 +1,7 @@
 <?php
-namespace Pribi\MainQueryCommands\Limits\Base;
+namespace Pribi\Commands\MainQueryStatements\Limits\Base;
 
-use Pribi\MainQueryCommands\Limits\Limit;
+use Pribi\Commands\MainQueryStatements\Limits\Limit;
 
 trait Limiting {
 	public function limit($limit) {

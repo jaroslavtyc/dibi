@@ -1,12 +1,12 @@
 <?php
-namespace Pribi\MainQueryCommands\Conditions\Base;
+namespace Pribi\Commands\MainQueryStatements\Conditions\Base;
 
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\MainQueryCommands\Conditions\AndNot;
-use Pribi\MainQueryCommands\Conditions\Conjunction;
-use Pribi\MainQueryCommands\Conditions\Disjunction;
-use Pribi\MainQueryCommands\Conditions\Exceptions;
-use Pribi\MainQueryCommands\Conditions\OrNot;
+use Pribi\Commands\MainQueryStatements\Conditions\AndNot;
+use Pribi\Commands\MainQueryStatements\Conditions\Conjunction;
+use Pribi\Commands\MainQueryStatements\Conditions\Disjunction;
+use Pribi\Commands\MainQueryStatements\Conditions\Exceptions;
+use Pribi\Commands\MainQueryStatements\Conditions\OrNot;
 
 /**
  * @method \Pribi\Commands\Command and($identificator)

@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\MainQueryCommands\Conditions;
+namespace Pribi\Commands\MainQueryStatements\Conditions;
 
 class NotIn extends \Pribi\Commands\Conditions\NotIn {
 

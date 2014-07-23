@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Transactions\Commits;
+namespace Pribi\Commands\MainQueryStatements\Transactions\Commits;
 
 use Pribi\Commands\WithoutIdentifier;
 use Pribi\Transactions\Ends\Base\Finishable;

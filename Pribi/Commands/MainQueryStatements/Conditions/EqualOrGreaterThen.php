@@ -1,7 +1,7 @@
 <?php
-namespace Pribi\MainQueryCommands\Conditions;
+namespace Pribi\Commands\MainQueryStatements\Conditions;
 
-use Pribi\MainQueryCommands\Conditions\Base\AndOring;
+use Pribi\Commands\MainQueryStatements\Conditions\Base\AndOring;
 
 class EqualOrGreaterThen extends \Pribi\Commands\Conditions\EqualOrGreaterThen {
 	use AndOring;

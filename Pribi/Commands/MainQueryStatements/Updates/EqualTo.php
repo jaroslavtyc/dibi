@@ -1,11 +1,11 @@
 <?php
-namespace Pribi\MainQueryCommands\Updates;
+namespace Pribi\Commands\MainQueryStatements\Updates;
 
 use Pribi\Commands\Statements\Limits\Base\Limitable;
-use Pribi\MainQueryCommands\Limits\Base\Limiting;
+use Pribi\Commands\MainQueryStatements\Limits\Base\Limiting;
 use Pribi\Commands\WithIdentifier;
-use Pribi\MainQueryCommands\WhereSources\Base\Whereable;
-use Pribi\MainQueryCommands\WhereSources\Base\Whereing;
+use Pribi\Commands\MainQueryStatements\WhereSources\Base\Whereable;
+use Pribi\Commands\MainQueryStatements\WhereSources\Base\Whereing;
 use Pribi\Executions\Executable;
 use Pribi\Executions\Executabling;
 

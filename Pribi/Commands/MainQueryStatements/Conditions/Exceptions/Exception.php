@@ -1,6 +1,6 @@
 <?php
-namespace Pribi\MainQueryCommands\Conditions\Exceptions;
+namespace Pribi\Commands\MainQueryStatements\Conditions\Exceptions;
 
-interface Exception extends \Pribi\MainQueryCommands\Exceptions\Exception, \Pribi\Commands\Conditions\Exceptions\Exception {
+interface Exception extends \Pribi\Commands\MainQueryStatements\Exceptions\Exception, \Pribi\Commands\Conditions\Exceptions\Exception {
 
 }

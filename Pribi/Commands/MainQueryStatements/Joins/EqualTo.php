@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\MainQueryCommands\Joins;
+namespace Pribi\Commands\MainQueryStatements\Joins;
 
 use Pribi\Executions\Executable;
 use Pribi\Executions\Executabling;

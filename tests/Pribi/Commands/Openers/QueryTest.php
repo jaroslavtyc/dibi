@@ -82,7 +82,7 @@ class QueryTest extends \Tests\Helpers\TestCase {
 		$createdStatementDummy = 'foo';
 		$commandsBuilderMock
 			->expects($this->once())
-			->method('createSelect')
+			->method('createMainQuerySelect')
 			->willReturn($createdStatementDummy);
 		$subject = 'bar';
 		$commandsBuilderMock
@@ -121,7 +121,7 @@ class QueryTest extends \Tests\Helpers\TestCase {
 		$query = $this->createQuery($commandsBuilderMock);
 		$commandsBuilderMock
 			->expects($this->once())
-			->method('createStartTransaction')
+			->method('createMainQueryStartTransaction')
 			->willReturn($this->getMockBuilder(\Pribi\Commands\Statements\Inserts\InsertInto::class)
 					->disableOriginalConstructor()
 					->getMock()
@@ -135,8 +135,85 @@ class QueryTest extends \Tests\Helpers\TestCase {
 		$createdStatementDummy = 'foo';
 		$commandsBuilderMock
 			->expects($this->once())
-			->method('createBegin')
+			->method('createMainQueryBegin')
 			->willReturn($createdStatementDummy);
 		$this->assertSame($createdStatementDummy, $query->begin());
+	}
+
+	public function testCanBeginWork() {
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$query = $this->createQuery($commandsBuilderMock);
+		$createdStatementDummy = 'foo';
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createMainQueryBeginWork')
+			->willReturn($createdStatementDummy);
+		$this->assertSame($createdStatementDummy, $query->beginWork());
+	}
+
+	public function testCanCommit() {
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$query = $this->createQuery($commandsBuilderMock);
+		$createdStatementDummy = 'foo';
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createMainQueryCommit')
+			->willReturn($createdStatementDummy);
+		$this->assertSame($createdStatementDummy, $query->commit());
+	}
+
+	public function testCanCommitWork() {
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$query = $this->createQuery($commandsBuilderMock);
+		$createdStatementDummy = 'foo';
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createMainQueryCommitWork')
+			->willReturn($createdStatementDummy);
+		$this->assertSame($createdStatementDummy, $query->commitWork());
+	}
+
+	public function testCanDisableAutocommit() {
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$query = $this->createQuery($commandsBuilderMock);
+		$createdStatementDummy = 'foo';
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createMainQueryDisableAutocommit')
+			->willReturn($createdStatementDummy);
+		$this->assertSame($createdStatementDummy, $query->disableAutocommit());
+	}
+
+	public function testCanEnableAutocommit() {
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$query = $this->createQuery($commandsBuilderMock);
+		$createdStatementDummy = 'foo';
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createMainQueryEnableAutocommit')
+			->willReturn($createdStatementDummy);
+		$this->assertSame($createdStatementDummy, $query->enableAutocommit());
+	}
+
+	public function testCanRollback() {
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$query = $this->createQuery($commandsBuilderMock);
+		$createdStatementDummy = 'foo';
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createMainQueryRollback')
+			->willReturn($createdStatementDummy);
+		$this->assertSame($createdStatementDummy, $query->rollback());
+	}
+
+	public function testCanRollbackWork() {
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$query = $this->createQuery($commandsBuilderMock);
+		$createdStatementDummy = 'foo';
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createMainQueryRollbackWork')
+			->willReturn($createdStatementDummy);
+		$this->assertSame($createdStatementDummy, $query->rollbackWork());
 	}
 }

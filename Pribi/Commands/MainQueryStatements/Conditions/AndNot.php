@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\MainQueryCommands\Conditions;
+namespace Pribi\Commands\MainQueryStatements\Conditions;
 
 class AndNot extends Conjunction {
 	protected function toSql() {

@@ -11,6 +11,7 @@ class Query extends \Pribi\Commands\Command {
 	}
 
 	public function insertInto($table, $columns) {
+		// INSERT INTO is not a part of main query commands because of lack of execution sense immediately after it
 		return $this->getCommandBuilder()->createInsertInto(
 			$this->getCommandBuilder()->createIdentifier($table),
 			$this,
@@ -19,6 +20,7 @@ class Query extends \Pribi\Commands\Command {
 	}
 
 	public function insertIgnoreInto($table, $columns) {
+		// INSERT IGNORE INTO is not a part of main query commands because of lack of execution sense immediately after it
 		return $this->getCommandBuilder()->createInsertIgnoreInto(
 			$this->getCommandBuilder()->createIdentifier($table),
 			$this,
@@ -27,7 +29,7 @@ class Query extends \Pribi\Commands\Command {
 	}
 
 	public function select($subject) {
-		return $this->getCommandBuilder()->createSelect(
+		return $this->getCommandBuilder()->createMainQuerySelect(
 			$this->getCommandBuilder()->createIdentifier($subject),
 			$this
 		);
@@ -41,10 +43,38 @@ class Query extends \Pribi\Commands\Command {
 	}
 
 	public function startTransaction() {
-		return $this->getCommandBuilder()->createStartTransaction($this);
+		return $this->getCommandBuilder()->createMainQueryStartTransaction($this);
 	}
 
 	public function begin() {
-		return $this->getCommandBuilder()->createBegin($this);
+		return $this->getCommandBuilder()->createMainQueryBegin($this);
+	}
+
+	public function beginWork() {
+		return $this->getCommandBuilder()->createMainQueryBeginWork($this);
+	}
+
+	public function commit() {
+		return $this->getCommandBuilder()->createMainQueryCommit($this);
+	}
+
+	public function commitWork() {
+		return $this->getCommandBuilder()->createMainQueryCommitWork($this);
+	}
+
+	public function disableAutocommit() {
+		return $this->getCommandBuilder()->createMainQueryDisableAutocommit($this);
+	}
+
+	public function enableAutocommit() {
+		return $this->getCommandBuilder()->createMainQueryEnableAutocommit($this);
+	}
+
+	public function rollback() {
+		return $this->getCommandBuilder()->createMainQueryRollback($this);
+	}
+
+	public function rollbackWork() {
+		return $this->getCommandBuilder()->createMainQueryRollbackWork($this);
 	}
 }

@@ -1,7 +1,7 @@
 <?php
-namespace Pribi\MainQueryCommands\Conditions;
+namespace Pribi\Commands\MainQueryStatements\Conditions;
 
-use Pribi\MainQueryCommands\Conditions\Base\AndOring;
+use Pribi\Commands\MainQueryStatements\Conditions\Base\AndOring;
 
 class NotLike extends \Pribi\Commands\Conditions\NotLike {
 	use AndOring;

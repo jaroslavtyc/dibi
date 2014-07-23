@@ -1,10 +1,10 @@
 <?php
 namespace Pribi\Transactions\Ends\Base;
 
-use Pribi\Commands\Transactions\Finishes\AndChain;
-use Pribi\Commands\Transactions\Finishes\AndNoChain;
-use Pribi\Commands\Transactions\Finishes\NoRelease;
-use Pribi\Commands\Transactions\Finishes\Release;
+use Pribi\Commands\MainQueryStatements\Transactions\Finishes\AndChain;
+use Pribi\Commands\MainQueryStatements\Transactions\Finishes\AndNoChain;
+use Pribi\Commands\MainQueryStatements\Transactions\Finishes\NoRelease;
+use Pribi\Commands\MainQueryStatements\Transactions\Finishes\Release;
 
 trait Finishing {
 	public function andChain() {

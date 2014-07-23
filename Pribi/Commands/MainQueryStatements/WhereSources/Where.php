@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\MainQueryCommands\WhereSources;
+namespace Pribi\Commands\MainQueryStatements\WhereSources;
 
 use Pribi\Executions\Executable;
 use Pribi\Executions\Executabling;

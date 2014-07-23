@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\MainQueryCommands\Joins;
+namespace Pribi\Commands\MainQueryStatements\Joins;
 
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Executions\Executable;

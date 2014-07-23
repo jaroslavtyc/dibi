@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\MainQueryCommands\Exceptions;
+namespace Pribi\Commands\MainQueryStatements\Exceptions;
 
 interface Exception extends \Pribi\Commands\Exceptions\Exception {
 

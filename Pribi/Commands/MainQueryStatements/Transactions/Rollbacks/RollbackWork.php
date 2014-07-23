@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Transactions\Rollbacks;
+namespace Pribi\Commands\MainQueryStatements\Transactions\Rollbacks;
 
 class RollbackWork extends Rollback {
 	protected function toSql() {

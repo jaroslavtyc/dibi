@@ -18,6 +18,10 @@ class CommandsBuilder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\Subconditions\Subcondition($this);
 	}
 
+	public function createMainQuerySelect(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Selects\Select($identifier, $previousCommand, $this);
+	}
+
 	public function createSelect(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\Statements\Selects\Select($identifier, $previousCommand, $this);
 	}
@@ -46,16 +50,44 @@ class CommandsBuilder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\Deletions\Delete($identifier, $previousCommand, $this);
 	}
 
-	public function createStartTransaction(\Pribi\Commands\Command $previousCommand) {
-		return new \Pribi\Commands\Transactions\StartTransactions\StartTransaction($previousCommand, $this);
+	public function createMainQueryStartTransaction(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Transactions\StartTransactions\StartTransaction($previousCommand, $this);
 	}
 
-	public function createBegin(\Pribi\Commands\Command $previousCommand) {
-		return new \Pribi\Commands\Transactions\Begins\Begin($previousCommand, $this);
+	public function createMainQueryBegin(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Transactions\Begins\Begin($previousCommand, $this);
 	}
 
-	public function createWork(\Pribi\Commands\Command $previousCommand) {
-		return new \Pribi\Commands\Transactions\Begins\Work($previousCommand, $this);
+	public function createMainQueryBeginWork(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Transactions\Begins\BeginWork($previousCommand, $this);
+	}
+
+	public function createMainQueryWork(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Transactions\Begins\BeginWork($previousCommand, $this);
+	}
+
+	public function createMainQueryCommit(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Transactions\Commits\Commit($previousCommand, $this);
+	}
+
+	public function createMainQueryCommitWork(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Transactions\Commits\CommitWork($previousCommand, $this);
+	}
+
+	public function createMainQueryDisableAutocommit(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Transactions\Options\DisableAutocommit($previousCommand, $this);
+	}
+
+	public function createMainQueryEnableAutocommit(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Transactions\Options\EnableAutocommit($previousCommand, $this);
+	}
+
+	public function createMainQueryRollback(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Transactions\Rollbacks\Rollback($previousCommand, $this);
+	}
+
+	public function createMainQueryRollbackWork(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Transactions\Rollbacks\RollbackWork($previousCommand, $this);
 	}
 
 	public function createFrom(\Pribi\Commands\Identifiers\Identifier $fromSource, \Pribi\Commands\Command $previousCommand) {

@@ -1,8 +1,8 @@
 <?php
-namespace Pribi\MainQueryCommands\Updates\Base;
+namespace Pribi\Commands\MainQueryStatements\Updates\Base;
 
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\MainQueryCommands\Updates\Set;
+use Pribi\Commands\MainQueryStatements\Updates\Set;
 
 trait AfterUpdating {
 	public function set($subject) {

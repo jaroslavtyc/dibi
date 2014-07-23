@@ -1,10 +1,10 @@
 <?php
-namespace Pribi\MainQueryCommands\Conditions;
+namespace Pribi\Commands\MainQueryStatements\Conditions;
 
 use Pribi\Executions\Executable;
 use Pribi\Executions\Executabling;
-use Pribi\MainQueryCommands\Conditions\Base\AndOring;
-use Pribi\MainQueryCommands\Conditions\Base\Comparing;
+use Pribi\Commands\MainQueryStatements\Conditions\Base\AndOring;
+use Pribi\Commands\MainQueryStatements\Conditions\Base\Comparing;
 
 class Conjunction extends \Pribi\Commands\Conditions\Conjunction implements Executable {
 	use AndOring;

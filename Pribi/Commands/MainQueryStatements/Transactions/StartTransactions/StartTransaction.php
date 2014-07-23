@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Transactions\StartTransactions;
+namespace Pribi\Commands\MainQueryStatements\Transactions\StartTransactions;
 
 use Pribi\Commands\WithoutIdentifier;
 use Pribi\Executions\Executable;
