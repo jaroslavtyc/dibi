@@ -17,14 +17,12 @@ class QueryTest extends \Tests\Helpers\TestCase {
 	public function testCanInsertInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		$query = $this->createQuery($commandsBuilderMock);
+		$createdStatementDummy = 'foo';
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createInsertInto')
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Statements\Inserts\InsertInto::class)
-					->disableOriginalConstructor()
-					->getMock()
-			);
-		$tableName = 'foo';
+			->willReturn($createdStatementDummy);
+		$tableName = 'bar';
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createIdentifier')
@@ -33,7 +31,7 @@ class QueryTest extends \Tests\Helpers\TestCase {
 					->disableOriginalConstructor()
 					->getMock()
 			);
-		$columnNames = ['bar_column', 'baz_column'];
+		$columnNames = ['baz', 'qux'];
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createIdentifiers')
@@ -42,7 +40,7 @@ class QueryTest extends \Tests\Helpers\TestCase {
 					->disableOriginalConstructor()
 					->getMock()
 			);
-		$query->insertInto($tableName, $columnNames);
+		$this->assertSame($createdStatementDummy, $query->insertInto($tableName, $columnNames));
 	}
 
 	private function createQuery(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
@@ -52,14 +50,12 @@ class QueryTest extends \Tests\Helpers\TestCase {
 	public function testCanInsertIgnoreInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		$query = $this->createQuery($commandsBuilderMock);
+		$createdStatementDummy = 'foo';
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createInsertIgnoreInto')
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Statements\Inserts\InsertIgnoreInto::class)
-					->disableOriginalConstructor()
-					->getMock()
-			);
-		$tableName = 'foo';
+			->willReturn($createdStatementDummy);
+		$tableName = 'bar';
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createIdentifier')
@@ -68,7 +64,7 @@ class QueryTest extends \Tests\Helpers\TestCase {
 					->disableOriginalConstructor()
 					->getMock()
 			);
-		$columnNames = ['bar_column', 'baz_column'];
+		$columnNames = ['baz', 'qux'];
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createIdentifiers')
@@ -77,20 +73,18 @@ class QueryTest extends \Tests\Helpers\TestCase {
 					->disableOriginalConstructor()
 					->getMock()
 			);
-		$query->insertIgnoreInto($tableName, $columnNames);
+		$this->assertSame($createdStatementDummy, $query->insertIgnoreInto($tableName, $columnNames));
 	}
 
 	public function testCanSelect() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		$query = $this->createQuery($commandsBuilderMock);
+		$createdStatementDummy = 'foo';
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createSelect')
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Statements\Inserts\InsertInto::class)
-					->disableOriginalConstructor()
-					->getMock()
-			);
-		$subject = 'foo';
+			->willReturn($createdStatementDummy);
+		$subject = 'bar';
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createIdentifier')
@@ -99,20 +93,18 @@ class QueryTest extends \Tests\Helpers\TestCase {
 					->disableOriginalConstructor()
 					->getMock()
 			);
-		$query->select($subject);
+		$this->assertSame($createdStatementDummy, $query->select($subject));
 	}
 
 	public function testCanDelete() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		$query = $this->createQuery($commandsBuilderMock);
+		$createdStatementDummy = 'foo';
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createDelete')
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Statements\Inserts\InsertInto::class)
-					->disableOriginalConstructor()
-					->getMock()
-			);
-		$subject = 'foo';
+			->willReturn($createdStatementDummy);
+		$subject = 'bar';
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createIdentifier')
@@ -121,7 +113,7 @@ class QueryTest extends \Tests\Helpers\TestCase {
 					->disableOriginalConstructor()
 					->getMock()
 			);
-		$query->delete($subject);
+		$this->assertSame($createdStatementDummy, $query->delete($subject));
 	}
 
 	public function testCanStartTransaction() {
@@ -140,13 +132,11 @@ class QueryTest extends \Tests\Helpers\TestCase {
 	public function testCanBegin() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		$query = $this->createQuery($commandsBuilderMock);
+		$createdStatementDummy = 'foo';
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createBegin')
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Statements\Inserts\InsertInto::class)
-					->disableOriginalConstructor()
-					->getMock()
-			);
-		$query->begin();
+			->willReturn($createdStatementDummy);
+		$this->assertSame($createdStatementDummy, $query->begin());
 	}
 }
