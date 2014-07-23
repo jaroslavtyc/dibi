@@ -1,18 +1,8 @@
 <?php
 namespace Pribi\Commands\Openers;
 
-use Pribi\Builders\CommandsBuilder;
-use Pribi\Commands\Command;
-use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Inserts\InsertIgnoreInto;
-use Pribi\Commands\Inserts\InsertInto;
-use Pribi\Commands\Selects\Select;
-use Pribi\Commands\Identifiers\Identifiers;
-use Pribi\Commands\Transactions\StartTransactions\StartTransaction;
-use Pribi\Commands\Deletions\Delete;
-
-class Query extends Command {
-	public function __construct(CommandsBuilder $commandsBuilder) {
+class Query extends \Pribi\Commands\Command {
+	public function __construct(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
 		parent::__construct($this, $commandsBuilder);
 	}
 
@@ -51,6 +41,6 @@ class Query extends Command {
 	}
 
 	public function startTransaction() {
-		return new StartTransaction($this);
+		return $this->getCommandBuilder()->createStartTransaction($this);
 	}
 }

@@ -46,6 +46,10 @@ class CommandsBuilder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\Deletions\Delete($identifier, $previousCommand, $this);
 	}
 
+	public function createStartTransaction(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\Transactions\StartTransactions\StartTransaction($previousCommand, $this);
+	}
+
 	public function createFrom(\Pribi\Commands\Identifiers\Identifier $fromSource, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\FromSources\From($fromSource, $previousCommand, $this);
 	}

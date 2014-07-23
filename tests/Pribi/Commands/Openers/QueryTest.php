@@ -122,4 +122,17 @@ class QueryTest extends \Tests\Helpers\TestCase {
 			);
 		$query->delete($subject);
 	}
+
+	public function testCanStartTransaction() {
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$query = $this->createQuery($commandsBuilderMock);
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createStartTransaction')
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Inserts\InsertInto::class)
+					->disableOriginalConstructor()
+					->getMock()
+			);
+		$query->startTransaction();
+	}
 }
