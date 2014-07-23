@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\WhereSources;
+namespace Pribi\Commands\WhereDefinitions;
 
 use Pribi\Commands\Conditions\Base\AndOring;
 use Pribi\Commands\Conditions\Base\AndOrUsable;

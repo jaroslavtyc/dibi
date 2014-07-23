@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\Deletions;
 
-use Pribi\Commands\FromSources\From;
+use Pribi\Commands\FromDefinitions\From;
 use Pribi\Commands\Identifiers\EmptyIdentifier;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\WithIdentifier;

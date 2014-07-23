@@ -1,9 +1,9 @@
 <?php
-namespace Pribi\Commands\WhereSources\Base;
+namespace Pribi\Commands\WhereDefinitions\Base;
 
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\WhereSources\Where;
-use Pribi\Commands\WhereSources\WhereNot;
+use Pribi\Commands\WhereDefinitions\Where;
+use Pribi\Commands\WhereDefinitions\WhereNot;
 
 trait Whereing {
 	public function where($subject) {

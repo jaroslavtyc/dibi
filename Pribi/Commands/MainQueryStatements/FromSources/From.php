@@ -6,7 +6,7 @@ use Pribi\Commands\Identifiers\Identifier;
 /**
  * @method FromAlias as ($alias)
  */
-class From extends \Pribi\Commands\FromSources\From implements Executable {
+class From extends \Pribi\Commands\FromDefinitions\From implements Executable {
 	use Executabling;
 
 	protected function alias(Identifier $alias) {

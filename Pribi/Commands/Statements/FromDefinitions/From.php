@@ -1,22 +1,22 @@
 <?php
-namespace Pribi\Commands\FromSources;
+namespace Pribi\Commands\FromDefinitions;
 
-use Pribi\Commands\FromSources\Base\FromIdentifiable;
+use Pribi\Commands\FromDefinitions\Base\FromIdentifiable;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\IdentifierBringer;
 use Pribi\Commands\Joins\Base\Joinable;
 use Pribi\Commands\Joins\Joining;
 use Pribi\Commands\Limits\Base\Limitable;
 use Pribi\Commands\Limits\Base\Limiting;
-use Pribi\Commands\WhereSources\Base\Whereable;
-use Pribi\Commands\WhereSources\Base\Whereing;
+use Pribi\Commands\WhereDefinitions\Base\Whereable;
+use Pribi\Commands\WhereDefinitions\Base\Whereing;
 
 /**
  * @method FromAlias as ($alias)
  */
 class From extends IdentifierBringer implements FromIdentifiable, Joinable, Whereable, Limitable {
 	use Joining;
-	use \Pribi\Commands\WhereSources\Base\Whereing;
+	use \Pribi\Commands\WhereDefinitions\Base\Whereing;
 	use \Pribi\Commands\Limits\Base\Limiting;
 
 	protected function toSql() {
