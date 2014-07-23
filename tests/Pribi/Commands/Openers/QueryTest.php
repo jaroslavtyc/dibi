@@ -1,8 +1,6 @@
 <?php
 namespace Pribi\Commands\Openers;
 
-use Pribi\Executions\QueryExecutor;
-
 class QueryTest extends \Tests\Helpers\TestCase {
 
 	public function testInstanceCanBeCreated() {
@@ -41,10 +39,7 @@ class QueryTest extends \Tests\Helpers\TestCase {
 		$query->insertInto($tableName, $columnNames);
 	}
 
-	private function createQuery(\PHPUnit_Framework_MockObject_MockObject $commandsBuilder) {
-		/**
-		 * @var \Pribi\Builders\CommandsBuilder $commandsBuilder
-		 */
+	private function createQuery(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
 		return new Query($commandsBuilder);
 	}
 
