@@ -48,7 +48,7 @@ trait Executabling {
 	/**
 	 * @return Builder
 	 */
-	protected function createBuilder() {
+	private function createBuilder() {
 		return new Builder;
 	}
 }
