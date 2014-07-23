@@ -1,13 +1,11 @@
 <?php
 namespace Pribi\Commands\Transactions\Begins;
 
-use Pribi\Commands\Transactions\Commits\Commit;
-
-class Begin extends \Pribi\Commands\WithoutIdentifier implements \Pribi\Executions\Executable {
+class Work extends \Pribi\Commands\WithoutIdentifier implements \Pribi\Executions\Executable {
 	use \Pribi\Executions\Executabling;
 
 	protected function toSql() {
-		return 'BEGIN';
+		return 'WORK';
 	}
 
 	public function work() {

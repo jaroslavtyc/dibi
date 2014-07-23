@@ -43,4 +43,8 @@ class Query extends \Pribi\Commands\Command {
 	public function startTransaction() {
 		return $this->getCommandBuilder()->createStartTransaction($this);
 	}
+
+	public function begin() {
+		return $this->getCommandBuilder()->createBegin($this);
+	}
 }

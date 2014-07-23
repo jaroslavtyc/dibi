@@ -50,6 +50,14 @@ class CommandsBuilder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\Transactions\StartTransactions\StartTransaction($previousCommand, $this);
 	}
 
+	public function createBegin(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\Transactions\Begins\Begin($previousCommand, $this);
+	}
+
+	public function createWork(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\Transactions\Begins\Work($previousCommand, $this);
+	}
+
 	public function createFrom(\Pribi\Commands\Identifiers\Identifier $fromSource, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\FromSources\From($fromSource, $previousCommand, $this);
 	}
