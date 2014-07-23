@@ -8,6 +8,12 @@ class QueryTest extends \Tests\Helpers\TestCase {
 		$this->assertNotNull($instance);
 	}
 
+	public function testAsSqlIsEmptyString() {
+		$toSqlMethod = new \ReflectionMethod(Query::class, 'toSql');
+		$toSqlMethod->setAccessible(TRUE);
+		$this->assertSame('', $toSqlMethod->invoke(new Query($this->getCommandsBuilderDummy())));
+	}
+
 	public function testCanInsertInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		$query = $this->createQuery($commandsBuilderMock);
