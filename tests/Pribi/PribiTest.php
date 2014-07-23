@@ -18,7 +18,7 @@ class PribiTest extends \Tests\Helpers\TestCase {
 		$this->assertEquals('foo', $pribi->createQuery());
 	}
 
-	private function createPribi(\Pribi\Builders\CommandsBuilder $commandsBuilder){
+	private function createPribi(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
 		return new Pribi($commandsBuilder);
 	}
 
