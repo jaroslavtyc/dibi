@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Selects\Base;
+namespace Pribi\Commands\Statements\Selects\Base;
 
 interface AfterSelectUsable {
 	public function select($subject);

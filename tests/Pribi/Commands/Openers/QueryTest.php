@@ -20,7 +20,7 @@ class QueryTest extends \Tests\Helpers\TestCase {
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createInsertInto')
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Inserts\InsertInto::class)
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Statements\Inserts\InsertInto::class)
 					->disableOriginalConstructor()
 					->getMock()
 			);
@@ -55,7 +55,7 @@ class QueryTest extends \Tests\Helpers\TestCase {
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createInsertIgnoreInto')
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Inserts\InsertInto::class)
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Statements\Inserts\InsertIgnoreInto::class)
 					->disableOriginalConstructor()
 					->getMock()
 			);
@@ -86,7 +86,7 @@ class QueryTest extends \Tests\Helpers\TestCase {
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createSelect')
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Inserts\InsertInto::class)
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Statements\Inserts\InsertInto::class)
 					->disableOriginalConstructor()
 					->getMock()
 			);
@@ -108,7 +108,7 @@ class QueryTest extends \Tests\Helpers\TestCase {
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createDelete')
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Inserts\InsertInto::class)
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Statements\Inserts\InsertInto::class)
 					->disableOriginalConstructor()
 					->getMock()
 			);
@@ -130,7 +130,7 @@ class QueryTest extends \Tests\Helpers\TestCase {
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createStartTransaction')
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Inserts\InsertInto::class)
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Statements\Inserts\InsertInto::class)
 					->disableOriginalConstructor()
 					->getMock()
 			);
@@ -143,7 +143,7 @@ class QueryTest extends \Tests\Helpers\TestCase {
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createBegin')
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Inserts\InsertInto::class)
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Statements\Inserts\InsertInto::class)
 					->disableOriginalConstructor()
 					->getMock()
 			);

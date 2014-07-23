@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Inserts;
+namespace Pribi\Commands\Statements\Inserts;
 
 class InsertInto extends Insert {
 

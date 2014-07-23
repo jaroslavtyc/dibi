@@ -6,7 +6,7 @@ use Pribi\Executions\Executable;
 use Pribi\Executions\Executabling;
 use Pribi\MainQueryCommands\Selects\Base\AfterSelecting;
 
-class SelectNotAlias extends \Pribi\Commands\Selects\SelectNotAlias implements Executable {
+class SelectNotAlias extends \Pribi\Commands\Statements\Selects\SelectNotAlias implements Executable {
 	use AfterSelecting;
 	use Executabling;
 

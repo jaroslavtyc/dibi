@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Limits;
+namespace Pribi\Commands\Statements\Limits;
 
 use Pribi\Commands\Command;
 use Pribi\Commands\WithoutIdentifier;

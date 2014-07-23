@@ -1,10 +1,10 @@
 <?php
-namespace Pribi\Commands\Selects\Base;
+namespace Pribi\Commands\Statements\Selects\Base;
 
 use Pribi\Commands\IdentifierBringer;
-use Pribi\Commands\Limits\Base\Limitable;
-use Pribi\Commands\Limits\Base\Limiting;
-use Pribi\Commands\Selects\SelectAlias;
+use Pribi\Commands\Statements\Limits\Base\Limitable;
+use Pribi\Commands\Statements\Limits\Base\Limiting;
+use Pribi\Commands\Statements\Selects\SelectAlias;
 
 /**
  * @method SelectAlias as ($alias)

@@ -1,9 +1,9 @@
 <?php
-namespace Pribi\Commands\Selects\Base;
+namespace Pribi\Commands\Statements\Selects\Base;
 
 use Pribi\Commands\FromDefinitions\From;
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Selects\SelectNot;
+use Pribi\Commands\Statements\Selects\SelectNot;
 use Pribi\Commands\WhereDefinitions\Where;
 use Pribi\Commands\WhereDefinitions\WhereNot;
 
@@ -12,7 +12,7 @@ trait AfterSelecting {
 		/**
 		 * @var \Pribi\Commands\Command $this
 		 */
-		$select = new \Pribi\Commands\Selects\Select(new Identifier($subject), $this);
+		$select = new \Pribi\Commands\Statements\Selects\Select(new Identifier($subject), $this);
 
 		return $select;
 	}

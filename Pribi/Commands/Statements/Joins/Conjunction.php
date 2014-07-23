@@ -6,8 +6,8 @@ use Pribi\Commands\DifferentTo;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Joins\Base\AndOring;
 use Pribi\Commands\Joins\Base\Comparing;
-use Pribi\Commands\Limits\Base\Limitable;
-use Pribi\Commands\Limits\Base\Limiting;
+use Pribi\Commands\Statements\Limits\Base\Limitable;
+use Pribi\Commands\Statements\Limits\Base\Limiting;
 use Pribi\Commands\WhereDefinitions\Base\Whereable;
 use Pribi\Commands\WhereDefinitions\Base\Whereing;
 

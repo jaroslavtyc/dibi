@@ -1,11 +1,11 @@
 <?php
-namespace Pribi\Commands\Inserts;
+namespace Pribi\Commands\Statements\Inserts;
 
 use Pribi\Builders\CommandsBuilder;
 use Pribi\Commands\Command;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\WithIdentifier;
-use Pribi\Commands\Selects\Select;
+use Pribi\Commands\Statements\Selects\Select;
 use Pribi\Commands\Identifiers\Identifiers;
 
 abstract class Insert extends WithIdentifier {

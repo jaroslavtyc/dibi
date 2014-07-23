@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Inserts;
+namespace Pribi\Commands\Statements\Inserts;
 
 use Pribi\Commands\Command;
 use Pribi\Commands\Identifiers\Identifiers;

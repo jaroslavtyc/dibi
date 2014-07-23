@@ -6,8 +6,8 @@ use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\IdentifierBringer;
 use Pribi\Commands\Joins\Base\Joinable;
 use Pribi\Commands\Joins\Joining;
-use Pribi\Commands\Limits\Base\Limitable;
-use Pribi\Commands\Limits\Base\Limiting;
+use Pribi\Commands\Statements\Limits\Base\Limitable;
+use Pribi\Commands\Statements\Limits\Base\Limiting;
 use Pribi\Commands\WhereDefinitions\Base\Whereable;
 use Pribi\Commands\WhereDefinitions\Base\Whereing;
 
@@ -17,7 +17,7 @@ use Pribi\Commands\WhereDefinitions\Base\Whereing;
 class From extends IdentifierBringer implements FromIdentifiable, Joinable, Whereable, Limitable {
 	use Joining;
 	use \Pribi\Commands\WhereDefinitions\Base\Whereing;
-	use \Pribi\Commands\Limits\Base\Limiting;
+	use \Pribi\Commands\Statements\Limits\Base\Limiting;
 
 	protected function toSql() {
 		if (is_a($this->getPreviousCommand(), self::CLASS_IDENTITY)) {

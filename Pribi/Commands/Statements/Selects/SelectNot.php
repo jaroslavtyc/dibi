@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Selects;
+namespace Pribi\Commands\Statements\Selects;
 
 use Pribi\Commands\Identifiers\Identifier;
 
