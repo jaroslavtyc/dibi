@@ -10,11 +10,11 @@ class CommandsBuilder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\Identifiers\Identifiers($subjects);
 	}
 
-	public function createQuery(){
+	public function createQuery() {
 		return new \Pribi\Commands\Openers\Query($this);
 	}
 
-	public function createSubcondition(){
+	public function createSubcondition() {
 		return new \Pribi\Commands\Subconditions\Subcondition($this);
 	}
 
@@ -59,6 +59,6 @@ class CommandsBuilder extends \Pribi\Core\Object {
 	}
 
 	public function createFrom(\Pribi\Commands\Identifiers\Identifier $fromSource, \Pribi\Commands\Command $previousCommand) {
-		return new \Pribi\Commands\FromSources\From($fromSource, $previousCommand, $this);
+		return new \Pribi\Commands\FromDefinitions\From($fromSource, $previousCommand, $this);
 	}
 }
