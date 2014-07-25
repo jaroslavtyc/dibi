@@ -22,6 +22,10 @@ class CommandsBuilder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\MainQueryStatements\Selects\Select($identifier, $previousCommand, $this);
 	}
 
+	public function createMainQueryUpdate(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Updates\Update($identifier, $previousCommand, $this);
+	}
+
 	public function createSelect(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\Statements\Selects\Select($identifier, $previousCommand, $this);
 	}

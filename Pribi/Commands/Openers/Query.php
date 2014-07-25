@@ -35,6 +35,13 @@ class Query extends \Pribi\Commands\Command {
 		);
 	}
 
+	public function update($subject) {
+		return $this->getCommandBuilder()->createMainQueryUpdate(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
+	}
+
 	public function delete($subject) {
 		return $this->getCommandBuilder()->createDelete(
 			$this->getCommandBuilder()->createIdentifier($subject),

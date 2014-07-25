@@ -96,6 +96,26 @@ class QueryTest extends \Tests\Helpers\TestCase {
 		$this->assertSame($createdStatementDummy, $query->select($subject));
 	}
 
+	public function testCanUpdate() {
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$query = $this->createQuery($commandsBuilderMock);
+		$createdStatementDummy = 'foo';
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createMainQueryUpdate')
+			->willReturn($createdStatementDummy);
+		$subject = 'bar';
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createIdentifier')
+			->with($subject)
+			->willReturn($this->getMockBuilder(\Pribi\Commands\Identifiers\Identifier::class)
+					->disableOriginalConstructor()
+					->getMock()
+			);
+		$this->assertSame($createdStatementDummy, $query->update($subject));
+	}
+
 	public function testCanDelete() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		$query = $this->createQuery($commandsBuilderMock);
