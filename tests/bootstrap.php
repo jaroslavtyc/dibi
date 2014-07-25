@@ -6,7 +6,11 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-require_once __DIR__ . '/helpers/TestCase.php';
+foreach(scandir(__DIR__ . '/helpers/') as $file) {
+	if (preg_match('/\.php$/', $file)) {
+		require_once __DIR__ . '/helpers/' . $file;
+	}
+}
 
 spl_autoload_register(function ($className) {
 	$classFilename = __DIR__ . '/../' . str_replace('\\', '/', $className) . '.php';
