@@ -17,4 +17,8 @@ abstract class Object {
 	public static function __callStatic($name, array $arguments) {
 		throw new Exceptions\UnknownStaticMethodCalled(\sprintf('Executing static method [%s->%s()] fails. Does not exists or has restricted access.', \get_called_class(), $name));
 	}
+
+	public function __invoke() {
+		throw new Exceptions\UnknownMethodCalled(\sprintf('Calling object of class [%s] as method fails. Does not implements __invoke() method.', \get_called_class()));
+	}
 }
