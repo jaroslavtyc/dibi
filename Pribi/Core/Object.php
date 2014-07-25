@@ -10,10 +10,6 @@ abstract class Object {
 		throw new Exceptions\WritingAccess(\sprintf('Writting to property [%s->%s] fails. Does not exists or has restricted access.', \get_class($this), $name));
 	}
 
-	public function __isset($name) {
-		throw new Exceptions\ReadingAccess(\sprintf('Checking property [%s->%s] if is set fails. Does not exists or has restricted access.', \get_class($this), $name));
-	}
-
 	public function __call($name, array $arguments) {
 		throw new Exceptions\UnknownMethodCalled(\sprintf('Executing method [%s->%s()] fails. Does not exists or has restricted access.', \get_class($this), $name));
 	}
