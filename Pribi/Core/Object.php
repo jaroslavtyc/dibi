@@ -7,7 +7,7 @@ abstract class Object {
 	}
 
 	public function __set($name, $value) {
-		throw new Exceptions\WrittingAccess(\sprintf('Writting to property [%s->%s] fails. Does not exists or has restricted access.', \get_class($this), $name));
+		throw new Exceptions\WritingAccess(\sprintf('Writting to property [%s->%s] fails. Does not exists or has restricted access.', \get_class($this), $name));
 	}
 
 	public function __isset($name) {

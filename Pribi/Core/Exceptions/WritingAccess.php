@@ -1,6 +1,6 @@
 <?php
 namespace Pribi\Core\Exceptions;
 
-class WrittingAccess extends Access {
+class WritingAccess extends Access {
 
 }
