@@ -1,0 +1,26 @@
+<?php
+namespace Pribi\Commands\Joins;
+
+use Pribi\Commands\Identifiers\Identifier;
+use Pribi\Commands\Joins\Base\AndOring;
+use Pribi\Commands\Joins\Base\Comparing;
+use Pribi\Commands\AnyQueryStatements\Limits\Base\Limitable;
+use Pribi\Commands\AnyQueryStatements\Limits\Base\Limiting;
+
+class Disjunction extends \Pribi\Commands\AnyQueryStatements\Conditions\Disjunction implements Limitable {
+	use AndOring;
+	use Comparing;
+	use Limiting;
+
+	protected function conjunction(Identifier $identifier) {
+		$conjunction = new Conjunction($identifier, $this);
+
+		return $conjunction;
+	}
+
+	protected function disjunction(Identifier $identifier) {
+		$disjunction = new Disjunction($identifier, $this);
+
+		return $disjunction;
+	}
+}

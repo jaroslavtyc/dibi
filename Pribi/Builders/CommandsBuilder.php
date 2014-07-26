@@ -27,11 +27,11 @@ class CommandsBuilder extends \Pribi\Core\Object {
 	}
 
 	public function createSelect(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
-		return new \Pribi\Commands\Statements\Selects\Select($identifier, $previousCommand, $this);
+		return new \Pribi\Commands\AnyQueryStatements\Selects\Select($identifier, $previousCommand, $this);
 	}
 
-	public function createSelectAlias(\Pribi\Commands\Identifiers\Identifier $alias, \Pribi\Commands\Statements\Selects\Select $prependSelect) {
-		return new \Pribi\Commands\Statements\Selects\SelectAlias($alias, $prependSelect, $this);
+	public function createSelectAlias(\Pribi\Commands\Identifiers\Identifier $alias, \Pribi\Commands\AnyQueryStatements\Selects\Select $prependSelect) {
+		return new \Pribi\Commands\AnyQueryStatements\Selects\SelectAlias($alias, $prependSelect, $this);
 	}
 
 	public function createInsertInto(
@@ -39,7 +39,7 @@ class CommandsBuilder extends \Pribi\Core\Object {
 		\Pribi\Commands\Command $previousCommand,
 		\Pribi\Commands\Identifiers\Identifiers $columnsIdentifiers
 	) {
-		return new \Pribi\Commands\Statements\Inserts\InsertInto($tableIdentifier, $previousCommand, $this, $columnsIdentifiers);
+		return new \Pribi\Commands\AnyQueryStatements\Inserts\InsertInto($tableIdentifier, $previousCommand, $this, $columnsIdentifiers);
 	}
 
 	public function createInsertIgnoreInto(
@@ -47,7 +47,7 @@ class CommandsBuilder extends \Pribi\Core\Object {
 		\Pribi\Commands\Command $previousCommand,
 		\Pribi\Commands\Identifiers\Identifiers $columnsIdentifiers
 	) {
-		return new \Pribi\Commands\Statements\Inserts\InsertIgnoreInto($tableIdentifier, $previousCommand, $this, $columnsIdentifiers);
+		return new \Pribi\Commands\AnyQueryStatements\Inserts\InsertIgnoreInto($tableIdentifier, $previousCommand, $this, $columnsIdentifiers);
 	}
 
 	public function createDelete(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {

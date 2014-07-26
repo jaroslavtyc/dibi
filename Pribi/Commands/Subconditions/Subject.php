@@ -1,10 +1,10 @@
 <?php
 namespace Pribi\Commands\Subconditions;
 
-use Pribi\Commands\Conditions\Conjunction;
-use Pribi\Commands\Conditions\Disjunction;
-use Pribi\Commands\Conditions\IsNotNull;
-use Pribi\Commands\Conditions\IsNull;
+use Pribi\Commands\AnyQueryStatements\Conditions\Conjunction;
+use Pribi\Commands\AnyQueryStatements\Conditions\Disjunction;
+use Pribi\Commands\AnyQueryStatements\Conditions\IsNotNull;
+use Pribi\Commands\AnyQueryStatements\Conditions\IsNull;
 use Pribi\Commands\WithIdentifier;
 
 /**
@@ -12,7 +12,7 @@ use Pribi\Commands\WithIdentifier;
  * @method or($subject) @return Disjunction
  */
 class Subject extends WithIdentifier {
-	use \Pribi\Commands\Conditions\Base\AndOring;
+	use \Pribi\Commands\AnyQueryStatements\Conditions\Base\AndOring;
 
 	protected function toSql() {
 		return $this->getIdentifier()->toSql();

@@ -4,7 +4,7 @@ namespace Pribi\Commands\MainQueryStatements\Selects;
 /**
  * @method SelectAlias as ($alias)
  */
-class Select extends \Pribi\Commands\Statements\Selects\Select implements \Pribi\Executions\Executable {
+class Select extends \Pribi\Commands\AnyQueryStatements\Selects\Select implements \Pribi\Executions\Executable {
 	use Base\AfterSelecting;
 	use \Pribi\Executions\Executabling;
 

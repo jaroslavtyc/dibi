@@ -142,7 +142,7 @@ class QueryCommandTest extends \Tests\Helpers\CommandTestCase {
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createMainQueryStartTransaction')
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Statements\Inserts\InsertInto::class)
+			->willReturn($this->getMockBuilder(\Pribi\Commands\AnyQueryStatements\Inserts\InsertInto::class)
 					->disableOriginalConstructor()
 					->getMock()
 			);

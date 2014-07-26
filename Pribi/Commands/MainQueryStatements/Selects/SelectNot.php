@@ -9,7 +9,7 @@ use Pribi\Commands\MainQueryStatements\Selects\Base\AfterSelecting;
 /**
  * @method SelectAlias as ($alias)
  */
-class SelectNot extends \Pribi\Commands\Statements\Selects\SelectNot implements Executable {
+class SelectNot extends \Pribi\Commands\AnyQueryStatements\Selects\SelectNot implements Executable {
 	use AfterSelecting;
 	use Executabling;
 
