@@ -1,8 +1,6 @@
 <?php
 namespace Pribi\Commands\Deletions;
 
-use Pribi\Commands\FromDefinitions\From;
-use Pribi\Commands\Identifiers\EmptyIdentifier;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\WithIdentifier;
 
@@ -17,13 +15,8 @@ class Delete extends WithIdentifier {
 		}
 	}
 
-	public function delete($subject = '') {
-		$this->getCommandBuilder()->createDelete(
-			$subject === ''
-				? new EmptyIdentifier() // that means "delete all from single table" in SQL language
-				: new Identifier($subject),
-			$this
-		);
+	public function delete($subject = '' /* that means "delete all from single table" in SQL language */) {
+		$this->getCommandBuilder()->createDelete(new Identifier($subject), $this);
 	}
 
 	public function from($subject) {
