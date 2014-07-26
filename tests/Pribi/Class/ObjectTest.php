@@ -43,6 +43,11 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testCallingObjectAsAMethodWithoutInvokeMagicMethodCauseException() {
 		$object = $this->createObjectInstance();
+		/**
+		 * A little hack to avoid PHPStorm error warning. The $object of course does not have Callable interface.
+		 *
+		 * @var $object Callable
+		 */
 		$object();
 	}
 }
