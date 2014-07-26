@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Core\Exceptions;
 
-class UnknownMethodCalled extends ExecutingAccess {
+class UnknownMethodCalled extends ExecutingPermission {
 
 }
  

@@ -1,6 +1,6 @@
 <?php
 namespace Pribi\Core\Exceptions;
 
-class ExecutingAccess extends Access {
+class ExecutingPermission extends Access {
 
 }
