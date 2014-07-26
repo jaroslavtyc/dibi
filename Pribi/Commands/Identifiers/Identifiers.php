@@ -7,8 +7,8 @@ use Traversable;
 class Identifiers extends QueryPart implements \IteratorAggregate, \Countable {
 	private $identifiers;
 
-	public function __construct($subjects) {
-		$this->identifiers = $this->buildIdentifiers($subjects);
+	public function __construct($oneOrMoreSubjects) {
+		$this->identifiers = $this->buildIdentifiers($oneOrMoreSubjects);
 	}
 
 	private function buildIdentifiers($subjects) {
