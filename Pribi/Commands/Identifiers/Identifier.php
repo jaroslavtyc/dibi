@@ -4,6 +4,7 @@ namespace Pribi\Commands\Identifiers;
 use Pribi\Commands\QueryPart;
 
 class Identifier extends QueryPart {
+
 	private $subject;
 	private $quoted;
 
@@ -34,7 +35,7 @@ class Identifier extends QueryPart {
 	}
 
 	private function isProbablyNotSpecial($subject) {
-		return preg_match('~^[.\s\dA-Za-z$_\x{0080}-\x{FFFF}]+(\.\*)?$~u', $subject);
+		return (bool)preg_match('~^[.\s\dA-Za-z$_\x{0080}-\x{FFFF}]+(\.\*)?$~u', $subject);
 	}
 
 	private function isValidIdentifier($qualifier) {
