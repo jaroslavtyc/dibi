@@ -9,7 +9,7 @@ class Identifiers extends QueryPart implements \IteratorAggregate, \Countable {
 	private $identifiers;
 
 	public function __construct(array $subjects, \Pribi\Builders\CommandsBuilder $commandsBuilder) {
-		$this->identifiers = $this->buildIdentifiers($subjects, $commandsBuilder);
+		$this->buildIdentifiers($subjects, $commandsBuilder);
 	}
 
 	private function buildIdentifiers(array $subjects, \Pribi\Builders\CommandsBuilder $commandsBuilder) {
@@ -34,13 +34,13 @@ class Identifiers extends QueryPart implements \IteratorAggregate, \Countable {
 	}
 
 	/**
-	 * @return Identifier[] \ArrayIterator
+	 * @return Identifier[]
 	 */
 	public function getIterator() {
 		return $this->identifiers;
 	}
 
 	public function count() {
-		return count($this->getIterator());
+		return count($this->identifiers);
 	}
 }
