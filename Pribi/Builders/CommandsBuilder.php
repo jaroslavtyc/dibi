@@ -2,12 +2,13 @@
 namespace Pribi\Builders;
 
 class CommandsBuilder extends \Pribi\Core\Object {
+
 	public function createIdentifier($subject) {
 		return new \Pribi\Commands\Identifiers\Identifier($subject);
 	}
 
-	public function createIdentifiers($subjects) {
-		return new \Pribi\Commands\Identifiers\Identifiers($subjects);
+	public function createIdentifiers(array $subjects) {
+		return new \Pribi\Commands\Identifiers\Identifiers($subjects, $this);
 	}
 
 	public function createQuery() {

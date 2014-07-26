@@ -2,21 +2,21 @@
 namespace Pribi\Commands\Identifiers;
 
 use Pribi\Commands\QueryPart;
-use Traversable;
+use Pribi\Core\Exceptions\Access;
 
 class Identifiers extends QueryPart implements \IteratorAggregate, \Countable {
+
 	private $identifiers;
 
-	public function __construct(array $subjects) {
-		$this->identifiers = $this->buildIdentifiers($subjects);
+	public function __construct(array $subjects, \Pribi\Builders\CommandsBuilder $commandsBuilder) {
+		$this->identifiers = $this->buildIdentifiers($subjects, $commandsBuilder);
 	}
 
-	private function buildIdentifiers(array $subjects) {
+	private function buildIdentifiers(array $subjects, \Pribi\Builders\CommandsBuilder $commandsBuilder) {
 		$this->identifiers = new \ArrayIterator();
 		foreach ($subjects as $subject) {
-			$this->identifiers->append(new Identifier($subject));
+			$this->identifiers->append($commandsBuilder->createIdentifier($subject));
 		}
-		$this->identifiers->append(new Identifier($subjects));
 	}
 
 	protected function toSql() {
@@ -34,7 +34,7 @@ class Identifiers extends QueryPart implements \IteratorAggregate, \Countable {
 	}
 
 	/**
-	 * @return \ArrayIterator
+	 * @return Identifier[] \ArrayIterator
 	 */
 	public function getIterator() {
 		return $this->identifiers;
