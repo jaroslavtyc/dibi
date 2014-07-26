@@ -7,19 +7,16 @@ use Traversable;
 class Identifiers extends QueryPart implements \IteratorAggregate, \Countable {
 	private $identifiers;
 
-	public function __construct($oneOrMoreSubjects) {
-		$this->identifiers = $this->buildIdentifiers($oneOrMoreSubjects);
+	public function __construct(array $subjects) {
+		$this->identifiers = $this->buildIdentifiers($subjects);
 	}
 
-	private function buildIdentifiers($subjects) {
+	private function buildIdentifiers(array $subjects) {
 		$this->identifiers = new \ArrayIterator();
-		if (is_array($subjects) || (is_object($subjects) && is_a($subjects, 'Traversable'))) {
-			foreach ($subjects as $subject) {
-				$this->identifiers->append(new Identifier($subject));
-			}
-		} else {
-			$this->identifiers->append(new Identifier($subjects));
+		foreach ($subjects as $subject) {
+			$this->identifiers->append(new Identifier($subject));
 		}
+		$this->identifiers->append(new Identifier($subjects));
 	}
 
 	protected function toSql() {
