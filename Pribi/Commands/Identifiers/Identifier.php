@@ -68,7 +68,7 @@ class Identifier extends QueryPart {
 		return implode('.', $qualifiers);
 	}
 
-	public function toSql() {
+	protected function toSql() {
 		return $this->quoted;
 	}
 }
