@@ -1,13 +1,11 @@
 <?php
 namespace Pribi\Commands;
 
-use Pribi\Builders\CommandsBuilder;
-
 abstract class Command extends QueryPart {
 	private $previousCommand;
 	private $commandsBuilder;
 
-	public function __construct(Command $previousCommand, CommandsBuilder $commandsBuilder) {
+	public function __construct(Command $previousCommand, \Pribi\Builders\CommandsBuilder $commandsBuilder) {
 		$this->previousCommand = $previousCommand;
 		$this->commandsBuilder = $commandsBuilder;
 	}
@@ -24,7 +22,7 @@ abstract class Command extends QueryPart {
 	}
 
 	/**
-	 * @return CommandsBuilder
+	 * @return \Pribi\Builders\CommandsBuilder
 	 */
 	protected function getCommandBuilder() {
 		return $this->commandsBuilder;
