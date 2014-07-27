@@ -3,6 +3,12 @@ namespace Pribi\Commands\Identifiers;
 
 use Pribi\Commands\QueryPart;
 
+/**
+ * Class Identifier
+ * @package Pribi\Commands\Identifiers
+ *
+ * @see http://dev.mysql.com/doc/refman/5.0/en/identifier-qualifiers.html
+ */
 class Identifier extends QueryPart {
 
 	private $subject;

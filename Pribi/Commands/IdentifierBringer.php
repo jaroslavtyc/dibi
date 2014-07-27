@@ -1,17 +1,18 @@
 <?php
 namespace Pribi\Commands;
 
-use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Identifiers\IdentifierAlias;
-
 /**
- * @method IdentifierAlias as ($alias)
+ * Class IdentifierBringer
+ * @package Pribi\Commands
+ *
+ * @method \Pribi\Commands\Identifiers\IdentifierAlias as ($alias)
  */
+
 abstract class IdentifierBringer extends WithIdentifier {
 	public function __call($methodName, array $arguments) {
 		if ($methodName === 'as') {
 			if (\array_key_exists(0, $arguments)) {
-				$nextToFluid = $this->alias(new Identifier($arguments[0]));
+				$nextToFluid = $this->alias(new \Pribi\Commands\Identifiers\Identifier($arguments[0]));
 			} else {
 				throw new Exceptions\MissingAliasName;
 			}
@@ -26,5 +27,5 @@ abstract class IdentifierBringer extends WithIdentifier {
 	 * @param $name
 	 * @return \Pribi\Commands\Command
 	 */
-	abstract protected function alias(Identifier $name);
+	abstract protected function alias(\Pribi\Commands\Identifiers\Identifier $name);
 }
