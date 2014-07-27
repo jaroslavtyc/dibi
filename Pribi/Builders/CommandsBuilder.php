@@ -15,8 +15,8 @@ class CommandsBuilder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\Openers\Query($this);
 	}
 
-	public function createSubcondition() {
-		return new \Pribi\Commands\Subconditions\Subcondition($this);
+	public function createSubQuery() {
+		return new \Pribi\Commands\SubQueries\SubQuery($this);
 	}
 
 	public function createMainQuerySelect(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
@@ -27,7 +27,7 @@ class CommandsBuilder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\MainQueryStatements\Updates\Update($identifier, $previousCommand, $this);
 	}
 
-	public function createSelect(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+	public function createAnyQuerySelect(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\AnyQueryStatements\Selects\Select($identifier, $previousCommand, $this);
 	}
 

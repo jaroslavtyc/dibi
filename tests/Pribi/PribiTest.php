@@ -22,13 +22,13 @@ class PribiCommandTest extends \Tests\Helpers\CommandTestCase {
 		return new Pribi($commandsBuilder);
 	}
 
-	public function testCanGiveSubcondition() {
+	public function testCanGiveSubQuery() {
 		$commandBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		$pribi = $this->createPribi($commandBuilderMock);
 		$commandBuilderMock->expects($this->once())
-			->method('createSubcondition')
+			->method('createSubQuery')
 			->with() // no parameters expected
 			->willReturn('foo');
-		$this->assertEquals('foo', $pribi->craeteSubcondition());
+		$this->assertEquals('foo', $pribi->createSubQuery());
 	}
 }

@@ -13,7 +13,7 @@ class Pribi {
 		return $this->commandsBuilder->createQuery();
 	}
 
-	public function craeteSubcondition() {
-		return $this->commandsBuilder->createSubcondition();
+	public function createSubQuery() {
+		return $this->commandsBuilder->createSubQuery();
 	}
 }
