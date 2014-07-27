@@ -1,6 +1,11 @@
 <?php
 namespace Pribi\Commands\Openers;
 
+/**
+ * Class Query
+ * @package Pribi\Commands\Openers
+ * @see http://dev.mysql.com/doc/refman/5.6/en/entering-queries.html
+ */
 class Query extends \Pribi\Commands\Command {
 	public function __construct(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
 		parent::__construct($this, $commandsBuilder);
