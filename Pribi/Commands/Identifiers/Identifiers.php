@@ -2,7 +2,6 @@
 namespace Pribi\Commands\Identifiers;
 
 use Pribi\Commands\QueryPart;
-use Pribi\Core\Exceptions\Access;
 
 class Identifiers extends QueryPart implements \IteratorAggregate, \Countable {
 
@@ -23,9 +22,7 @@ class Identifiers extends QueryPart implements \IteratorAggregate, \Countable {
 		$sql = '';
 		$delimiter = '';
 		foreach ($this->identifiers as $identifier) {
-			/**
-			 * @var Identifier $identifier
-			 */
+			/** @var Identifier $identifier */
 			$sql .= $delimiter . $identifier->toSql();
 			$delimiter = ',';
 		}
