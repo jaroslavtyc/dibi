@@ -1,18 +1,28 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
-use Pribi\Commands\Command;
-use Pribi\Commands\Identifiers\Identifiers;
+class Values extends \Pribi\Commands\Command {
 
-class Values extends Command {
-	private $values;
+	private $subjects;
 
-	public function __construct(Identifiers $values, Command $previousCommand) {
-		parent::__construct($previousCommand);
-		$this->values = $values;
+	public function __construct(
+		\Pribi\Commands\Subjects\Subjects $subjects,
+		\Pribi\Commands\Command $previousCommand,
+		\Pribi\Builders\CommandsBuilder $commandsBuilder
+	) {
+		parent::__construct($previousCommand, $commandsBuilder);
+		$this->subjects = $subjects;
 	}
 
 	protected function toSql() {
-		return 'VALUES (' . $this->values->toSql() . ')';
+		return 'VALUES (' . $this->subjects->toSql() . ')';
+	}
+
+	public function onDuplicateKeyUpdate($columnName, $expression) {
+		return $this->getCommandBuilder()->createOnDuplicateKeyUpdate(
+			$this->getCommandBuilder()->createIdentifier($columnName),
+			$this->getCommandBuilder()->createSubject($expression),
+			$this
+		);
 	}
 }
