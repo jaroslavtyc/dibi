@@ -31,7 +31,7 @@ class Identifiers extends QueryPart implements \IteratorAggregate, \Countable {
 	}
 
 	/**
-	 * @return Identifier[]
+	 * @return \ArrayIterator Identifier[]
 	 */
 	public function getIterator() {
 		return $this->identifiers;
