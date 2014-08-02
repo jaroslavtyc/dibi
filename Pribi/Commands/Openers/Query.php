@@ -15,13 +15,9 @@ class Query extends \Pribi\Commands\Command {
 		return '';
 	}
 
-	public function insertInto($table, $columns) {
-		// INSERT INTO is not a part of main query commands because of lack of execution sense immediately after it
-		return $this->getCommandBuilder()->createInsertInto(
-			$this->getCommandBuilder()->createIdentifier($table),
-			$this,
-			$this->getCommandBuilder()->createIdentifiers($columns)
-		);
+	public function insert() {
+		// INSERT is not a part of main query commands because of lack of execution sense immediately after it
+		return $this->getCommandBuilder()->createInsert($this);
 	}
 
 	public function insertIgnoreInto($table, $columns) {

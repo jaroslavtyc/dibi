@@ -19,63 +19,15 @@ class QueryCommandTest extends \Tests\Helpers\CommandTestCase {
 		$createdStatementDummy = 'foo';
 		$commandsBuilderMock
 			->expects($this->once())
-			->method('createInsertInto')
+			->method('createInsert')
 			->willReturn($createdStatementDummy);
-		$tableName = 'bar';
-		$commandsBuilderMock
-			->expects($this->once())
-			->method('createIdentifier')
-			->with($tableName)
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Identifiers\Identifier::class)
-					->disableOriginalConstructor()
-					->getMock()
-			);
-		$columnNames = ['baz', 'qux'];
-		$commandsBuilderMock
-			->expects($this->once())
-			->method('createIdentifiers')
-			->with($columnNames)
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Identifiers\Identifiers::class)
-					->disableOriginalConstructor()
-					->getMock()
-			);
 		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
 		$query = $this->createQuery($commandsBuilderMock);
-		$this->assertSame($createdStatementDummy, $query->insertInto($tableName, $columnNames));
+		$this->assertSame($createdStatementDummy, $query->insert());
 	}
 
 	private function createQuery(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
 		return new Query($commandsBuilder);
-	}
-
-	public function testCanInsertIgnoreInto() {
-		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
-		$createdStatementDummy = 'foo';
-		$commandsBuilderMock
-			->expects($this->once())
-			->method('createInsertIgnoreInto')
-			->willReturn($createdStatementDummy);
-		$tableName = 'bar';
-		$commandsBuilderMock
-			->expects($this->once())
-			->method('createIdentifier')
-			->with($tableName)
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Identifiers\Identifier::class)
-					->disableOriginalConstructor()
-					->getMock()
-			);
-		$columnNames = ['baz', 'qux'];
-		$commandsBuilderMock
-			->expects($this->once())
-			->method('createIdentifiers')
-			->with($columnNames)
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Identifiers\Identifiers::class)
-					->disableOriginalConstructor()
-					->getMock()
-			);
-		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
-		$query = $this->createQuery($commandsBuilderMock);
-		$this->assertSame($createdStatementDummy, $query->insertIgnoreInto($tableName, $columnNames));
 	}
 
 	public function testCanSelect() {

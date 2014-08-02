@@ -11,6 +11,14 @@ class CommandsBuilder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\Identifiers\Identifiers($subjects, $this);
 	}
 
+	public function createSubject($subjectValue) {
+		return new \Pribi\Commands\Subjects\Subject($subjectValue, $this);
+	}
+
+	public function createSubjects(array $subjectValues) {
+		return new \Pribi\Commands\Subjects\Subjects($subjectValues, $this);
+	}
+
 	public function createQuery() {
 		return new \Pribi\Commands\Openers\Query($this);
 	}
@@ -35,20 +43,39 @@ class CommandsBuilder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\AnyQueryStatements\Selects\SelectAlias($alias, $prependSelect, $this);
 	}
 
-	public function createInsertInto(
-		\Pribi\Commands\Identifiers\Identifier $tableIdentifier,
-		\Pribi\Commands\Command $previousCommand,
-		\Pribi\Commands\Identifiers\Identifiers $columnsIdentifiers
-	) {
-		return new \Pribi\Commands\AnyQueryStatements\Inserts\InsertInto($tableIdentifier, $previousCommand, $this, $columnsIdentifiers);
+	public function createLowPriority(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Inserts\LowPriority($previousCommand, $this);
 	}
 
-	public function createInsertIgnoreInto(
-		\Pribi\Commands\Identifiers\Identifier $tableIdentifier,
-		\Pribi\Commands\Command $previousCommand,
-		\Pribi\Commands\Identifiers\Identifiers $columnsIdentifiers
+	public function createHighPriority(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Inserts\HighPriority($previousCommand, $this);
+	}
+
+	public function createDelayed(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Inserts\Delayed($previousCommand, $this);
+	}
+
+	public function createIgnore(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Inserts\Ignore($previousCommand, $this);
+	}
+
+	public function createInsert(\Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Inserts\Insert($previousCommand, $this);
+	}
+
+	public function createInto(\Pribi\Commands\Identifiers\Identifier $tableName, \Pribi\Commands\Identifiers\Identifiers $columnNames, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Inserts\Into($tableName, $columnNames, $previousCommand, $this);
+	}
+
+	public function createValues(
+		\Pribi\Commands\Subjects\Subjects $subjects,
+		\Pribi\Commands\Command $previousCommand
 	) {
-		return new \Pribi\Commands\AnyQueryStatements\Inserts\InsertIgnoreInto($tableIdentifier, $previousCommand, $this, $columnsIdentifiers);
+		return new \Pribi\Commands\AnyQueryStatements\Inserts\Values($subjects, $previousCommand, $this);
+	}
+
+	public function createOnDuplicateKeyUpdate(\Pribi\Commands\Identifiers\Identifier $columnName, \Pribi\Commands\Subjects\Subject $expression, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Inserts\OnDuplicateKeyUpdate($columnName, $expression, $previousCommand, $this);
 	}
 
 	public function createDelete(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {

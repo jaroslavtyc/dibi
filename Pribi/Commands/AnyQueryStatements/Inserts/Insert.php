@@ -1,54 +1,36 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
-use Pribi\Builders\CommandsBuilder;
-use Pribi\Commands\Command;
-use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\WithIdentifier;
-use Pribi\Commands\AnyQueryStatements\Selects\Select;
-use Pribi\Commands\Identifiers\Identifiers;
-
-abstract class Insert extends WithIdentifier {
-	private $columns;
-
-	public function __construct(
-		Identifier $tableIdentifier,
-		Command $previousCommand,
-		CommandsBuilder $commandsBuilder,
-		Identifiers $columns = NULL
-	) {
-		parent::__construct($tableIdentifier, $previousCommand, $commandsBuilder);
-		$this->columns = $columns;
-	}
+/**
+ * Class Insert
+ * @package Pribi\Commands\AnyQueryStatements\Inserts
+ *
+ * @see http://dev.mysql.com/doc/refman/5.6/en/insert.html
+ */
+class Insert extends \Pribi\Commands\WithoutIdentifier {
 
 	protected function toSql() {
-		$sql = 'INTO ' . $this->getIdentifier()->toSql();
-		if (count($this->columns) > 0) {
-			$sql .= '(' . $this->getImplodedColumns() . ')';
-		}
-
-		return $sql;
+		return 'INSERT';
 	}
 
-	private function getImplodedColumns() {
-		$imploded = '';
-		$delimiter = '';
-		foreach ($this->columns as $column) {
-			/**
-			 * @var Identifier $column
-			 */
-			$imploded .= $delimiter . $column->toSql();
-			$delimiter = ',';
-		}
-
-		return $imploded;
+	public function lowPriority() {
+		return $this->getCommandBuilder()->createLowPriority($this);
 	}
 
-	public function values($subjects) {
-		return new Values(new Identifiers($subjects), $this);
+	public function delayed() {
+		return $this->getCommandBuilder()->createDelayed($this);
 	}
 
-	public function select($subject) {
-		return new Select($subject, $this);
+	public function highPriority() {
+		return $this->getCommandBuilder()->createHighPriority($this);
+	}
+
+	public function ignoreInto($tableName, array $columnNames = []) {
+		return $this->getCommandBuilder()->createIgnore($this)
+			->into($tableName, $columnNames);
+	}
+
+	public function into($tableName, $columnNames = []) {
+		return $this->getCommandBuilder()->createInto($this->getCommandBuilder()->createIdentifier($tableName), $this->getCommandBuilder()->createIdentifiers($columnNames), $this);
 	}
 }
