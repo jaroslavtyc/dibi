@@ -17,17 +17,12 @@ class Insert extends \Pribi\Commands\WithoutIdentifier {
 		return $this->getCommandBuilder()->createLowPriority($this);
 	}
 
-	public function delayed() {
-		return $this->getCommandBuilder()->createDelayed($this);
-	}
-
 	public function highPriority() {
 		return $this->getCommandBuilder()->createHighPriority($this);
 	}
 
-	public function ignoreInto($tableName, array $columnNames = []) {
-		return $this->getCommandBuilder()->createIgnore($this)
-			->into($tableName, $columnNames);
+	public function delayed() {
+		return $this->getCommandBuilder()->createDelayed($this);
 	}
 
 	public function into($tableName, $columnNames = []) {
@@ -36,5 +31,10 @@ class Insert extends \Pribi\Commands\WithoutIdentifier {
 			$this->getCommandBuilder()->createIdentifiers($columnNames),
 			$this
 		);
+	}
+
+	public function ignoreInto($tableName, array $columnNames = []) {
+		return $this->getCommandBuilder()->createIgnore($this)
+			->into($tableName, $columnNames);
 	}
 }
