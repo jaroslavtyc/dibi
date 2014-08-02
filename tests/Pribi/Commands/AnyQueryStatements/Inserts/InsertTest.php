@@ -6,7 +6,7 @@ use Tests\Helpers\CommandTestCase;
 class InsertTest extends CommandTestCase {
 
 	public function testCanCreateInstance() {
-		$instance = new Insert($this->getCommandDummy(), $this->getCommandsBuilderDummy());
+		$instance = new Insert($this->createCommandDummy(), $this->getCommandsBuilderDummy());
 		$this->assertNotNull($instance);
 	}
 
@@ -33,7 +33,7 @@ class InsertTest extends CommandTestCase {
 			->method('createIgnore')
 			->with($insert)
 			->willReturn($ignoreMock = $this->getMockBuilder(Ignore::class)
-					->setConstructorArgs([$this->getCommandDummy(), $commandsBuilderMock])
+					->setConstructorArgs([$this->createCommandDummy(), $commandsBuilderMock])
 					->getMock()
 			);
 		$ignoreMock
@@ -46,36 +46,33 @@ class InsertTest extends CommandTestCase {
 
 	public function testCanInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$tableIdentifierDummy = $this->createIdentifierDummy();
+		$columnsIdentifierDummy = $this->createIdentifiersDummy();
+		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
+		$insert = $this->createInsert($commandsBuilderMock);
 		$createdStatementDummy = 'foo';
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createInto')
+			->with($tableIdentifierDummy, $columnsIdentifierDummy, $insert)
 			->willReturn($createdStatementDummy);
 		$tableName = 'bar';
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createIdentifier')
 			->with($tableName)
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Identifiers\Identifier::class)
-					->disableOriginalConstructor()
-					->getMock()
-			);
+			->willReturn($tableIdentifierDummy);
 		$columnNames = ['baz', 'qux'];
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createIdentifiers')
 			->with($columnNames)
-			->willReturn($this->getMockBuilder(\Pribi\Commands\Identifiers\Identifiers::class)
-					->disableOriginalConstructor()
-					->getMock()
-			);
-		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
-		$insert = $this->createInsert($commandsBuilderMock);
+			->willReturn($columnsIdentifierDummy);
 		$this->assertSame($createdStatementDummy, $insert->into($tableName, $columnNames));
 	}
 
 	private function createInsert(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
-		return new Insert($this->getCommandDummy(), $commandsBuilder);
+		return new Insert($this->createCommandDummy(), $commandsBuilder);
 	}
 }
  
