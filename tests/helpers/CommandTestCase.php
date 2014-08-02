@@ -42,4 +42,22 @@ abstract class CommandTestCase extends \PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 	}
+
+	/**
+	 * @return \Pribi\Commands\Subjects\Subject
+	 */
+	protected function createSubjectDummy() {
+		return $this->getMockBuilder(\Pribi\Commands\Subjects\Subject::class)
+			->disableOriginalConstructor()
+			->getMock();
+	}
+
+	/**
+	 * @return \Pribi\Commands\Subjects\Subjects
+	 */
+	protected function createSubjectsDummy() {
+		return $this->getMockBuilder(\Pribi\Commands\Subjects\Subjects::class)
+			->disableOriginalConstructor()
+			->getMock();
+	}
 }
