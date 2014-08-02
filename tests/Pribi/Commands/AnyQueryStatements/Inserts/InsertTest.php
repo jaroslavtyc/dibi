@@ -10,6 +10,19 @@ class InsertTest extends CommandTestCase {
 		$this->assertNotNull($instance);
 	}
 
+	public function testCanLowPriority() {
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
+		$insert = $this->createInsert($commandsBuilderMock);
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandsBuilderMock */
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createLowPriority')
+			->with($insert)
+			->willReturn($ignoreDummy = 'foo');
+		$this->assertSame($ignoreDummy, $insert->lowPriority());
+	}
+
 	public function testCantIgnoreInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
