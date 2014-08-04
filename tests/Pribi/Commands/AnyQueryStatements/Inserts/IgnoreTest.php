@@ -8,6 +8,17 @@ class IgnoreTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertNotNull($instance);
 	}
 
+	public function testAsSqlIsIgnoreKeyword() {
+		$toSqlMethod = new \ReflectionMethod(Ignore::class, 'toSql');
+		$toSqlMethod->setAccessible(TRUE);
+		$ignore = $this->createIgnore($this->getCommandsBuilderDummy());
+		$this->assertSame('IGNORE', $toSqlMethod->invoke($ignore));
+	}
+
+	private function createIgnore(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
+		return new Ignore($this->createCommandDummy(), $commandsBuilder);
+	}
+
 	public function testCanUseInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
@@ -33,15 +44,5 @@ class IgnoreTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertSame($intoDummy, $ignore->into($tableName, $columnNames));
 	}
 
-	private function createIgnore(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
-		return new Ignore($this->createCommandDummy(), $commandsBuilder);
-	}
-
-	public function testAsSqlIsAsExpected() {
-		$toSqlMethod = new \ReflectionMethod(Ignore::class, 'toSql');
-		$toSqlMethod->setAccessible(TRUE);
-		$ignore = $this->createIgnore($this->getCommandsBuilderDummy());
-		$this->assertSame('IGNORE', $toSqlMethod->invoke($ignore));
-	}
 }
  
