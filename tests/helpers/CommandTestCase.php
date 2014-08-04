@@ -60,4 +60,15 @@ abstract class CommandTestCase extends \PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 	}
+
+	/**
+	 * @param string $className
+	 * @return \ReflectionMethod
+	 */
+	protected function createToSqlReflectionMethod($className) {
+		$toSqlMethod = new \ReflectionMethod($className, 'toSql');
+		$toSqlMethod->setAccessible(TRUE);
+
+		return $toSqlMethod;
+	}
 }
