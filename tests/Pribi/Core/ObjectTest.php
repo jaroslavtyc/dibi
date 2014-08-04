@@ -41,12 +41,10 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @expectedException \Pribi\Core\Exceptions\UnknownMethodCalled
 	 */
-	public function testCallingObjectAsAMethodWithoutInvokeMagicMethodCauseException() {
+	public function testCallingObjectAsAMethodCauseException() {
 		$object = $this->createObjectInstance();
 		/**
-		 * A little hack to avoid PHPStorm error warning. The $object of course does not have Callable interface.
-		 *
-		 * @var $object Callable
+		 * @var $object Callable (a little hack to avoid PHPStorm error warning, the $object of course does not have Callable interface)
 		 */
 		$object();
 	}
