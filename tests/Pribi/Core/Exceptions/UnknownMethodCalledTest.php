@@ -2,7 +2,7 @@
 namespace Pribi\Core\Exceptions;
 
 class UnknownMethodCalledTest extends \PHPUnit_Framework_TestCase {
-	public function testIsPartOfCoreExceptionsFamilyByIncludingProperInterface() {
+	public function testIsPartOfCoreExceptionsFamily() {
 		$exceptionObject = new UnknownMethodCalled();
 		$this->assertTrue(is_a($exceptionObject, Exception::class));
 	}
