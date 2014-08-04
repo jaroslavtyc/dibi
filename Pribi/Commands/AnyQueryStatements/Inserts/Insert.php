@@ -25,6 +25,10 @@ class Insert extends \Pribi\Commands\WithoutIdentifier {
 		return $this->getCommandBuilder()->createDelayed($this);
 	}
 
+	public function ignore() {
+		return $this->getCommandBuilder()->createIgnore($this);
+	}
+
 	public function into($tableName, $columnNames = []) {
 		return $this->getCommandBuilder()->createInto(
 			$this->getCommandBuilder()->createIdentifier($tableName),
@@ -33,7 +37,4 @@ class Insert extends \Pribi\Commands\WithoutIdentifier {
 		);
 	}
 
-	public function ignore() {
-		return $this->getCommandBuilder()->createIgnore($this);
-	}
 }
