@@ -80,7 +80,7 @@ class InsertTest extends CommandTestCase {
 		$this->assertSame($createdStatementDummy, $insert->into($tableName, $columnNames));
 	}
 
-	public function testCanUseIgnoreInto() {
+	public function testCanUseIgnore() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
 		$insert = $this->createInsert($commandsBuilderMock);
@@ -89,16 +89,8 @@ class InsertTest extends CommandTestCase {
 			->expects($this->once())
 			->method('createIgnore')
 			->with($insert)
-			->willReturn($ignoreMock = $this->getMockBuilder(Ignore::class)
-					->setConstructorArgs([$this->createCommandDummy(), $commandsBuilderMock])
-					->getMock()
-			);
-		$ignoreMock
-			->expects($this->once())
-			->method('into')
-			->with($tableName = 'bar', $columnNames = ['baz', 'qux'])
-			->willReturn($intoDummy = 'foo');
-		$this->assertSame($intoDummy, $insert->ignoreInto($tableName, $columnNames));
+			->willReturn($ignoreDummy = 'foo');
+		$this->assertSame($ignoreDummy, $insert->ignore());
 	}
 }
  

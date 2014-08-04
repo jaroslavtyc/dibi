@@ -33,8 +33,7 @@ class Insert extends \Pribi\Commands\WithoutIdentifier {
 		);
 	}
 
-	public function ignoreInto($tableName, array $columnNames = []) {
-		return $this->getCommandBuilder()->createIgnore($this)
-			->into($tableName, $columnNames);
+	public function ignore() {
+		return $this->getCommandBuilder()->createIgnore($this);
 	}
 }
