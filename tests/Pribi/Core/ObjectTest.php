@@ -44,7 +44,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
 	public function testCallingObjectAsAMethodCauseException() {
 		$object = $this->createObjectInstance();
 		/**
-		 * @var $object Callable (a little hack to avoid PHPStorm error warning, the $object of course does not have Callable interface)
+		 * @var Callable $object (a little hack to avoid PHPStorm error warning, the $object of course does not have Callable interface)
 		 */
 		$object();
 	}
