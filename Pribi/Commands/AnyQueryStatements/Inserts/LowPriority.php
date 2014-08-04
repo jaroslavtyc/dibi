@@ -10,5 +10,13 @@ class LowPriority extends \Pribi\Commands\WithoutIdentifier {
 	public function ignore() {
 		return $this->getCommandBuilder()->createIgnore($this);
 	}
+
+	public function into($tableName, $columnNames = []) {
+		return $this->getCommandBuilder()->createInto(
+			$this->getCommandBuilder()->createIdentifier($tableName),
+			$this->getCommandBuilder()->createIdentifiers($columnNames),
+			$this
+		);
+	}
 }
  
