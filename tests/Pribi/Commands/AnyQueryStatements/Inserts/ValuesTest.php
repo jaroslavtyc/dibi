@@ -18,7 +18,7 @@ class ValuesTest extends \Tests\Helpers\CommandTestCase {
 			->getMock();
 		$subjectsMock->expects($this->once())
 			->method('toSql')
-			->with()
+			->with() // no parameters expected
 			->willReturn($subjectsAsSqlDummy);
 		/** @var \Pribi\Commands\Subjects\Subjects $subjectsMock */
 		$values = new Values($subjectsMock, $this->createCommandDummy(), $this->getCommandsBuilderDummy());
