@@ -10,6 +10,17 @@ class InsertTest extends CommandTestCase {
 		$this->assertNotNull($instance);
 	}
 
+	public function testAsSqlIsInsertKeyword() {
+		$toSqlMethod = new \ReflectionMethod(Insert::class, 'toSql');
+		$toSqlMethod->setAccessible(TRUE);
+		$insert = $this->createInsert($this->getCommandsBuilderDummy());
+		$this->assertSame('INSERT', $toSqlMethod->invoke($insert));
+	}
+
+	private function createInsert(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
+		return new Insert($this->createCommandDummy(), $commandsBuilder);
+	}
+
 	public function testCanUseLowPriority() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
@@ -21,10 +32,6 @@ class InsertTest extends CommandTestCase {
 			->with($insert)
 			->willReturn($ignoreDummy = 'foo');
 		$this->assertSame($ignoreDummy, $insert->lowPriority());
-	}
-
-	private function createInsert(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
-		return new Insert($this->createCommandDummy(), $commandsBuilder);
 	}
 
 	public function testCanUseHighPriority() {
@@ -53,6 +60,19 @@ class InsertTest extends CommandTestCase {
 		$this->assertSame($delayedDummy, $insert->delayed());
 	}
 
+	public function testCanUseIgnore() {
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
+		$insert = $this->createInsert($commandsBuilderMock);
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandsBuilderMock */
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createIgnore')
+			->with($insert)
+			->willReturn($ignoreDummy = 'foo');
+		$this->assertSame($ignoreDummy, $insert->ignore());
+	}
+
 	public function testCanUseInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		$tableIdentifierDummy = $this->createIdentifierDummy();
@@ -60,6 +80,7 @@ class InsertTest extends CommandTestCase {
 		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
 		$insert = $this->createInsert($commandsBuilderMock);
 		$createdStatementDummy = 'foo';
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandsBuilderMock */
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createInto')
@@ -78,19 +99,6 @@ class InsertTest extends CommandTestCase {
 			->with($columnNames)
 			->willReturn($columnsIdentifierDummy);
 		$this->assertSame($createdStatementDummy, $insert->into($tableName, $columnNames));
-	}
-
-	public function testCanUseIgnore() {
-		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
-		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
-		$insert = $this->createInsert($commandsBuilderMock);
-		/** @var \PHPUnit_Framework_MockObject_MockObject $commandsBuilderMock */
-		$commandsBuilderMock
-			->expects($this->once())
-			->method('createIgnore')
-			->with($insert)
-			->willReturn($ignoreDummy = 'foo');
-		$this->assertSame($ignoreDummy, $insert->ignore());
 	}
 }
  
