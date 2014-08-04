@@ -98,13 +98,10 @@ class QueryCommandTest extends \Tests\Helpers\CommandTestCase {
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createMainQueryStartTransaction')
-			->willReturn($this->getMockBuilder(\Pribi\Commands\AnyQueryStatements\Inserts\InsertInto::class)
-					->disableOriginalConstructor()
-					->getMock()
-			);
+			->willReturn($mainQueryStartTransactionDummy = 'foo');
 		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
 		$query = $this->createQuery($commandsBuilderMock);
-		$query->startTransaction();
+		$this->assertSame($mainQueryStartTransactionDummy, $query->startTransaction());
 	}
 
 	public function testCanBegin() {
