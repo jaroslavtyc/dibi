@@ -15,6 +15,10 @@ class HighPriorityTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertSame('HIGH PRIORITY', $toSqlMethod->invoke($highPriority));
 	}
 
+	private function createHighPriority(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
+		return new HighPriority($this->createCommandDummy(), $commandsBuilder);
+	}
+
 	public function testCanUseIgnore() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
@@ -56,8 +60,5 @@ class HighPriorityTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertSame($createdStatementDummy, $highPriority->into($tableName, $columnNames));
 	}
 
-	private function createHighPriority(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
-		return new HighPriority($this->createCommandDummy(), $commandsBuilder);
-	}
 }
  
