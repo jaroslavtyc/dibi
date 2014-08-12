@@ -6,23 +6,23 @@ class Into extends \Pribi\Commands\WithIdentifier {
 	/**
 	 * @var \Pribi\Commands\Identifiers\Identifiers
 	 */
-	private $columnNames;
+	private $columnIdentifiers;
 
 	public function __construct(
-		\Pribi\Commands\Identifiers\Identifier $tableName,
-		\Pribi\Commands\Identifiers\Identifiers $columnNames,
+		\Pribi\Commands\Identifiers\Identifier $tableIdentifier,
+		\Pribi\Commands\Identifiers\Identifiers $columnIdentifiers,
 		\Pribi\Commands\Command $previousCommand,
 		\Pribi\Builders\CommandsBuilder $commandsBuilder
 	) {
-		parent::__construct($tableName, $this, $commandsBuilder);
-		$this->columnNames = $columnNames;
+		parent::__construct($tableIdentifier, $this, $commandsBuilder);
+		$this->columnIdentifiers = $columnIdentifiers;
 	}
 
 	protected function toSql() {
 		return
 			'INTO ' . $this->getIdentifier()->toSql()
-			. ($this->columnNames->count() > 0
-				? '(' . $this->columnNames->toSql() . ')'
+			. ($this->columnIdentifiers->count() > 0
+				? '(' . $this->columnIdentifiers->toSql() . ')'
 				: ''
 			);
 	}
