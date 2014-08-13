@@ -7,12 +7,12 @@ class Ignore extends \Pribi\Commands\WithoutIdentifier {
 		return 'IGNORE';
 	}
 
-	public function into($tableName, array $columnNames = []) {
+	public function into($tableName, array $columnNames = [], array $partitionNames = []) {
 		return $this->getCommandBuilder()->createInto(
 			$this->getCommandBuilder()->createIdentifier($tableName),
 			$this->getCommandBuilder()->createIdentifiers($columnNames),
+			$this->getCommandBuilder()->createIdentifiers($partitionNames),
 			$this
 		);
 	}
 }
- 

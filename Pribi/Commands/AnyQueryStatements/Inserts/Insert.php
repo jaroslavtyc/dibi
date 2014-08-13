@@ -29,10 +29,11 @@ class Insert extends \Pribi\Commands\WithoutIdentifier {
 		return $this->getCommandBuilder()->createIgnore($this);
 	}
 
-	public function into($tableName, $columnNames = []) {
+	public function into($tableName, array $columnNames = [], array $partitionNames = []) {
 		return $this->getCommandBuilder()->createInto(
 			$this->getCommandBuilder()->createIdentifier($tableName),
 			$this->getCommandBuilder()->createIdentifiers($columnNames),
+			$this->getCommandBuilder()->createIdentifiers($partitionNames),
 			$this
 		);
 	}

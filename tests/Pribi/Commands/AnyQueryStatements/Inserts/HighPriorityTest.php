@@ -36,6 +36,7 @@ class HighPriorityTest extends \Tests\Helpers\CommandTestCase {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		$tableIdentifierDummy = $this->createIdentifierDummy();
 		$columnsIdentifierDummy = $this->createIdentifiersDummy();
+		$partitionIdentifiersDummy = $this->createIdentifiersDummy();
 		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
 		$highPriority = $this->createHighPriority($commandsBuilderMock);
 		$createdStatementDummy = 'foo';
@@ -43,7 +44,7 @@ class HighPriorityTest extends \Tests\Helpers\CommandTestCase {
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createInto')
-			->with($tableIdentifierDummy, $columnsIdentifierDummy, $highPriority)
+			->with($tableIdentifierDummy, $columnsIdentifierDummy, $partitionIdentifiersDummy, $highPriority)
 			->willReturn($createdStatementDummy);
 		$tableName = 'bar';
 		$commandsBuilderMock
@@ -52,13 +53,18 @@ class HighPriorityTest extends \Tests\Helpers\CommandTestCase {
 			->with($tableName)
 			->willReturn($tableIdentifierDummy);
 		$columnNames = ['baz', 'qux'];
+		$partitionNames = ['foobar', 'foobaz'];
 		$commandsBuilderMock
-			->expects($this->once())
+			->expects($this->at(1))
 			->method('createIdentifiers')
 			->with($columnNames)
 			->willReturn($columnsIdentifierDummy);
-		$this->assertSame($createdStatementDummy, $highPriority->into($tableName, $columnNames));
+		$commandsBuilderMock
+			->expects($this->at(2))
+			->method('createIdentifiers')
+			->with($partitionNames)
+			->willReturn($partitionIdentifiersDummy);
+		$this->assertSame($createdStatementDummy, $highPriority->into($tableName, $columnNames, $partitionNames));
 	}
 
 }
- 

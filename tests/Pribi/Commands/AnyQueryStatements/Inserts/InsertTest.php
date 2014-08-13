@@ -76,7 +76,8 @@ class InsertTest extends CommandTestCase {
 	public function testCanUseInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		$tableIdentifierDummy = $this->createIdentifierDummy();
-		$columnsIdentifierDummy = $this->createIdentifiersDummy();
+		$columnIdentifiersDummy = $this->createIdentifiersDummy();
+		$partitionIdentifiersDummy = $this->createIdentifiersDummy();
 		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
 		$insert = $this->createInsert($commandsBuilderMock);
 		$createdStatementDummy = 'foo';
@@ -84,7 +85,7 @@ class InsertTest extends CommandTestCase {
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createInto')
-			->with($tableIdentifierDummy, $columnsIdentifierDummy, $insert)
+			->with($tableIdentifierDummy, $columnIdentifiersDummy, $partitionIdentifiersDummy, $insert)
 			->willReturn($createdStatementDummy);
 		$tableName = 'bar';
 		$commandsBuilderMock
@@ -93,12 +94,17 @@ class InsertTest extends CommandTestCase {
 			->with($tableName)
 			->willReturn($tableIdentifierDummy);
 		$columnNames = ['baz', 'qux'];
+		$partitionNames = ['foobar', 'foobaz'];
 		$commandsBuilderMock
-			->expects($this->once())
+			->expects($this->at(1))
 			->method('createIdentifiers')
 			->with($columnNames)
-			->willReturn($columnsIdentifierDummy);
-		$this->assertSame($createdStatementDummy, $insert->into($tableName, $columnNames));
+			->willReturn($columnIdentifiersDummy);
+		$commandsBuilderMock
+			->expects($this->at(2))
+			->method('createIdentifiers')
+			->with($partitionNames)
+			->willReturn($partitionIdentifiersDummy);
+		$this->assertSame($createdStatementDummy, $insert->into($tableName, $columnNames, $partitionNames));
 	}
 }
- 

@@ -35,7 +35,8 @@ class DelayedTest extends \Tests\Helpers\CommandTestCase {
 	public function testCanUseInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
 		$tableIdentifierDummy = $this->createIdentifierDummy();
-		$columnsIdentifierDummy = $this->createIdentifiersDummy();
+		$columnIdentifiersDummy = $this->createIdentifiersDummy();
+		$partitionIdentifiersDummy = $this->createIdentifiersDummy();
 		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
 		$delayed = $this->createDelayed($commandsBuilderMock);
 		$createdStatementDummy = 'foo';
@@ -43,7 +44,7 @@ class DelayedTest extends \Tests\Helpers\CommandTestCase {
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createInto')
-			->with($tableIdentifierDummy, $columnsIdentifierDummy, $delayed)
+			->with($tableIdentifierDummy, $columnIdentifiersDummy, $partitionIdentifiersDummy, $delayed)
 			->willReturn($createdStatementDummy);
 		$tableName = 'bar';
 		$commandsBuilderMock
@@ -52,12 +53,17 @@ class DelayedTest extends \Tests\Helpers\CommandTestCase {
 			->with($tableName)
 			->willReturn($tableIdentifierDummy);
 		$columnNames = ['baz', 'qux'];
+		$partitionNames = ['foobar', 'foobaz'];
 		$commandsBuilderMock
-			->expects($this->once())
+			->expects($this->at(1))
 			->method('createIdentifiers')
 			->with($columnNames)
-			->willReturn($columnsIdentifierDummy);
-		$this->assertSame($createdStatementDummy, $delayed->into($tableName, $columnNames));
+			->willReturn($columnIdentifiersDummy);
+		$commandsBuilderMock
+			->expects($this->at(2))
+			->method('createIdentifiers')
+			->with($partitionNames)
+			->willReturn($partitionIdentifiersDummy);
+		$this->assertSame($createdStatementDummy, $delayed->into($tableName, $columnNames, $partitionNames));
 	}
 }
- 

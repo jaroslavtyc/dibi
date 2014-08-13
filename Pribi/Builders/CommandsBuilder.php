@@ -63,8 +63,13 @@ class CommandsBuilder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\AnyQueryStatements\Inserts\Insert($previousCommand, $this);
 	}
 
-	public function createInto(\Pribi\Commands\Identifiers\Identifier $tableName, \Pribi\Commands\Identifiers\Identifiers $columnNames, \Pribi\Commands\Command $previousCommand) {
-		return new \Pribi\Commands\AnyQueryStatements\Inserts\Into($tableName, $columnNames, $previousCommand, $this);
+	public function createInto(
+		\Pribi\Commands\Identifiers\Identifier $tableIdentifier,
+		\Pribi\Commands\Identifiers\Identifiers $columnIdentifiers,
+		\Pribi\Commands\Identifiers\Identifiers $partitionIdentifiers,
+		\Pribi\Commands\Command $previousCommand
+	) {
+		return new \Pribi\Commands\AnyQueryStatements\Inserts\Into($tableIdentifier, $columnIdentifiers, $partitionIdentifiers, $previousCommand, $this);
 	}
 
 	public function createValues(

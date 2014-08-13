@@ -21,28 +21,37 @@ class IgnoreTest extends \Tests\Helpers\CommandTestCase {
 
 	public function testCanUseInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$tableIdentifierDummy = $this->createIdentifierDummy();
+		$columnIdentifiersDummy = $this->createIdentifiersDummy();
+		$partitionIdentifiersDummy = $this->createIdentifiersDummy();
 		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
 		$ignore = $this->createIgnore($commandsBuilderMock);
+		$intoDummy = 'foo';
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandsBuilderMock */
+		$commandsBuilderMock
+			->expects($this->once())
+			->method('createInto')
+			->with($tableIdentifierDummy, $columnIdentifiersDummy, $partitionIdentifiersDummy, $ignore)
+			->willReturn($intoDummy);
 		$tableName = 'bar';
 		$columnNames = ['baz', 'qux'];
+		$partitionNames = ['foobar', 'foobaz'];
 		$commandsBuilderMock
 			->expects($this->once())
 			->method('createIdentifier')
 			->with($tableName)
-			->willReturn($tableIdentifierDummy = $this->createIdentifierDummy());
+			->willReturn($tableIdentifierDummy);
 		$commandsBuilderMock
-			->expects($this->once())
+			->expects($this->at(1))
 			->method('createIdentifiers')
 			->with($columnNames)
-			->willReturn($columnsIdentifierDummy = $this->createIdentifiersDummy());
+			->willReturn($columnIdentifiersDummy);
 		$commandsBuilderMock
-			->expects($this->once())
-			->method('createInto')
-			->with($tableIdentifierDummy, $columnsIdentifierDummy, $ignore)
-			->willReturn($intoDummy = 'foo');
-		$this->assertSame($intoDummy, $ignore->into($tableName, $columnNames));
+			->expects($this->at(2))
+			->method('createIdentifiers')
+			->with($partitionNames)
+			->willReturn($partitionIdentifiersDummy);
+		$this->assertSame($intoDummy, $ignore->into($tableName, $columnNames, $partitionNames));
 	}
 
 }
- 
