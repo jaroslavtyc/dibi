@@ -13,13 +13,13 @@ class OnDuplicateKeyUpdate extends \Pribi\Commands\Command {
 	private $expression;
 
 	public function __construct(
-		\Pribi\Commands\Identifiers\Identifier $columnName,
+		\Pribi\Commands\Identifiers\Identifier $columnIdentifier,
 		\Pribi\Commands\Subjects\Subject $expression,
 		\Pribi\Commands\Command $previousCommand,
 		\Pribi\Builders\CommandsBuilder $commandsBuilder
 	) {
 		parent::__construct($previousCommand, $commandsBuilder);
-		$this->columnName = $columnName;
+		$this->columnName = $columnIdentifier;
 		$this->expression = $expression;
 	}
 
