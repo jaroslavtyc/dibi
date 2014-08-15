@@ -6,11 +6,11 @@ abstract class CommandTestCase extends \PHPUnit_Framework_TestCase {
 	private $commandBuilder;
 
 	protected function setUp() {
-		$this->commandBuilder = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$this->commandBuilder = $this->getMock(\Pribi\Builders\CommandBuilder::class);
 	}
 
 	/**
-	 * @return \Pribi\Builders\CommandsBuilder
+	 * @return \Pribi\Builders\CommandBuilder
 	 */
 	protected function getCommandsBuilderDummy() {
 		return $this->commandBuilder;

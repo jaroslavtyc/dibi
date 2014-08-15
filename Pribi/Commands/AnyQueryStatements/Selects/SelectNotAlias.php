@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Selects;
 
-use Pribi\Builders\CommandsBuilder;
+use Pribi\Builders\CommandBuilder;
 use Pribi\Commands\Identifiers\Identifier;
 
 class SelectNotAlias extends Base\SelectAlias {
@@ -10,9 +10,9 @@ class SelectNotAlias extends Base\SelectAlias {
 	 *
 	 * @param Identifier $alias
 	 * @param SelectNot $prependSelectNot
-	 * @param CommandsBuilder $commandsBuilder
+	 * @param CommandBuilder $commandBuilder
 	 */
-	public function __construct(Identifier $alias, SelectNot $prependSelectNot, CommandsBuilder $commandsBuilder) {
-		parent::__construct($alias, $prependSelectNot, $commandsBuilder);
+	public function __construct(Identifier $alias, SelectNot $prependSelectNot, CommandBuilder $commandBuilder) {
+		parent::__construct($alias, $prependSelectNot, $commandBuilder);
 	}
 }

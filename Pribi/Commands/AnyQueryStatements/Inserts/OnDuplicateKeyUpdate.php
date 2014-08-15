@@ -16,9 +16,9 @@ class OnDuplicateKeyUpdate extends \Pribi\Commands\Command {
 		\Pribi\Commands\Identifiers\Identifier $columnIdentifier,
 		\Pribi\Commands\Subjects\Subject $expression,
 		\Pribi\Commands\Command $previousCommand,
-		\Pribi\Builders\CommandsBuilder $commandsBuilder
+		\Pribi\Builders\CommandBuilder $commandBuilder
 	) {
-		parent::__construct($previousCommand, $commandsBuilder);
+		parent::__construct($previousCommand, $commandBuilder);
 		$this->columnName = $columnIdentifier;
 		$this->expression = $expression;
 	}

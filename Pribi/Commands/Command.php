@@ -3,11 +3,11 @@ namespace Pribi\Commands;
 
 abstract class Command extends QueryPart {
 	private $previousCommand;
-	private $commandsBuilder;
+	private $commandBuilder;
 
-	public function __construct(Command $previousCommand, \Pribi\Builders\CommandsBuilder $commandsBuilder) {
+	public function __construct(Command $previousCommand, \Pribi\Builders\CommandBuilder $commandBuilder) {
 		$this->previousCommand = $previousCommand;
-		$this->commandsBuilder = $commandsBuilder;
+		$this->commandBuilder = $commandBuilder;
 	}
 
 	protected function hasPreviousCommand() {
@@ -22,9 +22,9 @@ abstract class Command extends QueryPart {
 	}
 
 	/**
-	 * @return \Pribi\Builders\CommandsBuilder
+	 * @return \Pribi\Builders\CommandBuilder
 	 */
 	protected function getCommandBuilder() {
-		return $this->commandsBuilder;
+		return $this->commandBuilder;
 	}
 }

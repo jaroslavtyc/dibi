@@ -28,21 +28,21 @@ class ValuesTest extends \Tests\Helpers\CommandTestCase {
 	public function testCanUseOnDuplicateKeyUpdate() {
 		$columnName = 'foo';
 		$expression = 'bar';
-		$commandsBuilder = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
-		$commandsBuilder->expects($this->once())
+		$commandBuilder = $this->getMock(\Pribi\Builders\CommandBuilder::class);
+		$commandBuilder->expects($this->once())
 			->method('createIdentifier')
 			->with($columnName)
 			->willReturn($columnIdentifier = $this->createIdentifierDummy());
-		$commandsBuilder->expects($this->once())
+		$commandBuilder->expects($this->once())
 			->method('createSubject')
 			->with($expression)
 			->willReturn($expressionSubject = $this->createSubjectDummy());
-		$commandsBuilder->expects($this->once())
+		$commandBuilder->expects($this->once())
 			->method('createOnDuplicateKeyUpdate')
 			->with($columnIdentifier, $expressionSubject)
 			->willReturn($onDuplicateKeyUpdateDummy = 'baz');
-		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilder */
-		$values = new Values($this->createSubjectsDummy(), $this->createCommandDummy(), $commandsBuilder);
+		/** @var \Pribi\Builders\CommandBuilder $commandBuilder */
+		$values = new Values($this->createSubjectsDummy(), $this->createCommandDummy(), $commandBuilder);
 		$this->assertSame($onDuplicateKeyUpdateDummy, $values->onDuplicateKeyUpdate($columnName, $expression));
 	}
 }

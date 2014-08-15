@@ -8,9 +8,9 @@ class Values extends \Pribi\Commands\Command {
 	public function __construct(
 		\Pribi\Commands\Subjects\Subjects $subjects,
 		\Pribi\Commands\Command $previousCommand,
-		\Pribi\Builders\CommandsBuilder $commandsBuilder
+		\Pribi\Builders\CommandBuilder $commandBuilder
 	) {
-		parent::__construct($previousCommand, $commandsBuilder);
+		parent::__construct($previousCommand, $commandBuilder);
 		$this->subjects = $subjects;
 	}
 

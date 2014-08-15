@@ -15,13 +15,13 @@ class DelayedTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertSame('DELAYED', $toSqlMethod->invoke($delayed));
 	}
 
-	private function createDelayed(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
-		return new Delayed($this->createCommandDummy(), $commandsBuilder);
+	private function createDelayed(\Pribi\Builders\CommandBuilder $commandBuilder) {
+		return new Delayed($this->createCommandDummy(), $commandBuilder);
 	}
 
 	public function testCanUseIgnore() {
-		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
-		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
+		/** @var \Pribi\Builders\CommandBuilder $commandsBuilderMock */
 		$delayed = $this->createDelayed($commandsBuilderMock);
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandsBuilderMock */
 		$commandsBuilderMock
@@ -33,11 +33,11 @@ class DelayedTest extends \Tests\Helpers\CommandTestCase {
 	}
 
 	public function testCanUseInto() {
-		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
 		$tableIdentifierDummy = $this->createIdentifierDummy();
 		$columnIdentifiersDummy = $this->createIdentifiersDummy();
 		$partitionIdentifiersDummy = $this->createIdentifiersDummy();
-		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
+		/** @var \Pribi\Builders\CommandBuilder $commandsBuilderMock */
 		$delayed = $this->createDelayed($commandsBuilderMock);
 		$createdStatementDummy = 'foo';
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandsBuilderMock */

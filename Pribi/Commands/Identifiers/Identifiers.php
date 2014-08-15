@@ -7,14 +7,14 @@ class Identifiers extends QueryPart implements \IteratorAggregate, \Countable {
 
 	private $identifiers;
 
-	public function __construct(array $subjects, \Pribi\Builders\CommandsBuilder $commandsBuilder) {
-		$this->buildIdentifiers($subjects, $commandsBuilder);
+	public function __construct(array $subjects, \Pribi\Builders\CommandBuilder $commandBuilder) {
+		$this->buildIdentifiers($subjects, $commandBuilder);
 	}
 
-	private function buildIdentifiers(array $subjects, \Pribi\Builders\CommandsBuilder $commandsBuilder) {
+	private function buildIdentifiers(array $subjects, \Pribi\Builders\CommandBuilder $commandBuilder) {
 		$this->identifiers = new \ArrayIterator();
 		foreach ($subjects as $subject) {
-			$this->identifiers->append($commandsBuilder->createIdentifier($subject));
+			$this->identifiers->append($commandBuilder->createIdentifier($subject));
 		}
 	}
 

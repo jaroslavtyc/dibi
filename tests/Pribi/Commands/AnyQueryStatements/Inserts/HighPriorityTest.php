@@ -15,13 +15,13 @@ class HighPriorityTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertSame('HIGH PRIORITY', $toSqlMethod->invoke($highPriority));
 	}
 
-	private function createHighPriority(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
-		return new HighPriority($this->createCommandDummy(), $commandsBuilder);
+	private function createHighPriority(\Pribi\Builders\CommandBuilder $commandBuilder) {
+		return new HighPriority($this->createCommandDummy(), $commandBuilder);
 	}
 
 	public function testCanUseIgnore() {
-		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
-		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
+		/** @var \Pribi\Builders\CommandBuilder $commandsBuilderMock */
 		$highPriority = $this->createHighPriority($commandsBuilderMock);
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandsBuilderMock */
 		$commandsBuilderMock
@@ -33,11 +33,11 @@ class HighPriorityTest extends \Tests\Helpers\CommandTestCase {
 	}
 
 	public function testCanUseInto() {
-		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
 		$tableIdentifierDummy = $this->createIdentifierDummy();
 		$columnsIdentifierDummy = $this->createIdentifiersDummy();
 		$partitionIdentifiersDummy = $this->createIdentifiersDummy();
-		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
+		/** @var \Pribi\Builders\CommandBuilder $commandsBuilderMock */
 		$highPriority = $this->createHighPriority($commandsBuilderMock);
 		$createdStatementDummy = 'foo';
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandsBuilderMock */

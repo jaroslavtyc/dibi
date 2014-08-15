@@ -8,8 +8,8 @@ namespace Pribi\Commands\SubQueries;
  */
 class SubQuery extends \Pribi\Commands\Command {
 
-	public function __construct(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
-		parent::__construct($this, $commandsBuilder);
+	public function __construct(\Pribi\Builders\CommandBuilder $commandBuilder) {
+		parent::__construct($this, $commandBuilder);
 	}
 
 	protected function toSql() {

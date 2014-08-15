@@ -15,16 +15,16 @@ class IgnoreTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertSame('IGNORE', $toSqlMethod->invoke($ignore));
 	}
 
-	private function createIgnore(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
-		return new Ignore($this->createCommandDummy(), $commandsBuilder);
+	private function createIgnore(\Pribi\Builders\CommandBuilder $commandBuilder) {
+		return new Ignore($this->createCommandDummy(), $commandBuilder);
 	}
 
 	public function testCanUseInto() {
-		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandsBuilder::class);
+		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
 		$tableIdentifierDummy = $this->createIdentifierDummy();
 		$columnIdentifiersDummy = $this->createIdentifiersDummy();
 		$partitionIdentifiersDummy = $this->createIdentifiersDummy();
-		/** @var \Pribi\Builders\CommandsBuilder $commandsBuilderMock */
+		/** @var \Pribi\Builders\CommandBuilder $commandsBuilderMock */
 		$ignore = $this->createIgnore($commandsBuilderMock);
 		$intoDummy = 'foo';
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandsBuilderMock */

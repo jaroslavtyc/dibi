@@ -5,14 +5,14 @@ class Subjects extends \Pribi\Commands\QueryPart implements \IteratorAggregate, 
 
 	private $subjectValues;
 
-	public function __construct(array $subjectValues, \Pribi\Builders\CommandsBuilder $commandsBuilder) {
-		$this->buildIdentifiers($subjectValues, $commandsBuilder);
+	public function __construct(array $subjectValues, \Pribi\Builders\CommandBuilder $commandBuilder) {
+		$this->buildIdentifiers($subjectValues, $commandBuilder);
 	}
 
-	private function buildIdentifiers(array $subjectValues, \Pribi\Builders\CommandsBuilder $commandsBuilder) {
+	private function buildIdentifiers(array $subjectValues, \Pribi\Builders\CommandBuilder $commandBuilder) {
 		$this->subjectValues = new \ArrayIterator();
 		foreach ($subjectValues as $value) {
-			$this->subjectValues->append($commandsBuilder->createSubject($value));
+			$this->subjectValues->append($commandBuilder->createSubject($value));
 		}
 	}
 

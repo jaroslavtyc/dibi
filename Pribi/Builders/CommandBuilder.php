@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Builders;
 
-class CommandsBuilder extends \Pribi\Core\Object {
+class CommandBuilder extends \Pribi\Core\Object {
 
 	public function createIdentifier($subject) {
 		return new \Pribi\Commands\Identifiers\Identifier($subject);
@@ -77,6 +77,14 @@ class CommandsBuilder extends \Pribi\Core\Object {
 		\Pribi\Commands\Command $previousCommand
 	) {
 		return new \Pribi\Commands\AnyQueryStatements\Inserts\Values($subjects, $previousCommand, $this);
+	}
+
+	public function createAnyQuerySet(
+		\Pribi\Commands\Identifiers\Identifier $columnIdentifier,
+		\Pribi\Commands\Subjects\Subject $expression,
+		\Pribi\Commands\Command $previousCommand
+	) {
+		return new \Pribi\Commands\AnyQueryStatements\Inserts\Set($columnIdentifier, $expression, $previousCommand, $this);
 	}
 
 	public function createOnDuplicateKeyUpdate(\Pribi\Commands\Identifiers\Identifier $columnName, \Pribi\Commands\Subjects\Subject $expression, \Pribi\Commands\Command $previousCommand) {

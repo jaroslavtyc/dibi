@@ -3,17 +3,17 @@ namespace Pribi;
 
 class Pribi {
 
-	private $commandsBuilder;
+	private $commandBuilder;
 
-	public function __construct(\Pribi\Builders\CommandsBuilder $commandsBuilder) {
-		$this->commandsBuilder = $commandsBuilder;
+	public function __construct(\Pribi\Builders\CommandBuilder $commandBuilder) {
+		$this->commandBuilder = $commandBuilder;
 	}
 
 	public function createQuery() {
-		return $this->commandsBuilder->createQuery();
+		return $this->commandBuilder->createQuery();
 	}
 
 	public function createSubQuery() {
-		return $this->commandsBuilder->createSubQuery();
+		return $this->commandBuilder->createSubQuery();
 	}
 }
