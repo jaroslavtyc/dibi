@@ -25,7 +25,7 @@ class ValuesTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertSame("VALUES ($subjectsAsSqlDummy)", $toSqlMethod->invoke($values));
 	}
 
-	public function testCanUseOnDuplicateKeyUpdate() {
+	public function testCanBeFollowedByOnDuplicateKeyUpdate() {
 		$columnName = 'foo';
 		$expression = 'bar';
 		$commandBuilder = $this->getMock(\Pribi\Builders\CommandBuilder::class);

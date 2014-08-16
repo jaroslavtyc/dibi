@@ -19,7 +19,7 @@ class HighPriorityTest extends \Tests\Helpers\CommandTestCase {
 		return new HighPriority($this->createCommandDummy(), $commandBuilder);
 	}
 
-	public function testCanUseIgnore() {
+	public function testCanBeFollowedByIgnore() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
 		/** @var \Pribi\Builders\CommandBuilder $commandsBuilderMock */
 		$highPriority = $this->createHighPriority($commandsBuilderMock);
@@ -32,7 +32,7 @@ class HighPriorityTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertSame($ignoreDummy, $highPriority->ignore());
 	}
 
-	public function testCanUseInto() {
+	public function testCanBeFollowedByInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
 		$tableIdentifierDummy = $this->createIdentifierDummy();
 		$columnsIdentifierDummy = $this->createIdentifiersDummy();
@@ -66,5 +66,4 @@ class HighPriorityTest extends \Tests\Helpers\CommandTestCase {
 			->willReturn($partitionIdentifiersDummy);
 		$this->assertSame($createdStatementDummy, $highPriority->into($tableName, $columnNames, $partitionNames));
 	}
-
 }

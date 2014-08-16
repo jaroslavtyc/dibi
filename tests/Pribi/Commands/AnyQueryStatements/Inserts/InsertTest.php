@@ -60,7 +60,7 @@ class InsertTest extends CommandTestCase {
 		$this->assertSame($delayedDummy, $insert->delayed());
 	}
 
-	public function testCanUseIgnore() {
+	public function testCanBeFollowedByIgnore() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
 		/** @var \Pribi\Builders\CommandBuilder $commandsBuilderMock */
 		$insert = $this->createInsert($commandsBuilderMock);
@@ -73,7 +73,7 @@ class InsertTest extends CommandTestCase {
 		$this->assertSame($ignoreDummy, $insert->ignore());
 	}
 
-	public function testCanUseInto() {
+	public function testCanBeFollowedByInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
 		$tableIdentifierDummy = $this->createIdentifierDummy();
 		$columnIdentifiersDummy = $this->createIdentifiersDummy();

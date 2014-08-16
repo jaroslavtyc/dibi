@@ -19,7 +19,7 @@ class IgnoreTest extends \Tests\Helpers\CommandTestCase {
 		return new Ignore($this->createCommandDummy(), $commandBuilder);
 	}
 
-	public function testCanUseInto() {
+	public function testCanBeFollowedByInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
 		$tableIdentifierDummy = $this->createIdentifierDummy();
 		$columnIdentifiersDummy = $this->createIdentifiersDummy();
@@ -53,5 +53,4 @@ class IgnoreTest extends \Tests\Helpers\CommandTestCase {
 			->willReturn($partitionIdentifiersDummy);
 		$this->assertSame($intoDummy, $ignore->into($tableName, $columnNames, $partitionNames));
 	}
-
 }

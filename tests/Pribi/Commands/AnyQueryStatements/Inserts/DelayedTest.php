@@ -19,7 +19,7 @@ class DelayedTest extends \Tests\Helpers\CommandTestCase {
 		return new Delayed($this->createCommandDummy(), $commandBuilder);
 	}
 
-	public function testCanUseIgnore() {
+	public function testCanBeFollowedByIgnore() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
 		/** @var \Pribi\Builders\CommandBuilder $commandsBuilderMock */
 		$delayed = $this->createDelayed($commandsBuilderMock);
@@ -32,7 +32,7 @@ class DelayedTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertSame($ignoreDummy, $delayed->ignore());
 	}
 
-	public function testCanUseInto() {
+	public function testCanBeFollowedByInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
 		$tableIdentifierDummy = $this->createIdentifierDummy();
 		$columnIdentifiersDummy = $this->createIdentifiersDummy();

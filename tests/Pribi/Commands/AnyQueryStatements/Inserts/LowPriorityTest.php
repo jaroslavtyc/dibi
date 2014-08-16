@@ -19,7 +19,7 @@ class LowPriorityTest extends \Tests\Helpers\CommandTestCase {
 		return new LowPriority($this->createCommandDummy(), $commandBuilder);
 	}
 
-	public function testCanUseIgnore() {
+	public function testCanBeFollowedByIgnore() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
 		/** @var \Pribi\Builders\CommandBuilder $commandsBuilderMock */
 		$lowPriority = $this->createLowPriority($commandsBuilderMock);
@@ -32,7 +32,7 @@ class LowPriorityTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertSame($ignoreDummy, $lowPriority->ignore());
 	}
 
-	public function testCanUseInto() {
+	public function testCanBeFollowedByInto() {
 		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
 		$tableIdentifierDummy = $this->createIdentifierDummy();
 		$columnIdentifiersDummy = $this->createIdentifiersDummy();
