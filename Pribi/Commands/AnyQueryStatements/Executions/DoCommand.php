@@ -6,13 +6,16 @@ namespace Pribi\Commands\AnyQueryStatements\Executions;
  * @package Pribi\Commands\AnyQueryStatements\Executions
  * @see http://dev.mysql.com/doc/refman/5.1/en/do.html
  */
-class DoCommand extends \Pribi\Commands\WithIdentifier implements \Pribi\Commands\SubQueries\SubQueryUsable {
+class DoCommand extends \Pribi\Commands\WithoutIdentifier {
 
-	protected function toSql() {
-		return 'DO ' . $this->getIdentifier()->toSql();
+	private $expression;
+
+	public function __construct(\Pribi\Commands\Subjects\Subject $expression, \Pribi\Commands\Command $previousCommand, \Pribi\Builders\CommandBuilder $commandBuilder) {
+		parent::__construct($previousCommand, $commandBuilder);
+		$this->expression = $expression;
 	}
 
-	public function subQuery() {
-		return $this->getCommandBuilder()->createSubQuery();
+	protected function toSql() {
+		return 'DO ' . $this->expression->toSql();
 	}
 }
