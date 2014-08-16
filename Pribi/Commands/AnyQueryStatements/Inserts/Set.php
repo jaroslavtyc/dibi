@@ -26,4 +26,20 @@ class Set extends WithIdentifier {
 			: 'SET ' // first SET statement
 		) . $this->getIdentifier()->toSql() . '=' . $this->expression->toSql();
 	}
+
+	public function set($columnName, $expression) {
+		return $this->getCommandBuilder()->createAnyQuerySet(
+			$this->getCommandBuilder()->createIdentifier($columnName),
+			$this->getCommandBuilder()->createSubject($expression),
+			$this
+		);
+	}
+
+	public function onDuplicateKeyUpdate($columnName, $expression) {
+		return $this->getCommandBuilder()->createOnDuplicateKeyUpdate(
+			$this->getCommandBuilder()->createIdentifier($columnName),
+			$this->getCommandBuilder()->createSubject($expression),
+			$this
+		);
+	}
 }
