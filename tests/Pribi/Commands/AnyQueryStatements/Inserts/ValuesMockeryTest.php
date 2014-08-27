@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
-class ValuesTest extends \Tests\Helpers\CommandTestCase {
+class ValuesMockeryTest extends \Tests\Helpers\CommandTestCase {
 
 	public function testCanCreateInstance() {
 		$instance = new Values($this->createSubjectsDummy(), $this->createCommandDummy(), $this->getCommandsBuilderDummy());
@@ -12,14 +12,11 @@ class ValuesTest extends \Tests\Helpers\CommandTestCase {
 		$toSqlMethod = new \ReflectionMethod(Values::class, 'toSql');
 		$toSqlMethod->setAccessible(TRUE);
 		$subjectsAsSqlDummy = 'foo';
-		$subjectsMock = $this->getMockBuilder(\Pribi\Commands\Subjects\Subjects::class)
-			->disableOriginalConstructor()
-			->setMethods(['toSql'])
-			->getMock();
-		$subjectsMock->expects($this->once())
-			->method('toSql')
-			->with() // no parameters expected
-			->willReturn($subjectsAsSqlDummy);
+		$subjectsMock = \Mockery::mock(\Pribi\Commands\Subjects\Subjects::class)
+			->shouldAllowMockingProtectedMethods();
+		$subjectsMock->shouldReceive('toSql')
+			->with()
+			->andReturn($subjectsAsSqlDummy);
 		/** @var \Pribi\Commands\Subjects\Subjects $subjectsMock */
 		$values = new Values($subjectsMock, $this->createCommandDummy(), $this->getCommandsBuilderDummy());
 		$this->assertSame("VALUES ($subjectsAsSqlDummy)", $toSqlMethod->invoke($values));
@@ -28,21 +25,21 @@ class ValuesTest extends \Tests\Helpers\CommandTestCase {
 	public function testCanBeFollowedByOnDuplicateKeyUpdate() {
 		$columnName = 'foo';
 		$expression = 'bar';
-		$commandBuilder = $this->getMock(\Pribi\Builders\CommandBuilder::class);
-		$commandBuilder->expects($this->once())
-			->method('createIdentifier')
+		$commandBuilder = \Mockery::mock(\Pribi\Builders\CommandBuilder::class);
+		$columnIdentifier = $this->createIdentifierDummy();
+		$commandBuilder->shouldReceive('createIdentifier')
 			->with($columnName)
-			->willReturn($columnIdentifier = $this->createIdentifierDummy());
-		$commandBuilder->expects($this->once())
-			->method('createSubject')
+			->andReturn($columnIdentifier);
+		$expressionSubject = $this->createSubjectDummy();
+		$commandBuilder->shouldReceive('createSubject')
 			->with($expression)
-			->willReturn($expressionSubject = $this->createSubjectDummy());
-		$commandBuilder->expects($this->once())
-			->method('createOnDuplicateKeyUpdate')
-			->with($columnIdentifier, $expressionSubject /* Why the hell PHPUnit does not fail here, when $previousCommand is missing ? */)
-			->willReturn($onDuplicateKeyUpdateDummy = 'baz');
+			->andReturn($expressionSubject);
 		/** @var \Pribi\Builders\CommandBuilder $commandBuilder */
 		$values = new Values($this->createSubjectsDummy(), $this->createCommandDummy(), $commandBuilder);
+		$onDuplicateKeyUpdateDummy = 'baz';
+		$commandBuilder->shouldReceive('createOnDuplicateKeyUpdate')
+			->with($columnIdentifier, $expressionSubject, $values)
+			->andReturn($onDuplicateKeyUpdateDummy);
 		$this->assertSame($onDuplicateKeyUpdateDummy, $values->onDuplicateKeyUpdate($columnName, $expression));
 	}
 }
