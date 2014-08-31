@@ -37,6 +37,7 @@ class ValuesMockeryTest extends \Tests\Helpers\CommandTestCase {
 		/** @var \Pribi\Builders\CommandBuilder $commandBuilder */
 		$values = new Values($this->createSubjectsDummy(), $this->createCommandDummy(), $commandBuilder);
 		$onDuplicateKeyUpdateDummy = 'baz';
+		/** @var \Mockery\MockInterface $commandBuilder */
 		$commandBuilder->shouldReceive('createOnDuplicateKeyUpdate')
 			->with($columnIdentifier, $expressionSubject, $values)
 			->andReturn($onDuplicateKeyUpdateDummy);
