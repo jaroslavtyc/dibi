@@ -15,11 +15,11 @@ Especially lack of prepared statements hurts these developers, who recalculate C
 Forbidden changes, because of final methods or whole classes, confound chance to extend Dibi itself, so fork has been enforced.
 All hail the "Fluent, MySQL, prepared statements". And wish me good luck with development.
 
-Pribi requires [PHP 5.4.0](http://php.net/releases/5_4_0.php)
-or later because of [namespaces 5.3](http://php.net/manual/en/language.namespaces.php)
- ,[__callStatic() 5.3](http://www.php.net/manual/en/language.oop5.overloading.php#object.callstatic)
- ,[\_\_DIR\_\_ 5.3](http://php.net/manual/en/language.constants.predefined.php)
- and [traits 5.4](http://php.net/traits).
+Pribi requires [PHP 5.5.0](http://php.net/releases/5_5_0.php) or later because of [namespaces 5.3](http://php.net/manual/en/language.namespaces.php),
+[\_\_callStatic() 5.3](http://www.php.net/manual/en/language.oop5.overloading.php#object.callstatic),
+[\_\_DIR\_\_ 5.3](http://php.net/manual/en/language.constants.predefined.php),
+[traits 5.4](http://php.net/traits)
+and [Foo::class magic (auto-existing) absolute class name constant](http://cz1.php.net/oop5.basic#language.oop5.basic.class.class).
 
 Tips and Tricks
 ---------------
