@@ -16,6 +16,7 @@ class ValuesMockeryTest extends \Tests\Helpers\CommandTestCase {
 			->shouldAllowMockingProtectedMethods();
 		$subjectsMock->shouldReceive('toSql')
 			->with()
+			->once()
 			->andReturn($subjectsAsSqlDummy);
 		/** @var \Pribi\Commands\Subjects\Subjects $subjectsMock */
 		$values = new Values($subjectsMock, $this->createCommandDummy(), $this->getCommandsBuilderDummy());
@@ -29,10 +30,12 @@ class ValuesMockeryTest extends \Tests\Helpers\CommandTestCase {
 		$columnIdentifier = $this->createIdentifierDummy();
 		$commandBuilder->shouldReceive('createIdentifier')
 			->with($columnName)
+			->once()
 			->andReturn($columnIdentifier);
 		$expressionSubject = $this->createSubjectDummy();
 		$commandBuilder->shouldReceive('createSubject')
 			->with($expression)
+			->once()
 			->andReturn($expressionSubject);
 		/** @var \Pribi\Builders\CommandBuilder $commandBuilder */
 		$values = new Values($this->createSubjectsDummy(), $this->createCommandDummy(), $commandBuilder);
@@ -40,7 +43,12 @@ class ValuesMockeryTest extends \Tests\Helpers\CommandTestCase {
 		/** @var \Mockery\MockInterface $commandBuilder */
 		$commandBuilder->shouldReceive('createOnDuplicateKeyUpdate')
 			->with($columnIdentifier, $expressionSubject, $values)
+			->once()
 			->andReturn($onDuplicateKeyUpdateDummy);
 		$this->assertSame($onDuplicateKeyUpdateDummy, $values->onDuplicateKeyUpdate($columnName, $expression));
+	}
+
+	protected function tearDown() {
+		\Mockery::close();
 	}
 }
