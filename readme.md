@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jaroslavtyc/pribi.svg?branch=master)](https://travis-ci.org/jaroslavtyc/pribi)
+
 Pribi (forked from [Dibi](http://dibiphp.com/cs/) - smart database layer for PHP)
 =========================================================
 
