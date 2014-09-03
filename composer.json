@@ -28,7 +28,8 @@
         "phpunit/phpunit": "4.0.*",
         "mockery/mockery": "dev-master",
         "hamcrest/hamcrest-php": "dev-master",
-        "phpspec/prophecy-phpunit": "~1.0"
+        "phpspec/prophecy-phpunit": "~1.0",
+        "satooshi/php-coveralls": "dev-master"
     },
     "autoload": {
         "psr-0": {
