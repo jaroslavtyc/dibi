@@ -17,6 +17,13 @@ abstract class CommandTestCase extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @return \PHPUnit_Framework_MockObject_MockObject
+	 */
+	protected function createCommandBuilderMock() {
+		return $this->getMock(\Pribi\Builders\CommandBuilder::class);
+	}
+
+	/**
 	 * @return \Pribi\Commands\Command
 	 */
 	protected function createCommandDummy() {

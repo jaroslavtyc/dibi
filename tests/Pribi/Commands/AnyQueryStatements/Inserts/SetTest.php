@@ -41,21 +41,21 @@ class SetTest extends \Tests\Helpers\CommandTestCase {
 		$columnIdentifierDummy = $this->createIdentifierDummy();
 		$expressionSubjectDummy = $this->createSubjectDummy();
 		$setDummy = 'baz';
-		$commandBuilder = $this->getMock(\Pribi\Builders\CommandBuilder::class);
-		$commandBuilder->expects($this->once())
+		$commandBuilderMock = $this->createCommandBuilderMock();
+		$commandBuilderMock->expects($this->once())
 			->method('createAnyQuerySet')
 			->with($columnIdentifierDummy, $expressionSubjectDummy)
 			->willReturn($setDummy);
-		$commandBuilder->expects($this->once())
+		$commandBuilderMock->expects($this->once())
 			->method('createIdentifier')
 			->with($columnName)
 			->willReturn($this->createIdentifierDummy());
-		$commandBuilder->expects($this->once())
+		$commandBuilderMock->expects($this->once())
 			->method('createSubject')
 			->with($expression)
 			->willReturn($this->createSubjectDummy());
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilder */
-		$set = new Set($this->createIdentifierDummy(), $this->createSubjectDummy(), $this->createCommandDummy(), $commandBuilder);
+		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		$set = new Set($this->createIdentifierDummy(), $this->createSubjectDummy(), $this->createCommandDummy(), $commandBuilderMock);
 		$this->assertSame($setDummy, $set->set($columnName, $expression));
 	}
 
@@ -65,21 +65,21 @@ class SetTest extends \Tests\Helpers\CommandTestCase {
 		$columnIdentifierDummy = $this->createIdentifierDummy();
 		$expressionSubjectDummy = $this->createSubjectDummy();
 		$onDuplicateKeyUpdateDummy = 'foobaz';
-		$commandBuilder = $this->getMock(\Pribi\Builders\CommandBuilder::class);
-		$commandBuilder->expects($this->once())
+		$commandBuilderMock = $this->createCommandBuilderMock();
+		$commandBuilderMock->expects($this->once())
 			->method('createOnDuplicateKeyUpdate')
 			->with($columnIdentifierDummy, $expressionSubjectDummy)
 			->willReturn($onDuplicateKeyUpdateDummy);
-		$commandBuilder->expects($this->once())
+		$commandBuilderMock->expects($this->once())
 			->method('createIdentifier')
 			->with($columnName)
 			->willReturn($columnIdentifierDummy);
-		$commandBuilder->expects($this->once())
+		$commandBuilderMock->expects($this->once())
 			->method('createSubject')
 			->with($expression)
 			->willReturn($expressionSubjectDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilder */
-		$set = new Set($this->createIdentifierDummy(), $this->createSubjectDummy(), $this->createCommandDummy(), $commandBuilder);
+		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		$set = new Set($this->createIdentifierDummy(), $this->createSubjectDummy(), $this->createCommandDummy(), $commandBuilderMock);
 		$this->assertSame($onDuplicateKeyUpdateDummy, $set->onDuplicateKeyUpdate($columnName, $expression));
 	}
 }

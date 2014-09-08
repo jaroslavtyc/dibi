@@ -28,21 +28,21 @@ class ValuesTest extends \Tests\Helpers\CommandTestCase {
 	public function testCanBeFollowedByOnDuplicateKeyUpdate() {
 		$columnName = 'foo';
 		$expression = 'bar';
-		$commandBuilder = $this->getMock(\Pribi\Builders\CommandBuilder::class);
-		$commandBuilder->expects($this->once())
+		$commandBuilderMock = $this->createCommandBuilderMock();
+		$commandBuilderMock->expects($this->once())
 			->method('createIdentifier')
 			->with($columnName)
 			->willReturn($columnIdentifier = $this->createIdentifierDummy());
-		$commandBuilder->expects($this->once())
+		$commandBuilderMock->expects($this->once())
 			->method('createSubject')
 			->with($expression)
 			->willReturn($expressionSubject = $this->createSubjectDummy());
-		$commandBuilder->expects($this->once())
+		$commandBuilderMock->expects($this->once())
 			->method('createOnDuplicateKeyUpdate')
 			->with($columnIdentifier, $expressionSubject /* Why the hell PHPUnit does not fail here, when $previousCommand is missing ? */)
 			->willReturn($onDuplicateKeyUpdateDummy = 'baz');
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilder */
-		$values = new Values($this->createSubjectsDummy(), $this->createCommandDummy(), $commandBuilder);
+		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		$values = new Values($this->createSubjectsDummy(), $this->createCommandDummy(), $commandBuilderMock);
 		$this->assertSame($onDuplicateKeyUpdateDummy, $values->onDuplicateKeyUpdate($columnName, $expression));
 	}
 }

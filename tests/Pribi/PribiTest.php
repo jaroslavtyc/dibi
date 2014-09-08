@@ -1,7 +1,7 @@
 <?php
 namespace Pribi;
 
-class PribiCommandTest extends \Tests\Helpers\CommandTestCase {
+class PribiTest extends \Tests\Helpers\CommandTestCase {
 
 	public function testInstanceCanBeCreated() {
 		$instance = new Pribi($this->getCommandsBuilderDummy());
@@ -9,7 +9,7 @@ class PribiCommandTest extends \Tests\Helpers\CommandTestCase {
 	}
 
 	public function testCanOpenQuery() {
-		$commandBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
+		$commandBuilderMock = $this->createCommandBuilderMock();
 		$pribi = $this->createPribi($commandBuilderMock);
 		$commandBuilderMock->expects($this->once())
 			->method('createQuery')
@@ -23,7 +23,7 @@ class PribiCommandTest extends \Tests\Helpers\CommandTestCase {
 	}
 
 	public function testCanGiveSubQuery() {
-		$commandBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
+		$commandBuilderMock = $this->createCommandBuilderMock();
 		$pribi = $this->createPribi($commandBuilderMock);
 		$commandBuilderMock->expects($this->once())
 			->method('createSubQuery')

@@ -1,16 +1,16 @@
 <?php
 namespace Pribi\Commands\Identifiers;
 
-class IdentifiersTest extends \PHPUnit_Framework_TestCase {
+class IdentifiersTest extends \Tests\Helpers\CommandTestCase {
 
 	public function testCanCreateInstance() {
-		$instance = new Identifiers([], $this->getMock(\Pribi\Builders\CommandBuilder::class));
+		$instance = new Identifiers([], $commandBuilderMock = $this->createCommandBuilderMock());
 		$this->assertNotNull($instance);
 	}
 
 	public function testAsSqlIsIdentifiersDelimitedByComma() {
-		$commandBuilder = $this->getMock(\Pribi\Builders\CommandBuilder::class);
-		$commandBuilder->expects($this->exactly(3))
+		$commandBuilderMock = $this->createCommandBuilderMock();
+		$commandBuilderMock->expects($this->exactly(3))
 			->method('createIdentifier')
 			->will($this->returnValueMap([
 				['foo', $fooSubjectMock = $this->getMockBuilder(\Pribi\Commands\Subjects\Subjects::class)
@@ -38,8 +38,8 @@ class IdentifiersTest extends \PHPUnit_Framework_TestCase {
 			->method('toSql')
 			->with()
 			->willReturn('foobaz');
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilder */
-		$identifiers = new Identifiers(['foo', 'bar', 'baz'], $commandBuilder);
+		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		$identifiers = new Identifiers(['foo', 'bar', 'baz'], $commandBuilderMock);
 		$this->assertSame(3, $identifiers->count());
 		$this->assertSame(3, $identifiers->getIterator()->count());
 		$toSqlMethod = new \ReflectionMethod(Identifiers::class, 'toSql');
@@ -49,22 +49,22 @@ class IdentifiersTest extends \PHPUnit_Framework_TestCase {
 
 	public function testSubjectsCanBeReturnedAsIdentifierOneByOne() {
 		$subjects = ['foo', 'bar', 'baz'];
-		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
+		$commandBuilderMock = $this->createCommandBuilderMock();
 		foreach ($subjects as $index => $subject) {
-			$commandsBuilderMock->expects($this->at($index)) // index of method calling */
-			->method('createIdentifier')
+			$commandBuilderMock->expects($this->at($index)) // index of method calling */
+				->method('createIdentifier')
 				->with($subjects[$index]) // expected parameter
 				->willReturn($subjects[$index]); // for ease we reuse the value for later comparison
 		}
 
 		foreach ($subjects as $index => $subject) {
-			$commandsBuilderMock->expects($this->at($index))
+			$commandBuilderMock->expects($this->at($index))
 				->method('createIdentifier')
 				->with($subjects[$index])
 				->willReturn($subjects[$index]);
 		}
-		/** @var $commandsBuilderMock \Pribi\Builders\CommandBuilder */
-		$identifiers = new Identifiers($subjects, $commandsBuilderMock);
+		/** @var $commandBuilderMock \Pribi\Builders\CommandBuilder */
+		$identifiers = new Identifiers($subjects, $commandBuilderMock);
 		$this->assertSame($identifiers->count(), count($subjects));
 		foreach ($identifiers as $index => $identifier) {
 			$this->assertSame($subjects[$index], $identifier);

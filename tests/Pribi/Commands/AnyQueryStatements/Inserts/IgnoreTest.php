@@ -20,15 +20,15 @@ class IgnoreTest extends \Tests\Helpers\CommandTestCase {
 	}
 
 	public function testCanBeFollowedByInto() {
-		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
+		$commandBuilderMock = $this->createCommandBuilderMock();
 		$tableIdentifierDummy = $this->createIdentifierDummy();
 		$columnIdentifiersDummy = $this->createIdentifiersDummy();
 		$partitionIdentifiersDummy = $this->createIdentifiersDummy();
-		/** @var \Pribi\Builders\CommandBuilder $commandsBuilderMock */
-		$ignore = $this->createIgnore($commandsBuilderMock);
+		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		$ignore = $this->createIgnore($commandBuilderMock);
 		$intoDummy = 'foo';
-		/** @var \PHPUnit_Framework_MockObject_MockObject $commandsBuilderMock */
-		$commandsBuilderMock
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */
+		$commandBuilderMock
 			->expects($this->once())
 			->method('createInto')
 			->with($tableIdentifierDummy, $columnIdentifiersDummy, $partitionIdentifiersDummy, $ignore)
@@ -36,17 +36,17 @@ class IgnoreTest extends \Tests\Helpers\CommandTestCase {
 		$tableName = 'bar';
 		$columnNames = ['baz', 'qux'];
 		$partitionNames = ['foobar', 'foobaz'];
-		$commandsBuilderMock
+		$commandBuilderMock
 			->expects($this->once())
 			->method('createIdentifier')
 			->with($tableName)
 			->willReturn($tableIdentifierDummy);
-		$commandsBuilderMock
+		$commandBuilderMock
 			->expects($this->at(1))
 			->method('createIdentifiers')
 			->with($columnNames)
 			->willReturn($columnIdentifiersDummy);
-		$commandsBuilderMock
+		$commandBuilderMock
 			->expects($this->at(2))
 			->method('createIdentifiers')
 			->with($partitionNames)

@@ -20,11 +20,11 @@ class HighPriorityTest extends \Tests\Helpers\CommandTestCase {
 	}
 
 	public function testCanBeFollowedByIgnore() {
-		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
-		/** @var \Pribi\Builders\CommandBuilder $commandsBuilderMock */
-		$highPriority = $this->createHighPriority($commandsBuilderMock);
-		/** @var \PHPUnit_Framework_MockObject_MockObject $commandsBuilderMock */
-		$commandsBuilderMock
+		$commandBuilderMock = $this->createCommandBuilderMock();
+		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		$highPriority = $this->createHighPriority($commandBuilderMock);
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */
+		$commandBuilderMock
 			->expects($this->once())
 			->method('createIgnore')
 			->with($highPriority)
@@ -33,33 +33,33 @@ class HighPriorityTest extends \Tests\Helpers\CommandTestCase {
 	}
 
 	public function testCanBeFollowedByInto() {
-		$commandsBuilderMock = $this->getMock(\Pribi\Builders\CommandBuilder::class);
+		$commandBuilderMock = $this->createCommandBuilderMock();
 		$tableIdentifierDummy = $this->createIdentifierDummy();
 		$columnsIdentifierDummy = $this->createIdentifiersDummy();
 		$partitionIdentifiersDummy = $this->createIdentifiersDummy();
-		/** @var \Pribi\Builders\CommandBuilder $commandsBuilderMock */
-		$highPriority = $this->createHighPriority($commandsBuilderMock);
+		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		$highPriority = $this->createHighPriority($commandBuilderMock);
 		$createdStatementDummy = 'foo';
-		/** @var \PHPUnit_Framework_MockObject_MockObject $commandsBuilderMock */
-		$commandsBuilderMock
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */
+		$commandBuilderMock
 			->expects($this->once())
 			->method('createInto')
 			->with($tableIdentifierDummy, $columnsIdentifierDummy, $partitionIdentifiersDummy, $highPriority)
 			->willReturn($createdStatementDummy);
 		$tableName = 'bar';
-		$commandsBuilderMock
+		$commandBuilderMock
 			->expects($this->once())
 			->method('createIdentifier')
 			->with($tableName)
 			->willReturn($tableIdentifierDummy);
 		$columnNames = ['baz', 'qux'];
 		$partitionNames = ['foobar', 'foobaz'];
-		$commandsBuilderMock
+		$commandBuilderMock
 			->expects($this->at(1))
 			->method('createIdentifiers')
 			->with($columnNames)
 			->willReturn($columnsIdentifierDummy);
-		$commandsBuilderMock
+		$commandBuilderMock
 			->expects($this->at(2))
 			->method('createIdentifiers')
 			->with($partitionNames)

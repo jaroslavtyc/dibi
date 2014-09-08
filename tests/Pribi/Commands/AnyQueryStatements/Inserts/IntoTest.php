@@ -32,7 +32,7 @@ class IntoTest extends \Tests\Helpers\CommandTestCase {
 	public function testAsSqlWithoutColumnsIsOnlyWithTableAndPartitions() {
 		$tableName = 'foo';
 		$partitionsAsSql = 'baz';
-		$into = $this->createInstanceToSqlTest($tableName, false, $partitionsAsSql);
+		$into = $this->createInstanceToSqlTest($tableName, FALSE, $partitionsAsSql);
 		$toSqlMethod = $this->createAccessibleToSqlMethod();
 		$this->assertSame("INTO $tableName PARTITION ($partitionsAsSql)", $toSqlMethod->invoke($into));
 	}
@@ -117,22 +117,22 @@ class IntoTest extends \Tests\Helpers\CommandTestCase {
 	}
 
 	public function testCanBeFollowedByValues() {
-		$commandsBuilder = $this->getMockBuilder(\Pribi\Builders\CommandBuilder::class)
+		$commandBuilderMock = $this->getMockBuilder(\Pribi\Builders\CommandBuilder::class)
 			->setMethods(['createValues', 'createSubjects'])
 			->getMock();
 		$values = ['foo', 'bar'];
 		$valueSubjectsDummy = $this->createSubjectsDummy();
 		$valueIdentifiersDummy = 'foobar';
-		$commandsBuilder->expects($this->once())
+		$commandBuilderMock->expects($this->once())
 			->method('createValues')
 			->with($valueSubjectsDummy)
 			->willReturn($valueIdentifiersDummy);
-		$commandsBuilder->expects($this->once())
+		$commandBuilderMock->expects($this->once())
 			->method('createSubjects')
 			->with($values)
 			->willReturn($valueSubjectsDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandsBuilder */
-		$into = $this->createInto($commandsBuilder);
+		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		$into = $this->createInto($commandBuilderMock);
 		$this->assertSame($valueIdentifiersDummy, $into->values($values));
 	}
 
@@ -147,52 +147,50 @@ class IntoTest extends \Tests\Helpers\CommandTestCase {
 	}
 
 	public function testCanBeFollowedBySet() {
-		$commandsBuilder = $this->getMockBuilder(\Pribi\Builders\CommandBuilder::class)
-			->getMock();
+		$commandBuilderMock = $this->createCommandBuilderMock();
 		$columnName = 'foo';
 		$expression = 'bar';
 		$columnIdentifierDummy = $this->createIdentifierDummy();
 		$expressionSubjectDummy = $this->createSubjectDummy();
 		$setDummy = 'baz';
-		$commandsBuilder->expects($this->once())
+		$commandBuilderMock->expects($this->once())
 			->method('createIdentifier')
 			->with($columnName)
 			->willReturn($columnIdentifierDummy);
-		$commandsBuilder->expects($this->once())
+		$commandBuilderMock->expects($this->once())
 			->method('createSubject')
 			->with($expression)
 			->willReturn($expressionSubjectDummy);
-		$commandsBuilder->expects($this->once())
+		$commandBuilderMock->expects($this->once())
 			->method('createAnyQuerySet')
 			->with($columnIdentifierDummy, $expressionSubjectDummy)
 			->willReturn($setDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandsBuilder */
-		$into = $this->createInto($commandsBuilder);
+		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		$into = $this->createInto($commandBuilderMock);
 		$this->assertSame($setDummy, $into->set($columnName, $expression));
 	}
 
 	public function testCanBeFollowedBySelect() {
-		$commandsBuilder = $this->getMockBuilder(\Pribi\Builders\CommandBuilder::class)
-			->getMock();
+		$commandBuilderMock = $this->createCommandBuilderMock();
 		$columnName = 'foo';
 		$expression = 'bar';
 		$columnIdentifierDummy = $this->createIdentifierDummy();
 		$expressionSubjectDummy = $this->createSubjectDummy();
 		$setDummy = 'baz';
-		$commandsBuilder->expects($this->once())
+		$commandBuilderMock->expects($this->once())
 			->method('createIdentifier')
 			->with($columnName)
 			->willReturn($columnIdentifierDummy);
-		$commandsBuilder->expects($this->once())
+		$commandBuilderMock->expects($this->once())
 			->method('createSubject')
 			->with($expression)
 			->willReturn($expressionSubjectDummy);
-		$commandsBuilder->expects($this->once())
+		$commandBuilderMock->expects($this->once())
 			->method('createAnyQuerySet')
 			->with($columnIdentifierDummy, $expressionSubjectDummy)
 			->willReturn($setDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandsBuilder */
-		$into = $this->createInto($commandsBuilder);
+		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		$into = $this->createInto($commandBuilderMock);
 		$this->assertSame($setDummy, $into->set($columnName, $expression));
 	}
 }
