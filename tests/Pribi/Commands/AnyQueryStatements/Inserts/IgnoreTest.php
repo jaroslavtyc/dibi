@@ -15,7 +15,7 @@ class IgnoreTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertSame('IGNORE', $toSqlMethod->invoke($ignore));
 	}
 
-	private function createIgnore(\Pribi\Builders\CommandBuilder $commandBuilder) {
+	private function createIgnore(\Pribi\Builders\Commands\Builder $commandBuilder) {
 		return new Ignore($this->createCommandDummy(), $commandBuilder);
 	}
 
@@ -24,7 +24,7 @@ class IgnoreTest extends \Tests\Helpers\CommandTestCase {
 		$tableIdentifierDummy = $this->createIdentifierDummy();
 		$columnIdentifiersDummy = $this->createIdentifiersDummy();
 		$partitionIdentifiersDummy = $this->createIdentifiersDummy();
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$ignore = $this->createIgnore($commandBuilderMock);
 		$intoDummy = 'foo';
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */

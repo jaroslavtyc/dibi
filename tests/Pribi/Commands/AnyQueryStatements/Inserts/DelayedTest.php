@@ -15,13 +15,13 @@ class DelayedTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertSame('DELAYED', $toSqlMethod->invoke($delayed));
 	}
 
-	private function createDelayed(\Pribi\Builders\CommandBuilder $commandBuilder) {
+	private function createDelayed(\Pribi\Builders\Commands\Builder $commandBuilder) {
 		return new Delayed($this->createCommandDummy(), $commandBuilder);
 	}
 
 	public function testCanBeFollowedByIgnore() {
 		$commandBuilderMock = $this->createCommandBuilderMock();
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$delayed = $this->createDelayed($commandBuilderMock);
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */
 		$commandBuilderMock
@@ -37,7 +37,7 @@ class DelayedTest extends \Tests\Helpers\CommandTestCase {
 		$tableIdentifierDummy = $this->createIdentifierDummy();
 		$columnIdentifiersDummy = $this->createIdentifiersDummy();
 		$partitionIdentifiersDummy = $this->createIdentifiersDummy();
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$delayed = $this->createDelayed($commandBuilderMock);
 		$createdStatementDummy = 'foo';
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */

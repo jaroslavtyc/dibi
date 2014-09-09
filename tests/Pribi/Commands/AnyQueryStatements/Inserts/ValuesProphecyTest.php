@@ -38,7 +38,7 @@ class ValuesProphecyTest extends \Tests\Helpers\CommandTestCase {
 	public function testCanBeFollowedByOnDuplicateKeyUpdate() {
 		$columnName = 'foo';
 		$expression = 'bar';
-		$commandBuilder = $this->prophet->prophesize(\Pribi\Builders\CommandBuilder::class);
+		$commandBuilder = $this->prophet->prophesize(\Pribi\Builders\Commands\Builder::class);
 		$columnIdentifier = $this->createIdentifierDummy();
 		$commandBuilder->createIdentifier($columnName)->willReturn($columnIdentifier);
 		$expressionSubject = $this->createSubjectDummy();

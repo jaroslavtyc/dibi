@@ -26,7 +26,7 @@ class ValuesMockeryTest extends \Tests\Helpers\CommandTestCase {
 	public function testCanBeFollowedByOnDuplicateKeyUpdate() {
 		$columnName = 'foo';
 		$expression = 'bar';
-		$commandBuilder = \Mockery::mock(\Pribi\Builders\CommandBuilder::class);
+		$commandBuilder = \Mockery::mock(\Pribi\Builders\Commands\Builder::class);
 		$columnIdentifier = $this->createIdentifierDummy();
 		$commandBuilder->shouldReceive('createIdentifier')
 			->with($columnName)
@@ -37,7 +37,7 @@ class ValuesMockeryTest extends \Tests\Helpers\CommandTestCase {
 			->with($expression)
 			->once()
 			->andReturn($expressionSubject);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilder */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
 		$values = new Values($this->createSubjectsDummy(), $this->createCommandDummy(), $commandBuilder);
 		$onDuplicateKeyUpdateDummy = 'baz';
 		/** @var \Mockery\MockInterface $commandBuilder */

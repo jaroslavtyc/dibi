@@ -7,7 +7,7 @@ namespace Pribi\Commands\Openers;
  * @see http://dev.mysql.com/doc/refman/5.6/en/entering-queries.html
  */
 class Query extends \Pribi\Commands\Command {
-	public function __construct(\Pribi\Builders\CommandBuilder $commandBuilder) {
+	public function __construct(\Pribi\Builders\Commands\Builder $commandBuilder) {
 		parent::__construct($this, $commandBuilder);
 	}
 

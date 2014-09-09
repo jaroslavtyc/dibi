@@ -54,7 +54,7 @@ class SetTest extends \Tests\Helpers\CommandTestCase {
 			->method('createSubject')
 			->with($expression)
 			->willReturn($this->createSubjectDummy());
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$set = new Set($this->createIdentifierDummy(), $this->createSubjectDummy(), $this->createCommandDummy(), $commandBuilderMock);
 		$this->assertSame($setDummy, $set->set($columnName, $expression));
 	}
@@ -78,7 +78,7 @@ class SetTest extends \Tests\Helpers\CommandTestCase {
 			->method('createSubject')
 			->with($expression)
 			->willReturn($expressionSubjectDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$set = new Set($this->createIdentifierDummy(), $this->createSubjectDummy(), $this->createCommandDummy(), $commandBuilderMock);
 		$this->assertSame($onDuplicateKeyUpdateDummy, $set->onDuplicateKeyUpdate($columnName, $expression));
 	}

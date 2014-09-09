@@ -17,13 +17,13 @@ class InsertTest extends CommandTestCase {
 		$this->assertSame('INSERT', $toSqlMethod->invoke($insert));
 	}
 
-	private function createInsert(\Pribi\Builders\CommandBuilder $commandBuilder) {
+	private function createInsert(\Pribi\Builders\Commands\Builder $commandBuilder) {
 		return new Insert($this->createCommandDummy(), $commandBuilder);
 	}
 
 	public function testCanUseLowPriority() {
 		$commandBuilderMock = $this->createCommandBuilderMock();
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$insert = $this->createInsert($commandBuilderMock);
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */
 		$commandBuilderMock
@@ -36,7 +36,7 @@ class InsertTest extends CommandTestCase {
 
 	public function testCanUseHighPriority() {
 		$commandBuilderMock = $this->createCommandBuilderMock();
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$insert = $this->createInsert($commandBuilderMock);
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */
 		$commandBuilderMock
@@ -49,7 +49,7 @@ class InsertTest extends CommandTestCase {
 
 	public function testCanUseDelayed() {
 		$commandBuilderMock = $this->createCommandBuilderMock();
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$insert = $this->createInsert($commandBuilderMock);
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */
 		$commandBuilderMock
@@ -62,7 +62,7 @@ class InsertTest extends CommandTestCase {
 
 	public function testCanBeFollowedByIgnore() {
 		$commandBuilderMock = $this->createCommandBuilderMock();
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$insert = $this->createInsert($commandBuilderMock);
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */
 		$commandBuilderMock
@@ -78,7 +78,7 @@ class InsertTest extends CommandTestCase {
 		$tableIdentifierDummy = $this->createIdentifierDummy();
 		$columnIdentifiersDummy = $this->createIdentifiersDummy();
 		$partitionIdentifiersDummy = $this->createIdentifiersDummy();
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$insert = $this->createInsert($commandBuilderMock);
 		$createdStatementDummy = 'foo';
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */

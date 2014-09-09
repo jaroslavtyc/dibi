@@ -14,7 +14,7 @@ class Set extends WithIdentifier {
 		\Pribi\Commands\Identifiers\Identifier $columnIdentifier,
 		\Pribi\Commands\Subjects\Subject $expression,
 		\Pribi\Commands\Command $previousCommand,
-		\Pribi\Builders\CommandBuilder $commandBuilder
+		\Pribi\Builders\Commands\Builder $commandBuilder
 	) {
 		parent::__construct($columnIdentifier, $previousCommand, $commandBuilder);
 		$this->expression = $expression;

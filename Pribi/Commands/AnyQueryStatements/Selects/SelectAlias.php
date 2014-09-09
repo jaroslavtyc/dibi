@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Selects;
 
-use Pribi\Builders\CommandBuilder;
+use Pribi\Builders\Commands\Builder;
 use Pribi\Commands\Identifiers\Identifier;
 
 class SelectAlias extends Base\SelectAlias {

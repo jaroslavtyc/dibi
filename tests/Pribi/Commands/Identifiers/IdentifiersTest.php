@@ -38,7 +38,7 @@ class IdentifiersTest extends \Tests\Helpers\CommandTestCase {
 			->method('toSql')
 			->with()
 			->willReturn('foobaz');
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$identifiers = new Identifiers(['foo', 'bar', 'baz'], $commandBuilderMock);
 		$this->assertSame(3, $identifiers->count());
 		$this->assertSame(3, $identifiers->getIterator()->count());
@@ -63,7 +63,7 @@ class IdentifiersTest extends \Tests\Helpers\CommandTestCase {
 				->with($subjects[$index])
 				->willReturn($subjects[$index]);
 		}
-		/** @var $commandBuilderMock \Pribi\Builders\CommandBuilder */
+		/** @var $commandBuilderMock \Pribi\Builders\Commands\Builder */
 		$identifiers = new Identifiers($subjects, $commandBuilderMock);
 		$this->assertSame($identifiers->count(), count($subjects));
 		foreach ($identifiers as $index => $identifier) {

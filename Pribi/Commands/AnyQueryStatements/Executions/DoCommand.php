@@ -10,7 +10,7 @@ class DoCommand extends \Pribi\Commands\WithoutIdentifier {
 
 	private $expression;
 
-	public function __construct(\Pribi\Commands\Subjects\Subject $expression, \Pribi\Commands\Command $previousCommand, \Pribi\Builders\CommandBuilder $commandBuilder) {
+	public function __construct(\Pribi\Commands\Subjects\Subject $expression, \Pribi\Commands\Command $previousCommand, \Pribi\Builders\Commands\Builder $commandBuilder) {
 		parent::__construct($previousCommand, $commandBuilder);
 		$this->expression = $expression;
 	}

@@ -17,7 +17,7 @@ class Into extends \Pribi\Commands\WithIdentifier {
 		\Pribi\Commands\Identifiers\Identifiers $columnIdentifiers,
 		\Pribi\Commands\Identifiers\Identifiers $partitionIdentifiers,
 		\Pribi\Commands\Command $previousCommand,
-		\Pribi\Builders\CommandBuilder $commandBuilder
+		\Pribi\Builders\Commands\Builder $commandBuilder
 	) {
 		parent::__construct($tableIdentifier, $this, $commandBuilder);
 		$this->columnIdentifiers = $columnIdentifiers;

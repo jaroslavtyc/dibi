@@ -41,7 +41,7 @@ class ValuesTest extends \Tests\Helpers\CommandTestCase {
 			->method('createOnDuplicateKeyUpdate')
 			->with($columnIdentifier, $expressionSubject /* Why the hell PHPUnit does not fail here, when $previousCommand is missing ? */)
 			->willReturn($onDuplicateKeyUpdateDummy = 'baz');
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$values = new Values($this->createSubjectsDummy(), $this->createCommandDummy(), $commandBuilderMock);
 		$this->assertSame($onDuplicateKeyUpdateDummy, $values->onDuplicateKeyUpdate($columnName, $expression));
 	}

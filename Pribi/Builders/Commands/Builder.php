@@ -1,7 +1,13 @@
 <?php
-namespace Pribi\Builders;
+namespace Pribi\Builders\Commands;
 
-class CommandBuilder extends \Pribi\Core\Object {
+class Builder extends \Pribi\Core\Object {
+
+	private $closingQueryBuilder;
+
+	public function __construct(\Pribi\Builders\ClosingQueries\Builder $closingQueryBuilder) {
+		$this->closingQueryBuilder = $closingQueryBuilder;
+	}
 
 	public function createIdentifier($subject) {
 		return new \Pribi\Commands\Identifiers\Identifier($subject);
@@ -19,7 +25,7 @@ class CommandBuilder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\Subjects\Subjects($subjectValues, $this);
 	}
 
-	public function createQuery() {
+	public function createOpeningQuery() {
 		return new \Pribi\Commands\Openers\Query($this);
 	}
 
@@ -137,5 +143,9 @@ class CommandBuilder extends \Pribi\Core\Object {
 
 	public function createFrom(\Pribi\Commands\Identifiers\Identifier $fromSource, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\FromDefinitions\From($fromSource, $previousCommand, $this);
+	}
+
+	public function createClosingQuery(\Pribi\Commands\Command $command){
+		return $this->closingQueryBuilder->buildQuery($command);
 	}
 }

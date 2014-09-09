@@ -5,12 +5,12 @@ class Pribi {
 
 	private $commandBuilder;
 
-	public function __construct(\Pribi\Builders\CommandBuilder $commandBuilder) {
+	public function __construct(\Pribi\Builders\Commands\Builder $commandBuilder) {
 		$this->commandBuilder = $commandBuilder;
 	}
 
-	public function createQuery() {
-		return $this->commandBuilder->createQuery();
+	public function createOpeningQuery() {
+		return $this->commandBuilder->createOpeningQuery();
 	}
 
 	public function createSubQuery() {

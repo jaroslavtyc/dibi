@@ -10,21 +10,25 @@ class PribiTest extends \Tests\Helpers\CommandTestCase {
 
 	public function testCanOpenQuery() {
 		$commandBuilderMock = $this->createCommandBuilderMock();
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$pribi = $this->createPribi($commandBuilderMock);
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */
 		$commandBuilderMock->expects($this->once())
-			->method('createQuery')
+			->method('createOpeningQuery')
 			->with() // no parameters expected
 			->willReturn('foo');
-		$this->assertEquals('foo', $pribi->createQuery());
+		$this->assertEquals('foo', $pribi->createOpeningQuery());
 	}
 
-	private function createPribi(\Pribi\Builders\CommandBuilder $commandBuilder) {
+	private function createPribi(\Pribi\Builders\Commands\Builder $commandBuilder) {
 		return new Pribi($commandBuilder);
 	}
 
 	public function testCanGiveSubQuery() {
 		$commandBuilderMock = $this->createCommandBuilderMock();
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$pribi = $this->createPribi($commandBuilderMock);
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */
 		$commandBuilderMock->expects($this->once())
 			->method('createSubQuery')
 			->with() // no parameters expected

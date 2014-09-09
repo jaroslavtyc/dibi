@@ -117,7 +117,8 @@ class IntoTest extends \Tests\Helpers\CommandTestCase {
 	}
 
 	public function testCanBeFollowedByValues() {
-		$commandBuilderMock = $this->getMockBuilder(\Pribi\Builders\CommandBuilder::class)
+		$commandBuilderMock = $this->getMockBuilder(\Pribi\Builders\Commands\Builder::class)
+			->disableOriginalConstructor()
 			->setMethods(['createValues', 'createSubjects'])
 			->getMock();
 		$values = ['foo', 'bar'];
@@ -131,12 +132,12 @@ class IntoTest extends \Tests\Helpers\CommandTestCase {
 			->method('createSubjects')
 			->with($values)
 			->willReturn($valueSubjectsDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$into = $this->createInto($commandBuilderMock);
 		$this->assertSame($valueIdentifiersDummy, $into->values($values));
 	}
 
-	private function createInto(\Pribi\Builders\CommandBuilder $commandBuilder) {
+	private function createInto(\Pribi\Builders\Commands\Builder $commandBuilder) {
 		return new Into(
 			$this->createIdentifierDummy(),
 			$this->createIdentifiersDummy(),
@@ -165,7 +166,7 @@ class IntoTest extends \Tests\Helpers\CommandTestCase {
 			->method('createAnyQuerySet')
 			->with($columnIdentifierDummy, $expressionSubjectDummy)
 			->willReturn($setDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$into = $this->createInto($commandBuilderMock);
 		$this->assertSame($setDummy, $into->set($columnName, $expression));
 	}
@@ -189,7 +190,7 @@ class IntoTest extends \Tests\Helpers\CommandTestCase {
 			->method('createAnyQuerySet')
 			->with($columnIdentifierDummy, $expressionSubjectDummy)
 			->willReturn($setDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$into = $this->createInto($commandBuilderMock);
 		$this->assertSame($setDummy, $into->set($columnName, $expression));
 	}

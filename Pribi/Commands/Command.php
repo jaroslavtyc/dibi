@@ -5,7 +5,7 @@ abstract class Command extends QueryPart {
 	private $previousCommand;
 	private $commandBuilder;
 
-	public function __construct(Command $previousCommand, \Pribi\Builders\CommandBuilder $commandBuilder) {
+	public function __construct(Command $previousCommand, \Pribi\Builders\Commands\Builder $commandBuilder) {
 		$this->previousCommand = $previousCommand;
 		$this->commandBuilder = $commandBuilder;
 	}
@@ -22,7 +22,7 @@ abstract class Command extends QueryPart {
 	}
 
 	/**
-	 * @return \Pribi\Builders\CommandBuilder
+	 * @return \Pribi\Builders\Commands\Builder
 	 */
 	protected function getCommandBuilder() {
 		return $this->commandBuilder;

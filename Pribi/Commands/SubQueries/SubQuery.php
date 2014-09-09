@@ -8,7 +8,7 @@ namespace Pribi\Commands\SubQueries;
  */
 class SubQuery extends \Pribi\Commands\Command {
 
-	public function __construct(\Pribi\Builders\CommandBuilder $commandBuilder) {
+	public function __construct(\Pribi\Builders\Commands\Builder $commandBuilder) {
 		parent::__construct($this, $commandBuilder);
 	}
 

@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Executions;
 
-use Pribi\Resources\Builder;
+use Pribi\Builders\ClosingQueries\Builder;
 use Pribi\Commands\Command;
 use Pribi\Resources\Query;
 
@@ -9,22 +9,22 @@ trait Executabling {
 	private $builder;
 
 	public function execute() {
-		return $this->builtQuery()->execute();
+		return $this->createQuery()->execute();
 	}
 
 	public function test() {
-		return $this->builtQuery()->test();
+		return $this->createQuery()->test();
 	}
 
 	public function explain() {
-		return $this->builtQuery()->explain();
+		return $this->createQuery()->explain();
 	}
 
 	/**
 	 * @return Query
 	 */
-	protected function builtQuery() {
-		return $this->buildQueryByBuilder($this->resolveBuilder());
+	protected function createQuery() {
+		return $this->getCommandBuilder()->createQuery($this);
 	}
 
 	private function buildQueryByBuilder(Builder $builder) {

@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Resources;
+namespace Pribi\Builders\ClosingQueries;
 
 use Pribi\Commands\Command,
 	Pribi\Executions\Executor,

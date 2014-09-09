@@ -3,24 +3,35 @@ namespace Tests\Helpers;
 
 abstract class CommandTestCase extends \PHPUnit_Framework_TestCase {
 
-	private $commandBuilder;
+	private $commandBuilderDummy;
 
 	protected function setUp() {
-		$this->commandBuilder = $this->getMock(\Pribi\Builders\CommandBuilder::class);
+		$this->commandBuilderDummy = $this->createCommandBuilderMock();
 	}
 
 	/**
-	 * @return \Pribi\Builders\CommandBuilder
+	 * @return \Pribi\Builders\ClosingQueries\Builder
+	 */
+	protected function getClosingQueriesBuilder() {
+		return $this->getMockBuilder(\Pribi\Builders\ClosingQueries\Builder::class)
+			->disableOriginalConstructor()
+			->getMock();
+	}
+
+	/**
+	 * @return \Pribi\Builders\Commands\Builder
 	 */
 	protected function getCommandsBuilderDummy() {
-		return $this->commandBuilder;
+		return $this->commandBuilderDummy;
 	}
 
 	/**
 	 * @return \PHPUnit_Framework_MockObject_MockObject
 	 */
 	protected function createCommandBuilderMock() {
-		return $this->getMock(\Pribi\Builders\CommandBuilder::class);
+		return $this->getMockBuilder(\Pribi\Builders\Commands\Builder::class)
+			->disableOriginalConstructor()
+			->getMock();
 	}
 
 	/**

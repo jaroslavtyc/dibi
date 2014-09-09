@@ -21,12 +21,12 @@ class QueryTest extends \Tests\Helpers\CommandTestCase {
 			->expects($this->once())
 			->method('createInsert')
 			->willReturn($createdStatementDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$query = $this->createQuery($commandBuilderMock);
 		$this->assertSame($createdStatementDummy, $query->insert());
 	}
 
-	private function createQuery(\Pribi\Builders\CommandBuilder $commandBuilder) {
+	private function createQuery(\Pribi\Builders\Commands\Builder $commandBuilder) {
 		return new Query($commandBuilder);
 	}
 
@@ -46,7 +46,7 @@ class QueryTest extends \Tests\Helpers\CommandTestCase {
 					->disableOriginalConstructor()
 					->getMock()
 			);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$query = $this->createQuery($commandBuilderMock);
 		$this->assertSame($createdStatementDummy, $query->select($subject));
 	}
@@ -67,7 +67,7 @@ class QueryTest extends \Tests\Helpers\CommandTestCase {
 					->disableOriginalConstructor()
 					->getMock()
 			);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$query = $this->createQuery($commandBuilderMock);
 		$this->assertSame($createdStatementDummy, $query->update($subject));
 	}
@@ -88,7 +88,7 @@ class QueryTest extends \Tests\Helpers\CommandTestCase {
 					->disableOriginalConstructor()
 					->getMock()
 			);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$query = $this->createQuery($commandBuilderMock);
 		$this->assertSame($createdStatementDummy, $query->delete($subject));
 	}
@@ -99,7 +99,7 @@ class QueryTest extends \Tests\Helpers\CommandTestCase {
 			->expects($this->once())
 			->method('createMainQueryStartTransaction')
 			->willReturn($mainQueryStartTransactionDummy = 'foo');
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$query = $this->createQuery($commandBuilderMock);
 		$this->assertSame($mainQueryStartTransactionDummy, $query->startTransaction());
 	}
@@ -111,7 +111,7 @@ class QueryTest extends \Tests\Helpers\CommandTestCase {
 			->expects($this->once())
 			->method('createMainQueryBegin')
 			->willReturn($createdStatementDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$query = $this->createQuery($commandBuilderMock);
 		$this->assertSame($createdStatementDummy, $query->begin());
 	}
@@ -123,7 +123,7 @@ class QueryTest extends \Tests\Helpers\CommandTestCase {
 			->expects($this->once())
 			->method('createMainQueryBeginWork')
 			->willReturn($createdStatementDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$query = $this->createQuery($commandBuilderMock);
 		$this->assertSame($createdStatementDummy, $query->beginWork());
 	}
@@ -135,7 +135,7 @@ class QueryTest extends \Tests\Helpers\CommandTestCase {
 			->expects($this->once())
 			->method('createMainQueryCommit')
 			->willReturn($createdStatementDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$query = $this->createQuery($commandBuilderMock);
 		$this->assertSame($createdStatementDummy, $query->commit());
 	}
@@ -147,7 +147,7 @@ class QueryTest extends \Tests\Helpers\CommandTestCase {
 			->expects($this->once())
 			->method('createMainQueryCommitWork')
 			->willReturn($createdStatementDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$query = $this->createQuery($commandBuilderMock);
 		$this->assertSame($createdStatementDummy, $query->commitWork());
 	}
@@ -159,7 +159,7 @@ class QueryTest extends \Tests\Helpers\CommandTestCase {
 			->expects($this->once())
 			->method('createMainQueryDisableAutocommit')
 			->willReturn($createdStatementDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$query = $this->createQuery($commandBuilderMock);
 		$this->assertSame($createdStatementDummy, $query->disableAutocommit());
 	}
@@ -171,7 +171,7 @@ class QueryTest extends \Tests\Helpers\CommandTestCase {
 			->expects($this->once())
 			->method('createMainQueryEnableAutocommit')
 			->willReturn($createdStatementDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$query = $this->createQuery($commandBuilderMock);
 		$this->assertSame($createdStatementDummy, $query->enableAutocommit());
 	}
@@ -183,7 +183,7 @@ class QueryTest extends \Tests\Helpers\CommandTestCase {
 			->expects($this->once())
 			->method('createMainQueryRollback')
 			->willReturn($createdStatementDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$query = $this->createQuery($commandBuilderMock);
 		$this->assertSame($createdStatementDummy, $query->rollback());
 	}
@@ -195,7 +195,7 @@ class QueryTest extends \Tests\Helpers\CommandTestCase {
 			->expects($this->once())
 			->method('createMainQueryRollbackWork')
 			->willReturn($createdStatementDummy);
-		/** @var \Pribi\Builders\CommandBuilder $commandBuilderMock */
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$query = $this->createQuery($commandBuilderMock);
 		$this->assertSame($createdStatementDummy, $query->rollbackWork());
 	}
