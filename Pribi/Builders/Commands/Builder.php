@@ -25,8 +25,8 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\Subjects\Subjects($subjectValues, $this);
 	}
 
-	public function createOpeningQuery() {
-		return new \Pribi\Commands\Openers\Query($this);
+	public function createQueryInitializer() {
+		return new \Pribi\Commands\Openers\QueryInitializer($this);
 	}
 
 	public function createSubQuery() {
@@ -145,7 +145,7 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\FromDefinitions\From($fromSource, $previousCommand, $this);
 	}
 
-	public function createClosingQuery(\Pribi\Commands\Command $command){
-		return $this->closingQueryBuilder->buildQuery($command);
+	public function createCompleteQuery(\Pribi\Commands\Command $command){
+		return $this->closingQueryBuilder->buildCompleteQuery($command);
 	}
 }

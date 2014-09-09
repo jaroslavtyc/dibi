@@ -9,11 +9,11 @@ class Pribi {
 		$this->commandBuilder = $commandBuilder;
 	}
 
-	public function createOpeningQuery() {
-		return $this->commandBuilder->createOpeningQuery();
+	public function openQuery() {
+		return $this->commandBuilder->createQueryInitializer();
 	}
 
-	public function createSubQuery() {
+	public function startSubQuery() {
 		return $this->commandBuilder->createSubQuery();
 	}
 }

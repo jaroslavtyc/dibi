@@ -1,54 +1,36 @@
 <?php
 namespace Pribi\Executions;
 
-use Pribi\Builders\ClosingQueries\Builder;
-use Pribi\Commands\Command;
-use Pribi\Resources\Query;
-
+/**
+ * For \Pribi\Commands\Command only
+ * @see \Pribi\Commands\Command
+ */
 trait Executabling {
+
 	private $builder;
 
 	public function execute() {
-		return $this->createQuery()->execute();
+		return $this->createCompleteQuery()->execute();
 	}
 
 	public function test() {
-		return $this->createQuery()->test();
+		return $this->createCompleteQuery()->test();
 	}
 
 	public function explain() {
-		return $this->createQuery()->explain();
+		return $this->createCompleteQuery()->explain();
 	}
 
 	/**
-	 * @return Query
+	 * @return \Pribi\Resources\CompleteQuery
 	 */
-	protected function createQuery() {
-		return $this->getCommandBuilder()->createQuery($this);
+	protected function createCompleteQuery() {
+		/** @var \Pribi\Commands\Command $this */
+		return $this->getCommandBuilder()->createCompleteQuery($this);
 	}
 
-	private function buildQueryByBuilder(Builder $builder) {
-		/**
-		 * @var Command $this
-		 */
-		return $builder->buildQuery($this);
-	}
-
-	/**
-	 * @return Builder
-	 */
-	protected function resolveBuilder() {
-		if (!isset($this->builder)) {
-			$this->builder = $this->createBuilder();
-		}
-
-		return $this->builder;
-	}
-
-	/**
-	 * @return Builder
-	 */
-	private function createBuilder() {
-		return new Builder;
+	private function buildQueryByBuilder(\Pribi\Builders\ClosingQueries\Builder $builder) {
+		/** @var \Pribi\Commands\Command $this */
+		return $builder->buildCompleteQuery($this);
 	}
 }

@@ -1,17 +1,17 @@
 <?php
 namespace Pribi\Commands\Openers;
 
-class QueryTest extends \Tests\Helpers\CommandTestCase {
+class QueryInitializerTest extends \Tests\Helpers\CommandTestCase {
 
 	public function testInstanceCanBeCreated() {
-		$instance = new Query($this->getCommandsBuilderDummy());
+		$instance = new QueryInitializer($this->getCommandsBuilderDummy());
 		$this->assertNotNull($instance);
 	}
 
 	public function testAsSqlIsEmptyString() {
-		$toSqlMethod = new \ReflectionMethod(Query::class, 'toSql');
+		$toSqlMethod = new \ReflectionMethod(QueryInitializer::class, 'toSql');
 		$toSqlMethod->setAccessible(TRUE);
-		$this->assertSame('', $toSqlMethod->invoke(new Query($this->getCommandsBuilderDummy())));
+		$this->assertSame('', $toSqlMethod->invoke(new QueryInitializer($this->getCommandsBuilderDummy())));
 	}
 
 	public function testCanInsertInto() {
@@ -27,7 +27,7 @@ class QueryTest extends \Tests\Helpers\CommandTestCase {
 	}
 
 	private function createQuery(\Pribi\Builders\Commands\Builder $commandBuilder) {
-		return new Query($commandBuilder);
+		return new QueryInitializer($commandBuilder);
 	}
 
 	public function testCanSelect() {
