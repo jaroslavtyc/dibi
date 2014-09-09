@@ -10,9 +10,7 @@ use Pribi\Commands\MainQueryStatements\WhereSources\WhereNot;
 
 trait AfterSelecting {
 	public function select($subject) {
-		/**
-		 * @var \Pribi\Commands\Command $this
-		 */
+		/** @var \Pribi\Commands\Command $this */
 		$select = new Select(new Identifier($subject), $this);
 
 		return $select;
