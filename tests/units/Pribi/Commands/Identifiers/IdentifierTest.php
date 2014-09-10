@@ -45,6 +45,26 @@ class IdentifierTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame($number, $this->getAsIdentifierTurnedToSql($number));
 	}
 
+	public function testWithPositiveIntegerAsStringSubjectIsSameDigitsAsSql() {
+		$number = '123456789';
+		$this->assertSame($number, $this->getAsIdentifierTurnedToSql($number));
+	}
+
+	public function testWithNegativeIntegerAsStringSubjectIsSameDigitsAsSql() {
+		$number = '-987654321';
+		$this->assertSame($number, $this->getAsIdentifierTurnedToSql($number));
+	}
+
+	public function testWithPositiveFloatAsStringSubjectIsSameFloatAsSql() {
+		$number = '123456.789';
+		$this->assertSame($number, $this->getAsIdentifierTurnedToSql($number));
+	}
+
+	public function testWithNegativeFloatAsStringSubjectIsSameFloatAsSql() {
+		$number = '-987654.321';
+		$this->assertSame($number, $this->getAsIdentifierTurnedToSql($number));
+	}
+
 	public function testWordIsQuotedAsSql() {
 		$word = 'foo';
 		$this->assertSame("`$word`", $this->getAsIdentifierTurnedToSql($word));

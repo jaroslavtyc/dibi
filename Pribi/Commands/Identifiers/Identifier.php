@@ -23,7 +23,7 @@ class Identifier extends QueryPart {
 	private function quote($subject) {
 		if ($this->isString($subject)) {
 			$subject = trim($subject);
-			if ($this->isNotManuallyQuoted($subject) && $this->isProbablyNotSpecial($subject) && $this->isValidIdentifier($subject)) {
+			if ($this->isNotNumeric($subject) && $this->isNotManuallyQuoted($subject) && $this->isProbablyNotSpecial($subject) && $this->isValidIdentifier($subject)) {
 				$subject = $this->quoteIt($subject);
 			}
 		} elseif (is_null($subject)) {
@@ -35,6 +35,10 @@ class Identifier extends QueryPart {
 
 	private function isString($subject) {
 		return is_string($subject) || (is_object($subject) && method_exists($subject, '__toString'));
+	}
+
+	private function isNotNumeric($subject) {
+		return !is_numeric($subject);
 	}
 
 	private function isNotManuallyQuoted($subject) {
