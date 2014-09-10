@@ -10,6 +10,13 @@
     <testsuites>
         <testsuite name="complete">
             <directory>./tests/units</directory>
+            <directory>./tests/integrations</directory>
+        </testsuite>
+        <testsuite name="unit">
+            <directory>./tests/units</directory>
+        </testsuite>
+        <testsuite name="integration">
+            <directory>./tests/integrations</directory>
         </testsuite>
     </testsuites>
 </phpunit>
