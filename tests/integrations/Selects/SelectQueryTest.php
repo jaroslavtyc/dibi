@@ -39,4 +39,13 @@ class SelectQueryTest extends \PHPUnit_Framework_TestCase {
 				->execute()
 		);
 	}
+
+	public function testCanSelectFromTable() {
+		$this->assertSame(
+			'SELECT `foo` FROM `bar`',
+			$this->pribi->openQuery()->select('foo')
+				->from('bar')
+				->execute()
+		);
+	}
 }
