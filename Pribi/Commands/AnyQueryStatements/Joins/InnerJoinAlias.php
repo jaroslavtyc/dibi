@@ -2,7 +2,7 @@
 namespace Pribi\Commands\Joins;
 
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\WhereDefinitions\Where;
+use Pribi\Commands\AnyQueryStatements\WhereConditions\Where;
 
 class InnerJoinAlias extends JoinAlias {
 	public function __construct(Identifier $alias, InnerJoin $prependInnerJoin) {

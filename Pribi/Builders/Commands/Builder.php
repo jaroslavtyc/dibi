@@ -142,7 +142,35 @@ class Builder extends \Pribi\Core\Object {
 	}
 
 	public function createFrom(\Pribi\Commands\Identifiers\Identifier $fromSource, \Pribi\Commands\Command $previousCommand) {
-		return new \Pribi\Commands\FromDefinitions\From($fromSource, $previousCommand, $this);
+		return new \Pribi\Commands\AnyQueryStatements\FromDefinitions\From($fromSource, $previousCommand, $this);
+	}
+
+	public function createMainQueryFrom(\Pribi\Commands\Identifiers\Identifier $fromSource, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\FromDefinitions\From($fromSource, $previousCommand, $this);
+	}
+
+	public function createMainQueryWhere(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\WhereConditions\Where($identifier, $previousCommand, $this);
+	}
+
+	public function createAnyQueryWhere(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\WhereConditions\Where($identifier, $previousCommand, $this);
+	}
+
+	public function createMainQueryWhereNot(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\WhereConditions\WhereNot($identifier, $previousCommand, $this);
+	}
+
+	public function createAnyQueryWhereNot(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\WhereConditions\WhereNot($identifier, $previousCommand, $this);
+	}
+
+	public function createAnyQueryLimit($offset, $limit, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Limits\Limit($offset, $limit, $previousCommand, $this);
+	}
+
+	public function createMainQueryLimit($offset, $limit, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Limits\Limit($offset, $limit, $previousCommand, $this);
 	}
 
 	public function createCompleteQuery(\Pribi\Commands\Command $command){

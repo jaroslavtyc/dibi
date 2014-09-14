@@ -1,11 +1,11 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Selects\Base;
 
-use Pribi\Commands\FromDefinitions\From;
+use Pribi\Commands\AnyQueryStatements\FromDefinitions\From;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\AnyQueryStatements\Selects\SelectNot;
-use Pribi\Commands\WhereDefinitions\Where;
-use Pribi\Commands\WhereDefinitions\WhereNot;
+use Pribi\Commands\AnyQueryStatements\WhereConditions\Where;
+use Pribi\Commands\AnyQueryStatements\WhereConditions\WhereNot;
 
 trait AfterSelecting {
 	public function select($subject) {

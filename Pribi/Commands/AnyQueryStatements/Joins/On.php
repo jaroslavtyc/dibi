@@ -11,8 +11,8 @@ use Pribi\Commands\AnyQueryStatements\Limits\Base\Limitable;
 use Pribi\Commands\AnyQueryStatements\Limits\Base\Limiting;
 use Pribi\Commands\Negation;
 use Pribi\Commands\RightJoin;
-use Pribi\Commands\WhereDefinitions\Base\Whereable;
-use Pribi\Commands\WhereDefinitions\Base\Whereing;
+use Pribi\Commands\AnyQueryStatements\WhereConditions\Base\Whereable;
+use Pribi\Commands\AnyQueryStatements\WhereConditions\Base\Whereing;
 use Pribi\Commands\WithIdentifier;
 
 class On extends WithIdentifier implements AndOrUsable, Comparable, Whereable, Limitable {

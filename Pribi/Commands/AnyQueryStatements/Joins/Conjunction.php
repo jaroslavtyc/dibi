@@ -8,8 +8,8 @@ use Pribi\Commands\Joins\Base\AndOring;
 use Pribi\Commands\Joins\Base\Comparing;
 use Pribi\Commands\AnyQueryStatements\Limits\Base\Limitable;
 use Pribi\Commands\AnyQueryStatements\Limits\Base\Limiting;
-use Pribi\Commands\WhereDefinitions\Base\Whereable;
-use Pribi\Commands\WhereDefinitions\Base\Whereing;
+use Pribi\Commands\AnyQueryStatements\WhereConditions\Base\Whereable;
+use Pribi\Commands\AnyQueryStatements\WhereConditions\Base\Whereing;
 
 class Conjunction extends \Pribi\Commands\AnyQueryStatements\Conditions\Conjunction implements Comparable, Whereable, Limitable {
 	use AndOring;

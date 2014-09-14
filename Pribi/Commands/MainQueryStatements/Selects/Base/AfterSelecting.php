@@ -2,53 +2,58 @@
 namespace Pribi\Commands\MainQueryStatements\Selects\Base;
 
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\MainQueryStatements\FromSources\From;
-use Pribi\Commands\MainQueryStatements\Selects\Select;
-use Pribi\Commands\MainQueryStatements\Selects\SelectNot;
-use Pribi\Commands\MainQueryStatements\WhereSources\Where;
-use Pribi\Commands\MainQueryStatements\WhereSources\WhereNot;
+use Pribi\Commands\MainQueryStatements\WhereConditions\Where;
+use Pribi\Commands\MainQueryStatements\WhereConditions\WhereNot;
 
 trait AfterSelecting {
+
+	/**
+	 * @param $subject
+	 * @return \Pribi\Commands\MainQueryStatements\Selects\Select
+	 */
 	public function select($subject) {
 		/** @var \Pribi\Commands\Command $this */
-		$select = new Select(new Identifier($subject), $this);
-
-		return $select;
+		return $this->getCommandBuilder()->createMainQuerySelect(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
 	}
 
-	public function selectNot($subject) {
-		/**
-		 * @var \Pribi\Commands\Command $this
-		 */
-		$select = new SelectNot(new Identifier($subject), $this);
-
-		return $select;
-	}
-
+	/**
+	 * @param $subject
+	 * @return \Pribi\Commands\MainQueryStatements\FromDefinitions\From
+	 */
 	public function from($subject) {
-		/**
-		 * @var \Pribi\Commands\Command $this
-		 */
-		$from = new From(new Identifier($subject), $this);
-
-		return $from;
+		/** @var \Pribi\Commands\Command $this */
+		return $this->getCommandBuilder()->createMainQueryFrom(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
 	}
 
 	public function where($subject) {
-		/**
-		 * @var \Pribi\Commands\Command $this
-		 */
-		$where = new Where(new Identifier($subject), $this);
-
-		return $where;
+		/** @var \Pribi\Commands\Command $this */
+		return $this->getCommandBuilder()->createMainQueryWhere(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
 	}
 
 	public function whereNot($subject) {
-		/**
-		 * @var \Pribi\Commands\Command $this
-		 */
-		$where = new WhereNot(new Identifier($subject), $this);
-
-		return $where;
+		/** @var \Pribi\Commands\Command $this */
+		return $this->getCommandBuilder()->createMainQueryWhereNot(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
 	}
+
+	public function limit($limit, $offset = 0) {
+		/** @var \Pribi\Commands\Command $this */
+		return $this->getCommandBuilder()->createMainQueryLimit(
+			$offset,
+			$limit,
+			$this
+		);
+	}
+
 }

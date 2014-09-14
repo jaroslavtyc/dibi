@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\FromDefinitions\Base;
+namespace Pribi\Commands\AnyQueryStatements\FromDefinitions\Base;
 
 interface FromIdentifiable {
 	const CLASS_IDENTITY = __CLASS__;

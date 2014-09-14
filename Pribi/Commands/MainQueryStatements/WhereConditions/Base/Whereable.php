@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\MainQueryStatements\WhereSources\Base;
+namespace Pribi\Commands\MainQueryStatements\WhereConditions\Base;
 
 interface Whereable {
 	public function where($subject);

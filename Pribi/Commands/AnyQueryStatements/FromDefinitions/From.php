@@ -1,22 +1,16 @@
 <?php
-namespace Pribi\Commands\FromDefinitions;
-
-use Pribi\Commands\FromDefinitions\Base\FromIdentifiable;
-use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\IdentifierBringer;
-use Pribi\Commands\Joins\Base\Joinable;
-use Pribi\Commands\Joins\Joining;
-use Pribi\Commands\AnyQueryStatements\Limits\Base\Limitable;
-use Pribi\Commands\AnyQueryStatements\Limits\Base\Limiting;
-use Pribi\Commands\WhereDefinitions\Base\Whereable;
-use Pribi\Commands\WhereDefinitions\Base\Whereing;
+namespace Pribi\Commands\AnyQueryStatements\FromDefinitions;
 
 /**
  * @method FromAlias as ($alias)
  */
-class From extends IdentifierBringer implements FromIdentifiable, Joinable, Whereable, Limitable {
-	use Joining;
-	use \Pribi\Commands\WhereDefinitions\Base\Whereing;
+class From extends \Pribi\Commands\IdentifierBringer implements \Pribi\Commands\AnyQueryStatements\FromDefinitions\Base\FromIdentifiable,
+	\Pribi\Commands\AnyQueryStatements\Joins\Base\Joinable,
+	\Pribi\Commands\AnyQueryStatements\WhereConditions\Base\Whereable,
+	\Pribi\Commands\AnyQueryStatements\Limits\Base\Limitable {
+
+	use \Pribi\Commands\AnyQueryStatements\Joins\Joining;
+	use \Pribi\Commands\AnyQueryStatements\WhereConditions\Base\Whereing;
 	use \Pribi\Commands\AnyQueryStatements\Limits\Base\Limiting;
 
 	protected function toSql() {
@@ -27,7 +21,7 @@ class From extends IdentifierBringer implements FromIdentifiable, Joinable, Wher
 		}
 	}
 
-	protected function alias(Identifier $alias) {
+	protected function alias(\Pribi\Commands\Identifiers\Identifier $alias) {
 		return new FromAlias($alias, $this);
 	}
 }
