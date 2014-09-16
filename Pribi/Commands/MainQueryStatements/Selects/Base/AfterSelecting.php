@@ -1,10 +1,6 @@
 <?php
 namespace Pribi\Commands\MainQueryStatements\Selects\Base;
 
-use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\MainQueryStatements\WhereConditions\Where;
-use Pribi\Commands\MainQueryStatements\WhereConditions\WhereNot;
-
 trait AfterSelecting {
 
 	/**
