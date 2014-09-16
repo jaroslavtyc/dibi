@@ -45,7 +45,7 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\AnyQueryStatements\Selects\Select($identifier, $previousCommand, $this);
 	}
 
-	public function createSelectAlias(\Pribi\Commands\Identifiers\Identifier $alias, \Pribi\Commands\AnyQueryStatements\Selects\Select $prependSelect) {
+	public function createAnyQuerySelectAlias(\Pribi\Commands\Identifiers\Identifier $alias, \Pribi\Commands\AnyQueryStatements\Selects\Select $prependSelect) {
 		return new \Pribi\Commands\AnyQueryStatements\Selects\SelectAlias($alias, $prependSelect, $this);
 	}
 
@@ -141,7 +141,7 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\MainQueryStatements\Transactions\Rollbacks\RollbackWork($previousCommand, $this);
 	}
 
-	public function createFrom(\Pribi\Commands\Identifiers\Identifier $fromSource, \Pribi\Commands\Command $previousCommand) {
+	public function createAnyQueryFrom(\Pribi\Commands\Identifiers\Identifier $fromSource, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\AnyQueryStatements\FromDefinitions\From($fromSource, $previousCommand, $this);
 	}
 
@@ -173,7 +173,7 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\MainQueryStatements\Limits\Limit($offset, $limit, $previousCommand, $this);
 	}
 
-	public function createCompleteQuery(\Pribi\Commands\Command $command){
+	public function createCompleteQuery(\Pribi\Commands\Command $command) {
 		return $this->closingQueryBuilder->buildCompleteQuery($command);
 	}
 }

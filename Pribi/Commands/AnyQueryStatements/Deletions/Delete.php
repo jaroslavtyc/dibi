@@ -20,6 +20,6 @@ class Delete extends WithIdentifier {
 	}
 
 	public function from($subject) {
-		$this->getCommandBuilder()->createFrom(new Identifier($subject), $this);
+		$this->getCommandBuilder()->createAnyQueryFrom(new Identifier($subject), $this);
 	}
 }
