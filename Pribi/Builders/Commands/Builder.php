@@ -145,6 +145,10 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\AnyQueryStatements\FromDefinitions\From($fromSource, $previousCommand, $this);
 	}
 
+	public function createAnyQueryFromAlias(\Pribi\Commands\Identifiers\Identifier $alias, \Pribi\Commands\AnyQueryStatements\FromDefinitions\From $prependFrom) {
+		return new \Pribi\Commands\AnyQueryStatements\FromDefinitions\FromAlias($alias, $prependFrom, $this);
+	}
+
 	public function createMainQueryFrom(\Pribi\Commands\Identifiers\Identifier $fromSource, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\MainQueryStatements\FromDefinitions\From($fromSource, $previousCommand, $this);
 	}
