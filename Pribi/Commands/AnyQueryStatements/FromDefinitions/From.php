@@ -21,7 +21,10 @@ class From extends \Pribi\Commands\IdentifierBringer implements \Pribi\Commands\
 		}
 	}
 
-	protected function alias(\Pribi\Commands\Identifiers\Identifier $alias) {
-		return new FromAlias($alias, $this);
+	protected function alias($aliasName) {
+		return $this->getCommandBuilder()->createAnyQueryFromAlias(
+			$this->getCommandBuilder()->createIdentifier($aliasName),
+			$this
+		);
 	}
 }

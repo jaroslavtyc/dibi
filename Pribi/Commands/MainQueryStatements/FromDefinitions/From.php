@@ -7,7 +7,10 @@ namespace Pribi\Commands\MainQueryStatements\FromDefinitions;
 class From extends \Pribi\Commands\AnyQueryStatements\FromDefinitions\From implements \Pribi\Executions\Executable {
 	use \Pribi\Executions\Executabling;
 
-	protected function alias(\Pribi\Commands\Identifiers\Identifier $alias) {
-		return new FromAlias($alias, $this);
+	protected function alias($aliasName) {
+		$this->getCommandBuilder()->createMainQueryFromAlias(
+			$this->getCommandBuilder()->createIdentifier($aliasName),
+			$this
+		);
 	}
 }

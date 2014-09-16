@@ -1,8 +1,6 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Selects;
 
-use Pribi\Commands\Identifiers\Identifier;
-
 /**
  * @method SelectAlias as ($alias)
  */
@@ -16,10 +14,13 @@ class Select extends Base\Select {
 	}
 
 	/**
-	 * @param Identifier $alias
-	 * @return \Pribi\Commands\Command|SelectAlias
+	 * @param string $aliasName
+	 * @return SelectAlias
 	 */
-	protected function alias(Identifier $alias) {
-		return $this->getCommandBuilder()->createSelectAlias($alias, $this);
+	protected function alias($aliasName) {
+		return $this->getCommandBuilder()->createAnyQuerySelectAlias(
+			$this->getCommandBuilder()->createIdentifier($aliasName),
+			$this
+		);
 	}
 }

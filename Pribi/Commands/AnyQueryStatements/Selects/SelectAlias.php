@@ -1,18 +1,19 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Selects;
 
-use Pribi\Builders\Commands\Builder;
-use Pribi\Commands\Identifiers\Identifier;
-
 class SelectAlias extends Base\SelectAlias {
 	/**
-	 * Constructor with closely specified PreviousCommand, respectively aliased Select
+	 * Constructor with closely specified previous command, aliased Select respectively
 	 *
-	 * @param Identifier $alias
+	 * @param \Pribi\Commands\Identifiers\Identifier $alias
 	 * @param Select $prependSelect
-	 * @param CommandBuilder $commandBuilder
+	 * @param \Pribi\Builders\Commands\Builder $commandBuilder
 	 */
-	public function __construct(Identifier $alias, Select $prependSelect, CommandBuilder $commandBuilder) {
+	public function __construct(
+		\Pribi\Commands\Identifiers\Identifier $alias,
+		Select $prependSelect,
+		\Pribi\Builders\Commands\Builder $commandBuilder
+	) {
 		parent::__construct($alias, $prependSelect, $commandBuilder);
 	}
 }

@@ -8,7 +8,7 @@ class Select extends \Pribi\Commands\AnyQueryStatements\Selects\Select implement
 	use Base\AfterSelecting;
 	use \Pribi\Executions\Executabling;
 
-	protected function alias(\Pribi\Commands\Identifiers\Identifier $alias) {
-		return new SelectAlias($alias, $this);
+	protected function alias($aliasName) {
+		return new SelectAlias($aliasName, $this, $this->getCommandBuilder());
 	}
 }

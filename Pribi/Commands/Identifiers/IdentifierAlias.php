@@ -1,13 +1,14 @@
 <?php
 namespace Pribi\Commands\Identifiers;
 
-use Pribi\Builders\Commands\Builder;
-use Pribi\Commands\Command;
-
-abstract class IdentifierAlias extends Command {
+abstract class IdentifierAlias extends \Pribi\Commands\Command {
 	private $alias;
 
-	public function __construct(Identifier $alias, Command $previousCommand, CommandBuilder $commandBuilder) {
+	public function __construct(
+		Identifier $alias,
+		\Pribi\Commands\Command $previousCommand,
+		\Pribi\Builders\Commands\Builder $commandBuilder
+	) {
 		$this->alias = $alias;
 		parent::__construct($previousCommand, $commandBuilder);
 	}
