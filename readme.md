@@ -21,7 +21,7 @@ Pribi requires [PHP 5.5.0](http://php.net/releases/5_5_0.php) or later because o
 [\_\_callStatic() 5.3](http://www.php.net/manual/en/language.oop5.overloading.php#object.callstatic),
 [\_\_DIR\_\_ 5.3](http://php.net/manual/en/language.constants.predefined.php),
 [traits 5.4](http://php.net/traits)
-and [Foo::class magic (auto-existing) absolute class name constant](http://cz1.php.net/oop5.basic#language.oop5.basic.class.class).
+and [Foo::class magic (auto-existing) absolute class name constant 5.5](http://php.net/oop5.basic#language.oop5.basic.class.class).
 
 Tips and Tricks
 ---------------
