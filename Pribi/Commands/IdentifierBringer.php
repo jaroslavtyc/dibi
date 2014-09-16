@@ -5,6 +5,8 @@ namespace Pribi\Commands;
  * Class IdentifierBringer
  * @package Pribi\Commands
  *
+ * Includes an identifier to query, so has the possibility to rename it immediately by an alias
+ *
  * @method \Pribi\Commands\Identifiers\IdentifierAlias as ($alias)
  */
 
