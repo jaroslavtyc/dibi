@@ -17,12 +17,11 @@ class InnerJoinAlias extends JoinAlias {
 		);
 	}
 
-	public function innerJoin($identificator) {
-		return new InnerJoin($identificator, $this);
-	}
-
-	public function leftJoin($name) {
-		return new LeftJoin(new Identifier($name), $this);
+	public function leftJoin($subject) {
+		return $this->getCommandBuilder()->createAnyQueryLeftJoin(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
 	}
 
 	public function rightJoin($identificator) {
