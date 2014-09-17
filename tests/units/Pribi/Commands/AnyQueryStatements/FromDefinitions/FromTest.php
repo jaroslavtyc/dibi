@@ -48,4 +48,23 @@ class FromTest extends \Tests\Helpers\CommandTestCase {
 			->willReturn($aliasDummy);
 		$this->assertSame($aliasDummy, $from->as('bar'));
 	}
+
+	public function testCanBeFollowedByInnerJoin() {
+		$commandBuilder = $this->createCommandBuilderMock();
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
+		$from = new From($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$tableName = 'foo';
+		$innerJoinDummy = 'bar';
+		$tableIdentifierDummy = $this->createIdentifierDummy();
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilder */
+		$commandBuilder->expects($this->once())
+			->method('createIdentifier')
+			->with($tableName)
+			->willReturn($tableIdentifierDummy);
+		$commandBuilder->expects($this->once())
+			->method('createAnyQueryInnerJoin')
+			->with($tableIdentifierDummy)
+			->willReturn($innerJoinDummy);
+		$this->assertSame($innerJoinDummy, $from->innerJoin($tableName));
+	}
 }
