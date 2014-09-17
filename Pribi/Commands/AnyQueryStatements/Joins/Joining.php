@@ -6,8 +6,9 @@ use Pribi\Commands\Identifiers\Identifier;
 trait Joining {
 	public function innerJoin($subject) {
 		/** @var \Pribi\Commands\Command $this */
-		return $this->getCommandBuilder()->createInnerJoin(
-			$this->getCommandBuilder()->createIdentifier($subject, $this)
+		return $this->getCommandBuilder()->createAnyQueryInnerJoin(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
 		);
 	}
 
