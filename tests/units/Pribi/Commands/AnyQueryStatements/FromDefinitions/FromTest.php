@@ -36,6 +36,7 @@ class FromTest extends \Tests\Helpers\CommandTestCase {
 		$from = new From($tableIdentifier, $this->createCommandDummy(), $commandBuilder);
 		$aliasName = 'bar';
 		$aliasIdentifier = $this->createIdentifierDummy();
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilder */
 		$commandBuilder->expects($this->once())
 			->method('createIdentifier')
 			->with($aliasName)
