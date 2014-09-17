@@ -1,16 +1,19 @@
 <?php
-namespace Pribi\Commands\Joins;
+namespace Pribi\Commands\AnyQueryStatements\Joins;
 
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Joins\Base\InnerJoinIdentifiable;
 use Pribi\Commands\AnyQueryStatements\WhereConditions\Where;
 
 /**
  * @method InnerJoinAlias as ($alias)
  */
-class InnerJoin extends Join implements InnerJoinIdentifiable {
-	protected function alias(Identifier $alias) {
-		return new InnerJoinAlias($alias, $this);
+class InnerJoin extends Join implements \Pribi\Commands\AnyQueryStatements\Joins\Base\InnerJoinIdentifiable {
+
+	protected function alias($aliasName) {
+		return $this->getCommandBuilder()->createAnyQueryInnerJoinAlias(
+			$this->getCommandBuilder()->createIdentifier($aliasName),
+			$this
+		);
 	}
 
 	protected function toSql() {

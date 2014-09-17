@@ -5,10 +5,10 @@ use Pribi\Commands\Identifiers\Identifier;
 
 trait Joining {
 	public function innerJoin($subject) {
-		/**
-		 * @var \Pribi\Commands\Command $this
-		 */
-		return new InnerJoin(new Identifier($subject), $this);
+		/** @var \Pribi\Commands\Command $this */
+		return $this->getCommandBuilder()->createInnerJoin(
+			$this->getCommandBuilder()->createIdentifier($subject, $this)
+		);
 	}
 
 	public function leftJoin($subject) {

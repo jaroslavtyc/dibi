@@ -1,12 +1,13 @@
 <?php
-namespace Pribi\Commands\Joins;
+namespace Pribi\Commands\AnyQueryStatements\Joins;
 
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\AnyQueryStatements\WhereConditions\Where;
 
 class InnerJoinAlias extends JoinAlias {
+
 	public function __construct(Identifier $alias, InnerJoin $prependInnerJoin) {
-		parent::__construct($alias, $prependInnerJoin);
+		parent::__construct($alias, $prependInnerJoin, $this->getCommandBuilder());
 	}
 
 	protected function toSql() {

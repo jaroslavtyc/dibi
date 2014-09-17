@@ -157,6 +157,24 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\MainQueryStatements\FromDefinitions\From($fromSource, $previousCommand, $this);
 	}
 
+	public function createAnyQueryInnerJoin(\Pribi\Commands\Identifiers\Identifier $joinedTable, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Joins\InnerJoin($joinedTable, $previousCommand, $this);
+	}
+
+	public function createAnyQueryInnerJoinAlias(
+		\Pribi\Commands\Identifiers\Identifier $aliasIdentifier,
+		\Pribi\Commands\AnyQueryStatements\Joins\InnerJoin $prependInnerJoin
+	) {
+		return new \Pribi\Commands\AnyQueryStatements\Joins\InnerJoinAlias($aliasIdentifier, $prependInnerJoin, $this);
+	}
+
+	public function createAnyQueryOn(
+		\Pribi\Commands\Identifiers\Identifier $identifier,
+		\Pribi\Commands\Command $previousJoinOrItsAlias
+	) {
+		return new \Pribi\Commands\AnyQueryStatements\Joins\On($identifier, $previousJoinOrItsAlias, $this);
+	}
+
 	public function createMainQueryWhere(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\MainQueryStatements\WhereConditions\Where($identifier, $previousCommand, $this);
 	}

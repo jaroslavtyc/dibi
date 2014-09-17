@@ -1,11 +1,12 @@
 <?php
-namespace Pribi\Commands\Joins;
+namespace Pribi\Commands\AnyQueryStatements\Joins;
 
-use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Identifiers\IdentifierAlias;
+abstract class JoinAlias extends \Pribi\Commands\Identifiers\IdentifierAlias {
 
-abstract class JoinAlias extends IdentifierAlias {
-	public function on($name) {
-		return new On(new Identifier($name), $this);
+	public function on($subject) {
+		return $this->getCommandBuilder()->createAnyQueryOn(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
 	}
 }
