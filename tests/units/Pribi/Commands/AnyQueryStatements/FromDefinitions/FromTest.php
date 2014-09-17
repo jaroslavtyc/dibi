@@ -24,7 +24,7 @@ class FromTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertSame("FROM $tableName", $toSqlMethod->invoke($highPriority));
 	}
 
-	public function testCallingAliasWillPropagateAliasNameAndReturnAliasObject() {
+	public function testCanBeFollowedByAs() {
 		$toSqlMethod = new \ReflectionMethod(From::class, 'toSql');
 		$toSqlMethod->setAccessible(TRUE);
 		$tableIdentifier = $this->getMockBuilder(\Pribi\Commands\Identifiers\Identifier::class)
