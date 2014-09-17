@@ -10,8 +10,11 @@ class InnerJoinAlias extends JoinAlias {
 		parent::__construct($alias, $prependInnerJoin, $this->getCommandBuilder());
 	}
 
-	protected function toSql() {
-		return 'AS ' . $this->getIdentifier()->toSql();
+	public function innerJoin($subject) {
+		return $this->getCommandBuilder()->createAnyQueryInnerJoin(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
 	}
 
 	public function innerJoin($identificator) {
