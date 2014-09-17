@@ -175,6 +175,17 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\AnyQueryStatements\Joins\On($identifier, $previousJoinOrItsAlias, $this);
 	}
 
+	public function createAnyQueryLeftJoin(\Pribi\Commands\Identifiers\Identifier $joinedTable, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Joins\LeftJoin($joinedTable, $previousCommand, $this);
+	}
+
+	public function createAnyQueryLeftJoinAlias(
+		\Pribi\Commands\Identifiers\Identifier $aliasIdentifier,
+		\Pribi\Commands\AnyQueryStatements\Joins\LeftJoin $prependLeftJoin
+	) {
+		return new \Pribi\Commands\AnyQueryStatements\Joins\LeftJoinAlias($aliasIdentifier, $prependLeftJoin, $this);
+	}
+
 	public function createMainQueryWhere(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\MainQueryStatements\WhereConditions\Where($identifier, $previousCommand, $this);
 	}

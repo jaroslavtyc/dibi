@@ -1,14 +1,16 @@
 <?php
-namespace Pribi\Commands\Joins;
-
-use Pribi\Commands\Identifiers\Identifier;
+namespace Pribi\Commands\AnyQueryStatements\Joins;
 
 /**
  * @method LeftJoinAlias as ($alias)
  */
 class LeftJoin extends Join {
-	protected function alias(Identifier $alias) {
-		return new LeftJoinAlias($alias, $this);
+
+	protected function alias($aliasName) {
+		$this->getCommandBuilder()->createAnyQueryInnerJoinAlias(
+			$this->getCommandBuilder()->createIdentifier($aliasName),
+			$this
+		);
 	}
 
 	protected function toSql() {
