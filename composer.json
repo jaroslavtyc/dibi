@@ -25,11 +25,8 @@
         "php": ">=5.5.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.0.*",
-        "mockery/mockery": "dev-master",
-        "hamcrest/hamcrest-php": "dev-master",
-        "phpspec/prophecy-phpunit": "~1.0",
-        "satooshi/php-coveralls": "dev-master"
+        "codeception/codeception": "~2.0",
+        "codeception/mockery-module": "dev-master"
     },
     "autoload": {
         "psr-0": {
