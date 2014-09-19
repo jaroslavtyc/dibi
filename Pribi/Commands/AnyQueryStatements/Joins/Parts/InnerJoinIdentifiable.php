@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\AnyQueryStatements\Joins\Base;
+namespace Pribi\Commands\AnyQueryStatements\Joins\Parts;
 
 interface InnerJoinIdentifiable {
 

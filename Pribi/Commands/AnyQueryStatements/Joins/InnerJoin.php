@@ -7,7 +7,7 @@ use Pribi\Commands\AnyQueryStatements\WhereConditions\Where;
 /**
  * @method InnerJoinAlias as ($alias)
  */
-class InnerJoin extends Join implements \Pribi\Commands\AnyQueryStatements\Joins\Base\InnerJoinIdentifiable {
+class InnerJoin extends Join implements \Pribi\Commands\AnyQueryStatements\Joins\Parts\InnerJoinIdentifiable {
 
 	protected function alias($aliasName) {
 		return $this->getCommandBuilder()->createAnyQueryInnerJoinAlias(

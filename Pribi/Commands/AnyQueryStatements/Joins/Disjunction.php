@@ -2,8 +2,8 @@
 namespace Pribi\Commands\Joins;
 
 use Pribi\Commands\Identifiers\Identifier;
-use Pribi\Commands\Joins\Base\AndOring;
-use Pribi\Commands\Joins\Base\Comparing;
+use Pribi\Commands\Joins\Parts\AndOring;
+use Pribi\Commands\Joins\Parts\Comparing;
 use Pribi\Commands\AnyQueryStatements\Limits\Base\Limitable;
 use Pribi\Commands\AnyQueryStatements\Limits\Base\Limiting;
 

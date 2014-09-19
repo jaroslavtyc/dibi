@@ -105,4 +105,23 @@ class FromTest extends \Tests\Helpers\CommandTestCase {
 			->willReturn($rightJoinDummy);
 		$this->assertSame($rightJoinDummy, $from->rightJoin($tableName));
 	}
+
+	public function testCanBeFollowedByWhere() {
+		$commandBuilder = $this->createCommandBuilderMock();
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
+		$from = new From($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$subjectName = 'foo';
+		$whereDummy = 'bar';
+		$tableIdentifierDummy = $this->createIdentifierDummy();
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilder */
+		$commandBuilder->expects($this->once())
+			->method('createIdentifier')
+			->with($subjectName)
+			->willReturn($tableIdentifierDummy);
+		$commandBuilder->expects($this->once())
+			->method('createAnyQueryWhere')
+			->with($tableIdentifierDummy)
+			->willReturn($whereDummy);
+		$this->assertSame($whereDummy, $from->where($subjectName));
+	}
 }
