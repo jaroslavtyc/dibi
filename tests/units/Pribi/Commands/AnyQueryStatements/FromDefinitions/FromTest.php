@@ -143,4 +143,33 @@ class FromTest extends \Tests\Helpers\CommandTestCase {
 			->willReturn($whereNotDummy);
 		$this->assertSame($whereNotDummy, $from->whereNot($subjectName));
 	}
+
+	public function testCanBeFollowedByLimit() {
+		$commandBuilder = $this->createCommandBuilderMock();
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
+		$from = new From($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$limitAmount = 'foo';
+		$limitDummy = 'bar';
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilder */
+		$commandBuilder->expects($this->once())
+			->method('createAnyQueryLimit')
+			->with(0, $limitAmount)
+			->willReturn($limitDummy);
+		$this->assertSame($limitDummy, $from->limit($limitAmount));
+	}
+
+	public function testCanBeFollowedByOffsetAndLimit() {
+		$commandBuilder = $this->createCommandBuilderMock();
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
+		$from = new From($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$offsetAmount = 'baz';
+		$limitAmount = 'foo';
+		$limitDummy = 'bar';
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilder */
+		$commandBuilder->expects($this->once())
+			->method('createAnyQueryLimit')
+			->with($offsetAmount, $limitAmount)
+			->willReturn($limitDummy);
+		$this->assertSame($limitDummy, $from->offsetAndLimit($offsetAmount, $limitAmount));
+	}
 }
