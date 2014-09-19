@@ -1,14 +1,13 @@
 <?php
-namespace Pribi\Commands\Joins;
-
-use Pribi\Commands\Identifiers\Identifier;
+namespace Pribi\Commands\AnyQueryStatements\Joins;
 
 /**
  * @method \Pribi\Commands\Joins\RightJoinAlias as ($alias)
  */
 class RightJoin extends Join {
-	protected function alias(Identifier $alias) {
-		return new RightJoinAlias($alias, $this);
+
+	protected function alias($aliasName) {
+		return new RightJoinAlias($aliasName, $this);
 	}
 
 	protected function toSql() {

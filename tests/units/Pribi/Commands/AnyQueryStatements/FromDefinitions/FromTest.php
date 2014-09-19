@@ -67,4 +67,42 @@ class FromTest extends \Tests\Helpers\CommandTestCase {
 			->willReturn($innerJoinDummy);
 		$this->assertSame($innerJoinDummy, $from->innerJoin($tableName));
 	}
+
+	public function testCanBeFollowedByLeftJoin() {
+		$commandBuilder = $this->createCommandBuilderMock();
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
+		$from = new From($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$tableName = 'foo';
+		$leftJoinDummy = 'bar';
+		$tableIdentifierDummy = $this->createIdentifierDummy();
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilder */
+		$commandBuilder->expects($this->once())
+			->method('createIdentifier')
+			->with($tableName)
+			->willReturn($tableIdentifierDummy);
+		$commandBuilder->expects($this->once())
+			->method('createAnyQueryLeftJoin')
+			->with($tableIdentifierDummy)
+			->willReturn($leftJoinDummy);
+		$this->assertSame($leftJoinDummy, $from->leftJoin($tableName));
+	}
+
+	public function testCanBeFollowedByRightJoin() {
+		$commandBuilder = $this->createCommandBuilderMock();
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
+		$from = new From($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$tableName = 'foo';
+		$rightJoinDummy = 'bar';
+		$tableIdentifierDummy = $this->createIdentifierDummy();
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilder */
+		$commandBuilder->expects($this->once())
+			->method('createIdentifier')
+			->with($tableName)
+			->willReturn($tableIdentifierDummy);
+		$commandBuilder->expects($this->once())
+			->method('createAnyQueryRightJoin')
+			->with($tableIdentifierDummy)
+			->willReturn($rightJoinDummy);
+		$this->assertSame($rightJoinDummy, $from->rightJoin($tableName));
+	}
 }

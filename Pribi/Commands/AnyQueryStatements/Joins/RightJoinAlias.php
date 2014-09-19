@@ -1,14 +1,9 @@
 <?php
-namespace Pribi\Commands\Joins;
-
-use Pribi\Commands\Identifiers\Identifier;
+namespace Pribi\Commands\AnyQueryStatements\Joins;
 
 class RightJoinAlias extends JoinAlias {
-	public function __construct(Identifier $alias, LeftJoin $prependLeftJoin) {
-		parent::__construct($alias, $prependLeftJoin);
-	}
 
-	protected function toSql() {
-		return 'AS ' . $this->getIdentifier()->toSql();
+	public function __construct(\Pribi\Commands\Identifiers\Identifier $aliasIdentifier, RightJoin $prependRightJoin) {
+		parent::__construct($aliasIdentifier, $prependRightJoin, $this->getCommandBuilder());
 	}
 }
