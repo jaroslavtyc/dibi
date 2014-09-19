@@ -124,4 +124,23 @@ class FromTest extends \Tests\Helpers\CommandTestCase {
 			->willReturn($whereDummy);
 		$this->assertSame($whereDummy, $from->where($subjectName));
 	}
+
+	public function testCanBeFollowedByWhereNot() {
+		$commandBuilder = $this->createCommandBuilderMock();
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
+		$from = new From($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$subjectName = 'foo';
+		$whereNotDummy = 'bar';
+		$tableIdentifierDummy = $this->createIdentifierDummy();
+		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilder */
+		$commandBuilder->expects($this->once())
+			->method('createIdentifier')
+			->with($subjectName)
+			->willReturn($tableIdentifierDummy);
+		$commandBuilder->expects($this->once())
+			->method('createAnyQueryWhereNot')
+			->with($tableIdentifierDummy)
+			->willReturn($whereNotDummy);
+		$this->assertSame($whereNotDummy, $from->whereNot($subjectName));
+	}
 }
