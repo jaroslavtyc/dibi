@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\Identifiers;
 
-class IdentifiersTest extends \Tests\Helpers\CommandTestCase {
+class IdentifiersTest extends \Tests\Unit\Helpers\CommandTestCase {
 
 	public function testCanCreateInstance() {
 		$instance = new Identifiers([], $commandBuilderMock = $this->createCommandBuilderMock());

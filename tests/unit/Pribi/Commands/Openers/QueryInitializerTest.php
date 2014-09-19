@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\Openers;
 
-class QueryInitializerTest extends \Tests\Helpers\CommandTestCase {
+class QueryInitializerTest extends \Tests\Unit\Helpers\CommandTestCase {
 
 	public function testInstanceCanBeCreated() {
 		$instance = new QueryInitializer($this->getCommandsBuilderDummy());

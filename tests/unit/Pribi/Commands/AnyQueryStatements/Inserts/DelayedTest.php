@@ -1,50 +1,50 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
-class HighPriorityTest extends \Tests\Helpers\CommandTestCase {
+class DelayedTest extends \Tests\Unit\Helpers\CommandTestCase {
 
 	public function testCanCreateInstance() {
-		$highPriority = new HighPriority($this->createCommandDummy(), $this->getCommandsBuilderDummy());
-		$this->assertNotNull($highPriority);
+		$instance = new Delayed($this->createCommandDummy(), $this->getCommandsBuilderDummy());
+		$this->assertNotNull($instance);
 	}
 
-	public function testAsSqlIsHighPriorityKeyword() {
-		$toSqlMethod = new \ReflectionMethod(HighPriority::class, 'toSql');
+	public function testAsSqlIsDelayedKeyword() {
+		$toSqlMethod = new \ReflectionMethod(Delayed::class, 'toSql');
 		$toSqlMethod->setAccessible(TRUE);
-		$highPriority = $this->createHighPriority($this->getCommandsBuilderDummy());
-		$this->assertSame('HIGH PRIORITY', $toSqlMethod->invoke($highPriority));
+		$delayed = $this->createDelayed($this->getCommandsBuilderDummy());
+		$this->assertSame('DELAYED', $toSqlMethod->invoke($delayed));
 	}
 
-	private function createHighPriority(\Pribi\Builders\Commands\Builder $commandBuilder) {
-		return new HighPriority($this->createCommandDummy(), $commandBuilder);
+	private function createDelayed(\Pribi\Builders\Commands\Builder $commandBuilder) {
+		return new Delayed($this->createCommandDummy(), $commandBuilder);
 	}
 
 	public function testCanBeFollowedByIgnore() {
 		$commandBuilderMock = $this->createCommandBuilderMock();
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
-		$highPriority = $this->createHighPriority($commandBuilderMock);
+		$delayed = $this->createDelayed($commandBuilderMock);
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */
 		$commandBuilderMock
 			->expects($this->once())
 			->method('createIgnore')
-			->with($highPriority)
+			->with($delayed)
 			->willReturn($ignoreDummy = 'foo');
-		$this->assertSame($ignoreDummy, $highPriority->ignore());
+		$this->assertSame($ignoreDummy, $delayed->ignore());
 	}
 
 	public function testCanBeFollowedByInto() {
 		$commandBuilderMock = $this->createCommandBuilderMock();
 		$tableIdentifierDummy = $this->createIdentifierDummy();
-		$columnsIdentifierDummy = $this->createIdentifiersDummy();
+		$columnIdentifiersDummy = $this->createIdentifiersDummy();
 		$partitionIdentifiersDummy = $this->createIdentifiersDummy();
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
-		$highPriority = $this->createHighPriority($commandBuilderMock);
+		$delayed = $this->createDelayed($commandBuilderMock);
 		$createdStatementDummy = 'foo';
 		/** @var \PHPUnit_Framework_MockObject_MockObject $commandBuilderMock */
 		$commandBuilderMock
 			->expects($this->once())
 			->method('createInto')
-			->with($tableIdentifierDummy, $columnsIdentifierDummy, $partitionIdentifiersDummy, $highPriority)
+			->with($tableIdentifierDummy, $columnIdentifiersDummy, $partitionIdentifiersDummy, $delayed)
 			->willReturn($createdStatementDummy);
 		$tableName = 'bar';
 		$commandBuilderMock
@@ -58,12 +58,12 @@ class HighPriorityTest extends \Tests\Helpers\CommandTestCase {
 			->expects($this->at(1))
 			->method('createIdentifiers')
 			->with($columnNames)
-			->willReturn($columnsIdentifierDummy);
+			->willReturn($columnIdentifiersDummy);
 		$commandBuilderMock
 			->expects($this->at(2))
 			->method('createIdentifiers')
 			->with($partitionNames)
 			->willReturn($partitionIdentifiersDummy);
-		$this->assertSame($createdStatementDummy, $highPriority->into($tableName, $columnNames, $partitionNames));
+		$this->assertSame($createdStatementDummy, $delayed->into($tableName, $columnNames, $partitionNames));
 	}
 }

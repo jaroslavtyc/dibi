@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Helpers;
+namespace Tests\Unit\Helpers;
 
 abstract class CommandTestCase extends \PHPUnit_Framework_TestCase {
 

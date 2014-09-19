@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\FromDefinitions;
 
-class FromTest extends \Tests\Helpers\CommandTestCase {
+class FromTest extends \Tests\Unit\Helpers\CommandTestCase {
 
 	public function testInstanceCanBeCreated() {
 		$instance = new From($this->createIdentifierDummy(), $this->createCommandDummy(), $this->getCommandsBuilderDummy());

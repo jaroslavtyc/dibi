@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
-class OnDuplicateKeyUpdateTest extends \Tests\Helpers\CommandTestCase {
+class OnDuplicateKeyUpdateTest extends \Tests\Unit\Helpers\CommandTestCase {
 
 	public function testCanCreateInstance() {
 		$instance = new OnDuplicateKeyUpdate($this->createIdentifierDummy(), $this->createSubjectDummy(), $this->createCommandDummy(), $this->getCommandsBuilderDummy());
@@ -61,4 +61,3 @@ class OnDuplicateKeyUpdateTest extends \Tests\Helpers\CommandTestCase {
 		$this->assertSame(",$identifierAsSql=$expressionAsSql", $toSqlMethod->invoke($onDuplicateKeyUpdate));
 	}
 }
- 

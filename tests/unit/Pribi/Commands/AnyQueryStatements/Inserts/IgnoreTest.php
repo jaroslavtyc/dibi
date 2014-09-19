@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
-class IgnoreTest extends \Tests\Helpers\CommandTestCase {
+class IgnoreTest extends \Tests\Unit\Helpers\CommandTestCase {
 
 	public function testCanCreateInstance() {
 		$instance = new Ignore($this->createCommandDummy(), $this->getCommandsBuilderDummy());
