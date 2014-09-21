@@ -4,7 +4,7 @@ namespace Pribi\Commands\AnyQueryStatements\WhereConditions\Parts;
 trait Whereing {
 
 	/**
-	 * @param $subject
+	 * @param string $subject
 	 * @return \Pribi\Commands\AnyQueryStatements\WhereConditions\Where
 	 */
 	public function where($subject) {
@@ -16,7 +16,7 @@ trait Whereing {
 	}
 
 	/**
-	 * @param $subject
+	 * @param string $subject
 	 * @return \Pribi\Commands\AnyQueryStatements\WhereConditions\WhereNot
 	 */
 	public function whereNot($subject) {

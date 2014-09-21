@@ -4,7 +4,7 @@ namespace Pribi\Commands\MainQueryStatements\Selects\Base;
 trait AfterSelecting {
 
 	/**
-	 * @param $subject
+	 * @param string $subject
 	 * @return \Pribi\Commands\MainQueryStatements\Selects\Select
 	 */
 	public function select($subject) {
@@ -16,7 +16,7 @@ trait AfterSelecting {
 	}
 
 	/**
-	 * @param $subject
+	 * @param string $subject
 	 * @return \Pribi\Commands\MainQueryStatements\FromDefinitions\From
 	 */
 	public function from($subject) {

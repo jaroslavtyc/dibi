@@ -6,7 +6,7 @@ use Pribi\Commands\Identifiers\Identifier;
 trait Joining {
 
 	/**
-	 * @param $subject
+	 * @param string $subject
 	 * @return InnerJoin
 	 */
 	public function innerJoin($subject) {
@@ -18,7 +18,7 @@ trait Joining {
 	}
 
 	/**
-	 * @param $subject
+	 * @param string $subject
 	 * @return LeftJoin
 	 */
 	public function leftJoin($subject) {
