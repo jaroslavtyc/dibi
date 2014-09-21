@@ -1,5 +1,5 @@
 <?php
-namespace tests\integrations\Selects;
+namespace tests\integration\Selects;
 
 class SelectQueryTest extends \PHPUnit_Framework_TestCase {
 
