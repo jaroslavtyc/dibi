@@ -13,4 +13,26 @@ class From extends \Pribi\Commands\AnyQueryStatements\FromDefinitions\From imple
 			$this
 		);
 	}
+
+	/**
+	 * @param string $subject
+	 * @return \Pribi\Commands\MainQueryStatements\WhereConditions\Where
+	 */
+	public function where($subject) {
+		return $this->getCommandBuilder()->createMainQueryWhere(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
+	}
+
+	/**
+	 * @param string $subject
+	 * @return \Pribi\Commands\AnyQueryStatements\WhereConditions\WhereNot
+	 */
+	public function whereNot($subject) {
+		return $this->getCommandBuilder()->createMainQueryWhereNot(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
+	}
 }
