@@ -4,7 +4,7 @@ namespace Pribi\Commands\MainQueryStatements\Selects\Base;
 trait AfterSelecting {
 
 	/**
-	 * @param string $subject
+	 * @param $subject
 	 * @return \Pribi\Commands\MainQueryStatements\Selects\Select
 	 */
 	public function select($subject) {
@@ -16,7 +16,7 @@ trait AfterSelecting {
 	}
 
 	/**
-	 * @param string $subject
+	 * @param $subject
 	 * @return \Pribi\Commands\MainQueryStatements\FromDefinitions\From
 	 */
 	public function from($subject) {
@@ -27,6 +27,10 @@ trait AfterSelecting {
 		);
 	}
 
+	/**
+	 * @param $subject
+	 * @return \Pribi\Commands\MainQueryStatements\WhereConditions\Where
+	 */
 	public function where($subject) {
 		/** @var \Pribi\Commands\Command $this */
 		return $this->getCommandBuilder()->createMainQueryWhere(
@@ -35,6 +39,10 @@ trait AfterSelecting {
 		);
 	}
 
+	/**
+	 * @param $subject
+	 * @return \Pribi\Commands\MainQueryStatements\WhereConditions\WhereNot
+	 */
 	public function whereNot($subject) {
 		/** @var \Pribi\Commands\Command $this */
 		return $this->getCommandBuilder()->createMainQueryWhereNot(
@@ -43,13 +51,24 @@ trait AfterSelecting {
 		);
 	}
 
-	public function limit($limit, $offset = 0) {
+	/**
+	 * @param $limit
+	 * @param int $offset
+	 * @return \Pribi\Commands\MainQueryStatements\Limits\Limit
+	 */
+	public function limit($limit) {
 		/** @var \Pribi\Commands\Command $this */
-		return $this->getCommandBuilder()->createMainQueryLimit(
-			$offset,
-			$limit,
-			$this
-		);
+		return $this->getCommandBuilder()->createMainQueryLimit(0, $limit, $this);
+	}
+
+	/**
+	 * @param $limit
+	 * @param int $offset
+	 * @return \Pribi\Commands\MainQueryStatements\Limits\Limit
+	 */
+	public function offsetLimit($offset, $limit) {
+		/** @var \Pribi\Commands\Command $this */
+		return $this->getCommandBuilder()->createMainQueryLimit($offset, $limit, $this);
 	}
 
 }
