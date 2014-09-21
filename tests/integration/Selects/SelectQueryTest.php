@@ -1,22 +1,16 @@
 <?php
 namespace tests\integrations\Selects;
 
-use Pribi\Builders\ClosingQueries\Builder;
-use Pribi\Executions\StringExecutorExplainerAndTester;
-use Pribi\Pribi;
-
 class SelectQueryTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @var Pribi
-	 */
+	/** @var \Pribi\Pribi */
 	private $pribi;
 
 	protected function setUp() {
-		$outputMaker = new StringExecutorExplainerAndTester();
-		$closingQueryBuilder = new Builder($outputMaker, $outputMaker, $outputMaker);
+		$outputMaker = new \Pribi\Executions\StringExecutorExplainerAndTester();
+		$closingQueryBuilder = new \Pribi\Builders\ClosingQueries\Builder($outputMaker, $outputMaker, $outputMaker);
 		$commandBuilder = new \Pribi\Builders\Commands\Builder($closingQueryBuilder);
-		$this->pribi = new Pribi($commandBuilder);
+		$this->pribi = new \Pribi\Pribi($commandBuilder);
 	}
 
 	public function testCanSelectNumericConstant() {
