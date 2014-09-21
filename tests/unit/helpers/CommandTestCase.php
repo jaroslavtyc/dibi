@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Unit\Helpers;
 
-abstract class CommandTestCase extends \PHPUnit_Framework_TestCase {
+abstract class CommandTestCase extends \Codeception\TestCase\Test {
 
 	private $commandBuilderDummy;
 
