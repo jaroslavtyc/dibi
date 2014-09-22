@@ -4,5 +4,5 @@ test:
 unit-test:
 	php vendor/codeception/codeception/codecept run unit
 
-unit-test:
+integration-test:
 	php vendor/codeception/codeception/codecept run integration
