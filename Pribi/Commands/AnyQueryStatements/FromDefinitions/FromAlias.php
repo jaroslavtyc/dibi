@@ -2,7 +2,7 @@
 namespace Pribi\Commands\AnyQueryStatements\FromDefinitions;
 
 class FromAlias extends \Pribi\Commands\Identifiers\IdentifierAlias implements
-	\Pribi\Commands\AnyQueryStatements\FromDefinitions\Base\FromIdentifiable,
+	\Pribi\Commands\AnyQueryStatements\FromDefinitions\Parts\FromIdentifiable,
 	\Pribi\Commands\AnyQueryStatements\WhereConditions\Parts\Whereable,
 	\Pribi\Commands\AnyQueryStatements\Joins\Parts\Joinable,
 	\Pribi\Commands\AnyQueryStatements\Limits\Base\Limitable {

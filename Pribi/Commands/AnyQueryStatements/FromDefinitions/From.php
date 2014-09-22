@@ -4,7 +4,7 @@ namespace Pribi\Commands\AnyQueryStatements\FromDefinitions;
 /**
  * @method FromAlias as ($alias)
  */
-class From extends \Pribi\Commands\IdentifierBringer implements \Pribi\Commands\AnyQueryStatements\FromDefinitions\Base\FromIdentifiable,
+class From extends \Pribi\Commands\IdentifierBringer implements \Pribi\Commands\AnyQueryStatements\FromDefinitions\Parts\FromIdentifiable,
 	\Pribi\Commands\AnyQueryStatements\Joins\Parts\Joinable,
 	\Pribi\Commands\AnyQueryStatements\WhereConditions\Parts\Whereable,
 	\Pribi\Commands\AnyQueryStatements\Limits\Base\Limitable {
