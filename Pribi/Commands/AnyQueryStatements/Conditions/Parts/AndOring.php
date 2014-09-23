@@ -1,46 +1,48 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Conditions\Parts;
 
-use Pribi\Commands\AnyQueryStatements\Conditions\AndNot;
-use Pribi\Commands\AnyQueryStatements\Conditions\Disjunction;
-use Pribi\Commands\AnyQueryStatements\Conditions\Exceptions;
-use Pribi\Commands\AnyQueryStatements\Conditions\OrNot;
-use Pribi\Commands\Identifiers\Identifier;
-
 /**
- * @method \Pribi\Commands\Command and($identificator)
- * @method \Pribi\Commands\Command or($identificator)
+ * @method \Pribi\Commands\Command and($subject)
+ * @method \Pribi\Commands\Command or($subject)
  */
 trait AndOring {
 
 	/**
 	 * @param $name
 	 * @param array $arguments
-	 * @return \Pribi\Commands\AnyQueryStatements\Conditions\Conjunction|Disjunction
+	 * @return \Pribi\Commands\AnyQueryStatements\Conditions\Conjunction|\Pribi\Commands\AnyQueryStatements\Conditions\Disjunction
 	 * @throws \Pribi\Commands\AnyQueryStatements\Conditions\Exceptions\UnknownMethodCalled
 	 */
 	public function __call($name, array $arguments) {
 		$upperCasedName = \strtoupper($name);
 		if ($upperCasedName === 'AND') {
-			return $this->conjunction(new Identifier($arguments[0]));
+			/** @var \Pribi\Commands\Command $this */
+			$identifier = $this->getCommandBuilder()->createIdentifier($arguments[0]);
+			/** @var $this */
+			return $this->conjunction($identifier);
 		} elseif ($upperCasedName === 'OR') {
-			return $this->disjunction(new Identifier($arguments[0]));
+			/** @var \Pribi\Commands\Command $this */
+			$identifier = $this->getCommandBuilder()->createIdentifier($arguments[0]);
+			/** @var $this */
+			return $this->disjunction($identifier);
 		} else {
-			throw new Exceptions\UnknownMethodCalled(\sprintf('Called non-existing method [%s->%s()]', get_class($this), $name));
+			throw new \Pribi\Commands\AnyQueryStatements\Conditions\Exceptions\UnknownMethodCalled(
+				\sprintf('Called non-existing method [%s->%s()]', get_class($this), $name)
+			);
 		}
 	}
 
 	/**
-	 * @param Identifier $identifier
+	 * @param \Pribi\Commands\Identifiers\Identifier $identifier
 	 * @return \Pribi\Commands\AnyQueryStatements\Conditions\Conjunction
 	 */
-	protected function conjunction(Identifier $identifier) {
+	protected function conjunction(\Pribi\Commands\Identifiers\Identifier $identifier) {
 		/** @var \Pribi\Commands\Command $this */
 		return $this->getCommandBuilder()->createAnyQueryConjunction($identifier, $this);
 	}
 
 	/**
-	 * @param Identifier $identifier
+	 * @param \Pribi\Commands\Identifiers\Identifier $identifier
 	 * @return \Pribi\Commands\AnyQueryStatements\Conditions\Disjunction
 	 */
 	protected function disjunction(Identifier $identifier) {
