@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\AnyQueryStatements\Conditions\Base;
+namespace Pribi\Commands\AnyQueryStatements\Conditions\Parts;
 
 /**
  * @method \Pribi\Commands\Command and($identificator)

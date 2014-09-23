@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\Joins;
 
-use Pribi\Commands\AnyQueryStatements\Conditions\Base\Comparable;
+use Pribi\Commands\AnyQueryStatements\Conditions\Parts\Comparable;
 use Pribi\Commands\DifferentTo;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Joins\Parts\AndOring;

@@ -12,7 +12,7 @@ use Pribi\Commands\Joins\OrNot;
  * @method Disjunction or($subject)
  */
 trait AndOring {
-	use \Pribi\Commands\AnyQueryStatements\Conditions\Base\AndOring;
+	use \Pribi\Commands\AnyQueryStatements\Conditions\Parts\AndOring;
 
 	protected function conjunction(Identifier $identifier) {
 		/**

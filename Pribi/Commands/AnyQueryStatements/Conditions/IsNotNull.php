@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Conditions;
 
-use Pribi\Commands\AnyQueryStatements\Conditions\Base\Null;
+use Pribi\Commands\AnyQueryStatements\Conditions\Parts\Null;
 
 class IsNotNull extends Null {
 	protected function toSql() {

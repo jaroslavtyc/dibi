@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\AnyQueryStatements\Conditions\Base;
+namespace Pribi\Commands\AnyQueryStatements\Conditions\Parts;
 
 use Pribi\Commands\AnyQueryStatements\Conditions\AndNot;
 use Pribi\Commands\AnyQueryStatements\Conditions\Conjunction;

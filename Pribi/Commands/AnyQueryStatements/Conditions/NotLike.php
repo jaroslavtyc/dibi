@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Conditions;
 
-use Pribi\Commands\AnyQueryStatements\Conditions\Base\Like;
+use Pribi\Commands\AnyQueryStatements\Conditions\Parts\Like;
 
 class NotLike extends Like {
 	protected function toSql() {
