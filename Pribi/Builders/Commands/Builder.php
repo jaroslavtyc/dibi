@@ -205,6 +205,10 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\AnyQueryStatements\WhereConditions\Where($identifier, $previousCommand, $this);
 	}
 
+	public function createAnyQueryConjunction(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Conditions\Conjunction($identifier, $previousCommand, $this);
+	}
+
 	public function createMainQueryWhereNot(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\MainQueryStatements\WhereConditions\WhereNot($identifier, $previousCommand, $this);
 	}

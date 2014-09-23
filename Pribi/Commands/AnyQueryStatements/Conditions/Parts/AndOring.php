@@ -2,7 +2,6 @@
 namespace Pribi\Commands\AnyQueryStatements\Conditions\Parts;
 
 use Pribi\Commands\AnyQueryStatements\Conditions\AndNot;
-use Pribi\Commands\AnyQueryStatements\Conditions\Conjunction;
 use Pribi\Commands\AnyQueryStatements\Conditions\Disjunction;
 use Pribi\Commands\AnyQueryStatements\Conditions\Exceptions;
 use Pribi\Commands\AnyQueryStatements\Conditions\OrNot;
@@ -13,6 +12,13 @@ use Pribi\Commands\Identifiers\Identifier;
  * @method \Pribi\Commands\Command or($identificator)
  */
 trait AndOring {
+
+	/**
+	 * @param $name
+	 * @param array $arguments
+	 * @return \Pribi\Commands\AnyQueryStatements\Conditions\Conjunction|Disjunction
+	 * @throws \Pribi\Commands\AnyQueryStatements\Conditions\Exceptions\UnknownMethodCalled
+	 */
 	public function __call($name, array $arguments) {
 		$upperCasedName = \strtoupper($name);
 		if ($upperCasedName === 'AND') {
@@ -24,11 +30,13 @@ trait AndOring {
 		}
 	}
 
+	/**
+	 * @param Identifier $identifier
+	 * @return \Pribi\Commands\AnyQueryStatements\Conditions\Conjunction
+	 */
 	protected function conjunction(Identifier $identifier) {
-		/**
-		 * @var \Pribi\Commands\Command $this
-		 */
-		return new Conjunction($identifier, $this);
+		/** @var \Pribi\Commands\Command $this */
+		return $this->getCommandBuilder()->createAnyQueryConjunction($identifier, $this);
 	}
 
 	protected function disjunction(Identifier $identifier) {
