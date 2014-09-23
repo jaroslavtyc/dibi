@@ -39,11 +39,13 @@ trait AndOring {
 		return $this->getCommandBuilder()->createAnyQueryConjunction($identifier, $this);
 	}
 
+	/**
+	 * @param Identifier $identifier
+	 * @return \Pribi\Commands\AnyQueryStatements\Conditions\Disjunction
+	 */
 	protected function disjunction(Identifier $identifier) {
-		/**
-		 * @var \Pribi\Commands\Command $this
-		 */
-		return new Disjunction($identifier, $this);
+		/** @var \Pribi\Commands\Command $this */
+		return $this->getCommandBuilder()->createAnyQueryDisjunction($identifier, $this);
 	}
 
 	public function andNot($subject) {
