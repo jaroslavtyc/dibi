@@ -48,17 +48,27 @@ trait AndOring {
 		return $this->getCommandBuilder()->createAnyQueryDisjunction($identifier, $this);
 	}
 
+	/**
+	 * @param $subject
+	 * @return \Pribi\Commands\AnyQueryStatements\Conditions\AndNot
+	 */
 	public function andNot($subject) {
-		/**
-		 * @var \Pribi\Commands\Command $this
-		 */
-		return new AndNot(new Identifier($subject), $this);
+		/** @var \Pribi\Commands\Command $this */
+		return $this->getCommandBuilder()->createAnyQueryAndNot(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
 	}
 
+	/**
+	 * @param $subject
+	 * @return \Pribi\Commands\AnyQueryStatements\Conditions\OrNot
+	 */
 	public function orNot($subject) {
-		/**
-		 * @var \Pribi\Commands\Command $this
-		 */
-		return new OrNot(new Identifier($subject), $this);
+		/** @var \Pribi\Commands\Command $this */
+		return $this->getCommandBuilder()->createAnyQueryOrNot(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
 	}
 }

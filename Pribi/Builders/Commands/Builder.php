@@ -213,6 +213,14 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\AnyQueryStatements\Conditions\Disjunction($identifier, $previousCommand, $this);
 	}
 
+	public function createAnyQueryAndNot(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Conditions\AndNot($identifier, $previousCommand, $this);
+	}
+
+	public function createAnyQueryOrNot(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Conditions\OrNot($identifier, $previousCommand, $this);
+	}
+
 	public function createMainQueryWhereNot(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\MainQueryStatements\WhereConditions\WhereNot($identifier, $previousCommand, $this);
 	}
