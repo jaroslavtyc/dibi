@@ -178,4 +178,31 @@ class WhereTest extends \Tests\Unit\Helpers\CommandTestCase {
 		$this->assertSame($differentToDummy, $where->differentTo($differentToSubject));
 	}
 
+	public function testCanBeFollowedByLimitWithoutOffset() {
+		$limitValue = 'foo';
+		$commandBuilder = \Mockery::mock(\Pribi\Builders\Commands\Builder::class);
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
+		$where = new Where($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$limitDummy = 'bar';
+		/** @var \Mockery\MockInterface $commandBuilder */
+		$commandBuilder->shouldReceive('createAnyQueryLimit')
+			->with(0, $limitValue, $where)
+			->andReturn($limitDummy);
+		$this->assertSame($limitDummy, $where->limit($limitValue));
+	}
+
+	public function testCanBeFollowedByOffsetAndLimit() {
+		$offsetValue = 'foo';
+		$limitValue = 'baz';
+		$commandBuilder = \Mockery::mock(\Pribi\Builders\Commands\Builder::class);
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
+		$where = new Where($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$limitDummy = 'bar';
+		/** @var \Mockery\MockInterface $commandBuilder */
+		$commandBuilder->shouldReceive('createAnyQueryLimit')
+			->with($offsetValue, $limitValue, $where)
+			->andReturn($limitDummy);
+		$this->assertSame($limitDummy, $where->offsetAndLimit($offsetValue, $limitValue));
+	}
+
 }

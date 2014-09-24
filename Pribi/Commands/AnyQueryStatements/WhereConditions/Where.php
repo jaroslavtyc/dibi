@@ -9,7 +9,9 @@ namespace Pribi\Commands\AnyQueryStatements\WhereConditions;
  */
 class Where extends \Pribi\Commands\WithIdentifier implements
 	\Pribi\Commands\AnyQueryStatements\Conditions\Parts\AndOrUsable,
-	\Pribi\Commands\AnyQueryStatements\Conditions\Parts\Comparable {
+	\Pribi\Commands\AnyQueryStatements\Conditions\Parts\Comparable,
+	\Pribi\Commands\AnyQueryStatements\Limits\Base\Limitable
+{
 
 	use \Pribi\Commands\AnyQueryStatements\Conditions\Parts\AndOring;
 
@@ -119,5 +121,21 @@ class Where extends \Pribi\Commands\WithIdentifier implements
 			$this->getCommandBuilder()->createIdentifier($subject),
 			$this
 		);
+	}
+
+	/**
+	 * @param int $limit
+	 * @return \Pribi\Commands\AnyQueryStatements\Limits\Limit
+	 */
+	public function limit($limit) {
+		return $this->getCommandBuilder()->createAnyQueryLimit(0, $limit, $this);
+	}
+
+	/**
+	 * @param int $limit
+	 * @return \Pribi\Commands\AnyQueryStatements\Limits\Limit
+	 */
+	public function offsetAndLimit($offset, $limit) {
+		return $this->getCommandBuilder()->createAnyQueryLimit($offset, $limit, $this);
 	}
 }
