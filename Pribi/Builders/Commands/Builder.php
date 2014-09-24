@@ -221,6 +221,30 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\AnyQueryStatements\Conditions\OrNot($identifier, $previousCommand, $this);
 	}
 
+	public function createAnyQueryEqualTo(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Conditions\EqualTo($identifier, $previousCommand, $this);
+	}
+
+	public function createAnyQueryEqualOrGreaterThen(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Conditions\EqualOrGreaterThen($identifier, $previousCommand, $this);
+	}
+
+	public function createAnyQueryEqualOrLesserThen(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Conditions\EqualOrLesserThen($identifier, $previousCommand, $this);
+	}
+
+	public function createAnyQueryGreaterThen(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Conditions\GreaterThen($identifier, $previousCommand, $this);
+	}
+
+	public function createAnyQueryLesserThen(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Conditions\LesserThen($identifier, $previousCommand, $this);
+	}
+
+	public function createAnyQueryDifferentTo(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Conditions\DifferentTo($identifier, $previousCommand, $this);
+	}
+
 	public function createMainQueryWhereNot(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\MainQueryStatements\WhereConditions\WhereNot($identifier, $previousCommand, $this);
 	}
