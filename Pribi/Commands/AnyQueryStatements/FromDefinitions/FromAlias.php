@@ -5,7 +5,7 @@ class FromAlias extends \Pribi\Commands\Identifiers\IdentifierAlias implements
 	\Pribi\Commands\AnyQueryStatements\FromDefinitions\Parts\FromIdentifiable,
 	\Pribi\Commands\AnyQueryStatements\WhereConditions\Parts\Whereable,
 	\Pribi\Commands\AnyQueryStatements\Joins\Parts\Joinable,
-	\Pribi\Commands\AnyQueryStatements\Limits\Base\Limitable {
+	\Pribi\Commands\AnyQueryStatements\Limits\Parts\Limitable {
 
 	public function __construct(
 		\Pribi\Commands\Identifiers\Identifier $alias,

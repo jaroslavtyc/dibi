@@ -7,11 +7,11 @@ namespace Pribi\Commands\AnyQueryStatements\FromDefinitions;
 class From extends \Pribi\Commands\IdentifierBringer implements \Pribi\Commands\AnyQueryStatements\FromDefinitions\Parts\FromIdentifiable,
 	\Pribi\Commands\AnyQueryStatements\Joins\Parts\Joinable,
 	\Pribi\Commands\AnyQueryStatements\WhereConditions\Parts\Whereable,
-	\Pribi\Commands\AnyQueryStatements\Limits\Base\Limitable {
+	\Pribi\Commands\AnyQueryStatements\Limits\Parts\Limitable {
 
 	use \Pribi\Commands\AnyQueryStatements\Joins\Joining;
 	use \Pribi\Commands\AnyQueryStatements\WhereConditions\Parts\Whereing;
-	use \Pribi\Commands\AnyQueryStatements\Limits\Base\Limiting;
+	use \Pribi\Commands\AnyQueryStatements\Limits\Parts\Limiting;
 
 	protected function toSql() {
 		if (is_a($this->getPreviousCommand(), self::CLASS_IDENTITY)) {

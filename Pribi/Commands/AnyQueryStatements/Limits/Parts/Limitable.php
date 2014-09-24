@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\AnyQueryStatements\Limits\Base;
+namespace Pribi\Commands\AnyQueryStatements\Limits\Parts;
 
 interface Limitable {
 	public function limit($limit);

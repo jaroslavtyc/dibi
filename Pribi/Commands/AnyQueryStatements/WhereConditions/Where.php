@@ -10,7 +10,7 @@ namespace Pribi\Commands\AnyQueryStatements\WhereConditions;
 class Where extends \Pribi\Commands\WithIdentifier implements
 	\Pribi\Commands\AnyQueryStatements\Conditions\Parts\AndOrUsable,
 	\Pribi\Commands\AnyQueryStatements\Conditions\Parts\Comparable,
-	\Pribi\Commands\AnyQueryStatements\Limits\Base\Limitable
+	\Pribi\Commands\AnyQueryStatements\Limits\Parts\Limitable
 {
 
 	use \Pribi\Commands\AnyQueryStatements\Conditions\Parts\AndOring;

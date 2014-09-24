@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\MainQueryStatements\Updates;
 
-use Pribi\Commands\AnyQueryStatements\Limits\Base\Limitable;
+use Pribi\Commands\AnyQueryStatements\Limits\Parts\Limitable;
 use Pribi\Commands\MainQueryStatements\Limits\Base\Limiting;
 use Pribi\Commands\WithIdentifier;
 use Pribi\Commands\MainQueryStatements\WhereConditions\Base\Whereable;

@@ -4,8 +4,8 @@ namespace Pribi\Commands\Joins;
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Joins\Parts\AndOring;
 use Pribi\Commands\Joins\Parts\Comparing;
-use Pribi\Commands\AnyQueryStatements\Limits\Base\Limitable;
-use Pribi\Commands\AnyQueryStatements\Limits\Base\Limiting;
+use Pribi\Commands\AnyQueryStatements\Limits\Parts\Limitable;
+use Pribi\Commands\AnyQueryStatements\Limits\Parts\Limiting;
 
 class Disjunction extends \Pribi\Commands\AnyQueryStatements\Conditions\Disjunction implements Limitable {
 	use AndOring;
