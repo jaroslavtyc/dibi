@@ -43,16 +43,4 @@ trait AndOring {
 	 * @return \Pribi\Commands\AnyQueryStatements\Conditions\Disjunction
 	 */
 	abstract protected function disjunction(\Pribi\Commands\Identifiers\Identifier $identifier);
-
-	/**
-	 * @param $subject
-	 * @return \Pribi\Commands\AnyQueryStatements\Conditions\AndNot
-	 */
-	abstract public function andNot($subject);
-
-	/**
-	 * @param $subject
-	 * @return \Pribi\Commands\AnyQueryStatements\Conditions\OrNot
-	 */
-	abstract public function orNot($subject);
 }
