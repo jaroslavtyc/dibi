@@ -8,13 +8,6 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-// helpers autoload
-foreach(scandir(__DIR__ . '/unit/helpers/') as $file) {
-	if (preg_match('/\.php$/', $file)) {
-		require_once __DIR__ . '/unit/helpers/' . $file;
-	}
-}
-
 // Pribi lazy autoload
 spl_autoload_register(function ($className) {
 	$classFilename = __DIR__ . '/../' . str_replace('\\', '/', $className) . '.php';

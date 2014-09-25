@@ -1,7 +1,7 @@
 <?php
 namespace Pribi;
 
-class PribiTest extends \Tests\Unit\Helpers\CommandTestCase {
+class PribiTest extends \tests\unit\helpers\CommandTestCase {
 
 	public function testInstanceCanBeCreated() {
 		$instance = new Pribi($this->getCommandsBuilderDummy());

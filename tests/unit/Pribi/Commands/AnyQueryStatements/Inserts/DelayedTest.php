@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
-class DelayedTest extends \Tests\Unit\Helpers\CommandTestCase {
+class DelayedTest extends \tests\unit\helpers\CommandTestCase {
 
 	public function testCanCreateInstance() {
 		$instance = new Delayed($this->createCommandDummy(), $this->getCommandsBuilderDummy());

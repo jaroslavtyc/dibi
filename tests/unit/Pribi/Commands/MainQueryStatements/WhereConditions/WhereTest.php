@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\MainQueryStatements\WhereConditions;
 
-class WhereTest extends \Tests\Unit\Helpers\CommandTestCase {
+class WhereTest extends \tests\unit\helpers\CommandTestCase {
 
 	public function testCanCreateInstance() {
 		$instance = new Where($this->createIdentifierDummy(), $this->createCommandDummy(), $this->getCommandsBuilderDummy());

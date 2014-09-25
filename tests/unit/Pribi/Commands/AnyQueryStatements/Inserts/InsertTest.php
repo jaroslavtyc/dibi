@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
-class InsertTest extends \Tests\Unit\Helpers\CommandTestCase {
+class InsertTest extends \tests\unit\helpers\CommandTestCase {
 
 	public function testCanCreateInstance() {
 		$instance = new Insert($this->createCommandDummy(), $this->getCommandsBuilderDummy());

@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
-class ValuesMockeryTest extends \Tests\Unit\Helpers\CommandTestCase {
+class ValuesMockeryTest extends \tests\unit\helpers\CommandTestCase {
 
 	public function testCanCreateInstance() {
 		$instance = new Values($this->createSubjectsDummy(), $this->createCommandDummy(), $this->getCommandsBuilderDummy());

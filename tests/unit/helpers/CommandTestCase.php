@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Unit\Helpers;
+namespace tests\unit\helpers;
 
 abstract class CommandTestCase extends \Codeception\TestCase\Test {
 

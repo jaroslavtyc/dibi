@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Executions;
 
-class DoCommandTest extends \Tests\Unit\Helpers\CommandTestCase {
+class DoCommandTest extends \tests\unit\helpers\CommandTestCase {
 
 	public function testCanCreateInstance() {
 		$instance = new DoCommand($this->createSubjectDummy(), $this->createCommandDummy(), $this->getCommandsBuilderDummy());

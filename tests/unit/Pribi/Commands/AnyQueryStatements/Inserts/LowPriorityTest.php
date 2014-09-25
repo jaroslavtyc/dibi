@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
-class LowPriorityTest extends \Tests\Unit\Helpers\CommandTestCase {
+class LowPriorityTest extends \tests\unit\helpers\CommandTestCase {
 
 	public function testCanCreateInstance() {
 		$lowPriority = new LowPriority($this->createCommandDummy(), $this->getCommandsBuilderDummy());
