@@ -209,40 +209,80 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\AnyQueryStatements\Conditions\Conjunction($identifier, $previousCommand, $this);
 	}
 
+	public function createMainQueryConjunction(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Conditions\Conjunction($identifier, $previousCommand, $this);
+	}
+
 	public function createAnyQueryDisjunction(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\AnyQueryStatements\Conditions\Disjunction($identifier, $previousCommand, $this);
+	}
+
+	public function createMainQueryDisjunction(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Conditions\Disjunction($identifier, $previousCommand, $this);
 	}
 
 	public function createAnyQueryAndNot(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\AnyQueryStatements\Conditions\AndNot($identifier, $previousCommand, $this);
 	}
 
+	public function createMainQueryAndNot(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Conditions\AndNot($identifier, $previousCommand, $this);
+	}
+
 	public function createAnyQueryOrNot(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\AnyQueryStatements\Conditions\OrNot($identifier, $previousCommand, $this);
+	}
+
+	public function createMainQueryOrNot(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Conditions\OrNot($identifier, $previousCommand, $this);
 	}
 
 	public function createAnyQueryEqualTo(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\AnyQueryStatements\Conditions\EqualTo($identifier, $previousCommand, $this);
 	}
 
+	public function createMainQueryEqualTo(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Conditions\EqualTo($identifier, $previousCommand, $this);
+	}
+
 	public function createAnyQueryEqualOrGreaterThen(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\AnyQueryStatements\Conditions\EqualOrGreaterThen($identifier, $previousCommand, $this);
+	}
+
+	public function createMainQueryEqualOrGreaterThen(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Conditions\EqualOrGreaterThen($identifier, $previousCommand, $this);
 	}
 
 	public function createAnyQueryEqualOrLesserThen(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\AnyQueryStatements\Conditions\EqualOrLesserThen($identifier, $previousCommand, $this);
 	}
 
+	public function createMainQueryEqualOrLesserThen(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Conditions\EqualOrLesserThen($identifier, $previousCommand, $this);
+	}
+
 	public function createAnyQueryGreaterThen(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\AnyQueryStatements\Conditions\GreaterThen($identifier, $previousCommand, $this);
+	}
+
+	public function createMainQueryGreaterThen(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Conditions\GreaterThen($identifier, $previousCommand, $this);
 	}
 
 	public function createAnyQueryLesserThen(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\AnyQueryStatements\Conditions\LesserThen($identifier, $previousCommand, $this);
 	}
 
+	public function createMainQueryLesserThen(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Conditions\LesserThen($identifier, $previousCommand, $this);
+	}
+
 	public function createAnyQueryDifferentTo(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\AnyQueryStatements\Conditions\DifferentTo($identifier, $previousCommand, $this);
+	}
+
+	public function createMainQueryDifferentTo(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Conditions\DifferentTo($identifier, $previousCommand, $this);
 	}
 
 	public function createMainQueryWhereNot(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {

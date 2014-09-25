@@ -53,4 +53,16 @@ class SelectQueryTest extends \PHPUnit_Framework_TestCase {
 				->execute()
 		);
 	}
+
+	public function testCanSelectFromTableWhereSomethingAndSomethingElse() {
+		$this->assertSame(
+			'SELECT `foo` FROM `bar` WHERE `baz` AND `qux`',
+			$this->pribi->openQuery()
+				->select('foo')
+				->from('bar')
+				->where('baz')
+				->and('qux')
+				->execute()
+		);
+	}
 }
