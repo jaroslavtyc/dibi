@@ -1,7 +1,7 @@
 <?php
-namespace tests\integration\Selects;
+namespace tests\integration\Select\From;
 
-class SelectFromQueryTest extends \tests\integration\helpers\QueryTestCase {
+class Test extends \tests\integration\helpers\QueryTestCase {
 
 	public function testCanSelectNumericConstant() {
 		$this->assertSame(

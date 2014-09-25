@@ -1,5 +1,5 @@
 <?php
-namespace tests\integration\Selects;
+namespace tests\integration\Select\From\Where;
 
 class SelectFromWhereQueryTest extends \tests\integration\helpers\QueryTestCase {
 
