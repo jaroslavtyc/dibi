@@ -3,7 +3,7 @@ namespace tests\integration\Select\From\Where;
 
 class SelectFromWhereConditions extends \tests\integration\helpers\QueryTestCase {
 
-	public function testCanSelectFromTableWhereSomethingAndSomethingElse() {
+	public function testSelectFromWhereAnd() {
 		$this->assertSame(
 			'SELECT `foo` FROM `bar` WHERE `baz` AND `qux`',
 			$this->pribi->openQuery()
@@ -15,7 +15,7 @@ class SelectFromWhereConditions extends \tests\integration\helpers\QueryTestCase
 		);
 	}
 
-	public function testCanSelectFromTableWhereSomethingOrSomethingElse() {
+	public function testSelectFromWhereOr() {
 		$this->assertSame(
 			'SELECT `foo` FROM `bar` WHERE `baz` OR `qux`',
 			$this->pribi->openQuery()
@@ -27,7 +27,7 @@ class SelectFromWhereConditions extends \tests\integration\helpers\QueryTestCase
 		);
 	}
 
-	public function testCanSelectFromTableWhereSomethingAndNotSomethingElse() {
+	public function testSelectFromTableWhereAndNot() {
 		$this->assertSame(
 			'SELECT `foo` FROM `bar` WHERE `baz` AND NOT `qux`',
 			$this->pribi->openQuery()
@@ -39,7 +39,7 @@ class SelectFromWhereConditions extends \tests\integration\helpers\QueryTestCase
 		);
 	}
 
-	public function testCanSelectFromTableWhereSomethingOrNotSomethingElse() {
+	public function testSelectFromWhereOrNot() {
 		$this->assertSame(
 			'SELECT `foo` FROM `bar` WHERE `baz` OR NOT `qux`',
 			$this->pribi->openQuery()
