@@ -11,7 +11,6 @@ class Conjunction extends \Pribi\Commands\WithIdentifier
 		return 'AND ' . $this->getIdentifier()->toSql();
 	}
 
-
 	/**
 	 * @param \Pribi\Commands\Identifiers\Identifier $identifier
 	 * @return \Pribi\Commands\AnyQueryStatements\Conditions\Conjunction

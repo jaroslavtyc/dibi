@@ -1,24 +1,22 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Conditions;
 
-use Pribi\Commands\Command;
-use Pribi\Commands\Identifiers\Identifier;
+class IfElse extends \Pribi\Commands\Command {
 
-class IfElse extends Command {
 	private $condition;
 	private $consequent;
 	private $alternative;
 
 	public function __construct(
-		Identifier $condition,
-		Identifier $consequent,
-		Identifier $alternative,
-		Command $previousCommand
+		\Pribi\Commands\Identifiers\Identifier $condition,
+		\Pribi\Commands\Identifiers\Identifier $consequent,
+		\Pribi\Commands\Identifiers\Identifier $alternative,
+		\Pribi\Commands\Command $previousCommand
 	) {
 		$this->condition = $condition;
 		$this->consequent = $consequent;
 		$this->alternative = $alternative;
-		parent::__construct($previousCommand);
+		parent::__construct($previousCommand, $this->getCommandBuilder());
 	}
 
 	protected function toSql() {

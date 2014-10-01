@@ -1,10 +1,9 @@
 <?php
-namespace Pribi\Commands\Joins;
+namespace Pribi\Commands\AnyQueryStatements\Joins;
 
-use Pribi\Commands\Joins\Parts\AndOring;
-use Pribi\Commands\AnyQueryStatements\Joins\Parts\Joinable;
+class GreaterThen extends \Pribi\Commands\AnyQueryStatements\Conditions\GreaterThen
+	implements \Pribi\Commands\AnyQueryStatements\Joins\Parts\Joinable {
 
-class GreaterThen extends \Pribi\Commands\AnyQueryStatements\Conditions\GreaterThen implements Joinable {
-	use AndOring;
+	use \Pribi\Commands\AnyQueryStatements\Joins\Parts\AndOring;
 	use Joining;
 }

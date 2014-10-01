@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\Joins\Parts;
+namespace Pribi\Commands\AnyQueryStatements\Joins\Parts;
 
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\Joins\AndNot;

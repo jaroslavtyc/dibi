@@ -1,8 +1,9 @@
 <?php
 namespace Pribi\Commands\MainQueryStatements\Conditions;
 
-use Pribi\Commands\MainQueryStatements\Conditions\Base\AndOring;
+class EqualTo extends \Pribi\Commands\AnyQueryStatements\Conditions\EqualTo implements \Pribi\Executions\Executable {
 
-class EqualTo extends \Pribi\Commands\AnyQueryStatements\Conditions\EqualTo {
-	use AndOring;
+	use \Pribi\Commands\MainQueryStatements\Conditions\Parts\AndOring;
+	use \Pribi\Executions\Executabling;
+
 }

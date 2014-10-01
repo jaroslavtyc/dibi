@@ -1,8 +1,6 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Joins;
 
-use Pribi\Commands\Identifiers\Identifier;
-
 trait Joining {
 
 	/**

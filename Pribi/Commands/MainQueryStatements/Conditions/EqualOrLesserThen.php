@@ -1,8 +1,10 @@
 <?php
 namespace Pribi\Commands\MainQueryStatements\Conditions;
 
-use Pribi\Commands\MainQueryStatements\Conditions\Base\AndOring;
+class EqualOrLesserThen extends \Pribi\Commands\AnyQueryStatements\Conditions\EqualOrLesserThen implements \Pribi\Executions\Executable {
 
-class EqualOrLesserThen extends \Pribi\Commands\AnyQueryStatements\Conditions\EqualOrLesserThen {
-	use AndOring;
+	use \Pribi\Commands\MainQueryStatements\Conditions\Parts\AndOring;
+	use \Pribi\Commands\MainQueryStatements\Conditions\Parts\Comparing;
+	use \Pribi\Executions\Executabling;
+
 }

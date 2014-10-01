@@ -1,8 +1,47 @@
 <?php
 namespace Pribi\Commands\MainQueryStatements\Conditions;
 
-use Pribi\Commands\MainQueryStatements\Conditions\Base\AndOring;
+class EqualOrGreaterThen extends \Pribi\Commands\AnyQueryStatements\Conditions\EqualOrGreaterThen implements \Pribi\Executions\Executable {
 
-class EqualOrGreaterThen extends \Pribi\Commands\AnyQueryStatements\Conditions\EqualOrGreaterThen {
-	use AndOring;
+	use \Pribi\Commands\MainQueryStatements\Conditions\Parts\AndOring;
+	use \Pribi\Executions\Executabling;
+
+	/**
+	 * @param \Pribi\Commands\Identifiers\Identifier $identifier
+	 * @return \Pribi\Commands\MainQueryStatements\Conditions\Conjunction
+	 */
+	protected function conjunction(\Pribi\Commands\Identifiers\Identifier $identifier) {
+		return $this->getCommandBuilder()->createMainQueryConjunction($identifier, $this);
+	}
+
+	/**
+	 * @param \Pribi\Commands\Identifiers\Identifier $identifier
+	 * @return \Pribi\Commands\MainQueryStatements\Conditions\Disjunction
+	 */
+	protected function disjunction(\Pribi\Commands\Identifiers\Identifier $identifier) {
+		return $this->getCommandBuilder()->createMainQueryDisjunction($identifier, $this);
+	}
+
+	/**
+	 * @param $subject
+	 * @return \Pribi\Commands\MainQueryStatements\Conditions\AndNot
+	 */
+	public function andNot($subject) {
+		return $this->getCommandBuilder()->createMainQueryAndNot(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
+	}
+
+	/**
+	 * @param $subject
+	 * @return \Pribi\Commands\MainQueryStatements\Conditions\OrNot
+	 */
+	public function orNot($subject) {
+		return $this->getCommandBuilder()->createMainQueryOrNot(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
+	}
+
 }

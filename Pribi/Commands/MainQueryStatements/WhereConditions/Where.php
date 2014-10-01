@@ -107,6 +107,17 @@ class Where extends \Pribi\Commands\AnyQueryStatements\WhereConditions\Where
 
 	/**
 	 * @param $subject
+	 * @return \Pribi\Commands\MainQueryStatements\Conditions\NotEqualTo
+	 */
+	public function notEqualTo($subject) {
+		return $this->getCommandBuilder()->createMainQueryNotEqualTo(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
+	}
+
+	/**
+	 * @param $subject
 	 * @return \Pribi\Commands\MainQueryStatements\Conditions\DifferentTo
 	 */
 	public function differentTo($subject) {

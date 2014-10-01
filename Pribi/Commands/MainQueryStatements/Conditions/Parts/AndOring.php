@@ -1,5 +1,5 @@
 <?php
-namespace Pribi\Commands\MainQueryStatements\Conditions\Base;
+namespace Pribi\Commands\MainQueryStatements\Conditions\Parts;
 
 use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\MainQueryStatements\Conditions\AndNot;
