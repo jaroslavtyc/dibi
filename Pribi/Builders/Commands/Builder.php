@@ -277,8 +277,16 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\MainQueryStatements\Conditions\LesserThen($identifier, $previousCommand, $this);
 	}
 
+	public function createAnyQueryNotEqualTo(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\AnyQueryStatements\Conditions\NotEqualTo($identifier, $previousCommand, $this);
+	}
+
 	public function createAnyQueryDifferentTo(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\AnyQueryStatements\Conditions\DifferentTo($identifier, $previousCommand, $this);
+	}
+
+	public function createMainQueryNotEqualTo(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Conditions\NotEqualTo($identifier, $previousCommand, $this);
 	}
 
 	public function createMainQueryDifferentTo(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
