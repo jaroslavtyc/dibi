@@ -3,6 +3,10 @@ namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
 class OnDuplicateKeyUpdateTest extends \tests\unit\helpers\CommandTestCase {
 
+	public function testNoFollowingStatementIsMissingOrExcessive() {
+		$this->huntUnexpectedFollowingStatements();
+	}
+
 	public function testCanCreateInstance() {
 		$instance = new OnDuplicateKeyUpdate($this->createIdentifierDummy(), $this->createSubjectDummy(), $this->createCommandDummy(), $this->getCommandsBuilderDummy());
 		$this->assertNotNull($instance);

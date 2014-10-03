@@ -3,6 +3,10 @@ namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
 class SetTest extends \tests\unit\helpers\CommandTestCase {
 
+	public function testNoFollowingStatementIsMissingOrExcessive() {
+		$this->huntUnexpectedFollowingStatements();
+	}
+
 	public function testCanCreateInstance() {
 		$instance = new Set($this->createIdentifierDummy(), $this->createSubjectDummy(), $this->createCommandDummy(), $this->getCommandsBuilderDummy());
 		$this->assertNotNull($instance);
