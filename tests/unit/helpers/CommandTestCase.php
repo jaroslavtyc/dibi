@@ -11,7 +11,7 @@ abstract class CommandTestCase extends \Codeception\TestCase\Test {
 
 	protected function huntUnexpectedFollowingStatements(){
 		$hunter = new \tests\unit\helpers\HunterOfUnexpectedFollowingStatement();
-		$hunter->hunt(static::class);
+		$hunter->hunt(preg_replace('~Test$~', '', static::class));
 	}
 
 	/**
