@@ -176,22 +176,17 @@ class IntoTest extends \tests\unit\helpers\CommandTestCase {
 		$columnName = 'foo';
 		$expression = 'bar';
 		$columnIdentifierDummy = $this->createIdentifierDummy();
-		$expressionSubjectDummy = $this->createSubjectDummy();
 		$setDummy = 'baz';
 		$commandBuilderMock->expects($this->once())
 			->method('createIdentifier')
 			->with($columnName)
 			->willReturn($columnIdentifierDummy);
-		$commandBuilderMock->expects($this->once())
-			->method('createSubject')
-			->with($expression)
-			->willReturn($expressionSubjectDummy);
-		$commandBuilderMock->expects($this->once())
-			->method('createAnyQuerySet')
-			->with($columnIdentifierDummy, $expressionSubjectDummy)
-			->willReturn($setDummy);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilderMock */
 		$into = $this->createInto($commandBuilderMock);
-		$this->assertSame($setDummy, $into->set($columnName, $expression));
+		$commandBuilderMock->expects($this->once())
+			->method('createAnyQuerySelect')
+			->with($columnIdentifierDummy, $into)
+			->willReturn($setDummy);
+		$this->assertSame($setDummy, $into->select($columnName, $expression));
 	}
 }

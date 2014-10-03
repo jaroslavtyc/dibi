@@ -48,10 +48,9 @@ class Into extends \Pribi\Commands\WithIdentifier {
 		);
 	}
 
-	public function select($columnName, $expression) {
+	public function select($subject) {
 		return $this->getCommandBuilder()->createAnyQuerySelect(
-			$this->getCommandBuilder()->createIdentifier($columnName),
-			$this->getCommandBuilder()->createSubject($expression),
+			$this->getCommandBuilder()->createIdentifier($subject),
 			$this
 		);
 	}
