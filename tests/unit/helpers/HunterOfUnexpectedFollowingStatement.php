@@ -10,10 +10,10 @@ class HunterOfUnexpectedFollowingStatement {
 		$unexpectedStatements = $this->getExcessiveStatements($expectedStatements, $availableStatements);
 		$missingStatements = $this->getMissingStatements($expectedStatements, $availableStatements);
 		if ($unexpectedStatements) {
-			$this->complainToExcessiveStatements($unexpectedStatements, $statementClassName);
+			$this->complainAboutExcessiveStatements($unexpectedStatements, $statementClassName);
 		}
 		if ($missingStatements) {
-			$this->complainToMissingStatements($missingStatements, $statementClassName);
+			$this->complainAboutMissingStatements($missingStatements, $statementClassName);
 		}
 	}
 
@@ -151,7 +151,7 @@ class HunterOfUnexpectedFollowingStatement {
 		return array_diff($expectedStatements, $sameStatements);
 	}
 
-	private function complainToExcessiveStatements(array $unexpectedStatements, $statementClassName) {
+	private function complainAboutExcessiveStatements(array $unexpectedStatements, $statementClassName) {
 		throw new \LogicException(sprintf(
 			'Found %d excessive following statements in class %s. Their list follows: %s',
 			count($unexpectedStatements),
@@ -160,7 +160,7 @@ class HunterOfUnexpectedFollowingStatement {
 		));
 	}
 
-	private function complainToMissingStatements(array $missingStatements, $statementClassName) {
+	private function complainAboutMissingStatements(array $missingStatements, $statementClassName) {
 		throw new \LogicException(sprintf(
 			'Missing %d following statements in class %s. Their list follows: %s',
 			count($missingStatements),
