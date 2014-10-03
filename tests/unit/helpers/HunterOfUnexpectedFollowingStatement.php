@@ -36,21 +36,19 @@ class HunterOfUnexpectedFollowingStatement {
 
 	private function complainAboutExcessiveStatements(array $unexpectedStatements, $statementClassName) {
 		throw new \LogicException(sprintf(
-			'Found %d excessive following statements in class %s. Their list follows: %s',
+			'%d tests missing for following statements in the class %s. Their list follows: %s',
 			count($unexpectedStatements),
 			$statementClassName,
-			implode(',', $unexpectedStatements)
+			implode(', ', $unexpectedStatements)
 		));
 	}
 
 	private function complainAboutMissingStatements(array $missingStatements, $statementClassName) {
 		throw new \LogicException(sprintf(
-			'Missing %d following statements in class %s. Their list follows: %s',
+			'%d following statements missing in the class %s. Their list follows: %s',
 			count($missingStatements),
 			$statementClassName,
-			implode(',', $missingStatements)
+			implode(', ', $missingStatements)
 		));
 	}
-
 }
- 
