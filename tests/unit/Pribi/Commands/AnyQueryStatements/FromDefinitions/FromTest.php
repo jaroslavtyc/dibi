@@ -3,6 +3,10 @@ namespace Pribi\Commands\AnyQueryStatements\FromDefinitions;
 
 class FromTest extends \tests\unit\helpers\CommandTestCase {
 
+	public function testNoFollowingStatementIsMissingOrExcessive() {
+		$this->huntUnexpectedFollowingStatements();
+	}
+
 	public function testInstanceCanBeCreated() {
 		$instance = new From($this->createIdentifierDummy(), $this->createCommandDummy(), $this->getCommandsBuilderDummy());
 		$this->assertNotNull($instance);
