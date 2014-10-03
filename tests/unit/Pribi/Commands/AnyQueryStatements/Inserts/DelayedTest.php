@@ -3,6 +3,10 @@ namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
 class DelayedTest extends \tests\unit\helpers\CommandTestCase {
 
+	public function testNoFollowingStatementIsMissingOrExcessive() {
+		$this->huntUnexpectedFollowingStatements();
+	}
+
 	public function testCanCreateInstance() {
 		$instance = new Delayed($this->createCommandDummy(), $this->getCommandsBuilderDummy());
 		$this->assertNotNull($instance);
