@@ -3,6 +3,10 @@ namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
 class IntoTest extends \tests\unit\helpers\CommandTestCase {
 
+	public function testNoFollowingStatementIsMissingOrExcessive() {
+		$this->huntUnexpectedFollowingStatements();
+	}
+
 	public function testCanCreateInstance() {
 		$instance = new Into(
 			$this->createIdentifierDummy(),
