@@ -25,7 +25,7 @@ class AvailableStatementsFinder extends StatementsFinder {
 	 * @return array
 	 */
 	private function parsePhpDocumentedPublicMethods($stringToParse) {
-		preg_match_all('~\*\s*@method\s+(?:\w+\s+)?(?<methodNames>\w+)\s*\(~', $stringToParse, $matches);
+		preg_match_all('~\*\s*@method\s+(?:[\w\\\]+\s+)?(?<methodNames>\w+)\s*\(~', $stringToParse, $matches);
 		if (isset($matches['methodNames'])) {
 			return $matches['methodNames'];
 		} else {
