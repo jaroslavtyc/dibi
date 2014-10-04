@@ -3,6 +3,10 @@ namespace Pribi\Commands\MainQueryStatements\WhereConditions;
 
 class WhereTest extends \tests\unit\helpers\StatementTestCase {
 
+	public function testNoFollowingStatementIsMissingOrExcessive() {
+		$this->huntUnexpectedFollowingStatements();
+	}
+
 	public function testCanCreateInstance() {
 		$instance = new Where($this->createIdentifierDummy(), $this->createCommandDummy(), $this->getCommandsBuilderDummy());
 		$this->assertNotNull($instance);
@@ -91,6 +95,23 @@ class WhereTest extends \tests\unit\helpers\StatementTestCase {
 			->with($equalToIdentifier, $where)
 			->andReturn($equalToDummy);
 		$this->assertSame($equalToDummy, $where->equalTo($equalToSubject));
+	}
+
+	public function testCanBeFollowedByNotEqualTo() {
+		$notEqualToSubject = 'foo';
+		$notEqualToIdentifier = $this->createIdentifierDummy();
+		$commandBuilder = \Mockery::mock(\Pribi\Builders\Commands\Builder::class);
+		$commandBuilder->shouldReceive('createIdentifier')
+			->with($notEqualToSubject)
+			->andReturn($notEqualToIdentifier);
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
+		$where = new Where($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$notEqualToDummy = 'bar';
+		/** @var \Mockery\MockInterface $commandBuilder */
+		$commandBuilder->shouldReceive('createMainQueryNotEqualTo')
+			->with($notEqualToIdentifier, $where)
+			->andReturn($notEqualToDummy);
+		$this->assertSame($notEqualToDummy, $where->notEqualTo($notEqualToSubject));
 	}
 
 	public function testCanBeFollowedByEqualOrGreaterThen() {
@@ -205,7 +226,7 @@ class WhereTest extends \tests\unit\helpers\StatementTestCase {
 		$this->assertSame($limitDummy, $where->offsetAndLimit($offsetValue, $limitValue));
 	}
 
-	public function testCanBeExecuted() {
+	public function testQueryCanBeExecuted() {
 		$commandBuilder = \Mockery::mock(\Pribi\Builders\Commands\Builder::class);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
 		$where = new Where($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
@@ -219,6 +240,38 @@ class WhereTest extends \tests\unit\helpers\StatementTestCase {
 			->with($where)
 			->andReturn($completeQuery);
 		$this->assertSame($resultDummy, $where->execute());
+	}
+
+	public function testQueryCanBeTested() {
+		$commandBuilder = \Mockery::mock(\Pribi\Builders\Commands\Builder::class);
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
+		$where = new Where($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		/** @var \Mockery\MockInterface $commandBuilder */
+		$completeQuery = \Mockery::mock(\Pribi\Resources\CompleteQuery::class);
+		$resultDummy = 'foo';
+		$completeQuery->shouldReceive('test')
+			->withNoArgs()
+			->andReturn($resultDummy);
+		$commandBuilder->shouldReceive('createCompleteQuery')
+			->with($where)
+			->andReturn($completeQuery);
+		$this->assertSame($resultDummy, $where->test());
+	}
+
+	public function testQueryCanBeExplained() {
+		$commandBuilder = \Mockery::mock(\Pribi\Builders\Commands\Builder::class);
+		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
+		$where = new Where($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		/** @var \Mockery\MockInterface $commandBuilder */
+		$completeQuery = \Mockery::mock(\Pribi\Resources\CompleteQuery::class);
+		$resultDummy = 'foo';
+		$completeQuery->shouldReceive('explain')
+			->withNoArgs()
+			->andReturn($resultDummy);
+		$commandBuilder->shouldReceive('createCompleteQuery')
+			->with($where)
+			->andReturn($completeQuery);
+		$this->assertSame($resultDummy, $where->explain());
 	}
 
 }
