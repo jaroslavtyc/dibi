@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\Executions;
 
-class DoCommandTest extends \tests\unit\helpers\CommandTestCase {
+class DoCommandTest extends \tests\unit\helpers\StatementTestCase {
 
 	public function testNoFollowingStatementIsMissingOrExcessive(){
 		$this->huntUnexpectedFollowingStatements();

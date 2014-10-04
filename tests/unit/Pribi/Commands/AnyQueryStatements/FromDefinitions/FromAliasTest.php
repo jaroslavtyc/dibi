@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\FromDefinitions;
 
-class FromAliasTest extends \tests\unit\helpers\CommandTestCase {
+class FromAliasTest extends \tests\unit\helpers\StatementTestCase {
 
 	public function testCanCreateInstance() {
 		$instance = new FromAlias(

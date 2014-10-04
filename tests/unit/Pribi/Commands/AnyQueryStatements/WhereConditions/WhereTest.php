@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\WhereConditions;
 
-class WhereTest extends \tests\unit\helpers\CommandTestCase {
+class WhereTest extends \tests\unit\helpers\StatementTestCase {
 
 	public function testNoFollowingStatementIsMissingOrExcessive() {
 		$this->huntUnexpectedFollowingStatements();

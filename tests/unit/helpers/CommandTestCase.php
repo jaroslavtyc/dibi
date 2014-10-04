@@ -9,11 +9,6 @@ abstract class CommandTestCase extends \Codeception\TestCase\Test {
 		$this->commandBuilderDummy = $this->createCommandBuilderMock();
 	}
 
-	protected function huntUnexpectedFollowingStatements(){
-		$hunter = new \tests\unit\helpers\HunterOfUnexpectedFollowingStatement(new ExpectedStatementsFinder, new AvailableStatementsFinder());
-		$hunter->hunt(preg_replace('~Test$~', '', static::class));
-	}
-
 	/**
 	 * @return \Pribi\Builders\ClosingQueries\Builder
 	 */
