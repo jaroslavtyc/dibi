@@ -1,7 +1,7 @@
 <?php
 namespace tests\unit\helpers;
 
-class ExcessiveStatementsFinder extends StatementsFinder {
+class AvailableStatementsFinder extends StatementsFinder {
 
 	public function findAvailableStatements($statementClassName) {
 		$publicMethodNames = $this->getPublicMethodNames($statementClassName);

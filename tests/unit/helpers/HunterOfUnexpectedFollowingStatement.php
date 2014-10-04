@@ -4,27 +4,27 @@ namespace tests\unit\helpers;
 class HunterOfUnexpectedFollowingStatement {
 
 	private $expectedStatementsFinder;
-	private $excessiveStatementsFinder;
+	private $availableStatementsFinder;
 
-	public function __construct(ExpectedStatementsFinder $expectedStatementsFinder, ExcessiveStatementsFinder $excessiveStatementsFinder) {
+	public function __construct(ExpectedStatementsFinder $expectedStatementsFinder, AvailableStatementsFinder $availableStatementsFinder) {
 		$this->expectedStatementsFinder = $expectedStatementsFinder;
-		$this->excessiveStatementsFinder = $excessiveStatementsFinder;
+		$this->availableStatementsFinder = $availableStatementsFinder;
 	}
 
 	public function hunt($statementClassName) {
 		$expectedStatements = $this->expectedStatementsFinder->findExpectedStatements($statementClassName);
-		$availableStatements = $this->excessiveStatementsFinder->findAvailableStatements($statementClassName);
-		$unexpectedStatements = $this->getExcessiveStatements($expectedStatements, $availableStatements);
+		$availableStatements = $this->availableStatementsFinder->findAvailableStatements($statementClassName);
+		$unexpectedStatements = $this->getUnexpectedStatements($expectedStatements, $availableStatements);
 		$missingStatements = $this->getMissingStatements($expectedStatements, $availableStatements);
 		if ($unexpectedStatements) {
-			$this->complainAboutExcessiveStatements($unexpectedStatements, $statementClassName);
+			$this->complainAboutUnexpectedStatements($unexpectedStatements, $statementClassName);
 		}
 		if ($missingStatements) {
 			$this->complainAboutMissingStatements($missingStatements, $statementClassName);
 		}
 	}
 
-	private function getExcessiveStatements(array $expectedStatements, array $availableStatements) {
+	private function getUnexpectedStatements(array $expectedStatements, array $availableStatements) {
 		$sameStatements = array_intersect($expectedStatements, $availableStatements);
 		return array_diff($availableStatements, $sameStatements);
 	}
@@ -34,7 +34,7 @@ class HunterOfUnexpectedFollowingStatement {
 		return array_diff($expectedStatements, $sameStatements);
 	}
 
-	private function complainAboutExcessiveStatements(array $unexpectedStatements, $statementClassName) {
+	private function complainAboutUnexpectedStatements(array $unexpectedStatements, $statementClassName) {
 		throw new \LogicException(sprintf(
 			'%d tests are missing for following statements in the class %s. Their list follows: %s',
 			count($unexpectedStatements),
