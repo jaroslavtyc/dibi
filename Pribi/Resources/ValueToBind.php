@@ -29,7 +29,7 @@ class ValueToBind extends Object {
 		if (in_array($type, array(\PDO::PARAM_BOOL, \PDO::PARAM_NULL, \PDO::PARAM_INT, \PDO::PARAM_STR, \PDO::PARAM_LOB))) {
 			return $type;
 		} else {
-			throw new UnknownDataType(var_export($type, TRUE));
+			throw new Exceptions\UnknownDataType(var_export($type, TRUE));
 		}
 	}
 
