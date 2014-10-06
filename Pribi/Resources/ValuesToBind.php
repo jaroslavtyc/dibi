@@ -1,9 +1,7 @@
 <?php
 namespace Pribi\Resources;
 
-use Pribi\Core\Object;
-
-class ValuesToBind extends Object implements \Iterator {
+class ValuesToBind extends \Pribi\Core\Object implements \Iterator {
 	private $values = array();
 
 	public function addValue($scalarValue, $name = FALSE, $dataType = ValueToBind::DEFAULT_DATA_TYPE) {

@@ -1,9 +1,7 @@
 <?php
 namespace Pribi\Resources;
 
-use Pribi\Core\Object;
-
-class ValueToBind extends Object {
+class ValueToBind extends \Pribi\Core\Object {
 	private $name;
 	private $value;
 	private $dataType;
