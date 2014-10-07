@@ -1,7 +1,7 @@
 <?php
 namespace tests\unit\helpers;
 
-class ExpectedStatementsFinder extends StatementsFinder {
+class AvailableTestsFinder extends StatementsFinder {
 
 	public function findExpectedStatements($statementClassName) {
 		$this->checkIfClassExists($statementClassName);
@@ -58,4 +58,3 @@ class ExpectedStatementsFinder extends StatementsFinder {
 	}
 
 }
- 

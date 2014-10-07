@@ -6,7 +6,7 @@ class HunterOfUnexpectedFollowingStatement {
 	private $expectedStatementsFinder;
 	private $availableStatementsFinder;
 
-	public function __construct(ExpectedStatementsFinder $expectedStatementsFinder, AvailableStatementsFinder $availableStatementsFinder) {
+	public function __construct(AvailableTestsFinder $expectedStatementsFinder, AvailableStatementsFinder $availableStatementsFinder) {
 		$this->expectedStatementsFinder = $expectedStatementsFinder;
 		$this->availableStatementsFinder = $availableStatementsFinder;
 	}
