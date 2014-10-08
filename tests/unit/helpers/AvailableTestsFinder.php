@@ -5,7 +5,9 @@ class AvailableTestsFinder extends StatementsFinder {
 
 	public function findExpectedStatements($statementClassName) {
 		$this->checkIfClassExists($statementClassName);
-		$assertContents = $this->getAssertContents($statementClassName);
+		$testClassName = $this->getTestClassTo($statementClassName);
+		$this->checkIfClassExists($testClassName);
+		$assertContents = $this->getAssertContents($testClassName);
 		$expectedStatements = [];
 		if ($assertContents) {
 			foreach ($assertContents as $assertContent) {
@@ -20,21 +22,45 @@ class AvailableTestsFinder extends StatementsFinder {
 	}
 
 	/**
-	 * @param $className
+	 * @param $testClassName
 	 * @return array
 	 */
-	private function getAssertContents($className) {
-		preg_match_all(
-			'~[>|\s]assert[A-Z]\w+\s*\((?<assertContent>.+)\)~',
-			$this->getClassFileContent($this->getTestClassTo($className)),
-			$matches
-		);
-
-		if (count($matches['assertContent'])) {
-			return $matches['assertContent'];
-		} else {
-			return [];
+	private function getAssertContents($testClassName) {
+		$reflectionClass = new \ReflectionClass($testClassName);
+		$publicDynamicMethods = $reflectionClass->getMethods(\ReflectionMethod::IS_PUBLIC ^ \ReflectionMethod::IS_STATIC);
+		$methodsByFile = [];
+		foreach ($publicDynamicMethods as $publicDynamicMethod) {
+			if (preg_match('~^Pribi\\\|tests\\\~', $publicDynamicMethod->getFileName())) {
+				if (!isset($methodsByFile[$publicDynamicMethod->getFileName()])) {
+					$methodsByFile[$publicDynamicMethod->getFileName()] = [];
+				}
+				$methodsByFile[$publicDynamicMethod->getFileName()][] = $publicDynamicMethod;
+			}
 		}
+
+		$assertContents = [];
+		foreach ($methodsByFile as $file => $methodsFromSameFile) {
+			$fileRows = explode("\n", file_get_contents($file));
+			foreach ($methodsFromSameFile as $methodReflection) {
+				$methodContent = '';
+				/** @var \ReflectionMethod $methodReflection */
+				for ($currentRow = $methodReflection->getStartLine(); $currentRow < $methodReflection->getEndLine() - 1; $currentRow++) {
+					$methodContent .= $fileRows[$currentRow];
+				}
+				if ($methodContent !== '') {
+					preg_match(
+						'~[>|\s]assert[A-Z]\w+\s*\((?<assertContent>.+)\)~',
+						$methodContent,
+						$matches
+					);
+					if (isset($matches['assertContent']) && $matches['assertContent'] !== '') {
+						$assertContents[] = $matches['assertContent'];
+					}
+				}
+			}
+		}
+
+		return $assertContents;
 	}
 
 	private function getTestedStatement($string) {
