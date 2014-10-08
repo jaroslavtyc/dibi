@@ -124,6 +124,19 @@ class Where extends \Pribi\Commands\WithIdentifier implements
 	}
 
 	/**
+	 * Same meaning as different to
+	 *
+	 * @param $subject
+	 * @return \Pribi\Commands\AnyQueryStatements\Conditions\NotEqualTo
+	 */
+	public function notEqualTo($subject) {
+		return $this->getCommandBuilder()->createAnyQueryNotEqualTo(
+			$this->getCommandBuilder()->createIdentifier($subject),
+			$this
+		);
+	}
+
+	/**
 	 * @param int $limit
 	 * @return \Pribi\Commands\AnyQueryStatements\Limits\Limit
 	 */
