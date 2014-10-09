@@ -2,7 +2,7 @@
 // namespace hsa to follow directory structure to allow autoloading by PSR-0 standard
 namespace tests\unit\Pribi\Commands\AnyQueryStatements\WhereConditions;
 
-abstract class WhereTestBase extends \tests\unit\helpers\StatementTestCase {
+abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 
 	private $whereClassName;
 	private $whereNamespacePrefix;

@@ -1,7 +1,7 @@
 <?php
 namespace Pribi\Commands\AnyQueryStatements\WhereConditions;
 
-class WhereTest extends \tests\unit\Pribi\Commands\AnyQueryStatements\WhereConditions\WhereTestBase {
+class WhereTest extends \tests\unit\Pribi\Commands\AnyQueryStatements\WhereConditions\WhereTestHelper {
 
 	protected function getWhereClassName() {
 		return Where::class;
