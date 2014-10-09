@@ -1,7 +1,7 @@
 <?php
 namespace tests\unit\helpers;
 
-class HunterOfUnexpectedFollowingStatement {
+class HunterOfMissingTestsAndStatements {
 
 	private $expectedStatementsFinder;
 	private $availableStatementsFinder;

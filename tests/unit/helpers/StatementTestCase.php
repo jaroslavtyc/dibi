@@ -4,7 +4,7 @@ namespace tests\unit\helpers;
 class StatementTestCase extends CommandTestCase {
 
 	protected function huntUnexpectedFollowingStatements(){
-		$hunter = new \tests\unit\helpers\HunterOfUnexpectedFollowingStatement(
+		$hunter = new \tests\unit\helpers\HunterOfMissingTestsAndStatements(
 			new AvailableTestsFinder,
 			new AvailableStatementsFinder()
 		);
