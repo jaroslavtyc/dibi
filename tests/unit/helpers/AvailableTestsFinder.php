@@ -30,7 +30,7 @@ class AvailableTestsFinder extends StatementsFinder {
 		$publicDynamicMethods = $reflectionClass->getMethods(\ReflectionMethod::IS_PUBLIC ^ \ReflectionMethod::IS_STATIC);
 		$methodsByFile = [];
 		foreach ($publicDynamicMethods as $publicDynamicMethod) {
-			if (preg_match('~^Pribi\\\|tests\\\~', $publicDynamicMethod->getFileName())) {
+			if (preg_match('~^Pribi[\W]|tests[\W]~', $publicDynamicMethod->getFileName())) {
 				if (!isset($methodsByFile[$publicDynamicMethod->getFileName()])) {
 					$methodsByFile[$publicDynamicMethod->getFileName()] = [];
 				}
