@@ -1,12 +1,14 @@
 <?php
-namespace Pribi\Commands\AnyQueryStatements\Executions;
+namespace Pribi\Commands\MainQueryStatements\Executions;
 
 /**
  * Class DoCommand
  * @package Pribi\Commands\AnyQueryStatements\Executions
  * @see http://dev.mysql.com/doc/refman/5.1/en/do.html
  */
-class DoCommand extends \Pribi\Commands\WithoutIdentifier {
+class DoCommand extends \Pribi\Commands\WithoutIdentifier implements \Pribi\Executions\Executable {
+
+	use \Pribi\Executions\Executabling;
 
 	private $expression;
 
