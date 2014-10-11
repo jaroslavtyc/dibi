@@ -3,10 +3,6 @@ namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
 class IgnoreTest extends \tests\unit\helpers\StatementTestCase {
 
-	public function testNoFollowingStatementIsMissingOrExcessive() {
-		$this->huntUnexpectedFollowingStatements();
-	}
-
 	public function testCanCreateInstance() {
 		$instance = new Ignore($this->createCommandDummy(), $this->getCommandsBuilderDummy());
 		$this->assertNotNull($instance);

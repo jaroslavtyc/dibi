@@ -3,10 +3,6 @@ namespace Pribi\Commands\AnyQueryStatements\Executions;
 
 class DoCommandTest extends \tests\unit\helpers\StatementTestCase {
 
-	public function testNoFollowingStatementIsMissingOrExcessive(){
-		$this->huntUnexpectedFollowingStatements();
-	}
-
 	public function testCanCreateInstance() {
 		$instance = new DoCommand($this->createSubjectDummy(), $this->createCommandDummy(), $this->getCommandsBuilderDummy());
 		$this->assertNotNull($instance);

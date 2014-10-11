@@ -3,10 +3,6 @@ namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
 class ValuesTest extends \tests\unit\helpers\StatementTestCase {
 
-	public function testNoFollowingStatementIsMissingOrExcessive() {
-		$this->huntUnexpectedFollowingStatements();
-	}
-
 	public function testCanCreateInstance() {
 		$instance = new Values($this->createSubjectsDummy(), $this->createCommandDummy(), $this->getCommandsBuilderDummy());
 		$this->assertNotNull($instance);

@@ -3,10 +3,6 @@ namespace Pribi\Commands\AnyQueryStatements\Inserts;
 
 class LowPriorityTest extends \tests\unit\helpers\StatementTestCase {
 
-	public function testNoFollowingStatementIsMissingOrExcessive() {
-		$this->huntUnexpectedFollowingStatements();
-	}
-
 	public function testCanCreateInstance() {
 		$lowPriority = new LowPriority($this->createCommandDummy(), $this->getCommandsBuilderDummy());
 		$this->assertNotNull($lowPriority);

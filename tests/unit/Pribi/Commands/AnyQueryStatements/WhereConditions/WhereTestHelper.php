@@ -4,25 +4,8 @@ namespace tests\unit\Pribi\Commands\AnyQueryStatements\WhereConditions;
 
 abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 
-	private $whereClassName;
-	private $whereNamespacePrefix;
-
-	protected function setUp() {
-		parent::setUp();
-		$this->whereClassName = $this->getWhereClassName();
-		$this->whereNamespacePrefix = $this->getWhereNamespacePrefix();
-	}
-
-	abstract protected function getWhereClassName();
-	
-	abstract protected function getWhereNamespacePrefix();
-
-	public function testNoFollowingStatementIsMissingOrExcessive() {
-		$this->huntUnexpectedFollowingStatements();
-	}
-
 	public function testCanCreateInstance() {
-		$instance = new $this->whereClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $this->getCommandsBuilderDummy());
+		$instance = new $this->testedClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $this->getCommandsBuilderDummy());
 		$this->assertNotNull($instance);
 	}
 
@@ -34,11 +17,11 @@ abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 			->with($subject)
 			->andReturn($andIdentifier);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
-		$where = new $this->whereClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$where = new $this->testedClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
 		/** @var \Pribi\Commands\AnyQueryStatements\WhereConditions\Where $where */
 		$conjunctionDummy = 'bar';
 		/** @var \Mockery\MockInterface $commandBuilder */
-		$commandBuilder->shouldReceive('create' . $this->whereNamespacePrefix . 'QueryConjunction')
+		$commandBuilder->shouldReceive('create' . $this->namespacePrefix . 'QueryConjunction')
 			->with($andIdentifier, $where)
 			->andReturn($conjunctionDummy);
 		$this->assertSame($conjunctionDummy, $where->and($subject));
@@ -52,11 +35,11 @@ abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 			->with($orSubject)
 			->andReturn($orIdentifier);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
-		$where = new $this->whereClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$where = new $this->testedClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
 		/** @var \Pribi\Commands\AnyQueryStatements\WhereConditions\Where $where */
 		$disjunctionDummy = 'bar';
 		/** @var \Mockery\MockInterface $commandBuilder */
-		$commandBuilder->shouldReceive('create' . $this->whereNamespacePrefix . 'QueryDisjunction')
+		$commandBuilder->shouldReceive('create' . $this->namespacePrefix . 'QueryDisjunction')
 			->with($orIdentifier, $where)
 			->andReturn($disjunctionDummy);
 		$this->assertSame($disjunctionDummy, $where->or($orSubject));
@@ -70,11 +53,11 @@ abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 			->with($andNotSubject)
 			->andReturn($orIdentifier);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
-		$where = new $this->whereClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$where = new $this->testedClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
 		/** @var \Pribi\Commands\AnyQueryStatements\WhereConditions\Where $where */
 		$andNotDummy = 'bar';
 		/** @var \Mockery\MockInterface $commandBuilder */
-		$commandBuilder->shouldReceive('create' . $this->whereNamespacePrefix . 'QueryAndNot')
+		$commandBuilder->shouldReceive('create' . $this->namespacePrefix . 'QueryAndNot')
 			->with($orIdentifier, $where)
 			->andReturn($andNotDummy);
 		$this->assertSame($andNotDummy, $where->andNot($andNotSubject));
@@ -88,11 +71,11 @@ abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 			->with($orNotSubject)
 			->andReturn($orNotIdentifier);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
-		$where = new $this->whereClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$where = new $this->testedClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
 		/** @var \Pribi\Commands\AnyQueryStatements\WhereConditions\Where $where */
 		$orNotDummy = 'bar';
 		/** @var \Mockery\MockInterface $commandBuilder */
-		$commandBuilder->shouldReceive('create' . $this->whereNamespacePrefix . 'QueryOrNot')
+		$commandBuilder->shouldReceive('create' . $this->namespacePrefix . 'QueryOrNot')
 			->with($orNotIdentifier, $where)
 			->andReturn($orNotDummy);
 		$this->assertSame($orNotDummy, $where->orNot($orNotSubject));
@@ -106,11 +89,11 @@ abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 			->with($equalToSubject)
 			->andReturn($equalToIdentifier);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
-		$where = new $this->whereClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$where = new $this->testedClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
 		/** @var \Pribi\Commands\AnyQueryStatements\WhereConditions\Where $where */
 		$equalToDummy = 'bar';
 		/** @var \Mockery\MockInterface $commandBuilder */
-		$commandBuilder->shouldReceive('create' . $this->whereNamespacePrefix . 'QueryEqualTo')
+		$commandBuilder->shouldReceive('create' . $this->namespacePrefix . 'QueryEqualTo')
 			->with($equalToIdentifier, $where)
 			->andReturn($equalToDummy);
 		$this->assertSame($equalToDummy, $where->equalTo($equalToSubject));
@@ -124,11 +107,11 @@ abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 			->with($equalOrGreaterThenSubject)
 			->andReturn($equalOrGreaterThenIdentifier);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
-		$where = new $this->whereClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$where = new $this->testedClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
 		/** @var \Pribi\Commands\AnyQueryStatements\WhereConditions\Where $where */
 		$equalOrGreaterThenDummy = 'bar';
 		/** @var \Mockery\MockInterface $commandBuilder */
-		$commandBuilder->shouldReceive('create' . $this->whereNamespacePrefix . 'QueryEqualOrGreaterThen')
+		$commandBuilder->shouldReceive('create' . $this->namespacePrefix . 'QueryEqualOrGreaterThen')
 			->with($equalOrGreaterThenIdentifier, $where)
 			->andReturn($equalOrGreaterThenDummy);
 		$this->assertSame($equalOrGreaterThenDummy, $where->equalOrGreaterThen($equalOrGreaterThenSubject));
@@ -142,11 +125,11 @@ abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 			->with($equalOrLesserThenSubject)
 			->andReturn($equalOrLesserThenIdentifier);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
-		$where = new $this->whereClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$where = new $this->testedClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
 		/** @var \Pribi\Commands\AnyQueryStatements\WhereConditions\Where $where */
 		$equalOrLesserThenDummy = 'bar';
 		/** @var \Mockery\MockInterface $commandBuilder */
-		$commandBuilder->shouldReceive('create' . $this->whereNamespacePrefix . 'QueryEqualOrLesserThen')
+		$commandBuilder->shouldReceive('create' . $this->namespacePrefix . 'QueryEqualOrLesserThen')
 			->with($equalOrLesserThenIdentifier, $where)
 			->andReturn($equalOrLesserThenDummy);
 		$this->assertSame($equalOrLesserThenDummy, $where->equalOrLesserThen($equalOrLesserThenSubject));
@@ -160,11 +143,11 @@ abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 			->with($greaterThenSubject)
 			->andReturn($greaterThenIdentifier);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
-		$where = new $this->whereClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$where = new $this->testedClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
 		/** @var \Pribi\Commands\AnyQueryStatements\WhereConditions\Where $where */
 		$greaterThenDummy = 'bar';
 		/** @var \Mockery\MockInterface $commandBuilder */
-		$commandBuilder->shouldReceive('create' . $this->whereNamespacePrefix . 'QueryGreaterThen')
+		$commandBuilder->shouldReceive('create' . $this->namespacePrefix . 'QueryGreaterThen')
 			->with($greaterThenIdentifier, $where)
 			->andReturn($greaterThenDummy);
 		$this->assertSame($greaterThenDummy, $where->greaterThen($greaterThenSubject));
@@ -178,11 +161,11 @@ abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 			->with($lesserThenSubject)
 			->andReturn($lesserThenIdentifier);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
-		$where = new $this->whereClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$where = new $this->testedClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
 		/** @var \Pribi\Commands\AnyQueryStatements\WhereConditions\Where $where */
 		$lesserThenDummy = 'bar';
 		/** @var \Mockery\MockInterface $commandBuilder */
-		$commandBuilder->shouldReceive('create' . $this->whereNamespacePrefix . 'QueryLesserThen')
+		$commandBuilder->shouldReceive('create' . $this->namespacePrefix . 'QueryLesserThen')
 			->with($lesserThenIdentifier, $where)
 			->andReturn($lesserThenDummy);
 		$this->assertSame($lesserThenDummy, $where->lesserThen($lesserThenSubject));
@@ -196,11 +179,11 @@ abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 			->with($differentToSubject)
 			->andReturn($differentToIdentifier);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
-		$where = new $this->whereClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$where = new $this->testedClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
 		/** @var \Pribi\Commands\AnyQueryStatements\WhereConditions\Where $where */
 		$differentToDummy = 'bar';
 		/** @var \Mockery\MockInterface $commandBuilder */
-		$commandBuilder->shouldReceive('create' . $this->whereNamespacePrefix . 'QueryDifferentTo')
+		$commandBuilder->shouldReceive('create' . $this->namespacePrefix . 'QueryDifferentTo')
 			->with($differentToIdentifier, $where)
 			->andReturn($differentToDummy);
 		$this->assertSame($differentToDummy, $where->differentTo($differentToSubject));
@@ -214,11 +197,11 @@ abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 			->with($notEqualToSubject)
 			->andReturn($notEqualToIdentifier);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
-		$where = new $this->whereClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$where = new $this->testedClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
 		/** @var \Pribi\Commands\AnyQueryStatements\WhereConditions\Where $where */
 		$notEqualToDummy = 'bar';
 		/** @var \Mockery\MockInterface $commandBuilder */
-		$commandBuilder->shouldReceive('create' . $this->whereNamespacePrefix . 'QueryNotEqualTo')
+		$commandBuilder->shouldReceive('create' . $this->namespacePrefix . 'QueryNotEqualTo')
 			->with($notEqualToIdentifier, $where)
 			->andReturn($notEqualToDummy);
 		$this->assertSame($notEqualToDummy, $where->notEqualTo($notEqualToSubject));
@@ -228,11 +211,11 @@ abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 		$limitValue = 'foo';
 		$commandBuilder = \Mockery::mock(\Pribi\Builders\Commands\Builder::class);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
-		$where = new $this->whereClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$where = new $this->testedClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
 		/** @var \Pribi\Commands\AnyQueryStatements\WhereConditions\Where $where */
 		$limitDummy = 'bar';
 		/** @var \Mockery\MockInterface $commandBuilder */
-		$commandBuilder->shouldReceive('create' . $this->whereNamespacePrefix . 'QueryLimit')
+		$commandBuilder->shouldReceive('create' . $this->namespacePrefix . 'QueryLimit')
 			->with(0, $limitValue, $where)
 			->andReturn($limitDummy);
 		$this->assertSame($limitDummy, $where->limit($limitValue));
@@ -243,11 +226,11 @@ abstract class WhereTestHelper extends \tests\unit\helpers\StatementTestCase {
 		$limitValue = 'baz';
 		$commandBuilder = \Mockery::mock(\Pribi\Builders\Commands\Builder::class);
 		/** @var \Pribi\Builders\Commands\Builder $commandBuilder */
-		$where = new $this->whereClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
+		$where = new $this->testedClassName($this->createIdentifierDummy(), $this->createCommandDummy(), $commandBuilder);
 		/** @var \Pribi\Commands\AnyQueryStatements\WhereConditions\Where $where */
 		$limitDummy = 'bar';
 		/** @var \Mockery\MockInterface $commandBuilder */
-		$commandBuilder->shouldReceive('create' . $this->whereNamespacePrefix . 'QueryLimit')
+		$commandBuilder->shouldReceive('create' . $this->namespacePrefix . 'QueryLimit')
 			->with($offsetValue, $limitValue, $where)
 			->andReturn($limitDummy);
 		$this->assertSame($limitDummy, $where->offsetAndLimit($offsetValue, $limitValue));

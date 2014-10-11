@@ -3,11 +3,11 @@ namespace Pribi\Commands\MainQueryStatements\WhereConditions;
 
 class WhereTest extends \tests\unit\Pribi\Commands\AnyQueryStatements\WhereConditions\WhereTestHelper {
 
-	protected function getWhereClassName() {
+	protected function getTestedClassName() {
 		return Where::class;
 	}
 
-	protected function getWhereNamespacePrefix() {
+	protected function getNamespacePrefix() {
 		return 'Main';
 	}
 
