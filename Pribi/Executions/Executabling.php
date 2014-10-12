@@ -28,9 +28,4 @@ trait Executabling {
 		/** @var \Pribi\Commands\Command $this */
 		return $this->getCommandBuilder()->createCompleteQuery($this);
 	}
-
-	private function buildQueryByBuilder(\Pribi\Builders\ClosingQueries\Builder $builder) {
-		/** @var \Pribi\Commands\Command $this */
-		return $builder->buildCompleteQuery($this);
-	}
 }
