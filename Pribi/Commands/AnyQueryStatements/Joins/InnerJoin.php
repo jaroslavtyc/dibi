@@ -5,23 +5,19 @@ use Pribi\Commands\Identifiers\Identifier;
 use Pribi\Commands\AnyQueryStatements\WhereConditions\Where;
 
 /**
- * @method InnerJoinAlias as ($alias)
+ * @method JoinAlias as ($alias)
  */
 class InnerJoin extends Join implements \Pribi\Commands\AnyQueryStatements\Joins\Parts\InnerJoinIdentifiable {
 
+	protected function toSql() {
+		return 'INNER JOIN ' . $this->getIdentifier()->toSql();
+	}
+
 	protected function alias($aliasName) {
-		return $this->getCommandBuilder()->createAnyQueryInnerJoinAlias(
+		return $this->getCommandBuilder()->createAnyQueryJoinAlias(
 			$this->getCommandBuilder()->createIdentifier($aliasName),
 			$this
 		);
-	}
-
-	protected function toSql() {
-		if (is_a($this->getPreviousCommand(), self::CLASS_IDENTITY)) {
-			return ',' . $this->getIdentifier()->toSql();
-		} else {
-			return 'INNER JOIN ' . $this->getIdentifier()->toSql();
-		}
 	}
 
 	public function innerJoin($name) {

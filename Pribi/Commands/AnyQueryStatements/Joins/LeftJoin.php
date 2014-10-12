@@ -7,7 +7,7 @@ namespace Pribi\Commands\AnyQueryStatements\Joins;
 class LeftJoin extends Join {
 
 	protected function alias($aliasName) {
-		$this->getCommandBuilder()->createAnyQueryInnerJoinAlias(
+		$this->getCommandBuilder()->createAnyQueryJoinAlias(
 			$this->getCommandBuilder()->createIdentifier($aliasName),
 			$this
 		);

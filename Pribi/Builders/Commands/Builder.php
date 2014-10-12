@@ -161,11 +161,22 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\AnyQueryStatements\Joins\InnerJoin($joinedTable, $previousCommand, $this);
 	}
 
-	public function createAnyQueryInnerJoinAlias(
+	public function createMainQueryInnerJoin(\Pribi\Commands\Identifiers\Identifier $joinedTable, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Joins\InnerJoin($joinedTable, $previousCommand, $this);
+	}
+
+	public function createAnyQueryJoinAlias(
 		\Pribi\Commands\Identifiers\Identifier $aliasIdentifier,
 		\Pribi\Commands\AnyQueryStatements\Joins\InnerJoin $prependInnerJoin
 	) {
-		return new \Pribi\Commands\AnyQueryStatements\Joins\InnerJoinAlias($aliasIdentifier, $prependInnerJoin, $this);
+		return new \Pribi\Commands\AnyQueryStatements\Joins\JoinAlias($aliasIdentifier, $prependInnerJoin, $this);
+	}
+
+	public function createMainQueryJoinAlias(
+		\Pribi\Commands\Identifiers\Identifier $aliasIdentifier,
+		\Pribi\Commands\MainQueryStatements\Joins\JoinLike $prependJoin
+	) {
+		return new \Pribi\Commands\MainQueryStatements\Joins\JoinAlias($aliasIdentifier, $prependJoin, $this);
 	}
 
 	public function createAnyQueryOn(
@@ -175,26 +186,23 @@ class Builder extends \Pribi\Core\Object {
 		return new \Pribi\Commands\AnyQueryStatements\Joins\On($identifier, $previousJoinOrItsAlias, $this);
 	}
 
+	public function createMainQueryOn(
+		\Pribi\Commands\Identifiers\Identifier $identifier,
+		\Pribi\Commands\Command $previousJoinOrItsAlias
+	) {
+		return new \Pribi\Commands\MainQueryStatements\Joins\On($identifier, $previousJoinOrItsAlias, $this);
+	}
+
 	public function createAnyQueryLeftJoin(\Pribi\Commands\Identifiers\Identifier $joinedTable, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\AnyQueryStatements\Joins\LeftJoin($joinedTable, $previousCommand, $this);
 	}
 
-	public function createAnyQueryLeftJoinAlias(
-		\Pribi\Commands\Identifiers\Identifier $aliasIdentifier,
-		\Pribi\Commands\AnyQueryStatements\Joins\LeftJoin $prependLeftJoin
-	) {
-		return new \Pribi\Commands\AnyQueryStatements\Joins\LeftJoinAlias($aliasIdentifier, $prependLeftJoin, $this);
+	public function createMainQueryLeftJoin(\Pribi\Commands\Identifiers\Identifier $joinedTable, \Pribi\Commands\Command $previousCommand) {
+		return new \Pribi\Commands\MainQueryStatements\Joins\LeftJoin($joinedTable, $previousCommand, $this);
 	}
 
 	public function createAnyQueryRightJoin(\Pribi\Commands\Identifiers\Identifier $joinedTable, \Pribi\Commands\Command $previousCommand) {
 		return new \Pribi\Commands\AnyQueryStatements\Joins\RightJoin($joinedTable, $previousCommand, $this);
-	}
-
-	public function createAnyQueryRightJoinAlias(
-		\Pribi\Commands\Identifiers\Identifier $aliasIdentifier,
-		\Pribi\Commands\AnyQueryStatements\Joins\RightJoin $prependRightJoin
-	) {
-		return new \Pribi\Commands\AnyQueryStatements\Joins\LeftJoinAlias($aliasIdentifier, $prependRightJoin, $this);
 	}
 
 	public function createMainQueryWhere(\Pribi\Commands\Identifiers\Identifier $identifier, \Pribi\Commands\Command $previousCommand) {
