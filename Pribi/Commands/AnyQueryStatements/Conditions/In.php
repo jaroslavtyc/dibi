@@ -3,8 +3,14 @@ namespace Pribi\Commands\AnyQueryStatements\Conditions;
 
 class In extends Parts\In {
 
+	/**
+	 * @return string
+	 */
 	protected function toSql() {
-		return 'IN (' . $this->identifiers->toSql() . ')';
+		if ($this->identifiers->count() > 0) {
+			return 'IN(' . $this->identifiers->toSql() . ')';
+		}
+		return 'FALSE /* IN(empty) */';
 	}
 
 	/**

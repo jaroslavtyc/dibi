@@ -3,8 +3,14 @@ namespace Pribi\Commands\AnyQueryStatements\Conditions;
 
 class NotIn extends Parts\In {
 
+	/**
+	 * @return string
+	 */
 	protected function toSql() {
-		return 'NOT IN (' . $this->getIdentifiers()->toSql() . ')';
+		if ($this->identifiers->count() > 0) {
+			return 'NOT IN(' . $this->identifiers->toSql() . ')';
+		}
+		return 'NOT FALSE /* IN(empty) */';
 	}
 
 	/**

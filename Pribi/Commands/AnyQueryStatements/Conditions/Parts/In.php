@@ -9,16 +9,8 @@ abstract class In extends \Pribi\Commands\Command implements AndOrUsable {
 	private $identifiers;
 
 	public function __construct(\Pribi\Commands\Identifiers\Identifiers $identifiers, \Pribi\Commands\Command $previousCommand) {
-		$this->identifiers = $this->sanitizeAmountOfIdentifiers($identifiers);
+		$this->identifiers = $identifiers;
 		parent::__construct($previousCommand, $this->getCommandBuilder());
-	}
-
-	private function sanitizeAmountOfIdentifiers(\Pribi\Commands\Identifiers\Identifiers $identifiers) {
-		if (count($identifiers) === 0) {
-			// will be resolved as IN (NULL), which is always false
-			$identifiers = $this->getCommandBuilder()->createIdentifiers([null]);
-		}
-		return $identifiers;
 	}
 
 	/**
